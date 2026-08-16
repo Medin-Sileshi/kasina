@@ -21,7 +21,8 @@ const notoEthiopic = Noto_Serif_Ethiopic({
 
 export const metadata: Metadata = {
   title: "Kasina (ካሲና)",
-  description: "High-school classroom learning for Ethiopian secondary schools",
+  description:
+    "Classroom practice for Ethiopian Grade 12 students — assign, practice, and track progress.",
 };
 
 export default function RootLayout({
