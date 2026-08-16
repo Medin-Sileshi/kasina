@@ -71,41 +71,40 @@ curl -sS https://api.kasina.et/health
 
 ---
 
-## 4. Deploy web
+## 4. Deploy web (Vercel interim)
 
-### Option A — Cloudflare Pages (preferred)
+Import **https://github.com/Medin-Sileshi/kasina**.
 
-1. Connect the GitHub repo to Pages.
-2. Root directory / build:
-   - Framework: Next.js
-   - Build command: `pnpm --filter web build` (or monorepo-equivalent from root)
-   - Output: follow `@cloudflare/next-on-pages` or OpenNext CF adapter docs for your Next version
-3. Environment variables:
+**Project settings (required for this monorepo):**
+
+| Setting | Value |
+|---------|--------|
+| Framework Preset | Next.js |
+| **Root Directory** | `apps/web` |
+| Install Command | `cd ../.. && pnpm install --frozen-lockfile` |
+| Build Command | `cd ../.. && pnpm --filter web build` (or leave default from `apps/web/vercel.json`) |
+| Output | Next.js default (do not set static export) |
+
+**Environment variables:**
 
 ```text
 NEXT_PUBLIC_API_URL=https://api.kasina.et
 NEXT_PUBLIC_APP_URL=https://kasina.et
 ```
 
-4. Custom domain: `kasina.et` + `www.kasina.et`.
+(Until the API Worker is live, local/dev API won’t work from production — pages still render; auth/API calls will fail until `api.kasina.et` is deployed.)
 
-### Option B — Vercel interim (fine for MVP)
+**Domains:** Add `kasina.et` and `www.kasina.et` in Vercel → Domains, then match DNS in Cloudflare.
 
-1. Import the monorepo; set root to `apps/web` (or Turborepo filter).
-2. Same env vars as above.
-3. Point `kasina.et` / `www` CNAME to Vercel; keep API on Workers.
+If you see **FUNCTION_INVOCATION_FAILED / 500**: open Vercel → Deployment → **Logs** (Runtime). Most often Root Directory was left as repo root, or pnpm didn’t install workspace packages (`@kasina/types`).
+
+### Option B — Cloudflare Pages
+
+Same env vars. Prefer OpenNext / `@cloudflare/next-on-pages` adapter for Next 16; until then Vercel interim is fine.
 
 ### Same-origin rewrite (if cookies fail on Android)
 
-If cross-subdomain auth cookies break on mobile Chrome, set web to talk to itself and rewrite in [`apps/web/next.config.ts`](../../apps/web/next.config.ts) (already prepared when `API_PROXY_TARGET` is set):
-
-```text
-NEXT_PUBLIC_API_URL=     # empty / same origin
-API_PROXY_TARGET=https://api.kasina.et
-NEXT_PUBLIC_APP_URL=https://kasina.et
-```
-
-Then set Worker `APP_URL` / Better Auth `trustedOrigins` to `https://kasina.et` only (browser never hits `api.` directly).
+Set `API_PROXY_TARGET=https://api.kasina.et` and leave `NEXT_PUBLIC_API_URL` empty so the browser only talks to `kasina.et` (see [`apps/web/next.config.ts`](../../apps/web/next.config.ts)).
 
 ---
 

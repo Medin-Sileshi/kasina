@@ -14,6 +14,9 @@ const notoEthiopic = Noto_Serif_Ethiopic({
   subsets: ["ethiopic"],
   weight: ["400", "600", "700"],
   display: "swap",
+  // Avoid serverless crashes if Google Fonts fetch fails at runtime/build on Vercel
+  preload: false,
+  fallback: ["Noto Serif Ethiopic", "serif"],
 });
 
 export const metadata: Metadata = {
