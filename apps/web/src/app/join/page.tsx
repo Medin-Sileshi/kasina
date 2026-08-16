@@ -51,6 +51,7 @@ export default function JoinPage() {
     <AuthCard
       title="Join a class"
       subtitle="Enter your teacher's invite code to get started."
+      eyebrow="Get started"
     >
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Field label="Invite code">

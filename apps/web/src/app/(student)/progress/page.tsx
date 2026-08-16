@@ -148,10 +148,15 @@ export default function ProgressPage() {
 
   return (
     <>
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-950">Your study plan</h1>
-          <p className="mt-1 text-sm text-gray-500">
+      <div className="flex flex-wrap items-start justify-between gap-3 text-center sm:text-left">
+        <div className="w-full sm:w-auto">
+          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-accent-500">
+            Learn · Practice · Pass
+          </p>
+          <h1 className="mt-2 text-[1.65rem] font-bold tracking-tight text-gray-950 sm:text-[1.85rem]">
+            Your study plan
+          </h1>
+          <p className="mt-2 text-[15px] text-gray-500">
             Updated based on your recent practice
           </p>
         </div>

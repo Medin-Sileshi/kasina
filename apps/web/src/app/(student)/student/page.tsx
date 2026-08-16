@@ -120,27 +120,27 @@ export default function StudentHomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden rounded-[1.75rem] bg-primary-800 px-6 py-8 text-white shadow-[0_16px_40px_rgba(11,46,31,0.25)] sm:px-8 sm:py-9">
-        <div className="pointer-events-none absolute -right-8 -top-16 h-56 w-56 rounded-full bg-primary-700/50" />
-        <div className="pointer-events-none absolute -bottom-20 right-10 h-64 w-64 rounded-full bg-primary-900/50" />
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-[radial-gradient(ellipse_at_bottom,rgba(244,162,97,0.15),transparent_70%)]" />
-        <h1 className="relative text-[1.85rem] font-bold tracking-tight sm:text-3xl">
+      <section className="text-center sm:text-left">
+        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-accent-500">
+          Learn · Practice · Pass
+        </p>
+        <h1 className="mt-3 text-[1.85rem] font-bold tracking-tight text-gray-950 sm:text-3xl">
           {greeting()}, {me.user.name.split(" ")[0]}
         </h1>
-        <p className="relative mt-2.5 flex items-center gap-2 text-sm text-white/75">
+        <p className="mt-2.5 flex items-center justify-center gap-2 text-[15px] text-gray-500 sm:justify-start">
           <Calendar className="h-4 w-4 shrink-0" />
           {me.classes[0]?.name ?? "Grade 12 Mathematics"} · Keep practicing
         </p>
-        <div className="relative mt-8">
-          <div className="mb-2.5 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.1em] text-white/55">
+        <div className="mt-7">
+          <div className="mb-2.5 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.1em] text-gray-400">
             <span>Today&apos;s goal</span>
-            <span className="normal-case tracking-normal text-white/80">
+            <span className="normal-case tracking-normal text-gray-600">
               {goalDone}/20 questions
             </span>
           </div>
-          <div className="h-3 overflow-hidden rounded-full bg-white/15">
+          <div className="h-3 overflow-hidden rounded-full bg-gray-200">
             <div
-              className="h-full rounded-full bg-accent-500 transition-all"
+              className="h-full rounded-full bg-primary-700 transition-all"
               style={{ width: `${Math.max(goalPct, goalDone > 0 ? 8 : 0)}%` }}
             />
           </div>

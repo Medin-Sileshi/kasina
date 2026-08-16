@@ -226,13 +226,23 @@ export default function ResultsPage() {
           };
 
   return (
-    <div className="-mx-4 -my-7 overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white sm:-mx-6 sm:-my-9">
-      <section className="bg-primary-800 px-6 pb-20 pt-12 text-center">
-        <p className="text-6xl font-extrabold text-white">{displayPct}%</p>
-        <p className="mt-1.5 text-base text-white/70">
+    <div className="-mx-4 -mt-2 overflow-hidden sm:-mx-6">
+      <section className="relative overflow-hidden rounded-[1.75rem] bg-primary-800 px-6 pb-16 pt-10 text-center shadow-[0_16px_40px_rgba(0,44,27,0.25)]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(64,145,108,0.35),transparent_55%)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_80%,rgba(244,162,97,0.14),transparent_45%)]"
+        />
+        <p className="relative text-6xl font-extrabold tracking-tight text-white">
+          {displayPct}%
+        </p>
+        <p className="relative mt-1.5 text-base text-white/70">
           {score} correct out of {total} questions
         </p>
-        <div className="mt-5 flex justify-center gap-1.5">
+        <div className="relative mt-5 flex justify-center gap-1.5">
           {[1, 2, 3].map((n) => (
             <Star
               key={n}
@@ -240,13 +250,14 @@ export default function ResultsPage() {
             />
           ))}
         </div>
-        <p className="mt-4 text-sm text-white/50">
+        <p className="relative mt-4 text-xs font-medium uppercase tracking-[0.12em] text-accent-500/90">
           Mathematics
           {data.session.topic ? ` · ${data.session.topic}` : " · Practice"}
         </p>
       </section>
 
-      <section className="-mt-10 rounded-t-2xl bg-white px-6 pb-10 pt-7">
+      <section className="relative z-10 -mt-8 rounded-t-[2rem] bg-white px-6 pb-10 pt-4 shadow-[0_-16px_48px_rgba(0,44,27,0.18)]">
+        <div className="mx-auto mb-6 h-1.5 w-12 rounded-full bg-gray-200" />
         <div className="mb-6 flex gap-3">
           {message.icon}
           <div>
@@ -282,15 +293,25 @@ export default function ResultsPage() {
         </div>
 
         <div className="mt-7 space-y-2.5">
-          <PrimaryButton disabled={starting} onClick={() => void practiceWeak()}>
+          <PrimaryButton
+            disabled={starting}
+            onClick={() => void practiceWeak()}
+            className="rounded-2xl"
+          >
             {percent < 80 ? "Practice weak topics →" : "Practice again →"}
           </PrimaryButton>
-          <SecondaryButton disabled={starting} onClick={() => void retry()}>
+          <SecondaryButton
+            disabled={starting}
+            onClick={() => void retry()}
+            className="rounded-2xl"
+          >
             Try this quiz again
           </SecondaryButton>
           {data.answers.some((a) => !a.isCorrect) ? (
             <Link href={`/quiz/${params.sessionId}/review`}>
-              <SecondaryButton type="button">Review wrong answers</SecondaryButton>
+              <SecondaryButton type="button" className="rounded-2xl">
+                Review wrong answers
+              </SecondaryButton>
             </Link>
           ) : null}
           <GhostButton onClick={() => router.push("/subjects/mathematics")}>

@@ -78,17 +78,19 @@ export default function ReviewPage() {
 
   return (
     <>
-      <header className="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <header className="mb-6 text-center sm:text-left">
         <Link
           href={`/quiz/${params.sessionId}/results`}
-          className="inline-flex items-center gap-1 text-sm text-gray-500"
+          className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-primary-700"
         >
           <ChevronLeft className="h-4 w-4" /> Back to results
         </Link>
-        <h1 className="text-base font-semibold text-gray-950">
+        <h1 className="mt-4 text-[1.65rem] font-bold tracking-tight text-gray-950">
           Review wrong answers
         </h1>
-        <span className="text-sm text-gray-400">{wrong.length} questions</span>
+        <p className="mt-2 text-[15px] text-gray-500">
+          {wrong.length} question{wrong.length === 1 ? "" : "s"} to revisit
+        </p>
       </header>
 
       <ul className="space-y-2.5">

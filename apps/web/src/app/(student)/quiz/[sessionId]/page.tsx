@@ -213,8 +213,12 @@ export default function QuizPage() {
   }
 
   return (
-    <main className="min-h-full bg-gray-50 pb-28">
-      <div className="sticky top-0 z-50 bg-primary-900 text-white shadow-sm">
+    <main className="relative min-h-full overflow-hidden bg-primary-800 pb-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(64,145,108,0.35),transparent_55%)]"
+      />
+      <div className="sticky top-0 z-50 text-white">
         <div className="mx-auto flex h-14 max-w-[680px] items-center justify-between gap-2 px-4 sm:px-5">
           <button
             type="button"
@@ -225,7 +229,7 @@ export default function QuizPage() {
             <X className="h-5 w-5" />
           </button>
           <p className="min-w-0 truncate text-center text-sm">
-            <span className="mr-2 hidden rounded-md bg-primary-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:inline">
+            <span className="mr-2 hidden rounded-md bg-white/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:inline">
               Practice
             </span>
             <span className="text-white/90">Mathematics</span>
@@ -244,71 +248,74 @@ export default function QuizPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[680px] overflow-x-hidden px-4 pt-4 sm:px-5 sm:pt-5">
-        <div className="rounded-xl border border-gray-200 bg-white p-5 sm:p-7 sm:pb-6">
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-xs uppercase tracking-[0.06em] text-gray-400">
-              Question {index + 1}
-            </p>
-            <DifficultyBadge difficulty={question.difficulty} />
-          </div>
-          <div className="break-words text-lg leading-relaxed text-gray-950">
-            <MathText text={question.stem} />
-          </div>
-          {question.stemAm ? (
-            <p
-              lang="am"
-              className="font-ethiopic mt-3 break-words text-lg leading-[1.9] text-gray-700"
-            >
-              {question.stemAm}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="mt-4 overflow-x-hidden">
-          {question.options.map((opt) => (
-            <AnswerOption
-              key={opt.id}
-              letter={opt.label}
-              text={opt.text}
-              state={optionState(opt.id)}
-              disabled={submitted || submitting}
-              onClick={() => selectOption(opt.id)}
-            />
-          ))}
-        </div>
-
-        {submitted && explanation ? (
-          <div className="mt-2 -mt-2 rounded-b-xl border border-t-0 border-gray-100 bg-white px-5 py-5 sm:px-7 sm:py-6">
-            <div className="flex items-center gap-2">
-              {explanation.isCorrect ? (
-                <p className="font-semibold text-success-text">Correct!</p>
-              ) : (
-                <p className="font-semibold text-error-text">
-                  The correct answer is{" "}
-                  {question.options.find(
-                    (o) => o.id === explanation.correctOptionId,
-                  )?.label ?? explanation.correctOptionId.toUpperCase()}
-                </p>
-              )}
+      <div className="relative z-10 mx-auto max-w-[680px] overflow-x-hidden px-0 pt-3 sm:px-4 sm:pt-4">
+        <div className="rounded-t-[2rem] bg-gray-50 px-4 pb-8 pt-5 shadow-[0_-16px_48px_rgba(0,44,27,0.35)] sm:rounded-[1.75rem] sm:px-5 sm:pt-6">
+          <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-gray-200 sm:hidden" />
+          <div className="rounded-[1.25rem] border border-gray-200/70 bg-white p-5 sm:p-7 sm:pb-6">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-xs uppercase tracking-[0.06em] text-gray-400">
+                Question {index + 1}
+              </p>
+              <DifficultyBadge difficulty={question.difficulty} />
             </div>
-            <div className="mt-3 break-words text-base leading-relaxed text-gray-700">
-              <MathText text={explanation.explanation} />
+            <div className="break-words text-lg leading-relaxed text-gray-950">
+              <MathText text={question.stem} />
             </div>
-            {explanation.explanationAm ? (
+            {question.stemAm ? (
               <p
                 lang="am"
-                className="font-ethiopic mt-2 break-words text-base text-gray-600"
+                className="font-ethiopic mt-3 break-words text-lg leading-[1.9] text-gray-700"
               >
-                {explanation.explanationAm}
+                {question.stemAm}
               </p>
             ) : null}
           </div>
-        ) : null}
 
-        {error ? (
-          <p className="mt-3 text-sm text-error-text">{error}</p>
-        ) : null}
+          <div className="mt-4 overflow-x-hidden">
+            {question.options.map((opt) => (
+              <AnswerOption
+                key={opt.id}
+                letter={opt.label}
+                text={opt.text}
+                state={optionState(opt.id)}
+                disabled={submitted || submitting}
+                onClick={() => selectOption(opt.id)}
+              />
+            ))}
+          </div>
+
+          {submitted && explanation ? (
+            <div className="mt-2 -mt-2 rounded-b-[1.25rem] border border-t-0 border-gray-100 bg-white px-5 py-5 sm:px-7 sm:py-6">
+              <div className="flex items-center gap-2">
+                {explanation.isCorrect ? (
+                  <p className="font-semibold text-success-text">Correct!</p>
+                ) : (
+                  <p className="font-semibold text-error-text">
+                    The correct answer is{" "}
+                    {question.options.find(
+                      (o) => o.id === explanation.correctOptionId,
+                    )?.label ?? explanation.correctOptionId.toUpperCase()}
+                  </p>
+                )}
+              </div>
+              <div className="mt-3 break-words text-base leading-relaxed text-gray-700">
+                <MathText text={explanation.explanation} />
+              </div>
+              {explanation.explanationAm ? (
+                <p
+                  lang="am"
+                  className="font-ethiopic mt-2 break-words text-base text-gray-600"
+                >
+                  {explanation.explanationAm}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+
+          {error ? (
+            <p className="mt-3 text-sm text-error-text">{error}</p>
+          ) : null}
+        </div>
       </div>
 
       {/* Sticky action bar — keeps submit visible under sticky header on phones */}
@@ -338,7 +345,8 @@ export default function QuizPage() {
 
       {showExit ? (
         <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-4 sm:items-center">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6">
+          <div className="w-full max-w-md rounded-t-[2rem] bg-white p-6 shadow-[0_-16px_48px_rgba(0,44,27,0.25)] sm:rounded-[1.75rem]">
+            <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-gray-200 sm:hidden" />
             <h2 className="text-lg font-semibold text-gray-950">
               Exit this quiz?
             </h2>

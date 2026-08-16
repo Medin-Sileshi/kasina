@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, User } from "lucide-react";
+import { BrandAtmosphere } from "@/components/brand-chrome";
 
 const links = [
   { href: "/student", label: "Home", exact: true },
@@ -15,7 +16,7 @@ export function StudentNav({ userName }: { userName?: string }) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 bg-primary-800 text-white shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
+    <header className="relative z-40 text-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href="/student" className="shrink-0">
           <span className="text-lg font-bold tracking-tight">Kasina</span>
@@ -29,15 +30,13 @@ export function StudentNav({ userName }: { userName?: string }) {
 
         <nav className="hidden flex-1 items-center justify-center gap-7 md:flex">
           {links.map((link) => {
-            const active =
-              link.exact
-                ? pathname === link.href
-                : link.label === "Practice"
-                  ? pathname.startsWith("/subjects") ||
-                    pathname.startsWith("/quiz")
-                  : pathname === link.href ||
-                    (link.href !== "/student" &&
-                      pathname.startsWith(link.href));
+            const active = link.exact
+              ? pathname === link.href
+              : link.label === "Practice"
+                ? pathname.startsWith("/subjects") ||
+                  pathname.startsWith("/quiz")
+                : pathname === link.href ||
+                  (link.href !== "/student" && pathname.startsWith(link.href));
             return (
               <Link
                 key={`${link.label}-${link.id ?? link.href}`}
@@ -109,9 +108,15 @@ export function StudentShell({
   userName?: string;
 }) {
   return (
-    <div className="min-h-dvh bg-[#F4F6F5]">
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-primary-800">
+      <BrandAtmosphere />
       <StudentNav userName={userName} />
-      <div className="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9">{children}</div>
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-0 sm:px-4">
+        <div className="landing-sheet-in flex flex-1 flex-col rounded-t-[2rem] bg-gray-50 px-4 pb-10 pt-7 shadow-[0_-16px_48px_rgba(0,44,27,0.35)] sm:rounded-t-[2.25rem] sm:px-6 sm:pb-12 sm:pt-9">
+          <div className="mx-auto mb-6 h-1.5 w-12 shrink-0 rounded-full bg-gray-200 sm:mb-8" />
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

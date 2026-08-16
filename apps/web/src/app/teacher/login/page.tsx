@@ -9,6 +9,14 @@ import { Field, PrimaryButton, TextInput } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
 import { meQueryKey } from "@/lib/session";
 
+function authErrorMessage(err: { message?: string } | null | undefined) {
+  const msg = err?.message?.trim();
+  if (!msg || msg === "Failed to fetch" || /fetch failed/i.test(msg)) {
+    return "Cannot reach the server or database. Is the API running, and is Supabase online?";
+  }
+  return msg;
+}
+
 export default function TeacherLoginPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -21,20 +29,30 @@ export default function TeacherLoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const { error: err } = await authClient.signIn.email({ email, password });
-    setLoading(false);
-    if (err) {
-      setError(err.message ?? "Login failed");
-      return;
+    try {
+      const { error: err } = await authClient.signIn.email({ email, password });
+      if (err) {
+        setError(authErrorMessage(err));
+        return;
+      }
+      await queryClient.invalidateQueries({ queryKey: meQueryKey });
+      router.push("/teacher");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? authErrorMessage(err)
+          : "Login failed",
+      );
+    } finally {
+      setLoading(false);
     }
-    await queryClient.invalidateQueries({ queryKey: meQueryKey });
-    router.push("/teacher");
   }
 
   return (
     <AuthCard
       title="Teacher login"
       subtitle="Manage classes, assignments, and results."
+      eyebrow="Teachers"
     >
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Field label="Email">

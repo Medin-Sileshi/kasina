@@ -9,6 +9,14 @@ import { Field, PrimaryButton, TextInput } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
 import { meQueryKey } from "@/lib/session";
 
+function authErrorMessage(err: { message?: string } | null | undefined) {
+  const msg = err?.message?.trim();
+  if (!msg || msg === "Failed to fetch" || /fetch failed/i.test(msg)) {
+    return "Cannot reach the server or database. Is the API running, and is Supabase online?";
+  }
+  return msg;
+}
+
 export default function TeacherSignupPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -22,25 +30,33 @@ export default function TeacherSignupPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const { error: err } = await authClient.signUp.email({
-      email,
-      password,
-      name,
-      ...({ role: "teacher" } as Record<string, string>),
-    });
-    setLoading(false);
-    if (err) {
-      setError(err.message ?? "Sign up failed");
-      return;
+    try {
+      const { error: err } = await authClient.signUp.email({
+        email,
+        password,
+        name,
+        ...({ role: "teacher" } as Record<string, string>),
+      });
+      if (err) {
+        setError(authErrorMessage(err));
+        return;
+      }
+      await queryClient.invalidateQueries({ queryKey: meQueryKey });
+      router.push("/teacher");
+    } catch (err) {
+      setError(
+        err instanceof Error ? authErrorMessage(err) : "Sign up failed",
+      );
+    } finally {
+      setLoading(false);
     }
-    await queryClient.invalidateQueries({ queryKey: meQueryKey });
-    router.push("/teacher");
   }
 
   return (
     <AuthCard
       title="Create teacher account"
       subtitle="Set up your classroom on Kasina."
+      eyebrow="Teachers"
     >
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Field label="Full name">

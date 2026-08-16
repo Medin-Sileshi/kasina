@@ -15,7 +15,7 @@ export function PrimaryButton({
   return (
     <button
       {...props}
-      className={`inline-flex min-h-11 h-[52px] w-full items-center justify-center rounded-xl bg-primary-800 px-5 text-base font-semibold text-white transition hover:bg-primary-700 disabled:opacity-60 ${className}`}
+      className={`inline-flex min-h-11 h-[52px] w-full items-center justify-center rounded-2xl bg-primary-800 px-5 text-base font-semibold text-white transition hover:bg-primary-700 disabled:opacity-60 ${className}`}
     />
   );
 }
@@ -27,7 +27,7 @@ export function SecondaryButton({
   return (
     <button
       {...props}
-      className={`inline-flex h-12 w-full items-center justify-center rounded-xl border border-gray-200 bg-white px-5 text-base font-semibold text-gray-800 transition hover:bg-gray-50 disabled:opacity-60 ${className}`}
+      className={`inline-flex h-12 w-full items-center justify-center rounded-2xl border border-primary-800 bg-white px-5 text-base font-semibold text-primary-800 transition hover:bg-primary-50 disabled:opacity-60 ${className}`}
     />
   );
 }
@@ -39,7 +39,7 @@ export function GhostButton({
   return (
     <button
       {...props}
-      className={`inline-flex h-12 w-full items-center justify-center rounded-xl px-5 text-base font-medium text-gray-600 transition hover:text-primary-600 disabled:opacity-60 ${className}`}
+      className={`inline-flex h-12 w-full items-center justify-center rounded-2xl px-5 text-base font-medium text-gray-600 transition hover:text-primary-600 disabled:opacity-60 ${className}`}
     />
   );
 }
@@ -69,7 +69,7 @@ export function TextInput({
   return (
     <input
       {...props}
-      className={`h-12 w-full rounded-xl border border-gray-200 bg-white px-3 text-gray-950 outline-none transition placeholder:text-gray-400 focus:border-primary-600 ${className}`}
+      className={`h-12 w-full rounded-2xl border border-gray-200 bg-white px-3 text-gray-950 outline-none transition placeholder:text-gray-400 focus:border-primary-600 ${className}`}
     />
   );
 }
@@ -83,7 +83,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-gray-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_rgba(15,23,42,0.04)] ${className}`}
+      className={`rounded-[1.25rem] border border-gray-200/70 bg-white p-5 shadow-[0_1px_2px_rgba(0,44,27,0.04),0_8px_24px_rgba(0,44,27,0.05)] ${className}`}
     >
       {children}
     </div>

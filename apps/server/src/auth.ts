@@ -8,7 +8,7 @@ let cached: { key: string; auth: Auth; pool: Pool } | null = null;
 
 export function isTransientPgError(err: unknown): boolean {
   if (!err || typeof err !== "object") {
-    return /ECONNRESET|Connection terminated|connection timeout/i.test(
+    return /ECONNRESET|Connection terminated|connection timeout|ENOTFOUND|ECONNREFUSED/i.test(
       String(err),
     );
   }
@@ -17,9 +17,10 @@ export function isTransientPgError(err: unknown): boolean {
   return (
     code === "ECONNRESET" ||
     code === "ECONNREFUSED" ||
+    code === "ENOTFOUND" ||
     code === "ETIMEDOUT" ||
     code === "57P01" ||
-    /ECONNRESET|Connection terminated|connection timeout|server closed the connection/i.test(
+    /ECONNRESET|Connection terminated|connection timeout|server closed the connection|ENOTFOUND|getaddrinfo/i.test(
       message,
     )
   );
@@ -131,11 +132,24 @@ export function createAuth(env: ServerEnv) {
 
   pool.on("error", (err) => {
     console.error("[auth-pool] idle client error:", err.message);
+    // Drop the dead pool so the next request opens a fresh connection.
+    if (cached?.pool === pool) {
+      cached = null;
+    }
   });
 
   const auth = buildAuth(env, pool);
   cached = { key, auth, pool };
   return auth;
+}
+
+/** Force a new Pool on the next createAuth() — use after connection deaths. */
+export function resetAuthCache() {
+  const prev = cached;
+  cached = null;
+  if (prev?.pool) {
+    void prev.pool.end().catch(() => undefined);
+  }
 }
 
 export type { Auth };

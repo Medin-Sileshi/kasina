@@ -15,6 +15,7 @@ import {
   Grid3X3,
   LineChart,
 } from "lucide-react";
+import { BrandAtmosphere } from "@/components/brand-chrome";
 
 type NavItem = {
   id: string;
@@ -136,9 +137,10 @@ function TeacherShellNav({
       .find((item) => item.match(pathname, search))?.id ?? "dashboard";
 
   return (
-    <div className="flex min-h-dvh bg-[#F4F6F5]">
-      <aside className="sticky top-0 hidden h-dvh w-[248px] shrink-0 flex-col bg-primary-900 text-white md:flex">
-        <div className="px-5 pb-4 pt-6">
+    <div className="flex min-h-dvh bg-primary-800 md:bg-gray-50">
+      <aside className="relative sticky top-0 hidden h-dvh w-[248px] shrink-0 flex-col overflow-hidden bg-primary-800 text-white md:flex">
+        <BrandAtmosphere />
+        <div className="relative z-10 px-5 pb-4 pt-6">
           <Link href="/teacher" className="block">
             <span className="text-xl font-bold tracking-tight">Kasina</span>
             <span
@@ -148,12 +150,12 @@ function TeacherShellNav({
               (ካሲና)
             </span>
           </Link>
-          <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white/40">
+          <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-accent-500/90">
             Teacher
           </p>
         </div>
 
-        <nav className="flex-1 space-y-7 overflow-y-auto px-3 pb-4 pt-2">
+        <nav className="relative z-10 flex-1 space-y-7 overflow-y-auto px-3 pb-4 pt-2">
           {nav.map((section) => (
             <div key={section.group}>
               <p className="mb-2 px-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/35">
@@ -190,7 +192,7 @@ function TeacherShellNav({
         </nav>
 
         {onSignOut ? (
-          <div className="border-t border-white/10 p-3">
+          <div className="relative z-10 border-t border-white/10 p-3">
             <button
               type="button"
               onClick={onSignOut}
@@ -203,60 +205,81 @@ function TeacherShellNav({
         ) : null}
       </aside>
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-gray-200/80 bg-white/90 px-4 backdrop-blur-md sm:px-8">
-          <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-700 md:hidden">
-              Kasina Teacher
-            </p>
-            {title ? (
-              <h1 className="truncate text-lg font-bold tracking-tight text-gray-950 sm:text-[1.35rem]">
-                {title}
-              </h1>
-            ) : null}
-          </div>
-          <div className="flex items-center gap-2.5">
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
-              aria-label="Notifications"
-            >
-              <Bell className="h-[18px] w-[18px]" />
-            </button>
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-800 text-sm font-semibold text-white ring-2 ring-white">
+      <div className="relative flex min-w-0 flex-1 flex-col md:bg-transparent">
+        {/* Mobile: green brand strip matching landing */}
+        <div className="relative overflow-hidden bg-primary-800 text-white md:hidden">
+          <BrandAtmosphere />
+          <div className="relative z-10 flex h-14 items-center justify-between px-4">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-500/90">
+                Kasina · Teacher
+              </p>
+              {title ? (
+                <h1 className="truncate text-base font-bold tracking-tight">
+                  {title}
+                </h1>
+              ) : null}
+            </div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-sm font-semibold ring-2 ring-white/10">
               {(userName ?? "T").charAt(0).toUpperCase()}
             </div>
           </div>
-        </header>
+          <nav className="relative z-10 flex gap-1 overflow-x-auto border-t border-white/10 px-3 py-2">
+            {mobileNav.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-semibold ${
+                  pathname === item.href ||
+                  (item.href !== "/teacher" && pathname.startsWith(item.href))
+                    ? "bg-white/15 text-white"
+                    : "text-white/65"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            {onSignOut ? (
+              <button
+                type="button"
+                onClick={onSignOut}
+                className="ml-auto whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-semibold text-white/55"
+              >
+                Sign out
+              </button>
+            ) : null}
+          </nav>
+        </div>
 
-        <nav className="flex gap-1 overflow-x-auto border-b border-gray-200 bg-white px-3 py-2 md:hidden">
-          {mobileNav.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-semibold ${
-                pathname === item.href ||
-                (item.href !== "/teacher" && pathname.startsWith(item.href))
-                  ? "bg-primary-800 text-white"
-                  : "bg-primary-50 text-primary-800"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          {onSignOut ? (
-            <button
-              type="button"
-              onClick={onSignOut}
-              className="ml-auto whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-semibold text-gray-500"
-            >
-              Sign out
-            </button>
-          ) : null}
-        </nav>
+        <div className="flex min-h-0 flex-1 flex-col md:pl-0">
+          <header className="sticky top-0 z-20 hidden h-16 items-center justify-between border-b border-gray-200/80 bg-white/90 px-4 backdrop-blur-md md:flex sm:px-8">
+            <div className="min-w-0">
+              {title ? (
+                <h1 className="truncate text-lg font-bold tracking-tight text-gray-950 sm:text-[1.35rem]">
+                  {title}
+                </h1>
+              ) : null}
+            </div>
+            <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
+                aria-label="Notifications"
+              >
+                <Bell className="h-[18px] w-[18px]" />
+              </button>
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-800 text-sm font-semibold text-white ring-2 ring-white">
+                {(userName ?? "T").charAt(0).toUpperCase()}
+              </div>
+            </div>
+          </header>
 
-        <div className="flex-1 overflow-auto px-4 py-6 sm:px-8 sm:py-8">
-          <div className="mx-auto max-w-6xl">{children}</div>
+          <div className="flex-1 overflow-auto">
+            <div className="landing-sheet-in mx-auto min-h-full max-w-6xl rounded-t-[1.75rem] bg-gray-50 px-4 py-6 shadow-[0_-12px_40px_rgba(0,44,27,0.2)] sm:px-8 sm:py-8 md:rounded-none md:bg-transparent md:px-8 md:py-8 md:shadow-none">
+              <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-gray-200 md:hidden" />
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -277,7 +300,7 @@ export function TeacherShell({
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-dvh items-center justify-center bg-[#F4F6F5] text-gray-500">
+        <div className="flex min-h-dvh items-center justify-center bg-primary-800 text-white/70">
           Loading…
         </div>
       }

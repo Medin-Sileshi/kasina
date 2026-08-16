@@ -12,7 +12,6 @@ import {
   SecondaryButton,
   SectionLabel,
   EmptyState,
-  Card,
   StatusPill,
   ContentSkeleton,
 } from "@/components/ui";
@@ -140,25 +139,24 @@ export default function MathematicsSubjectPage() {
   }
 
   return (
-    <Card className="overflow-hidden p-0">
-      <div className="border-b border-gray-100 bg-primary-800 px-6 py-6 text-white">
+    <div>
+      <div className="text-center sm:text-left">
         <Link
           href="/student"
-          className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white"
+          className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-primary-700"
         >
           <ChevronLeft className="h-5 w-5" /> Home
         </Link>
-        <div className="mt-4 flex items-start justify-between gap-4">
+        <div className="mt-5 flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-sm font-bold">
-                Σ
-              </span>
-              <h1 className="text-2xl font-bold">Mathematics</h1>
-            </div>
-            <p className="mt-1 text-sm text-white/70">
-              Grade {meta.grade} · {meta.questionCount} questions · {totalTopics}{" "}
-              topics
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-accent-500">
+              Grade {meta.grade}
+            </p>
+            <h1 className="mt-2 text-[1.65rem] font-bold tracking-tight text-gray-950 sm:text-[1.85rem]">
+              Mathematics
+            </h1>
+            <p className="mt-2 text-[15px] text-gray-500">
+              {meta.questionCount} questions · {totalTopics} topics
             </p>
           </div>
           {meta.overallAccuracy != null ? (
@@ -167,7 +165,7 @@ export default function MathematicsSubjectPage() {
         </div>
       </div>
 
-      <div className="px-6 py-6">
+      <div className="mt-8">
         <SectionLabel>Start practicing</SectionLabel>
         <PrimaryButton
           className="mt-3"
@@ -305,6 +303,6 @@ export default function MathematicsSubjectPage() {
           <p className="mt-4 text-sm text-error-text">{actionError}</p>
         ) : null}
       </div>
-    </Card>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { createAuth, isTransientPgError } from "./auth";
+import { createAuth, isTransientPgError, resetAuthCache } from "./auth";
 import { createDb, pingDb } from "./db";
 import type { AppVariables, ServerEnv } from "./env";
 import { getSessionCached } from "./lib/auth-user";
@@ -40,35 +40,89 @@ app.get("/health", async (c) => {
   try {
     const db = createDb(c.env);
     const ok = await pingDb(db);
-    return c.json({ ok: true, db: ok });
-  } catch {
-    return c.json({ ok: false, db: false }, 500);
+    if (!ok) {
+      return c.json(
+        {
+          ok: false,
+          db: false,
+          hint: "Supabase REST unreachable or schema missing. Check SUPABASE_* and that the project is not paused.",
+        },
+        503,
+      );
+    }
+    return c.json({ ok: true, db: true });
+  } catch (err) {
+    return c.json(
+      {
+        ok: false,
+        db: false,
+        hint:
+          err instanceof Error
+            ? err.message
+            : "Database health check failed",
+      },
+      500,
+    );
   }
 });
 
 app.on(["POST", "GET"], "/api/auth/*", async (c) => {
-  const auth = createAuth(c.env);
   const raw = c.req.raw;
   let last: Response | undefined;
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
+      const auth = createAuth(c.env);
       const res = await auth.handler(raw.clone());
-      if (res.status < 500 || attempt === 2) return res;
+      if (res.status < 500) return res;
 
       const body = await res.clone().text();
-      if (
-        !/ECONNRESET|Connection terminated|connection timeout|SERVER_ERROR|INTERNAL_SERVER_ERROR/i.test(
+      const retryable =
+        !body ||
+        /ECONNRESET|Connection terminated|connection timeout|ENOTFOUND|ECONNREFUSED|SERVER_ERROR|INTERNAL_SERVER_ERROR/i.test(
           body,
-        )
-      ) {
+        );
+
+      if (!retryable || attempt === 2) {
+        if (res.status >= 500 && !body) {
+          return new Response(
+            JSON.stringify({
+              error:
+                "Cannot reach the database. Check your connection, that Supabase is not paused, and that DATABASE_URL in apps/server/.dev.vars is correct.",
+            }),
+            {
+              status: 503,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }
         return res;
       }
+
       last = res;
-      await new Promise((r) => setTimeout(r, 250 * (attempt + 1)));
+      resetAuthCache();
+      await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
     } catch (err) {
-      if (!isTransientPgError(err) || attempt === 2) throw err;
-      await new Promise((r) => setTimeout(r, 250 * (attempt + 1)));
+      console.error(
+        "[auth] handler error:",
+        err instanceof Error ? err.message : err,
+      );
+      if (!isTransientPgError(err) || attempt === 2) {
+        return new Response(
+          JSON.stringify({
+            error:
+              err instanceof Error
+                ? err.message
+                : "Auth temporarily unavailable",
+          }),
+          {
+            status: 503,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+      resetAuthCache();
+      await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
     }
   }
 
