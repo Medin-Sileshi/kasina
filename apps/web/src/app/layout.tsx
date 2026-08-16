@@ -20,9 +20,9 @@ const notoEthiopic = Noto_Serif_Ethiopic({
 });
 
 export const metadata: Metadata = {
-  title: "Kasina (ካሲና)",
+  title: "Kasina (ካሲና) — Melak AI tutor for Ethiopian students",
   description:
-    "Classroom practice for Ethiopian Grade 12 students — assign, practice, and track progress.",
+    "Melak helps Grade 7–12 students prepare for Ethiopia’s national exams — including CBT. Now piloting Grade 12 Mathematics classrooms.",
 };
 
 export default function RootLayout({
