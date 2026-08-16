@@ -24,31 +24,31 @@ const copy = {
     langLabel: "EN",
     brandAm: "ካሲና",
     pilot:
-      "Now piloting Grade 12 Mathematics classrooms on the web — Melak offline on mobile comes next.",
-    headline: "Melak, an AI tutor that helps you pass — even without internet.",
+      "Now piloting Grade 12 Mathematics classrooms on the web. Melak offline on mobile comes next.",
+    headline: "Melak helps students understand their lessons, even without internet.",
     subhead:
-      "Built for Grade 7–12 students preparing for Ethiopia’s national exams — including the new computer-based (CBT) format.",
+      "Built for Ethiopian classrooms: Grade 7 to 12 students who want real understanding, and teachers who want to teach more effectively.",
     cta: "Start Learning Free",
-    ctaTeachers: "For Schools & Teachers →",
+    ctaTeachers: "For Schools & Teachers",
     offlineCaption: "Designed for offline study after one download",
-    problemTitle: "Built for the exam system students actually face",
+    problemTitle: "Built for how learning actually happens",
     problemBody:
-      "Parents and students already know the pressure. Kasina is built around that reality — not around generic study tips.",
+      "Kasina supports classrooms where understanding matters as much as practice, and where teachers can see who needs help.",
     problems: [
       {
-        title: "Passing is hard",
-        body: "National exams decide next steps for millions of families. Students need focused practice, not guesswork.",
+        title: "Understanding takes support",
+        body: "Students need clear explanations in their own words, not only drills that chase a score.",
       },
       {
-        title: "CBT is new for many",
-        body: "Computer-based exams are rolling out. Sitting a test on a screen should not be the first time a student uses one.",
+        title: "Teachers need visibility",
+        body: "Knowing who is stuck, and on what, helps teachers use class time where it matters most.",
       },
       {
         title: "Access is uneven",
-        body: "Quality tutoring clusters in cities with reliable internet. Rural and low-connectivity students get left behind.",
+        body: "Quality support often clusters where internet is reliable. Kasina is designed so learning is not limited to strong connectivity.",
       },
     ],
-    howTitle: "How Kasina + Melak work",
+    howTitle: "How Kasina and Melak work",
     steps: [
       {
         title: "Download once, learn anywhere",
@@ -57,72 +57,72 @@ const copy = {
       },
       {
         title: "Ask Melak anything",
-        body: "Ask in your own words — Amharic or English — and get a clear explanation, not just a score.",
+        body: "Ask in Amharic or English and get a clear explanation, not just a right or wrong mark.",
         icon: "sparkles" as const,
       },
       {
-        title: "Practice like the real exam",
-        body: "CBT-style practice so the computer format isn’t a surprise on exam day.",
+        title: "Practice with purpose",
+        body: "Classroom practice and screen-based exercises that reinforce what was taught, including CBT-style formats when needed.",
         icon: "monitor" as const,
       },
       {
-        title: "Track real progress",
-        body: "See what’s improving and what still needs work — so effort turns into mastery.",
+        title: "See real progress",
+        body: "Students and teachers can see what is improving and what still needs attention.",
         icon: "chart" as const,
       },
     ],
-    featuresTitle: "What students and parents care about",
+    featuresTitle: "What classrooms need",
     features: [
       {
         title: "Study without waiting for wifi",
-        body: "On the bus, at home, or anywhere signal drops — Melak is designed to keep tutoring available offline after setup.",
+        body: "On the bus, at home, or anywhere signal drops. Melak is designed to keep tutoring available offline after setup.",
       },
       {
-        title: "Melak talks with you",
-        body: "A conversational tutor (not only flashcards). Ask why an answer is wrong and get an explanation you can follow.",
+        title: "Melak explains, not only quizzes",
+        body: "A conversational tutor. Ask why an answer is wrong and get an explanation that builds understanding.",
       },
       {
         title: "Curriculum-aligned practice",
-        body: "Classroom practice today starts with Grade 12 Mathematics. Broader Grade 7–12 subject coverage expands as Kasina grows.",
+        body: "Classroom practice today starts with Grade 12 Mathematics. Broader Grade 7 to 12 subject coverage expands as Kasina grows.",
       },
       {
-        title: "CBT exam simulation",
-        body: "Practice on a screen the way the national exam increasingly works — so the format itself isn’t the obstacle.",
+        title: "Tools for teachers",
+        body: "Create classes, assign practice, and see who needs support so teaching time goes further.",
       },
       {
         title: "Amharic and English",
-        body: "Learn in the language that helps you understand — switch when you need to.",
+        body: "Learn in the language that helps understanding. Switch when needed.",
       },
     ],
     pricingTitle: "What it costs",
     pricingBody:
-      "Free for students who join a class with an invite code. Teachers can create a free account during the classroom pilot. School and institutional plans will be clear before any paid rollout — no surprise fees on this page.",
-    schoolsTitle: "For schools & teachers",
+      "Free for students who join a class with an invite code. Teachers can create a free account during the classroom pilot. School and institutional plans will be clear before any paid rollout. No surprise fees on this page.",
+    schoolsTitle: "For schools and teachers",
     schoolsBody:
-      "Create classes, assign practice, and see who’s struggling — aligned with how Ethiopian classrooms actually run. Start free, then talk to us about school-wide rollout.",
+      "Create classes, assign practice, and see who is struggling. Built for how Ethiopian classrooms run. Start free, then talk with us about school-wide rollout.",
     schoolsCta: "Create teacher account",
     schoolsContact: "Request a school conversation",
-    faqTitle: "Questions parents ask",
+    faqTitle: "Common questions",
     faqs: [
       {
         q: "Does it really work without internet?",
-        a: "The long-term product is offline-first Melak on mobile after one download. Today’s pilot is web classroom practice and needs a connection. We’re clear about both so expectations stay honest.",
+        a: "The long-term product is offline Melak on mobile after one download. Today’s pilot is web classroom practice and needs a connection. We are clear about both so expectations stay honest.",
       },
       {
         q: "What devices does it support?",
-        a: "Right now: modern phones and laptops in a browser (Chrome/Firefox). A dedicated Android app for offline Melak is on the roadmap after this pilot.",
+        a: "Right now: modern phones and laptops in a browser (Chrome or Firefox). A dedicated Android app for offline Melak is on the roadmap after this pilot.",
       },
       {
-        q: "Is my child’s data safe?",
-        a: "We only collect what’s needed for learning and class management. We don’t sell student data. A plain-language Privacy Policy will stay linked in the footer as the product grows.",
+        q: "Is student data safe?",
+        a: "We only collect what is needed for learning and class management. We do not sell student data. A plain-language Privacy Policy will stay linked in the footer as the product grows.",
       },
       {
         q: "How much data does the first download use?",
-        a: "For the web pilot, you use normal browsing data. For the future mobile download, we’ll publish an approximate size before release so families can plan.",
+        a: "For the web pilot, you use normal browsing data. For the future mobile download, we will publish an approximate size before release so families can plan.",
       },
       {
         q: "Is this aligned with the national curriculum?",
-        a: "Practice content is built around Ethiopian secondary exam prep — starting with Grade 12 Mathematics in this pilot. We do not claim official MoE endorsement unless a partnership is signed and listed here.",
+        a: "Practice content follows Ethiopian secondary classroom subjects, starting with Grade 12 Mathematics in this pilot. We do not claim official MoE endorsement unless a partnership is signed and listed here.",
       },
     ],
     footerTag: "Classroom learning for Ethiopian secondary schools",
@@ -141,85 +141,85 @@ const copy = {
     langLabel: "አማ",
     brandAm: "ካሲና",
     pilot:
-      "አሁን በድር ላይ የ12ኛ ክፍል ሂሳብ ክፍሎችን በሙከራ እያስተዳደርን ነው — ከመስመር ውጭ መላክ በሞባይል ይቀጥላል።",
-    headline: "መላክ — በይነመረብ ሳይኖርም እንድታልፍ የሚረዳህ የሰው ሰራሽ አስተማሪ።",
+      "አሁን በድር ላይ የ12ኛ ክፍል ሂሳብ ክፍሎችን በሙከራ እያስተዳደርን ነው። ከመስመር ውጭ መላክ በሞባይል ይቀጥላል።",
+    headline: "መላክ በይነመረብ ሳይኖርም ትምህርትን ለመረዳት የሚረዳ የሰው ሰራሽ አስተማሪ ነው።",
     subhead:
-      "ለ7ኛ–12ኛ ክፍል ተማሪዎች የኢትዮጵያ ብሔራዊ ፈተናዎችን — የኮምፒዩተር ላይ (CBT) ቅርጸትን ጨምሮ — ለመዘጋጀት የተሰራ።",
+      "ለኢትዮጵያ ክፍሎች የተሰራ፡ ከ7ኛ እስከ 12ኛ ክፍል ተማሪዎች ትምህርታቸውን እንዲረዱ፣ መምህራንም በብቃት እንዲያስተምሩ።",
     cta: "ነጻ ለመማር ይጀምሩ",
-    ctaTeachers: "ለትምህርት ቤቶችና መምህራን →",
+    ctaTeachers: "ለትምህርት ቤቶችና መምህራን",
     offlineCaption: "አንድ ጊዜ ካወረዱ በኋላ ከመስመር ውጭ ለመማር የተዘጋጀ",
-    problemTitle: "ተማሪዎች ለሚያጋጥሟቸው ፈተና እውነታ የተሰራ",
+    problemTitle: "ትምህርት በእውነት እንዴት እንደሚሆን የተሰራ",
     problemBody:
-      "ወላጆችና ተማሪዎች ጫናውን ያውቃሉ። ካሲና ያንን እውነታ መሠረት አድርጎ የተሰራ ነው።",
+      "ካሲና ግንዛቤ እንደ ልምምድ አስፈላጊ በሆነበት፣ መምህራንም ማን እገዛ እንደሚያስፈልገው ማየት በሚችሉበት ክፍል ላይ ያተኩራል።",
     problems: [
       {
-        title: "ማለፍ ከባድ ነው",
-        body: "ብሔራዊ ፈተናዎች የሚቀጥለውን እርምጃ ይወስናሉ። ተማሪዎች ሆን ብሎ ልምምድ ያስፈልጋቸዋል።",
+        title: "መረዳት ድጋፍ ይፈልጋል",
+        body: "ተማሪዎች በራሳቸው ቃላት ግልጽ ማብራሪያ ያስፈልጋቸዋል፣ ውጤት ብቻ የሚያሳድድ ልምምድ አይደለም።",
       },
       {
-        title: "CBT ለብዙዎች አዲስ ነው",
-        body: "በኮምፒዩተር ላይ ፈተና እየተስፋፋ ነው። በፈተና ቀን ለመጀመሪያ ጊዜ ማያ ገጽ መጠቀም አይገባም።",
+        title: "መምህራን ግልጽነት ይፈልጋሉ",
+        body: "ማን በምን እንደሚቸገር ማወቅ የክፍል ጊዜን በሚያስፈልገው ቦታ ለመጠቀም ይረዳል።",
       },
       {
         title: "እኩል አይደለም",
-        body: "ጥራት ያለው ትምህርት ብዙ ጊዜ በከተሞች ነው። አነስተኛ ግንኙነት ያላቸው ተማሪዎች ይቀራሉ።",
+        body: "ጥራት ያለው ድጋፍ ብዙ ጊዜ ጠንካራ በይነመረብ ባለበት ነው። ካሲና ትምህርት በግንኙነት ብቻ እንዳይገደብ የተዘጋጀ ነው።",
       },
     ],
-    howTitle: "ካሲና + መላክ እንዴት ይሰራሉ",
+    howTitle: "ካሲና እና መላክ እንዴት ይሰራሉ",
     steps: [
       {
-        title: "አንድ ጊዜ አውርድ፣ በየትም ተማር",
+        title: "አንድ ጊዜ ማውረድ፣ በየትም መማር",
         body: "ከመጀመሪያው ማውረድ በኋላ የመላክ ዋና ትምህርት ያለ wifi እንዲቀጥል የተዘጋጀ ነው።",
         icon: "download" as const,
       },
       {
-        title: "ማንኛውንም ነገር መላክን ጠይቅ",
-        body: "በራስህ ቃላት — በአማርኛ ወይም በእንግሊዘኛ — ግልጽ ማብራሪያ ታገኛለህ።",
+        title: "መላክን ማንኛውንም ነገር መጠየቅ",
+        body: "በአማርኛ ወይም በእንግሊዘኛ ጠይቀው ግልጽ ማብራሪያ ያግኙ፣ ትክክል ወይም ስህተት ብቻ አይደለም።",
         icon: "sparkles" as const,
       },
       {
-        title: "እንደ እውነተኛው ፈተና ልምምድ አድርግ",
-        body: "የCBT-ቅርጸት ልምምድ — ቅርጸቱ በፈተና ቀን አያስደንቅህም።",
+        title: "በዓላማ ልምምድ",
+        body: "የተማረውን የሚያጠናክር የክፍል ልምምድ እና የማያ ገጽ ልምምድ፣ አስፈላጊ ሲሆን የCBT ቅርጸትን ጨምሮ።",
         icon: "monitor" as const,
       },
       {
-        title: "እውነተኛ እድገትህን ተከታተል",
-        body: "ምን እንደሚሻሻል እና ምን ገና እንደሚያስፈልግ ታያለህ።",
+        title: "እውነተኛ እድገት ማየት",
+        body: "ተማሪዎችና መምህራን ምን እንደሚሻሻል እና ምን ገና ትኩረት እንደሚያስፈልገው ማየት ይችላሉ።",
         icon: "chart" as const,
       },
     ],
-    featuresTitle: "ተማሪዎችና ወላጆች የሚፈልጉት",
+    featuresTitle: "ክፍሎች የሚያስፈልጋቸው",
     features: [
       {
-        title: "wifi ሳትጠብቅ ተማር",
-        body: "በአውቶቡስ፣ በቤት፣ ሲግናል በሚቋረጥበት — መላክ ከተዘጋጀ በኋላ ከመስመር ውጭ እንዲሰራ የተዘጋጀ ነው።",
+        title: "wifi ሳይጠበቅ መማር",
+        body: "በአውቶቡስ፣ በቤት፣ ሲግናል በሚቋረጥበት። መላክ ከተዘጋጀ በኋላ ከመስመር ውጭ እንዲሰራ የተዘጋጀ ነው።",
       },
       {
-        title: "መላክ ከአንተ ጋር ይነጋገራል",
-        body: "ውይይታዊ አስተማሪ። መልሱ ለምን እንደተሳሳተ ጠይቅ — የምትከተለው ማብራሪያ ታገኛለህ።",
+        title: "መላክ ያብራራል፣ ፈተና ብቻ አይደለም",
+        body: "ውይይታዊ አስተማሪ። መልሱ ለምን እንደተሳሳተ ይጠይቁ፣ ግንዛቤ የሚገነባ ማብራሪያ ያግኙ።",
       },
       {
         title: "ከስርአተ ትምህርት ጋር የተያያዘ ልምምድ",
-        body: "ዛሬ የክፍል ልምምድ በ12ኛ ክፍል ሂሳብ ይጀምራል። የ7–12 ርዕሰ ጉዳዮች እየሰፋ ይሄዳል።",
+        body: "ዛሬ የክፍል ልምምድ በ12ኛ ክፍል ሂሳብ ይጀምራል። ከ7ኛ እስከ 12ኛ ርዕሰ ጉዳዮች እየሰፋ ይሄዳል።",
       },
       {
-        title: "የCBT ፈተና ማስመሰል",
-        body: "ብሔራዊ ፈተና እየሄደበት ባለው ማያ ገጽ ላይ ልምምድ አድርግ።",
+        title: "ለመምህራን መሣሪያዎች",
+        body: "ክፍል ይፍጠሩ፣ ልምምድ ይመድቡ፣ ማን እገዛ እንደሚያስፈልገው ይመልከቱ፣ የማስተማር ጊዜ ይራዘም።",
       },
       {
         title: "አማርኛ እና እንግሊዘኛ",
-        body: "በምትረዳበት ቋንቋ ተማር — ስትፈልግ ቀይር።",
+        body: "መረዳት በሚያስችል ቋንቋ ይማሩ። አስፈላጊ ሲሆን ይቀይሩ።",
       },
     ],
     pricingTitle: "ዋጋው ምንድን ነው",
     pricingBody:
-      "በግብዣ ኮድ የሚቀላቀሉ ተማሪዎች ነፃ ናቸው። መምህራን በሙከራ ወቅት ነፃ መለያ መፍጠር ይችላሉ። የትምህርት ቤት ክፍያ ከመጀመሩ በፊት በግልጽ ይገለጻል።",
+      "በግብዣ ኮድ የሚቀላቀሉ ተማሪዎች ነፃ ናቸው። መምህራን በሙከራ ወቅት ነፃ መለያ መፍጠር ይችላሉ። የትምህርት ቤት ክፍያ ከመጀመሩ በፊት በግልጽ ይገለጻል። በዚህ ገጽ ላይ ያልተጠበቀ ክፍያ የለም።",
     schoolsTitle: "ለትምህርት ቤቶችና መምህራን",
     schoolsBody:
-      "ክፍል ፍጠር፣ ልምምድ መድብ፣ ማን እንደሚቸገር እይ። ነፃ ጀምር — ለትምህርት ቤት ስፋት ከእኛ ጋር ተነጋገር።",
-    schoolsCta: "የመምህር መለያ ፍጠር",
-    schoolsContact: "የትምህርት ቤት ውይይት ጠይቅ",
-    faqTitle: "ወላጆች የሚጠይቋቸው ጥያቄዎች",
+      "ክፍል ይፍጠሩ፣ ልምምድ ይመድቡ፣ ማን እንደሚቸገር ይመልከቱ። ለኢትዮጵያ ክፍሎች የተሰራ። ነፃ ይጀምሩ፣ ለትምህርት ቤት ስፋት ከእኛ ጋር ይነጋገሩ።",
+    schoolsCta: "የመምህር መለያ ይፍጠሩ",
+    schoolsContact: "የትምህርት ቤት ውይይት ይጠይቁ",
+    faqTitle: "ተደጋጋሚ ጥያቄዎች",
     faqs: [
       {
         q: "በእውነት ያለ በይነመረብ ይሰራል?",
@@ -227,10 +227,10 @@ const copy = {
       },
       {
         q: "ምን ዓይነት መሣሪያ ይደግፋል?",
-        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ። ለከመስመር ውጭ መላክ የAndroid መተግበሪያ ከሙከራ በኋላ ይመጣል።",
+        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ (Chrome ወይም Firefox)። ለከመስመር ውጭ መላክ የAndroid መተግበሪያ ከሙከራ በኋላ ይመጣል።",
       },
       {
-        q: "የልጄ መረጃ ደህንነቱ የተጠበቀ ነው?",
+        q: "የተማሪ መረጃ ደህንነቱ የተጠበቀ ነው?",
         a: "ለትምህርትና ክፍል አስተዳደር የሚያስፈልገውን ብቻ እንሰበስባለን። የተማሪ መረጃ አንሸጥም።",
       },
       {
@@ -239,7 +239,7 @@ const copy = {
       },
       {
         q: "ከብሔራዊ ስርአተ ትምህርት ጋር የተጣጣመ ነው?",
-        a: "ይዘቱ የኢትዮጵያ ሁለተኛ ደረጃ ፈተና ዝግጅትን ያጠነጥናል — በዚህ ሙከራ በ12ኛ ክፍል ሂሳብ። ያልተፈረመ የMoE አጋርነት አንጠቀስም።",
+        a: "ይዘቱ የኢትዮጵያ ሁለተኛ ደረጃ የክፍል ርዕሰ ጉዳዮችን ይከተላል፣ በዚህ ሙከራ በ12ኛ ክፍል ሂሳብ። ያልተፈረመ የMoE አጋርነት አንጠቀስም።",
       },
     ],
     footerTag: "ለኢትዮጵያ ሁለተኛ ደረጃ ትምህርት ቤቶች የክፍል ትምህርት",
@@ -248,9 +248,9 @@ const copy = {
     footerSchools: "ለትምህርት ቤቶች",
     footerAbout: "ስለ እኛ",
     melakName: "መላክ",
-    melakChatQ: "የ x² ተውሳክ እንዴት አገኛለሁ?",
-    melakChatA: "የኃይል ህግን ተጠቀም፡ ገላጩን አውርድ ከዚያ አንድ ቀንስ። ስለዚህ 2x።",
-    joinHint: "የግብዣ ኮድ አለህ? ክፍልህን ነፃ ተቀላቀል።",
+    melakChatQ: "የ x² ተውሳክ እንዴት ይገኛል?",
+    melakChatA: "የኃይል ህግን ይጠቀሙ፡ ገላጩን አውርደው ከዚያ አንድ ይቀንሱ። ስለዚህ 2x።",
+    joinHint: "የግብዣ ኮድ አለዎት? ክፍልዎን ነፃ ይቀላቀሉ።",
   },
 } as const;
 
@@ -466,7 +466,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Pricing — skip empty social proof */}
+      {/* Pricing */}
       <section className="relative border-t border-white/10 px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-xl text-center">
           <Shield className="mx-auto h-7 w-7 text-accent-500" strokeWidth={1.75} aria-hidden />
