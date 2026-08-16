@@ -3,5 +3,21 @@
   "name": "kasina-server",
   "main": "src/index.ts",
   "compatibility_date": "2026-08-02",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "api.kasina.et",
+      "custom_domain": true
+    }
+  ],
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "834cbe71949648b49e492da982933cc8"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
 }

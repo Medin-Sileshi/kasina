@@ -99,11 +99,33 @@ function isPoolerUrl(databaseUrl: string) {
 }
 
 export function createAuth(env: ServerEnv) {
-  if (!env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is required for Better Auth");
+  const databaseUrl = env.HYPERDRIVE?.connectionString ?? env.DATABASE_URL;
+  if (!databaseUrl) {
+    throw new Error(
+      "DATABASE_URL or HYPERDRIVE binding is required for Better Auth",
+    );
   }
 
-  const key = `${env.DATABASE_URL}|${env.BETTER_AUTH_SECRET}|${env.BETTER_AUTH_URL}`;
+  const viaHyperdrive = Boolean(env.HYPERDRIVE?.connectionString);
+
+  // Hyperdrive owns the real pool. Do not cache a Worker-side Pool across
+  // requests — reused sockets cause intermittent Error 1101 crashes.
+  if (viaHyperdrive) {
+    const pool = new Pool({
+      connectionString: databaseUrl,
+      max: 1,
+      min: 0,
+      idleTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 15_000,
+      allowExitOnIdle: true,
+    });
+    pool.on("error", (err) => {
+      console.error("[auth-pool] hyperdrive client error:", err.message);
+    });
+    return buildAuth(env, pool);
+  }
+
+  const key = `${databaseUrl}|${env.BETTER_AUTH_SECRET}|${env.BETTER_AUTH_URL}`;
   if (cached?.key === key) {
     return cached.auth;
   }
@@ -112,12 +134,11 @@ export function createAuth(env: ServerEnv) {
     void cached.pool.end().catch(() => undefined);
   }
 
-  const pooler = isPoolerUrl(env.DATABASE_URL);
+  const pooler = isPoolerUrl(databaseUrl);
 
-  // Session-mode Supabase pooler: keep a single client. Concurrent sockets get
-  // reset (ECONNRESET / Connection terminated) and break getSession/sign-in.
+  // Session-mode Supabase pooler (local Node): max 1 to avoid resets.
   const pool = new Pool({
-    connectionString: env.DATABASE_URL,
+    connectionString: databaseUrl,
     max: 1,
     min: 0,
     idleTimeoutMillis: pooler ? 5_000 : 30_000,
@@ -125,14 +146,13 @@ export function createAuth(env: ServerEnv) {
     allowExitOnIdle: true,
     keepAlive: true,
     keepAliveInitialDelayMillis: 5_000,
-    ssl: env.DATABASE_URL.includes("localhost")
+    ssl: databaseUrl.includes("localhost")
       ? undefined
       : { rejectUnauthorized: false },
   });
 
   pool.on("error", (err) => {
     console.error("[auth-pool] idle client error:", err.message);
-    // Drop the dead pool so the next request opens a fresh connection.
     if (cached?.pool === pool) {
       cached = null;
     }
