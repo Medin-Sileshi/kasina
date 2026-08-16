@@ -17,6 +17,12 @@
       "id": "834cbe71949648b49e492da982933cc8"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "TEXTBOOKS",
+      "bucket_name": "kasina-textbooks"
+    }
+  ],
   "observability": {
     "enabled": true
   }

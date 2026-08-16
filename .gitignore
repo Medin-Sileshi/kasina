@@ -44,3 +44,6 @@ pnpm-debug.log*
 *.pem
 *.local
 .env*.local
+
+# Large MoE textbook PDFs (stored in Cloudflare R2; see content/textbooks/manifest.json)
+content/textbooks/**/*.pdf

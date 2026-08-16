@@ -1,0 +1,47 @@
+{
+  "bucket": "kasina-textbooks",
+  "curriculum": "Ethiopia MoE new curriculum student textbooks",
+  "sourceNote": "PDFs live in Cloudflare R2. Local copies under content/textbooks/grade-12/*.pdf are gitignored and used only for upload.",
+  "books": [
+    {
+      "id": "grade-12-mathematics",
+      "grade": 12,
+      "subject": "mathematics",
+      "title": "Grade 12 Mathematics Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/mathematics/student-textbook.pdf",
+      "mvpStatus": "active",
+      "notes": "Primary MVP content source for question-bank QA and curriculum alignment."
+    },
+    {
+      "id": "grade-12-physics",
+      "grade": 12,
+      "subject": "physics",
+      "title": "Grade 12 Physics Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/physics/student-textbook.pdf",
+      "mvpStatus": "archived",
+      "notes": "Stored for post-MVP multi-subject expansion. Not used in the Grade 12 Math classroom pilot."
+    },
+    {
+      "id": "grade-12-chemistry",
+      "grade": 12,
+      "subject": "chemistry",
+      "title": "Grade 12 Chemistry Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/chemistry/student-textbook.pdf",
+      "mvpStatus": "archived",
+      "notes": "Stored for post-MVP multi-subject expansion."
+    },
+    {
+      "id": "grade-12-biology",
+      "grade": 12,
+      "subject": "biology",
+      "title": "Grade 12 Biology Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/biology/student-textbook.pdf",
+      "mvpStatus": "archived",
+      "notes": "Stored for post-MVP multi-subject expansion."
+    }
+  ]
+}

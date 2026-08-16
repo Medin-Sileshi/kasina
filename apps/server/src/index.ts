@@ -9,6 +9,7 @@ import { classesApp } from "./routes/classes";
 import { progressApp } from "./routes/progress";
 import { sessionsApp } from "./routes/sessions";
 import { subjectsApp } from "./routes/subjects";
+import { textbooksApp } from "./routes/textbooks";
 
 type HonoEnv = {
   Bindings: ServerEnv;
@@ -274,5 +275,6 @@ app.route("/assignments", assignmentsApp);
 app.route("/sessions", sessionsApp);
 app.route("/progress", progressApp);
 app.route("/subjects", subjectsApp);
+app.route("/textbooks", textbooksApp);
 
 export default app;

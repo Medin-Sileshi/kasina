@@ -30,7 +30,14 @@ Prefer topics with **≥10** questions so “Assign 10” does not reuse items h
 
 ## Content sources (for authors)
 
-See plan / ops notes: MoE Grade 12 Math student textbook + teacher’s guide; past ESSLCE papers; optional Gr 11 for review-item QA.
+**Canonical MVP textbook (R2):** `textbooks/grade-12/mathematics/student-textbook.pdf` in bucket `kasina-textbooks`  
+Catalog: [`content/textbooks/manifest.json`](../../content/textbooks/manifest.json)  
+Upload: `pnpm textbooks:upload`  
+Authenticated fetch: `GET /textbooks/grade-12/mathematics`
+
+Also archived on R2 (not in the Math pilot UI): Grade 12 Physics, Chemistry, Biology student textbooks for post-MVP multi-subject work.
+
+Use the Math PDF when reviewing explanations and expanding `grade12-math-seed.json`. Past ESSLCE papers and optional Gr 11 review items remain secondary sources.
 
 ## Amharic
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AlertTriangle, ChevronRight, Plus } from "lucide-react";
-import { apiFetch } from "@/lib/auth-client";
+import { apiFetch, openTextbook } from "@/lib/auth-client";
 import { useMe, meQueryKey } from "@/lib/session";
 import { useTeacherTitle } from "@/components/teacher-chrome";
 import {
@@ -147,6 +147,17 @@ export default function TeacherHomePage() {
               accent={atRisk.length ? "warning" : "default"}
             />
           </div>
+
+          <p className="mt-4 text-[13px] text-gray-500">
+            Curriculum source:{" "}
+            <button
+              type="button"
+              onClick={() => openTextbook("mathematics")}
+              className="font-semibold text-primary-700 underline-offset-2 hover:underline"
+            >
+              Grade 12 Mathematics textbook
+            </button>
+          </p>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-5">
             <Card className="lg:col-span-2">

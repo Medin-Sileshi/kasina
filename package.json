@@ -11,7 +11,8 @@
     "db:seed": "pnpm --filter @kasina/db seed",
     "db:reset-pilot": "pnpm --filter @kasina/db reset-pilot",
     "questions:validate": "pnpm --filter @kasina/question-bank validate",
-    "smoke:prod": "bash ./scripts/smoke-prod.sh"
+    "smoke:prod": "bash ./scripts/smoke-prod.sh",
+    "textbooks:upload": "bash ./scripts/upload-textbooks-r2.sh"
   },
   "devDependencies": {
     "prettier": "^3.7.4",

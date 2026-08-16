@@ -71,3 +71,12 @@ export async function apiFetch<T>(
   }
   return data;
 }
+
+/** Open an authenticated textbook PDF in a new tab (streams from API/R2). */
+export function openTextbook(subject: string) {
+  window.open(
+    `${apiBase}/textbooks/grade-12/${encodeURIComponent(subject)}`,
+    "_blank",
+    "noopener,noreferrer",
+  );
+}

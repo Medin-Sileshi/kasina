@@ -1,0 +1,42 @@
+{
+  "bucket": "kasina-textbooks",
+  "curriculum": "Ethiopia MoE new curriculum student textbooks",
+  "books": [
+    {
+      "id": "grade-12-mathematics",
+      "grade": 12,
+      "subject": "mathematics",
+      "title": "Grade 12 Mathematics Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/mathematics/student-textbook.pdf",
+      "mvpStatus": "active"
+    },
+    {
+      "id": "grade-12-physics",
+      "grade": 12,
+      "subject": "physics",
+      "title": "Grade 12 Physics Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/physics/student-textbook.pdf",
+      "mvpStatus": "archived"
+    },
+    {
+      "id": "grade-12-chemistry",
+      "grade": 12,
+      "subject": "chemistry",
+      "title": "Grade 12 Chemistry Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/chemistry/student-textbook.pdf",
+      "mvpStatus": "archived"
+    },
+    {
+      "id": "grade-12-biology",
+      "grade": 12,
+      "subject": "biology",
+      "title": "Grade 12 Biology Student Textbook",
+      "edition": "new curriculum",
+      "r2Key": "textbooks/grade-12/biology/student-textbook.pdf",
+      "mvpStatus": "archived"
+    }
+  ]
+}
