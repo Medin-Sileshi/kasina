@@ -1,7 +1,10 @@
 import { createAuthClient } from "better-auth/react";
 
 export const apiBase =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8787";
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === "production"
+    ? "https://api.kasina.et"
+    : "http://localhost:8787");
 
 export const authClient = createAuthClient({
   baseURL: apiBase,
