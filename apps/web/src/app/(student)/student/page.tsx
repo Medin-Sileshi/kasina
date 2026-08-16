@@ -121,10 +121,7 @@ export default function StudentHomePage() {
   return (
     <>
       <section className="text-center sm:text-left">
-        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-accent-500">
-          Learn · Practice · Pass
-        </p>
-        <h1 className="mt-3 text-[1.85rem] font-bold tracking-tight text-gray-950 sm:text-3xl">
+        <h1 className="text-[1.85rem] font-bold tracking-tight text-gray-950 sm:text-3xl">
           {greeting()}, {me.user.name.split(" ")[0]}
         </h1>
         <p className="mt-2.5 flex items-center justify-center gap-2 text-[15px] text-gray-500 sm:justify-start">

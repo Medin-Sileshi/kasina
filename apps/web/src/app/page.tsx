@@ -17,13 +17,6 @@ export default function HomePage() {
         <div className="landing-fade-up">
           <BrandWordmark size="lg" />
         </div>
-        <p className="landing-fade-up landing-delay-2 mt-6 max-w-[20rem] text-base font-medium leading-snug text-white/75 sm:max-w-md sm:text-lg">
-          Classroom practice that helps Ethiopian students master topics — and
-          pass.
-        </p>
-        <p className="landing-fade-up landing-delay-3 mt-4 text-xs font-medium uppercase tracking-[0.12em] text-accent-500/90">
-          Learn · Practice · Pass
-        </p>
       </section>
 
       <BottomSheet>

@@ -8,7 +8,6 @@ import {
 
 export function WelcomeChrome({
   children,
-  tagline = "Learn · Practice · Pass",
 }: {
   children: ReactNode;
   tagline?: string;
@@ -18,9 +17,6 @@ export function WelcomeChrome({
       <BrandAtmosphere />
       <div className="relative flex min-h-[42dvh] shrink-0 flex-col items-center justify-center px-6 pb-8 pt-16 text-center sm:min-h-[48dvh]">
         <BrandWordmark />
-        <p className="mt-5 text-xs font-medium uppercase tracking-[0.12em] text-accent-500/90">
-          {tagline}
-        </p>
       </div>
       <BottomSheet className="flex-1">{children}</BottomSheet>
     </main>
@@ -48,9 +44,11 @@ export function AuthCard({
         <Link href={backHref} className="landing-fade-up block">
           <BrandWordmark />
         </Link>
-        <p className="landing-fade-up landing-delay-1 mt-5 text-xs font-medium uppercase tracking-[0.12em] text-accent-500/90">
-          {eyebrow ?? "Learn · Practice · Pass"}
-        </p>
+        {eyebrow ? (
+          <p className="landing-fade-up landing-delay-1 mt-5 text-xs font-medium uppercase tracking-[0.12em] text-accent-500/90">
+            {eyebrow}
+          </p>
+        ) : null}
       </section>
 
       <BottomSheet className="mt-auto">
