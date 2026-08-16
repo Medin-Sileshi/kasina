@@ -1,0 +1,13 @@
+# Copy to apps/server/.dev.vars for local `pnpm --filter server dev`
+# For Workers production, use `wrangler secret put` (see docs/mvp/deploy-kasina-et.md)
+
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+DATABASE_URL=
+BETTER_AUTH_SECRET=dev-secret-change-me-to-a-long-random-string
+BETTER_AUTH_URL=http://localhost:8787
+APP_URL=http://localhost:3000
+
+# Production secrets (not for .dev.vars file on laptop):
+# BETTER_AUTH_URL=https://api.kasina.et
+# APP_URL=https://kasina.et

@@ -1,0 +1,117 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Bell, User } from "lucide-react";
+
+const links = [
+  { href: "/student", label: "Home", exact: true },
+  { href: "/subjects/mathematics", label: "Subjects" },
+  { href: "/subjects/mathematics", label: "Practice", id: "practice" },
+  { href: "/progress", label: "Progress" },
+];
+
+export function StudentNav({ userName }: { userName?: string }) {
+  const pathname = usePathname();
+
+  return (
+    <header className="sticky top-0 z-40 bg-primary-800 text-white shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
+        <Link href="/student" className="shrink-0">
+          <span className="text-lg font-bold tracking-tight">Kasina</span>
+          <span
+            lang="am"
+            className="font-ethiopic ml-1.5 text-sm font-semibold text-white/75"
+          >
+            (ካሲና)
+          </span>
+        </Link>
+
+        <nav className="hidden flex-1 items-center justify-center gap-7 md:flex">
+          {links.map((link) => {
+            const active =
+              link.exact
+                ? pathname === link.href
+                : link.label === "Practice"
+                  ? pathname.startsWith("/subjects") ||
+                    pathname.startsWith("/quiz")
+                  : pathname === link.href ||
+                    (link.href !== "/student" &&
+                      pathname.startsWith(link.href));
+            return (
+              <Link
+                key={`${link.label}-${link.id ?? link.href}`}
+                href={link.href}
+                className={`relative text-sm font-medium transition ${
+                  active ? "text-white" : "text-white/65 hover:text-white"
+                }`}
+              >
+                {link.label}
+                {active ? (
+                  <span className="absolute -bottom-[18px] left-0 right-0 h-[2.5px] rounded-full bg-accent-500" />
+                ) : null}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-3">
+          <span className="hidden text-xs font-medium text-white/65 sm:inline">
+            EN <span className="text-white/30">|</span> አማ
+          </span>
+          <button
+            type="button"
+            className="rounded-full p-2 text-white/75 transition hover:bg-white/10"
+            aria-label="Notifications"
+          >
+            <Bell className="h-[18px] w-[18px]" />
+          </button>
+          <div
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-sm font-semibold ring-2 ring-white/10"
+            title={userName}
+          >
+            {userName ? (
+              userName.charAt(0).toUpperCase()
+            ) : (
+              <User className="h-4 w-4" />
+            )}
+          </div>
+        </div>
+      </div>
+
+      <nav className="flex gap-1 overflow-x-auto border-t border-white/10 px-3 py-2 md:hidden">
+        {links.map((link) => {
+          const active = link.exact
+            ? pathname === link.href
+            : pathname.startsWith(link.href);
+          return (
+            <Link
+              key={`m-${link.label}-${link.id ?? ""}`}
+              href={link.href}
+              className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold ${
+                active ? "bg-white/15 text-white" : "text-white/65"
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </header>
+  );
+}
+
+export function StudentShell({
+  children,
+  userName,
+}: {
+  children: React.ReactNode;
+  userName?: string;
+}) {
+  return (
+    <div className="min-h-dvh bg-[#F4F6F5]">
+      <StudentNav userName={userName} />
+      <div className="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9">{children}</div>
+    </div>
+  );
+}

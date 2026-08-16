@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand — deep forest green (product mockups) */
+  --color-primary-900: #002c1b;
+  --color-primary-800: #0b2e1f;
+  --color-primary-700: #1b4332;
+  --color-primary-600: #2d6a4f;
+  --color-primary-500: #40916c;
+  --color-primary-400: #74c69d;
+  --color-primary-100: #d8f3dc;
+  --color-primary-50: #f0fbf4;
+
+  /* Semantic */
+  --color-success: #1b4332;
+  --color-success-bg: #d8f3dc;
+  --color-success-text: #0b2e1f;
+  --color-error: #c62828;
+  --color-error-bg: #ffebee;
+  --color-error-text: #b71c1c;
+  --color-warning: #f59e0b;
+  --color-warning-text: #b45309;
+  --color-warning-bg: #fffbeb;
+
+  /* Accent */
+  --color-accent-500: #f4a261;
+  --color-accent-600: #e08e4f;
+  --color-accent-100: #fef3e2;
+
+  /* Gray */
+  --color-gray-950: #0c0c0e;
+  --color-gray-800: #1f2937;
+  --color-gray-700: #374151;
+  --color-gray-600: #4b5563;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-50: #f9fafb;
+
+  /* Subjects */
+  --color-subject-math: #1d4ed8;
+  --color-subject-math-bg: #eff6ff;
+  --color-subject-physics: #7c3aed;
+  --color-subject-physics-bg: #f5f3ff;
+  --color-subject-chemistry: #b45309;
+  --color-subject-chemistry-bg: #fffbeb;
+  --color-subject-biology: #15803d;
+  --color-subject-biology-bg: #f0fdf4;
+  --color-subject-english: #0e7490;
+  --color-subject-english-bg: #ecfeff;
+  --color-subject-history: #92400e;
+  --color-subject-history-bg: #fef3c7;
+  --color-subject-geography: #065f46;
+  --color-subject-geography-bg: #ecfdf5;
+  --color-subject-economics: #1e40af;
+  --color-subject-economics-bg: #eef2ff;
+  --color-subject-civics: #9d174d;
+  --color-subject-civics-bg: #fff1f2;
+
+  /* Spacing */
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+
+  /* Radius */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+}
+
+@theme inline {
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-50: var(--color-primary-50);
+
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-success-text: var(--color-success-text);
+  --color-error: var(--color-error);
+  --color-error-bg: var(--color-error-bg);
+  --color-error-text: var(--color-error-text);
+  --color-warning: var(--color-warning);
+  --color-warning-text: var(--color-warning-text);
+  --color-warning-bg: var(--color-warning-bg);
+
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-100: var(--color-accent-100);
+
+  --color-gray-950: var(--color-gray-950);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-50: var(--color-gray-50);
+
+  --color-subject-math: var(--color-subject-math);
+  --color-subject-math-bg: var(--color-subject-math-bg);
+
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-ethiopic: var(--font-ethiopic), "Noto Serif Ethiopic", serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+}
+
+body {
+  background: var(--color-gray-50);
+  color: var(--color-gray-950);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-ethiopic {
+  font-family: var(--font-ethiopic), "Noto Serif Ethiopic", serif;
+}
+
+.safe-pb {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
