@@ -185,6 +185,18 @@ export default function MathematicsSubjectPage() {
         >
           {starting ? "Starting…" : "Practice 10 random questions"}
         </PrimaryButton>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link href="/cbt">
+            <SecondaryButton type="button" className="sm:w-auto">
+              CBT exam practice
+            </SecondaryButton>
+          </Link>
+          <Link href="/melak">
+            <SecondaryButton type="button" className="sm:w-auto">
+              Ask Melak
+            </SecondaryButton>
+          </Link>
+        </div>
 
         {meta.years.length > 0 ? (
           <>

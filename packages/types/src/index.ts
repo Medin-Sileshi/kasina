@@ -85,7 +85,7 @@ export interface Assignment {
   createdAt: string;
 }
 
-export type SessionMode = "random" | "topic" | "assignment" | "weak_topics" | "year";
+export type SessionMode = "random" | "topic" | "assignment" | "weak_topics" | "year" | "cbt";
 
 export interface Session {
   id: string;

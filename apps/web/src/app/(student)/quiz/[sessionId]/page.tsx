@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { X } from "lucide-react";
+import { Flag, X } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
-import { useQuizStore } from "@/lib/quiz-store";
+import { formatTimer, useQuizStore } from "@/lib/quiz-store";
 import {
   AnswerOption,
   type AnswerOptionState,
@@ -23,10 +23,11 @@ import { WifiOff } from "lucide-react";
 type AnswerResponse = {
   answer: {
     selectedOptionId: string;
-    isCorrect: boolean;
-    correctOptionId: string;
-    explanation: string;
+    isCorrect?: boolean;
+    correctOptionId?: string;
+    explanation?: string;
     explanationAm?: string | null;
+    saved?: boolean;
   };
 };
 
@@ -43,16 +44,26 @@ export default function QuizPage() {
     answers,
     contextLabel,
     sessionId: storeSessionId,
+    mode,
+    flagged,
+    timerSeconds,
     selectOption,
     markSubmitted,
+    markCbtSaved,
+    toggleFlag,
+    goTo,
     next,
     reset,
+    tickTimer,
   } = useQuizStore();
 
   const [loading, setLoading] = useState(questions.length === 0);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [showExit, setShowExit] = useState(false);
+  const [showSubmitAll, setShowSubmitAll] = useState(false);
+
+  const isCbt = mode === "cbt";
 
   useEffect(() => {
     if (storeSessionId === sessionId && questions.length > 0) {
@@ -66,6 +77,7 @@ export default function QuizPage() {
         topic?: string | null;
         unit?: string | null;
         year?: number | null;
+        completedAt?: string | null;
       };
       questions: typeof questions;
       answers: Array<{
@@ -75,32 +87,69 @@ export default function QuizPage() {
       }>;
     }>(`/sessions/${sessionId}`)
       .then((data) => {
+        const cbt = data.session.mode === "cbt";
         const label =
           data.session.topic ||
           (data.session.year ? `${data.session.year} Exam` : "Practice");
+        const restoredAnswers = Object.fromEntries(
+          data.answers.map((a) => [
+            a.questionId,
+            cbt
+              ? { selectedOptionId: a.selectedOptionId, saved: true }
+              : {
+                  selectedOptionId: a.selectedOptionId,
+                  isCorrect: a.isCorrect,
+                },
+          ]),
+        );
         reset({
           sessionId: data.session.id,
           questions: data.questions as never,
           contextLabel: label,
+          mode: cbt ? "cbt" : "practice",
+          timerSeconds: cbt && !data.session.completedAt ? 40 * 60 : null,
         });
+        if (Object.keys(restoredAnswers).length) {
+          useQuizStore.setState({ answers: restoredAnswers });
+        }
+        if (data.session.completedAt) {
+          router.replace(`/quiz/${sessionId}/results`);
+        }
       })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [sessionId, storeSessionId, questions.length, reset]);
+  }, [sessionId, storeSessionId, questions.length, reset, router]);
+
+  useEffect(() => {
+    if (!isCbt || timerSeconds == null) return;
+    const id = window.setInterval(() => {
+      tickTimer();
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [isCbt, timerSeconds, tickTimer]);
+
+  useEffect(() => {
+    if (isCbt && timerSeconds === 0) {
+      void finishExam();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCbt, timerSeconds]);
 
   const question = questions[index];
   const total = questions.length;
-  const progressPct = total
-    ? Math.round((Object.keys(answers).length / total) * 100)
-    : 0;
+  const answeredCount = Object.keys(answers).length;
+  const progressPct = total ? Math.round((answeredCount / total) * 100) : 0;
 
   const optionState = useCallback(
     (optionId: string): AnswerOptionState => {
+      if (isCbt) {
+        return selectedOptionId === optionId ? "selected" : "default";
+      }
       if (!submitted || !question) {
         return selectedOptionId === optionId ? "selected" : "default";
       }
       const ans = answers[question.id];
-      if (!ans) return "default";
+      if (!ans?.correctOptionId) return "default";
       if (optionId === ans.correctOptionId) {
         return optionId === ans.selectedOptionId
           ? "correct"
@@ -109,11 +158,36 @@ export default function QuizPage() {
       if (optionId === ans.selectedOptionId) return "wrong";
       return "default";
     },
-    [submitted, selectedOptionId, answers, question],
+    [isCbt, submitted, selectedOptionId, answers, question],
   );
+
+  async function saveCbtAnswer(andAdvance = false) {
+    if (!question || !selectedOptionId) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      await apiFetch<AnswerResponse>(`/sessions/${sessionId}/answers`, {
+        method: "POST",
+        body: JSON.stringify({
+          questionId: question.id,
+          selectedOptionId,
+        }),
+      });
+      markCbtSaved(question.id, selectedOptionId);
+      if (andAdvance && index < total - 1) next();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not save answer");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   const onSubmit = async () => {
     if (!question || !selectedOptionId || submitted) return;
+    if (isCbt) {
+      await saveCbtAnswer(false);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -135,7 +209,33 @@ export default function QuizPage() {
     }
   };
 
+  async function finishExam() {
+    setSubmitting(true);
+    try {
+      if (question && selectedOptionId && !answers[question.id]) {
+        await saveCbtAnswer(false);
+      }
+      await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+      router.push(`/quiz/${sessionId}/results`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not complete session");
+      setSubmitting(false);
+    }
+  }
+
   const onNext = async () => {
+    if (isCbt) {
+      if (selectedOptionId && !answers[question?.id ?? ""]) {
+        await saveCbtAnswer(true);
+        return;
+      }
+      if (index >= total - 1) {
+        setShowSubmitAll(true);
+        return;
+      }
+      next();
+      return;
+    }
     if (index >= total - 1) {
       try {
         await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
@@ -150,7 +250,7 @@ export default function QuizPage() {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (!question || showExit) return;
+      if (!question || showExit || showSubmitAll) return;
       const key = e.key.toLowerCase();
       if (!submitted && ["a", "b", "c", "d"].includes(key)) {
         const opt = question.options.find(
@@ -159,7 +259,8 @@ export default function QuizPage() {
         if (opt) selectOption(opt.id);
       }
       if (e.key === "Enter") {
-        if (!submitted && selectedOptionId) void onSubmit();
+        if (isCbt && selectedOptionId) void saveCbtAnswer(true);
+        else if (!submitted && selectedOptionId) void onSubmit();
         else if (submitted) void onNext();
       }
       if (e.key === "Escape") setShowExit(true);
@@ -167,12 +268,12 @@ export default function QuizPage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [question, submitted, selectedOptionId, showExit, index]);
+  }, [question, submitted, selectedOptionId, showExit, showSubmitAll, index, isCbt]);
 
   const explanation = useMemo(() => {
-    if (!question) return null;
+    if (!question || isCbt) return null;
     return answers[question.id];
-  }, [answers, question]);
+  }, [answers, question, isCbt]);
 
   if (loading) {
     return (
@@ -189,8 +290,10 @@ export default function QuizPage() {
         title="Couldn't load questions"
         body={error}
         action={
-          <SecondaryButton onClick={() => router.push("/subjects/mathematics")}>
-            Back to Mathematics
+          <SecondaryButton
+            onClick={() => router.push(isCbt ? "/cbt" : "/subjects/mathematics")}
+          >
+            Back
           </SecondaryButton>
         }
       />
@@ -230,15 +333,26 @@ export default function QuizPage() {
           </button>
           <p className="min-w-0 truncate text-center text-sm">
             <span className="mr-2 hidden rounded-md bg-white/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:inline">
-              Practice
+              {isCbt ? "CBT" : "Practice"}
             </span>
             <span className="text-white/90">Mathematics</span>
             <span className="text-white/40"> · </span>
             <span className="text-white/70">{contextLabel}</span>
           </p>
-          <p className="shrink-0 font-mono text-sm font-semibold tabular-nums">
-            {index + 1}/{total}
-          </p>
+          <div className="flex shrink-0 items-center gap-2 font-mono text-sm font-semibold tabular-nums">
+            {isCbt && timerSeconds != null ? (
+              <span
+                className={
+                  timerSeconds < 300 ? "text-amber-300" : "text-white/90"
+                }
+              >
+                {formatTimer(timerSeconds)}
+              </span>
+            ) : null}
+            <span>
+              {index + 1}/{total}
+            </span>
+          </div>
         </div>
         <div className="h-1 w-full bg-white/15">
           <div
@@ -251,12 +365,55 @@ export default function QuizPage() {
       <div className="relative z-10 mx-auto max-w-[680px] overflow-x-hidden px-0 pt-3 sm:px-4 sm:pt-4">
         <div className="rounded-t-[2rem] bg-gray-50 px-4 pb-8 pt-5 shadow-[0_-16px_48px_rgba(0,44,27,0.35)] sm:rounded-[1.75rem] sm:px-5 sm:pt-6">
           <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-gray-200 sm:hidden" />
+          {isCbt ? (
+            <div className="mb-4 flex flex-wrap gap-1.5">
+              {questions.map((q, i) => {
+                const answered = Boolean(answers[q.id]);
+                const isFlagged = flagged[q.id];
+                const isCurrent = i === index;
+                return (
+                  <button
+                    key={q.id}
+                    type="button"
+                    onClick={() => goTo(i)}
+                    className={`h-8 min-w-8 rounded-lg px-2 text-xs font-semibold ${
+                      isCurrent
+                        ? "bg-primary-800 text-white"
+                        : answered
+                          ? "bg-primary-100 text-primary-800"
+                          : isFlagged
+                            ? "bg-amber-100 text-amber-800"
+                            : "bg-white text-gray-600 ring-1 ring-gray-200"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
           <div className="rounded-[1.25rem] border border-gray-200/70 bg-white p-5 sm:p-7 sm:pb-6">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between gap-2">
               <p className="text-xs uppercase tracking-[0.06em] text-gray-400">
                 Question {index + 1}
               </p>
-              <DifficultyBadge difficulty={question.difficulty} />
+              <div className="flex items-center gap-2">
+                {isCbt ? (
+                  <button
+                    type="button"
+                    onClick={() => toggleFlag(question.id)}
+                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                      flagged[question.id]
+                        ? "bg-amber-100 text-amber-800"
+                        : "bg-gray-100 text-gray-600"
+                    }`}
+                  >
+                    <Flag className="h-3 w-3" />
+                    {flagged[question.id] ? "Flagged" : "Flag"}
+                  </button>
+                ) : null}
+                <DifficultyBadge difficulty={question.difficulty} />
+              </div>
             </div>
             <div className="break-words text-lg leading-relaxed text-gray-950">
               <MathText text={question.stem} />
@@ -278,7 +435,7 @@ export default function QuizPage() {
                 letter={opt.label}
                 text={opt.text}
                 state={optionState(opt.id)}
-                disabled={submitted || submitting}
+                disabled={(submitted && !isCbt) || submitting}
                 onClick={() => selectOption(opt.id)}
               />
             ))}
@@ -294,13 +451,15 @@ export default function QuizPage() {
                     The correct answer is{" "}
                     {question.options.find(
                       (o) => o.id === explanation.correctOptionId,
-                    )?.label ?? explanation.correctOptionId.toUpperCase()}
+                    )?.label ?? explanation.correctOptionId?.toUpperCase()}
                   </p>
                 )}
               </div>
-              <div className="mt-3 break-words text-base leading-relaxed text-gray-700">
-                <MathText text={explanation.explanation} />
-              </div>
+              {explanation.explanation ? (
+                <div className="mt-3 break-words text-base leading-relaxed text-gray-700">
+                  <MathText text={explanation.explanation} />
+                </div>
+              ) : null}
               {explanation.explanationAm ? (
                 <p
                   lang="am"
@@ -318,27 +477,71 @@ export default function QuizPage() {
         </div>
       </div>
 
-      {/* Sticky action bar — keeps submit visible under sticky header on phones */}
-      {(selectedOptionId && !submitted) || submitted ? (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 px-4 py-3 backdrop-blur-md safe-pb">
-          <div className="mx-auto max-w-[680px]">
-            {selectedOptionId && !submitted ? (
-              <PrimaryButton
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 px-4 py-3 backdrop-blur-md safe-pb">
+        <div className="mx-auto flex max-w-[680px] flex-col gap-2">
+          {isCbt ? (
+            <>
+              {selectedOptionId ? (
+                <PrimaryButton
+                  className="min-h-12"
+                  disabled={submitting}
+                  onClick={() => void saveCbtAnswer(true)}
+                >
+                  {submitting ? "Saving…" : "Save & next →"}
+                </PrimaryButton>
+              ) : null}
+              <SecondaryButton
                 className="min-h-12"
                 disabled={submitting}
-                onClick={() => void onSubmit()}
+                onClick={() => setShowSubmitAll(true)}
               >
-                {submitting ? "Saving…" : "Submit Answer"}
-              </PrimaryButton>
-            ) : null}
-            {submitted ? (
-              <PrimaryButton
-                className="min-h-12"
-                onClick={() => void onNext()}
-              >
-                {index >= total - 1 ? "See Results →" : "Next Question →"}
-              </PrimaryButton>
-            ) : null}
+                Submit exam ({answeredCount}/{total} answered)
+              </SecondaryButton>
+            </>
+          ) : (
+            <>
+              {selectedOptionId && !submitted ? (
+                <PrimaryButton
+                  className="min-h-12"
+                  disabled={submitting}
+                  onClick={() => void onSubmit()}
+                >
+                  {submitting ? "Saving…" : "Submit Answer"}
+                </PrimaryButton>
+              ) : null}
+              {submitted ? (
+                <PrimaryButton className="min-h-12" onClick={() => void onNext()}>
+                  {index >= total - 1 ? "See Results →" : "Next Question →"}
+                </PrimaryButton>
+              ) : null}
+            </>
+          )}
+        </div>
+      </div>
+
+      {showSubmitAll ? (
+        <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-4 sm:items-center">
+          <div className="w-full max-w-md rounded-t-[2rem] bg-white p-6 sm:rounded-[1.75rem]">
+            <h2 className="text-lg font-semibold text-gray-950">Submit exam?</h2>
+            <p className="mt-2 text-sm text-gray-500">
+              You answered {answeredCount} of {total} questions.
+              {answeredCount < total
+                ? " Unanswered questions will be marked wrong."
+                : ""}
+            </p>
+            <PrimaryButton
+              className="mt-6 min-h-12"
+              disabled={submitting}
+              onClick={() => void finishExam()}
+            >
+              {submitting ? "Submitting…" : "Submit all →"}
+            </PrimaryButton>
+            <GhostButton
+              className="mt-2 min-h-12"
+              onClick={() => setShowSubmitAll(false)}
+            >
+              Keep working
+            </GhostButton>
           </div>
         </div>
       ) : null}
@@ -348,20 +551,20 @@ export default function QuizPage() {
           <div className="w-full max-w-md rounded-t-[2rem] bg-white p-6 shadow-[0_-16px_48px_rgba(0,44,27,0.25)] sm:rounded-[1.75rem]">
             <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-gray-200 sm:hidden" />
             <h2 className="text-lg font-semibold text-gray-950">
-              Exit this quiz?
+              Exit this {isCbt ? "exam" : "quiz"}?
             </h2>
             <p className="mt-2 text-sm text-gray-500">
               Your progress in this session will be saved. You can resume later
               from your progress page.
             </p>
             <PrimaryButton className="mt-6 min-h-12" onClick={() => setShowExit(false)}>
-              Keep practicing
+              Keep {isCbt ? "exam" : "practicing"}
             </PrimaryButton>
             <GhostButton
               className="mt-2 min-h-12"
-              onClick={() => router.push("/subjects/mathematics")}
+              onClick={() => router.push(isCbt ? "/cbt" : "/subjects/mathematics")}
             >
-              Exit quiz
+              Exit
             </GhostButton>
           </div>
         </div>

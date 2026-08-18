@@ -55,6 +55,10 @@ const nextConfig: NextConfig = {
         source: "/textbooks/:path*",
         destination: `${apiProxyTarget}/textbooks/:path*`,
       },
+      {
+        source: "/melak/:path*",
+        destination: `${apiProxyTarget}/melak/:path*`,
+      },
     ];
   },
 };

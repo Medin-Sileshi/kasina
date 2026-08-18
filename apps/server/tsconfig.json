@@ -10,6 +10,9 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@kasina/melak-core": ["../../packages/melak-core/src/index.ts"]
+    }
   },
 }

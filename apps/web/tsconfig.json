@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@kasina/melak-core": ["../../packages/melak-core/src/index.ts"]
     }
   },
   "include": [

@@ -8,6 +8,8 @@ import { BrandAtmosphere } from "@/components/brand-chrome";
 const links = [
   { href: "/student", label: "Home", exact: true },
   { href: "/subjects/mathematics", label: "Subjects" },
+  { href: "/melak", label: "Melak" },
+  { href: "/cbt", label: "CBT" },
   { href: "/read/mathematics", label: "Textbook" },
   { href: "/progress", label: "Progress" },
 ];
@@ -15,6 +17,8 @@ const links = [
 function linkActive(pathname: string, href: string, exact?: boolean) {
   if (exact) return pathname === href;
   if (href.startsWith("/read")) return pathname.startsWith("/read");
+  if (href === "/melak") return pathname.startsWith("/melak");
+  if (href === "/cbt") return pathname.startsWith("/cbt");
   if (href.startsWith("/subjects")) {
     return pathname.startsWith("/subjects") || pathname.startsWith("/quiz");
   }
@@ -63,8 +67,10 @@ export function StudentNav({ userName }: { userName?: string }) {
           </span>
           <button
             type="button"
-            className="rounded-full p-2 text-white/75 transition hover:bg-white/10"
-            aria-label="Notifications"
+            disabled
+            title="Notifications coming soon"
+            className="cursor-not-allowed rounded-full p-2 text-white/40"
+            aria-label="Notifications (coming soon)"
           >
             <Bell className="h-[18px] w-[18px]" />
           </button>

@@ -265,6 +265,36 @@ export default function StudentHomePage() {
         </div>
       </section>
 
+      <section className="mt-8">
+        <h2 className="text-lg font-bold text-gray-950">Demo surfaces</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <Link href="/melak">
+            <Card className="flex items-center gap-3 overflow-hidden p-0 transition hover:border-primary-400">
+              <span className="h-full w-1.5 shrink-0 self-stretch bg-accent-500" />
+              <div className="flex flex-1 items-center justify-between py-4 pr-4">
+                <div>
+                  <p className="font-semibold text-gray-950">Melak tutor</p>
+                  <p className="text-sm text-gray-500">Grade 12 Math · pilot</p>
+                </div>
+                <ChevronRight className="h-5 w-5 text-gray-300" />
+              </div>
+            </Card>
+          </Link>
+          <Link href="/cbt">
+            <Card className="flex items-center gap-3 overflow-hidden p-0 transition hover:border-primary-400">
+              <span className="h-full w-1.5 shrink-0 self-stretch bg-primary-600" />
+              <div className="flex flex-1 items-center justify-between py-4 pr-4">
+                <div>
+                  <p className="font-semibold text-gray-950">CBT practice</p>
+                  <p className="text-sm text-gray-500">Exam-style · 20 questions</p>
+                </div>
+                <ChevronRight className="h-5 w-5 text-gray-300" />
+              </div>
+            </Card>
+          </Link>
+        </div>
+      </section>
+
       {weak ? (
         <section className="mt-8">
           <h2 className="flex items-center gap-2 text-lg font-bold text-gray-950">

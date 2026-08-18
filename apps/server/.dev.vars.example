@@ -8,6 +8,8 @@ BETTER_AUTH_SECRET=dev-secret-change-me-to-a-long-random-string
 BETTER_AUTH_URL=http://localhost:8787
 APP_URL=http://localhost:3000
 
-# Production secrets (not for .dev.vars file on laptop):
-# BETTER_AUTH_URL=https://api.kasina.et
+# Melak optional cloud tutor (offline tutor works without this)
+ANTHROPIC_API_KEY=
+
+# Production URLs (not for .dev.vars file on laptop):
 # APP_URL=https://kasina.et

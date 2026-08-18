@@ -271,8 +271,10 @@ function TeacherShellNav({
             <div className="flex items-center gap-2.5">
               <button
                 type="button"
-                className="flex h-11 w-11 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
-                aria-label="Notifications"
+                disabled
+                title="Notifications coming soon"
+                className="flex h-11 w-11 cursor-not-allowed items-center justify-center rounded-full text-gray-300"
+                aria-label="Notifications (coming soon)"
               >
                 <Bell className="h-[18px] w-[18px]" />
               </button>

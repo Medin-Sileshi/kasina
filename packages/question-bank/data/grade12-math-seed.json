@@ -1,2005 +1,5 @@
 [
   {
-    "id": "math-gr12-seed-001",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Sets and Relations",
-    "topic": "Sets",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Sets. Which option is correct for practice item 1?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Sets (#1)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Sets (#1)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Sets (#1)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Sets (#1)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Sets: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "sets-and-relations",
-      "sets",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-002",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Sets and Relations",
-    "topic": "Relations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Relations. Which option is correct for practice item 2?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Relations (#2)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Relations (#2)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Relations (#2)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Relations (#2)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Relations: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "sets-and-relations",
-      "relations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-003",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Sets and Relations",
-    "topic": "Functions",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Functions. Which option is correct for practice item 3?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Functions (#3)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Functions (#3)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Functions (#3)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Functions (#3)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Functions: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "sets-and-relations",
-      "functions",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-004",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Algebra",
-    "topic": "Equations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Equations. Which option is correct for practice item 4?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Equations (#4)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Equations (#4)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Equations (#4)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Equations (#4)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Equations: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "algebra",
-      "equations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-005",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Algebra",
-    "topic": "Inequalities",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Inequalities. Which option is correct for practice item 5?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Inequalities (#5)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Inequalities (#5)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Inequalities (#5)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Inequalities (#5)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Inequalities: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "algebra",
-      "inequalities",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-006",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Algebra",
-    "topic": "Polynomials",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Polynomials. Which option is correct for practice item 6?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Polynomials (#6)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Polynomials (#6)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Polynomials (#6)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Polynomials (#6)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Polynomials: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "algebra",
-      "polynomials",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-007",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Calculus",
-    "topic": "Power Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Power Rule. Which option is correct for practice item 7?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Power Rule (#7)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Power Rule (#7)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Power Rule (#7)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Power Rule (#7)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Power Rule: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "calculus",
-      "power-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-008",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Calculus",
-    "topic": "Product Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Product Rule. Which option is correct for practice item 8?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Product Rule (#8)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Product Rule (#8)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Product Rule (#8)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Product Rule (#8)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Product Rule: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "calculus",
-      "product-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-009",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Calculus",
-    "topic": "Limits",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Limits. Which option is correct for practice item 9?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Limits (#9)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Limits (#9)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Limits (#9)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Limits (#9)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Limits: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "calculus",
-      "limits",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-010",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Geometry",
-    "topic": "Triangles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Triangles. Which option is correct for practice item 10?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Triangles (#10)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Triangles (#10)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Triangles (#10)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Triangles (#10)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Triangles: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "geometry",
-      "triangles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-011",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Geometry",
-    "topic": "Circles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Circles. Which option is correct for practice item 11?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Circles (#11)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Circles (#11)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Circles (#11)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Circles (#11)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Circles: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "geometry",
-      "circles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-012",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Geometry",
-    "topic": "Coordinate Geometry",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Coordinate Geometry. Which option is correct for practice item 12?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Coordinate Geometry (#12)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Coordinate Geometry (#12)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Coordinate Geometry (#12)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Coordinate Geometry (#12)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Coordinate Geometry: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "geometry",
-      "coordinate-geometry",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-013",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Statistics",
-    "topic": "Mean and Median",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Mean and Median. Which option is correct for practice item 13?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Mean and Median (#13)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Mean and Median (#13)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Mean and Median (#13)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Mean and Median (#13)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Mean and Median: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "statistics",
-      "mean-and-median",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-014",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Statistics",
-    "topic": "Probability",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Probability. Which option is correct for practice item 14?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Probability (#14)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Probability (#14)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Probability (#14)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Probability (#14)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Probability: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "statistics",
-      "probability",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-015",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Sets and Relations",
-    "topic": "Sets",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Sets. Which option is correct for practice item 15?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Sets (#15)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Sets (#15)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Sets (#15)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Sets (#15)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Sets: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "sets-and-relations",
-      "sets",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-016",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Sets and Relations",
-    "topic": "Relations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Relations. Which option is correct for practice item 16?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Relations (#16)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Relations (#16)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Relations (#16)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Relations (#16)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Relations: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "sets-and-relations",
-      "relations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-017",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Sets and Relations",
-    "topic": "Functions",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Functions. Which option is correct for practice item 17?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Functions (#17)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Functions (#17)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Functions (#17)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Functions (#17)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Functions: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "sets-and-relations",
-      "functions",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-018",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Algebra",
-    "topic": "Equations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Equations. Which option is correct for practice item 18?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Equations (#18)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Equations (#18)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Equations (#18)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Equations (#18)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Equations: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "algebra",
-      "equations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-019",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Algebra",
-    "topic": "Inequalities",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Inequalities. Which option is correct for practice item 19?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Inequalities (#19)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Inequalities (#19)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Inequalities (#19)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Inequalities (#19)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Inequalities: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "algebra",
-      "inequalities",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-020",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Algebra",
-    "topic": "Polynomials",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Polynomials. Which option is correct for practice item 20?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Polynomials (#20)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Polynomials (#20)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Polynomials (#20)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Polynomials (#20)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Polynomials: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "algebra",
-      "polynomials",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-021",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Calculus",
-    "topic": "Power Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Power Rule. Which option is correct for practice item 21?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Power Rule (#21)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Power Rule (#21)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Power Rule (#21)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Power Rule (#21)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Power Rule: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "calculus",
-      "power-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-022",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Calculus",
-    "topic": "Product Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Product Rule. Which option is correct for practice item 22?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Product Rule (#22)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Product Rule (#22)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Product Rule (#22)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Product Rule (#22)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Product Rule: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "calculus",
-      "product-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-023",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Calculus",
-    "topic": "Limits",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Limits. Which option is correct for practice item 23?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Limits (#23)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Limits (#23)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Limits (#23)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Limits (#23)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Limits: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "calculus",
-      "limits",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-024",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Geometry",
-    "topic": "Triangles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Triangles. Which option is correct for practice item 24?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Triangles (#24)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Triangles (#24)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Triangles (#24)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Triangles (#24)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Triangles: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "geometry",
-      "triangles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-025",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Geometry",
-    "topic": "Circles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Circles. Which option is correct for practice item 25?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Circles (#25)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Circles (#25)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Circles (#25)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Circles (#25)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Circles: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "geometry",
-      "circles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-026",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Geometry",
-    "topic": "Coordinate Geometry",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Coordinate Geometry. Which option is correct for practice item 26?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Coordinate Geometry (#26)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Coordinate Geometry (#26)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Coordinate Geometry (#26)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Coordinate Geometry (#26)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Coordinate Geometry: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "geometry",
-      "coordinate-geometry",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-027",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Statistics",
-    "topic": "Mean and Median",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Mean and Median. Which option is correct for practice item 27?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Mean and Median (#27)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Mean and Median (#27)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Mean and Median (#27)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Mean and Median (#27)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Mean and Median: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "statistics",
-      "mean-and-median",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-028",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Statistics",
-    "topic": "Probability",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Probability. Which option is correct for practice item 28?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Probability (#28)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Probability (#28)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Probability (#28)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Probability (#28)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Probability: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "statistics",
-      "probability",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-029",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Sets and Relations",
-    "topic": "Sets",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Sets. Which option is correct for practice item 29?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Sets (#29)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Sets (#29)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Sets (#29)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Sets (#29)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Sets: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "sets-and-relations",
-      "sets",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-030",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Sets and Relations",
-    "topic": "Relations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Relations. Which option is correct for practice item 30?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Relations (#30)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Relations (#30)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Relations (#30)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Relations (#30)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Relations: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "sets-and-relations",
-      "relations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-031",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Sets and Relations",
-    "topic": "Functions",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Functions. Which option is correct for practice item 31?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Functions (#31)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Functions (#31)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Functions (#31)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Functions (#31)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Functions: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "sets-and-relations",
-      "functions",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-032",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Algebra",
-    "topic": "Equations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Equations. Which option is correct for practice item 32?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Equations (#32)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Equations (#32)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Equations (#32)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Equations (#32)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Equations: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "algebra",
-      "equations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-033",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Algebra",
-    "topic": "Inequalities",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Inequalities. Which option is correct for practice item 33?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Inequalities (#33)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Inequalities (#33)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Inequalities (#33)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Inequalities (#33)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Inequalities: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "algebra",
-      "inequalities",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-034",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Algebra",
-    "topic": "Polynomials",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Polynomials. Which option is correct for practice item 34?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Polynomials (#34)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Polynomials (#34)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Polynomials (#34)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Polynomials (#34)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Polynomials: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "algebra",
-      "polynomials",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-035",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Calculus",
-    "topic": "Power Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Power Rule. Which option is correct for practice item 35?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Power Rule (#35)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Power Rule (#35)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Power Rule (#35)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Power Rule (#35)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Power Rule: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "calculus",
-      "power-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-036",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Calculus",
-    "topic": "Product Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Product Rule. Which option is correct for practice item 36?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Product Rule (#36)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Product Rule (#36)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Product Rule (#36)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Product Rule (#36)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Product Rule: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "calculus",
-      "product-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-037",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Calculus",
-    "topic": "Limits",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Limits. Which option is correct for practice item 37?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Limits (#37)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Limits (#37)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Limits (#37)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Limits (#37)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Limits: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "calculus",
-      "limits",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-038",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Geometry",
-    "topic": "Triangles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Triangles. Which option is correct for practice item 38?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Triangles (#38)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Triangles (#38)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Triangles (#38)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Triangles (#38)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Triangles: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "geometry",
-      "triangles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-039",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Geometry",
-    "topic": "Circles",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Circles. Which option is correct for practice item 39?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Circles (#39)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Circles (#39)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Circles (#39)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Circles (#39)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Circles: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "geometry",
-      "circles",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-040",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Geometry",
-    "topic": "Coordinate Geometry",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Geometry / Coordinate Geometry. Which option is correct for practice item 40?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Coordinate Geometry (#40)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Coordinate Geometry (#40)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Coordinate Geometry (#40)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Coordinate Geometry (#40)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Coordinate Geometry: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "geometry",
-      "coordinate-geometry",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-041",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Statistics",
-    "topic": "Mean and Median",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Mean and Median. Which option is correct for practice item 41?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Mean and Median (#41)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Mean and Median (#41)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Mean and Median (#41)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Mean and Median (#41)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Mean and Median: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "statistics",
-      "mean-and-median",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-042",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Statistics",
-    "topic": "Probability",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Statistics / Probability. Which option is correct for practice item 42?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Probability (#42)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Probability (#42)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Probability (#42)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Probability (#42)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Probability: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "statistics",
-      "probability",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-043",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Sets and Relations",
-    "topic": "Sets",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Sets. Which option is correct for practice item 43?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Sets (#43)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Sets (#43)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Sets (#43)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Sets (#43)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Sets: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "sets-and-relations",
-      "sets",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-044",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Sets and Relations",
-    "topic": "Relations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Relations. Which option is correct for practice item 44?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Relations (#44)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Relations (#44)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Relations (#44)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Relations (#44)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Relations: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "sets-and-relations",
-      "relations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-045",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Sets and Relations",
-    "topic": "Functions",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Sets and Relations / Functions. Which option is correct for practice item 45?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Functions (#45)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Functions (#45)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Functions (#45)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Functions (#45)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Functions: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "sets-and-relations",
-      "functions",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-046",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2021,
-    "unit": "Algebra",
-    "topic": "Equations",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Equations. Which option is correct for practice item 46?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Equations (#46)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Equations (#46)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Equations (#46)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Equations (#46)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Equations: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "algebra",
-      "equations",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-047",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2022,
-    "unit": "Algebra",
-    "topic": "Inequalities",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Inequalities. Which option is correct for practice item 47?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Inequalities (#47)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Inequalities (#47)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Inequalities (#47)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Inequalities (#47)"
-      }
-    ],
-    "correctOptionId": "d",
-    "explanation": "Sample explanation for Inequalities: the correct choice is D. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "algebra",
-      "inequalities",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-048",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2023,
-    "unit": "Algebra",
-    "topic": "Polynomials",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Algebra / Polynomials. Which option is correct for practice item 48?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Polynomials (#48)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Polynomials (#48)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Polynomials (#48)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Polynomials (#48)"
-      }
-    ],
-    "correctOptionId": "a",
-    "explanation": "Sample explanation for Polynomials: the correct choice is A. Replace with validated ESSLCE content.",
-    "difficulty": "easy",
-    "tags": [
-      "algebra",
-      "polynomials",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-049",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2024,
-    "unit": "Calculus",
-    "topic": "Power Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Power Rule. Which option is correct for practice item 49?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Power Rule (#49)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Power Rule (#49)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Power Rule (#49)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Power Rule (#49)"
-      }
-    ],
-    "correctOptionId": "b",
-    "explanation": "Sample explanation for Power Rule: the correct choice is B. Replace with validated ESSLCE content.",
-    "difficulty": "medium",
-    "tags": [
-      "calculus",
-      "power-rule",
-      "sample"
-    ]
-  },
-  {
-    "id": "math-gr12-seed-050",
-    "grade": 12,
-    "subject": "mathematics",
-    "stream": "both",
-    "year": 2020,
-    "unit": "Calculus",
-    "topic": "Product Rule",
-    "stem": "[SAMPLE] Grade 12 Mathematics — Calculus / Product Rule. Which option is correct for practice item 50?",
-    "options": [
-      {
-        "id": "a",
-        "label": "A",
-        "text": "Option A for Product Rule (#50)"
-      },
-      {
-        "id": "b",
-        "label": "B",
-        "text": "Option B for Product Rule (#50)"
-      },
-      {
-        "id": "c",
-        "label": "C",
-        "text": "Option C for Product Rule (#50)"
-      },
-      {
-        "id": "d",
-        "label": "D",
-        "text": "Option D for Product Rule (#50)"
-      }
-    ],
-    "correctOptionId": "c",
-    "explanation": "Sample explanation for Product Rule: the correct choice is C. Replace with validated ESSLCE content.",
-    "difficulty": "hard",
-    "tags": [
-      "calculus",
-      "product-rule",
-      "sample"
-    ]
-  },
-  {
     "id": "math-gr12-m3-051",
     "grade": 12,
     "subject": "mathematics",
@@ -2289,7 +289,9 @@
       "calculus",
       "product rule",
       "m3"
-    ]
+    ],
+    "stemAm": "Differentiate $f(x)=x^2\\sin x$. (conceptual choice)",
+    "explanationAm": "Use product rule: $2x\\sin x+x^2\\cos x$"
   },
   {
     "id": "math-gr12-m3-058",
@@ -2329,7 +331,9 @@
       "calculus",
       "product rule",
       "m3"
-    ]
+    ],
+    "stemAm": "If $u=x$ and $v=e^x$, $(uv)\\'=$",
+    "explanationAm": "$e^x+xe^x$"
   },
   {
     "id": "math-gr12-m3-059",
@@ -2369,7 +373,9 @@
       "calculus",
       "product rule",
       "m3"
-    ]
+    ],
+    "stemAm": "Product rule for $(fg)\\'$ is",
+    "explanationAm": "$f\\'g+fg\\'$"
   },
   {
     "id": "math-gr12-m3-060",
@@ -2409,7 +415,9 @@
       "calculus",
       "product rule",
       "m3"
-    ]
+    ],
+    "stemAm": "Differentiate $y=(2x+1)(x-3)$ using product rule",
+    "explanationAm": "$2(x-3)+(2x+1)=4x-5$"
   },
   {
     "id": "math-gr12-m3-061",
@@ -2449,7 +457,9 @@
       "calculus",
       "limits",
       "m3"
-    ]
+    ],
+    "stemAm": "$\\lim_{x\\to 2}(3x+1)=$",
+    "explanationAm": "Substitute: $7$"
   },
   {
     "id": "math-gr12-m3-062",
@@ -2489,7 +499,9 @@
       "calculus",
       "limits",
       "m3"
-    ]
+    ],
+    "stemAm": "$\\lim_{x\\to 0}\\frac{\\sin x}{x}=$",
+    "explanationAm": "Standard limit equals $1$"
   },
   {
     "id": "math-gr12-m3-063",
@@ -2529,7 +541,9 @@
       "calculus",
       "limits",
       "m3"
-    ]
+    ],
+    "stemAm": "$\\lim_{x\\to \\infty}\\frac{1}{x}=$",
+    "explanationAm": "Tends to $0$"
   },
   {
     "id": "math-gr12-m3-064",
@@ -2569,7 +583,9 @@
       "calculus",
       "limits",
       "m3"
-    ]
+    ],
+    "stemAm": "$\\lim_{x\\to 3}\\frac{x^2-9}{x-3}=$",
+    "explanationAm": "Factor: $x+3\\to 6$"
   },
   {
     "id": "math-gr12-m3-065",
@@ -3569,7 +1585,9 @@
       "statistics",
       "mean and median",
       "m3"
-    ]
+    ],
+    "stemAm": "Mean of $2,4,6$",
+    "explanationAm": "$4$"
   },
   {
     "id": "math-gr12-m3-090",
@@ -3609,7 +1627,9 @@
       "statistics",
       "mean and median",
       "m3"
-    ]
+    ],
+    "stemAm": "Median of $1,3,5,7,9$",
+    "explanationAm": "$5$"
   },
   {
     "id": "math-gr12-m3-091",
@@ -3649,7 +1669,9 @@
       "statistics",
       "mean and median",
       "m3"
-    ]
+    ],
+    "stemAm": "Mean of $10,10,10$",
+    "explanationAm": "$10$"
   },
   {
     "id": "math-gr12-m3-092",
@@ -3689,7 +1711,9 @@
       "statistics",
       "mean and median",
       "m3"
-    ]
+    ],
+    "stemAm": "Median of $2,4,6,8$",
+    "explanationAm": "$5$"
   },
   {
     "id": "math-gr12-m3-093",
@@ -3729,7 +1753,9 @@
       "statistics",
       "probability",
       "m3"
-    ]
+    ],
+    "stemAm": "Probability of heads on fair coin",
+    "explanationAm": "$1/2$"
   },
   {
     "id": "math-gr12-m3-094",
@@ -3769,7 +1795,9 @@
       "statistics",
       "probability",
       "m3"
-    ]
+    ],
+    "stemAm": "P(even) on fair die",
+    "explanationAm": "$1/2$"
   },
   {
     "id": "math-gr12-m3-095",
@@ -3809,7 +1837,9 @@
       "statistics",
       "probability",
       "m3"
-    ]
+    ],
+    "stemAm": "P(impossible event)",
+    "explanationAm": "$0$"
   },
   {
     "id": "math-gr12-m3-096",
@@ -3849,7 +1879,9 @@
       "statistics",
       "probability",
       "m3"
-    ]
+    ],
+    "stemAm": "P(certain event)",
+    "explanationAm": "$1$"
   },
   {
     "id": "math-gr12-m3-097",
@@ -4411,7 +2443,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Sum of the first $n$ terms of an arithmetic series is $S_n=\\frac{n}{2}(2a+(n-1)d)$. For $a=2$, $d=3$, $n=4$, $S_4=$",
+    "explanationAm": "$S_4=\\frac{4}{2}(4+9)=2\\times 13=26$."
   },
   {
     "id": "math-gr12-exp-003",
@@ -4451,7 +2485,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $a_1=5$ and $a_4=14$ in an arithmetic sequence, the common difference is",
+    "explanationAm": "$a_4=a_1+3d\\Rightarrow 14=5+3d\\Rightarrow d=3$."
   },
   {
     "id": "math-gr12-exp-004",
@@ -4533,7 +2569,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Sum of infinite geometric series with $|r|<1$ is $S=\\frac{a}{1-r}$. For $a=3$, $r=\\frac{1}{2}$, $S=$",
+    "explanationAm": "$S=\\frac{3}{1-1/2}=6$."
   },
   {
     "id": "math-gr12-exp-006",
@@ -4573,7 +2611,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $a_1=81$ and $r=\\frac{1}{3}$, then $a_3=$",
+    "explanationAm": "$a_3=81\\cdot(\\frac{1}{3})^2=9$."
   },
   {
     "id": "math-gr12-exp-007",
@@ -4655,7 +2695,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}$. For $n=10$ this equals",
+    "explanationAm": "$\\frac{10\\cdot 11}{2}=55$."
   },
   {
     "id": "math-gr12-exp-009",
@@ -4695,7 +2737,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "An arithmetic series has 1st term $1$ and last term $20$ with $10$ terms. Its sum is",
+    "explanationAm": "$S_n=\\frac{n}{2}(a_1+a_n)=\\frac{10}{2}(21)=105$."
   },
   {
     "id": "math-gr12-exp-010",
@@ -4819,7 +2863,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "For $|r|\\ge 1$, the infinite geometric series $\\sum ar^{n}$",
+    "explanationAm": "Requires $|r|<1$ for convergence."
   },
   {
     "id": "math-gr12-exp-013",
@@ -4901,7 +2947,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "A critical point of $f$ occurs where",
+    "explanationAm": "Definition of critical points."
   },
   {
     "id": "math-gr12-exp-015",
@@ -4983,7 +3031,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Acceleration is the derivative of",
+    "explanationAm": "$a(t)=v'(t)=s''(t)$."
   },
   {
     "id": "math-gr12-exp-017",
@@ -5023,7 +3073,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "For $f(x)=x^3-3x$, critical points solve $f'(x)=0$. Here $f'(x)=$",
+    "explanationAm": "Power rule: $3x^2-3$."
   },
   {
     "id": "math-gr12-exp-018",
@@ -5105,7 +3157,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $f''(x)<0$ on an interval, the graph of $f$ is",
+    "explanationAm": "Negative second derivative ⇒ concave down."
   },
   {
     "id": "math-gr12-exp-020",
@@ -5145,7 +3199,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Related rates: if a circle’s radius increases, area $A=\\pi r^2$ satisfies $\\frac{dA}{dt}=$",
+    "explanationAm": "Chain rule: $A'=2\\pi r\\,r'$."
   },
   {
     "id": "math-gr12-exp-021",
@@ -5185,7 +3241,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Absolute extrema of a continuous $f$ on $[a,b]$ occur at",
+    "explanationAm": "Extreme Value Theorem candidates."
   },
   {
     "id": "math-gr12-exp-022",
@@ -5225,7 +3283,9 @@
       "calculus",
       "applications-of-derivatives",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Linear approximation of $f$ near $a$ is",
+    "explanationAm": "Tangent-line approximation."
   },
   {
     "id": "math-gr12-exp-023",
@@ -5391,7 +3451,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "The definite integral $\\int_a^b f(x)\\,dx$ equals",
+    "explanationAm": "Fundamental Theorem of Calculus."
   },
   {
     "id": "math-gr12-exp-027",
@@ -5431,7 +3493,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\int e^x\\,dx =$",
+    "explanationAm": "Derivative of $e^x$ is $e^x$."
   },
   {
     "id": "math-gr12-exp-028",
@@ -5471,7 +3535,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\int \\cos x\\,dx =$",
+    "explanationAm": "Derivative of $\\sin x$ is $\\cos x$."
   },
   {
     "id": "math-gr12-exp-029",
@@ -5511,7 +3577,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\int_0^{\\pi/2} \\sin x\\,dx =$",
+    "explanationAm": "$[-\\cos x]_0^{\\pi/2}=0-(-1)=1$."
   },
   {
     "id": "math-gr12-exp-030",
@@ -5551,7 +3619,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $F'=f$, then $\\frac{d}{dx}\\int_0^x f(t)\\,dt =$",
+    "explanationAm": "FTC part 1."
   },
   {
     "id": "math-gr12-exp-031",
@@ -5591,7 +3661,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\int (3x^2+1)\\,dx =$",
+    "explanationAm": "Termwise antidifferentiation."
   },
   {
     "id": "math-gr12-exp-032",
@@ -5631,7 +3703,9 @@
       "calculus",
       "integrals",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Area under $y=f(x)\\ge 0$ from $a$ to $b$ is given by",
+    "explanationAm": "Geometric meaning of definite integral."
   },
   {
     "id": "math-gr12-exp-033",
@@ -5713,7 +3787,9 @@
       "calculus",
       "limits",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\lim_{x\\to \\infty} \\frac{1}{x} =$",
+    "explanationAm": "Reciprocal tends to $0$."
   },
   {
     "id": "math-gr12-exp-035",
@@ -5753,7 +3829,9 @@
       "calculus",
       "limits",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $\\lim_{x\\to a} f(x)=L$ and $\\lim_{x\\to a} g(x)=M$, then $\\lim (f+g)=$",
+    "explanationAm": "Sum rule for limits."
   },
   {
     "id": "math-gr12-exp-036",
@@ -6203,7 +4281,9 @@
       "statistics",
       "mean-and-median",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Median of $1,3,7$ is",
+    "explanationAm": "Middle value of ordered list."
   },
   {
     "id": "math-gr12-exp-047",
@@ -6325,7 +4405,9 @@
       "statistics",
       "probability",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $A$ and $B$ are mutually exclusive, $P(A\\cup B)=$",
+    "explanationAm": "Addition rule with $P(A\\cap B)=0$."
   },
   {
     "id": "math-gr12-exp-050",
@@ -6365,7 +4447,9 @@
       "statistics",
       "probability",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "A fair six-sided die: $P(\\text{rolling a }6)=$",
+    "explanationAm": "One favorable over six outcomes."
   },
   {
     "id": "math-gr12-exp-051",
@@ -6447,7 +4531,9 @@
       "calculus",
       "product-rule",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Differentiate $y=x\\ln x$ (for $x>0$)",
+    "explanationAm": "$(1)\\ln x+x\\cdot(1/x)=\\ln x+1$."
   },
   {
     "id": "math-gr12-exp-053",
@@ -6487,7 +4573,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $a_n=7+(n-1)·2$, then $a_1=$",
+    "explanationAm": "$a_1=7$."
   },
   {
     "id": "math-gr12-exp-054",
@@ -6527,7 +4615,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Number of terms from $a_1=2$ to $a_n=20$ with $d=2$ is",
+    "explanationAm": "$20=2+(n-1)2\\Rightarrow n=10$."
   },
   {
     "id": "math-gr12-exp-055",
@@ -6567,7 +4657,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Common difference of $11,8,5,2$ is",
+    "explanationAm": "$8-11=-3$."
   },
   {
     "id": "math-gr12-exp-056",
@@ -6607,7 +4699,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$S_5$ for $a=1$, $d=1$ equals",
+    "explanationAm": "$S_5=\\frac{5}{2}(2+4)=15$."
   },
   {
     "id": "math-gr12-exp-057",
@@ -6647,7 +4741,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "The 10th term of $5,5,5,\\dots$ is",
+    "explanationAm": "Constant sequence $d=0$."
   },
   {
     "id": "math-gr12-exp-058",
@@ -6687,7 +4783,9 @@
       "sequences-and-series",
       "arithmetic-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $a_2=6$ and $a_3=9$, then $a_1=$",
+    "explanationAm": "$d=3\\Rightarrow a_1=3$."
   },
   {
     "id": "math-gr12-exp-059",
@@ -6727,7 +4825,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If $a_1=5$ and $r=2$, $a_2=$",
+    "explanationAm": "$5·2=10$."
   },
   {
     "id": "math-gr12-exp-060",
@@ -6767,7 +4867,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Common ratio of $8,4,2,1$ is",
+    "explanationAm": "$4/8=1/2$."
   },
   {
     "id": "math-gr12-exp-061",
@@ -6807,7 +4909,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$a_1=1$, $r=-1$: $a_4=$",
+    "explanationAm": "$a_4 = 1·(-1)^{3} = -1$."
   },
   {
     "id": "math-gr12-exp-062",
@@ -6847,7 +4951,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Finite geometric sum $S_n=a\\frac{1-r^n}{1-r}$ ($r\\neq1$). For $a=2$, $r=2$, $n=3$",
+    "explanationAm": "$2(1-8)/(1-2)=2(-7)/(-1)=14$."
   },
   {
     "id": "math-gr12-exp-063",
@@ -6887,7 +4993,9 @@
       "sequences-and-series",
       "geometric-sequences",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "If each term is double the previous and $a_1=3$, $a_5=$",
+    "explanationAm": "$3·2^4=48$."
   },
   {
     "id": "math-gr12-exp-064",
@@ -6927,7 +5035,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\sum_{k=1}^{3} 2^k =$",
+    "explanationAm": "$2+4+8=14$."
   },
   {
     "id": "math-gr12-exp-065",
@@ -6967,7 +5077,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\sum_{k=1}^{4} 3 =$",
+    "explanationAm": "$3+3+3+3=12$."
   },
   {
     "id": "math-gr12-exp-066",
@@ -7007,7 +5119,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\sum_{k=1}^{n} 1 =$",
+    "explanationAm": "Sum of $n$ ones."
   },
   {
     "id": "math-gr12-exp-067",
@@ -7047,7 +5161,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "$\\sum_{k=1}^{2} k^2 =$",
+    "explanationAm": "$1+4=5$."
   },
   {
     "id": "math-gr12-exp-068",
@@ -7087,7 +5203,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "Partial sum $S_n$ of a series is",
+    "explanationAm": "Definition of partial sum."
   },
   {
     "id": "math-gr12-exp-069",
@@ -7127,7 +5245,9 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
-    ]
+    ],
+    "stemAm": "For geometric $a=1$, $r=1/2$, $S_\\infty=$",
+    "explanationAm": "$1/(1-1/2)=2$."
   },
   {
     "id": "math-gr12-exp-070",
@@ -7167,6 +5287,2092 @@
       "sequences-and-series",
       "series-summation",
       "mvp-expand"
+    ],
+    "stemAm": "$\\sum_{k=0}^{3} 2^k =$",
+    "explanationAm": "$1+2+4+8=15$."
+  },
+  {
+    "id": "math-gr12-seed-001",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Sets and Relations",
+    "topic": "Sets",
+    "stem": "$A=\\{1,2\\}$, $B=\\{2,3\\}$, $A\\cup B=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$\\{1,2,3\\}$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\{2\\}$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\{1,3\\}$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$\\emptyset$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$\\{1,2,3\\}$",
+    "difficulty": "medium",
+    "tags": [
+      "sets and relations",
+      "sets",
+      "m3",
+      "replaced-sample"
     ]
+  },
+  {
+    "id": "math-gr12-seed-002",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Sets and Relations",
+    "topic": "Relations",
+    "stem": "A relation from $A$ to $B$ is",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "a subset of $A\\times B$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "equal to $A$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "always a function"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "empty only"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "a subset of $A\\times B$",
+    "difficulty": "hard",
+    "tags": [
+      "sets and relations",
+      "relations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-003",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Sets and Relations",
+    "topic": "Functions",
+    "stem": "A function assigns",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "exactly one output per input"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "many outputs"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "no outputs"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "only integers"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "exactly one output per input",
+    "difficulty": "easy",
+    "tags": [
+      "sets and relations",
+      "functions",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-004",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Algebra",
+    "topic": "Equations",
+    "stem": "Solve $2x+5=17$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$11$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$12$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$x=6$",
+    "difficulty": "hard",
+    "tags": [
+      "algebra",
+      "equations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-005",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Algebra",
+    "topic": "Inequalities",
+    "stem": "Solve $x+3>7$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$x>4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x<4$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$x\\ge 4$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x\\le 4$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$x>4$",
+    "difficulty": "easy",
+    "tags": [
+      "algebra",
+      "inequalities",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-006",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Algebra",
+    "topic": "Polynomials",
+    "stem": "Degree of $3x^4-x+2$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$3$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$1$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$4$",
+    "difficulty": "medium",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-007",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Calculus",
+    "topic": "Power Rule",
+    "stem": "Find $\\frac{d}{dx}(x^5)$.",
+    "stemAm": "የ $x^5$ ተዋጽኦ ምንድን ነው?",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$5x^4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x^4$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$5x^5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$4x^5$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Power rule: $\\frac{d}{dx}(x^n)=nx^{n-1}$. Here $n=5$, so $5x^4$.",
+    "explanationAm": "የኃይል ደንብ፡ $nx^{n-1}$ ስለዚህ $5x^4$.",
+    "difficulty": "easy",
+    "tags": [
+      "calculus",
+      "power-rule",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-008",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Calculus",
+    "topic": "Product Rule",
+    "stem": "Differentiate $f(x)=x^2\\sin x$. (conceptual choice)",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$2x\\sin x+x^2\\cos x$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$2x\\cos x$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$x^2\\sin x$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2x+\\cos x$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Use product rule: $2x\\sin x+x^2\\cos x$",
+    "difficulty": "easy",
+    "tags": [
+      "calculus",
+      "product rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Differentiate $f(x)=x^2\\sin x$. (conceptual choice)",
+    "explanationAm": "Use product rule: $2x\\sin x+x^2\\cos x$"
+  },
+  {
+    "id": "math-gr12-seed-009",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Calculus",
+    "topic": "Limits",
+    "stem": "$\\lim_{x\\to 2}(3x+1)=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$7$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$6$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$3$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Substitute: $7$",
+    "difficulty": "medium",
+    "tags": [
+      "calculus",
+      "limits",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "$\\lim_{x\\to 2}(3x+1)=$",
+    "explanationAm": "Substitute: $7$"
+  },
+  {
+    "id": "math-gr12-seed-010",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Geometry",
+    "topic": "Triangles",
+    "stem": "Sum of interior angles in a triangle",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$180^\\circ$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$90^\\circ$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$360^\\circ$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$270^\\circ$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$180^\\circ$",
+    "difficulty": "hard",
+    "tags": [
+      "geometry",
+      "triangles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-011",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Geometry",
+    "topic": "Circles",
+    "stem": "Circumference of circle radius $r$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$2\\pi r$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\pi r^2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\pi r$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2r$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$2\\pi r$",
+    "difficulty": "easy",
+    "tags": [
+      "geometry",
+      "circles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-012",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Geometry",
+    "topic": "Coordinate Geometry",
+    "stem": "Distance from $(0,0)$ to $(3,4)$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$5$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$7$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$1$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$12$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$5$",
+    "difficulty": "medium",
+    "tags": [
+      "geometry",
+      "coordinate geometry",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-013",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Statistics",
+    "topic": "Mean and Median",
+    "stem": "Mean of $2,4,6$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$6$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$3$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$4$",
+    "difficulty": "hard",
+    "tags": [
+      "statistics",
+      "mean and median",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Mean of $2,4,6$",
+    "explanationAm": "$4$"
+  },
+  {
+    "id": "math-gr12-seed-014",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Statistics",
+    "topic": "Probability",
+    "stem": "Probability of heads on fair coin",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$1/2$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$0$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$1/6$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$1/2$",
+    "difficulty": "easy",
+    "tags": [
+      "statistics",
+      "probability",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Probability of heads on fair coin",
+    "explanationAm": "$1/2$"
+  },
+  {
+    "id": "math-gr12-seed-015",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Sets and Relations",
+    "topic": "Sets",
+    "stem": "$A\\cap B$ for above",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$\\{1,2,3\\}$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\{2\\}$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\{1\\}$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$\\emptyset$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$\\{2\\}$",
+    "difficulty": "hard",
+    "tags": [
+      "sets and relations",
+      "sets",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-016",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Sets and Relations",
+    "topic": "Relations",
+    "stem": "Reflexive relation on $A$ requires",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "symmetry"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$(a,a)$ for all $a\\in A$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "transitivity only"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "empty"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$(a,a)$ for all $a\\in A$",
+    "difficulty": "easy",
+    "tags": [
+      "sets and relations",
+      "relations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-017",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Sets and Relations",
+    "topic": "Functions",
+    "stem": "$f(x)=2x+1$, $f(3)=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$7$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$8$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$7$",
+    "difficulty": "medium",
+    "tags": [
+      "sets and relations",
+      "functions",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-018",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Algebra",
+    "topic": "Equations",
+    "stem": "Solve $x^2-5x+6=0$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$1,6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$2,3$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-2,-3$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$5,6$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$(x-2)(x-3)=0$",
+    "difficulty": "easy",
+    "tags": [
+      "algebra",
+      "equations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-019",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Algebra",
+    "topic": "Inequalities",
+    "stem": "Solve $-2x\\ge 8$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$x\\ge -4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x\\le -4$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$x\\ge 4$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x\\le 4$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$x\\le -4$",
+    "difficulty": "medium",
+    "tags": [
+      "algebra",
+      "inequalities",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-020",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Algebra",
+    "topic": "Polynomials",
+    "stem": "Sum of roots of $x^2-5x+6=0$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$1$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$5$",
+    "difficulty": "hard",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-021",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Calculus",
+    "topic": "Power Rule",
+    "stem": "If $f(x)=3x^4-2x$, then $f\\'(x)=$",
+    "stemAm": "ከ $f(x)=3x^4-2x$ ከሆነ $f'(x)=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$12x^3-2$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$12x^4-2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$3x^3-2$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$12x^3$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$\\frac{d}{dx}(3x^4)=12x^3$ and $\\frac{d}{dx}(-2x)=-2$.",
+    "explanationAm": "$12x^3-2$ በኃይል ደንብ።",
+    "difficulty": "easy",
+    "tags": [
+      "calculus",
+      "power-rule",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-022",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Calculus",
+    "topic": "Product Rule",
+    "stem": "If $u=x$ and $v=e^x$, $(uv)\\'=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$xe^x$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$e^x+xe^x$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$e^x$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x+e^x$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$e^x+xe^x$",
+    "difficulty": "medium",
+    "tags": [
+      "calculus",
+      "product rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "If $u=x$ and $v=e^x$, $(uv)\\'=$",
+    "explanationAm": "$e^x+xe^x$"
+  },
+  {
+    "id": "math-gr12-seed-023",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Calculus",
+    "topic": "Limits",
+    "stem": "$\\lim_{x\\to 0}\\frac{\\sin x}{x}=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$0$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\infty$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "undefined"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Standard limit equals $1$",
+    "difficulty": "hard",
+    "tags": [
+      "calculus",
+      "limits",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "$\\lim_{x\\to 0}\\frac{\\sin x}{x}=$",
+    "explanationAm": "Standard limit equals $1$"
+  },
+  {
+    "id": "math-gr12-seed-024",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Geometry",
+    "topic": "Triangles",
+    "stem": "In a right triangle, sides $3,4$, hypotenuse?",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$7$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$4$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$5$",
+    "difficulty": "easy",
+    "tags": [
+      "geometry",
+      "triangles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-025",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Geometry",
+    "topic": "Circles",
+    "stem": "Area of circle radius $r$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$2\\pi r$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\pi r^2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\pi d$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$r^2$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$\\pi r^2$",
+    "difficulty": "medium",
+    "tags": [
+      "geometry",
+      "circles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-026",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Geometry",
+    "topic": "Coordinate Geometry",
+    "stem": "Midpoint of $(2,4)$ and $(6,8)$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$(4,4)$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$(4,6)$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$(8,12)$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$(2,2)$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$(4,6)$",
+    "difficulty": "hard",
+    "tags": [
+      "geometry",
+      "coordinate geometry",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-027",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Statistics",
+    "topic": "Mean and Median",
+    "stem": "Median of $1,3,5,7,9$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$3$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$7$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$4$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$5$",
+    "difficulty": "easy",
+    "tags": [
+      "statistics",
+      "mean and median",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Median of $1,3,5,7,9$",
+    "explanationAm": "$5$"
+  },
+  {
+    "id": "math-gr12-seed-028",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Statistics",
+    "topic": "Probability",
+    "stem": "P(even) on fair die",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$1/6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1/2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$1/3$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2/3$"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "$1/2$",
+    "difficulty": "medium",
+    "tags": [
+      "statistics",
+      "probability",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "P(even) on fair die",
+    "explanationAm": "$1/2$"
+  },
+  {
+    "id": "math-gr12-seed-029",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Sets and Relations",
+    "topic": "Sets",
+    "stem": "Empty set symbol",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$\\emptyset$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\mathbb{R}$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\mathbb{N}$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$U$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$\\emptyset$",
+    "difficulty": "easy",
+    "tags": [
+      "sets and relations",
+      "sets",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-030",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Sets and Relations",
+    "topic": "Relations",
+    "stem": "Symmetric means",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$(a,b)\\Rightarrow(b,a)$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$(a,a)$ only"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "transitive"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "onto"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$(a,b)\\Rightarrow(b,a)$",
+    "difficulty": "medium",
+    "tags": [
+      "sets and relations",
+      "relations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-031",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Sets and Relations",
+    "topic": "Functions",
+    "stem": "One-to-one means",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "injective"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "surjective only"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "constant"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "even"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "injective",
+    "difficulty": "hard",
+    "tags": [
+      "sets and relations",
+      "functions",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-032",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Algebra",
+    "topic": "Equations",
+    "stem": "If $3x-1=2x+4$, then $x=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$5$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$3$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$4$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$5$",
+    "difficulty": "medium",
+    "tags": [
+      "algebra",
+      "equations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-033",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Algebra",
+    "topic": "Inequalities",
+    "stem": "Which is true for all $x>0$?",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$x^2>0$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x^2<0$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$x=0$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x<0$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$x^2>0$",
+    "difficulty": "hard",
+    "tags": [
+      "algebra",
+      "inequalities",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-034",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Algebra",
+    "topic": "Polynomials",
+    "stem": "Product of roots of $x^2-5x+6=0$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-6$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$1$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$6$",
+    "difficulty": "easy",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-035",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Calculus",
+    "topic": "Power Rule",
+    "stem": "Differentiate $y=\\frac{1}{x^3}$.",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$-3x^{-4}$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$3x^{-4}$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-3x^{-2}$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x^{-3}$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Rewrite as $y=x^{-3}$. Then $y\\'=-3x^{-4}$.",
+    "difficulty": "medium",
+    "tags": [
+      "calculus",
+      "power-rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "የ $y=\\frac{1}{x^3}$ ተዋጽኦ አግኙ።",
+    "explanationAm": "$x^{-3}$ ተዋጽኦ $-3x^{-4}$ ነው።"
+  },
+  {
+    "id": "math-gr12-seed-036",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Calculus",
+    "topic": "Product Rule",
+    "stem": "Product rule for $(fg)\\'$ is",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$f\\'g+fg\\'$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$f\\'g\\'$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$f+g$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$f\\'/g$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$f\\'g+fg\\'$",
+    "difficulty": "hard",
+    "tags": [
+      "calculus",
+      "product rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Product rule for $(fg)\\'$ is",
+    "explanationAm": "$f\\'g+fg\\'$"
+  },
+  {
+    "id": "math-gr12-seed-037",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Calculus",
+    "topic": "Limits",
+    "stem": "$\\lim_{x\\to \\infty}\\frac{1}{x}=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$0$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\infty$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$-1$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Tends to $0$",
+    "difficulty": "easy",
+    "tags": [
+      "calculus",
+      "limits",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "$\\lim_{x\\to \\infty}\\frac{1}{x}=$",
+    "explanationAm": "Tends to $0$"
+  },
+  {
+    "id": "math-gr12-seed-038",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Geometry",
+    "topic": "Triangles",
+    "stem": "Equilateral triangle has angles",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "all $60^\\circ$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "all $90^\\circ$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$30,60,90$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "all $45^\\circ$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "all $60^\\circ$",
+    "difficulty": "medium",
+    "tags": [
+      "geometry",
+      "triangles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-039",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Geometry",
+    "topic": "Circles",
+    "stem": "Diameter is",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "twice the radius"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "half the radius"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "equal to radius"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "circumference"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "twice the radius",
+    "difficulty": "hard",
+    "tags": [
+      "geometry",
+      "circles",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-040",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Geometry",
+    "topic": "Coordinate Geometry",
+    "stem": "Slope of line through $(0,0)$ and $(2,4)$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$2$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1/2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$0$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "undefined"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$2$",
+    "difficulty": "easy",
+    "tags": [
+      "geometry",
+      "coordinate geometry",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-041",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Statistics",
+    "topic": "Mean and Median",
+    "stem": "Mean of $10,10,10$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$10$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$0$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$30$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$3$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$10$",
+    "difficulty": "medium",
+    "tags": [
+      "statistics",
+      "mean and median",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Mean of $10,10,10$",
+    "explanationAm": "$10$"
+  },
+  {
+    "id": "math-gr12-seed-042",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Statistics",
+    "topic": "Probability",
+    "stem": "P(impossible event)",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$0$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$1/2$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "undefined"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$0$",
+    "difficulty": "hard",
+    "tags": [
+      "statistics",
+      "probability",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "P(impossible event)",
+    "explanationAm": "$0$"
+  },
+  {
+    "id": "math-gr12-seed-043",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Sets and Relations",
+    "topic": "Sets",
+    "stem": "If $A\\subseteq B$ and $B\\subseteq A$ then",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$A\\neq B$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$A\\subset B$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$A=B$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$A\\cap B=\\emptyset$"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "$A=B$",
+    "difficulty": "medium",
+    "tags": [
+      "sets and relations",
+      "sets",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-044",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Sets and Relations",
+    "topic": "Relations",
+    "stem": "Domain of relation is",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "codomain"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "range only"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "set of first components"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "empty"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "set of first components",
+    "difficulty": "hard",
+    "tags": [
+      "sets and relations",
+      "relations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-045",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Sets and Relations",
+    "topic": "Functions",
+    "stem": "Range of $f(x)=x^2$ for real $x$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$\\mathbb{R}$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$(-\\infty,0]$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$[0,\\infty)$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$\\{0\\}$"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "$[0,\\infty)$",
+    "difficulty": "easy",
+    "tags": [
+      "sets and relations",
+      "functions",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-046",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2021,
+    "unit": "Algebra",
+    "topic": "Equations",
+    "stem": "Number of real roots of $x^2+1=0$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$1$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "infinitely many"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$0$"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "No real roots",
+    "difficulty": "hard",
+    "tags": [
+      "algebra",
+      "equations",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-047",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2022,
+    "unit": "Algebra",
+    "topic": "Inequalities",
+    "stem": "Solution of $|x|<3$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$x>3$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x<-3$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$-3<x<3$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x\\ge 3$"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "$-3<x<3$",
+    "difficulty": "easy",
+    "tags": [
+      "algebra",
+      "inequalities",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-048",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2023,
+    "unit": "Algebra",
+    "topic": "Polynomials",
+    "stem": "$(x+2)(x-2)=$",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$x^2+4$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$x^2-2$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$x^2-4$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$x^2+2x-4$"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "$x^2-4$",
+    "difficulty": "medium",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "m3",
+      "replaced-sample"
+    ]
+  },
+  {
+    "id": "math-gr12-seed-049",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2024,
+    "unit": "Calculus",
+    "topic": "Power Rule",
+    "stem": "Find $\\frac{d}{dx}\\sqrt{x}$.",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$\\frac{1}{2\\sqrt{x}}$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$\\sqrt{x}$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$\\frac{1}{\\sqrt{x}}$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2\\sqrt{x}$"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "$\\sqrt{x}=x^{1/2}$, so derivative is $\\frac{1}{2}x^{-1/2}=\\frac{1}{2\\sqrt{x}}$.",
+    "difficulty": "medium",
+    "tags": [
+      "calculus",
+      "power-rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "የ $\\sqrt{x}$ ተዋጽኦ አግኙ።",
+    "explanationAm": "$x^{1/2}$ ተዋጽኦ $\\frac{1}{2}x^{-1/2}$ ነው።"
+  },
+  {
+    "id": "math-gr12-seed-050",
+    "grade": 12,
+    "subject": "mathematics",
+    "stream": "both",
+    "year": 2020,
+    "unit": "Calculus",
+    "topic": "Product Rule",
+    "stem": "Differentiate $y=(2x+1)(x-3)$ using product rule",
+    "options": [
+      {
+        "id": "a",
+        "label": "A",
+        "text": "$2x-3$"
+      },
+      {
+        "id": "b",
+        "label": "B",
+        "text": "$4x+5$"
+      },
+      {
+        "id": "c",
+        "label": "C",
+        "text": "$4x-5$"
+      },
+      {
+        "id": "d",
+        "label": "D",
+        "text": "$2x-5$"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "$2(x-3)+(2x+1)=4x-5$",
+    "difficulty": "easy",
+    "tags": [
+      "calculus",
+      "product rule",
+      "m3",
+      "replaced-sample"
+    ],
+    "stemAm": "Differentiate $y=(2x+1)(x-3)$ using product rule",
+    "explanationAm": "$2(x-3)+(2x+1)=4x-5$"
   }
 ]

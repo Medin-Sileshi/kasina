@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@kasina/melak-core": "workspace:^",
     "@kasina/types": "workspace:^",
     "@tanstack/react-query": "^5.101.4",
     "better-auth": "^1.6.25",

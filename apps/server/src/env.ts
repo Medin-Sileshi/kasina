@@ -21,6 +21,8 @@ export type ServerEnv = {
   BETTER_AUTH_SECRET: string;
   BETTER_AUTH_URL: string;
   APP_URL: string;
+  /** Anthropic API key for Melak chat pilot (Vision M1). */
+  ANTHROPIC_API_KEY?: string;
 };
 
 export type AppVariables = {

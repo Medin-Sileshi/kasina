@@ -4,13 +4,13 @@
  *
  * Apply migrations:
  *   1. Open Supabase SQL editor (or psql $DATABASE_URL)
- *   2. Run migrations/002_mvp_core.sql
+ *   2. Run migrations/002_mvp_core.sql then migrations/004_melak.sql
  *   3. Create teacher via Better Auth sign-up (role=teacher)
  *   4. Run: pnpm --filter @kasina/db seed
  *
  * Demo invite code: DEMO2026
  */
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 export const DEMO_INVITE_CODE = "DEMO2026";
 export const DEMO_TEACHER_EMAIL = "teacher@kasina.local";

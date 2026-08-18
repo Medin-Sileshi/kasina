@@ -16,8 +16,8 @@ export type QuestionRow = {
   tags_json: unknown;
 };
 
-export function mapQuestion(row: QuestionRow) {
-  return {
+export function mapQuestion(row: QuestionRow, opts?: { examMode?: boolean }) {
+  const base = {
     id: row.id,
     grade: row.grade,
     subject: row.subject,
@@ -28,11 +28,17 @@ export function mapQuestion(row: QuestionRow) {
     stem: row.stem,
     stemAm: row.stem_am,
     options: row.options_json,
+    difficulty: row.difficulty,
+    tags: row.tags_json,
+  };
+  if (opts?.examMode) {
+    return base;
+  }
+  return {
+    ...base,
     correctOptionId: row.correct_option_id,
     explanation: row.explanation,
     explanationAm: row.explanation_am,
-    difficulty: row.difficulty,
-    tags: row.tags_json,
   };
 }
 

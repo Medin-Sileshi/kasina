@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronLeft, ChevronRight, Trophy, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageCircle, Trophy, X } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
+import { cacheMelakQuestion } from "@/lib/melak-cache";
 import type { QuizQuestion } from "@/lib/quiz-store";
 import {
   AnswerOption,
@@ -24,14 +25,42 @@ type SessionPayload = {
 };
 
 export default function ReviewPage() {
+  return (
+    <Suspense fallback={<ContentSkeleton rows={4} />}>
+      <ReviewContent />
+    </Suspense>
+  );
+}
+
+function ReviewContent() {
   const params = useParams<{ sessionId: string }>();
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [activeId, setActiveId] = useState<string | null>(
+    searchParams.get("q"),
+  );
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["session", params.sessionId, "review"],
     queryFn: () =>
       apiFetch<SessionPayload>(`/sessions/${params.sessionId}`),
   });
+
+  useEffect(() => {
+    if (!data?.questions) return;
+    for (const q of data.questions) {
+      if (q.explanation) {
+        cacheMelakQuestion({
+          id: q.id,
+          stem: q.stem,
+          stemAm: q.stemAm,
+          unit: q.unit,
+          topic: q.topic,
+          explanation: q.explanation,
+          explanationAm: q.explanationAm,
+        });
+      }
+    }
+  }, [data?.questions]);
 
   if (isPending) return <ContentSkeleton rows={4} />;
 
@@ -165,8 +194,15 @@ export default function ReviewPage() {
                     ?.label}
                 </p>
                 <div className="mt-2 text-base text-gray-700">
-                  <MathText text={activeQ.explanation} />
+                  <MathText text={activeQ.explanation ?? ""} />
                 </div>
+                <Link
+                  href={`/melak?q=${encodeURIComponent(activeQ.id)}&session=${params.sessionId}`}
+                  className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary-200 bg-primary-50 px-4 py-2.5 text-sm font-semibold text-primary-800 hover:bg-primary-100"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Ask Melak about this
+                </Link>
               </div>
             </div>
           </div>

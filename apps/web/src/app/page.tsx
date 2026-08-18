@@ -24,7 +24,7 @@ const copy = {
     langLabel: "EN",
     brandAm: "ካሲና",
     pilot:
-      "Now piloting Grade 12 Mathematics classrooms on the web. Melak offline on mobile comes next.",
+      "Now piloting Grade 12 Mathematics classrooms — with offline Melak tutoring, CBT practice, and optional cloud AI when online.",
     headline: "Melak helps students understand their lessons, even without internet.",
     subhead:
       "Built for Ethiopian classrooms: Grade 7 to 12 students who want real understanding, and teachers who want to teach more effectively.",
@@ -106,7 +106,7 @@ const copy = {
     faqs: [
       {
         q: "Does it really work without internet?",
-        a: "The long-term product is offline Melak on mobile after one download. Today’s pilot is web classroom practice and needs a connection. We are clear about both so expectations stay honest.",
+        a: "Melak’s lightweight tutor runs on your device without wifi — grounded to practice questions when you open it from review. Optional cloud tutoring needs a connection. CBT and class sync still need internet today.",
       },
       {
         q: "What devices does it support?",

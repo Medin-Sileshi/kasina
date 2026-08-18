@@ -20,7 +20,9 @@ type HonoEnv = {
 };
 
 const startSchema = z.object({
-  mode: z.enum(["random", "topic", "year", "weak_topics"]).default("random"),
+  mode: z
+    .enum(["random", "topic", "year", "weak_topics", "cbt"])
+    .default("random"),
   subject: z.string().default("mathematics"),
   grade: z.number().int().default(12),
   unit: z.string().optional(),
@@ -165,6 +167,27 @@ sessionsApp.post("/", zValidator("json", startSchema), async (c) => {
     topic = targets.map((t) => t.topic).join(", ");
     unit = targets[0]?.unit ?? null;
     year = null;
+  } else if (body.mode === "cbt") {
+    mode = "cbt";
+    const cbtCount = Math.min(Math.max(body.count, 1), 40);
+    const { data, error } = await db
+      .from("questions")
+      .select(QUESTION_SELECT)
+      .eq("subject", body.subject)
+      .eq("grade", body.grade);
+    if (error) return c.json({ error: error.message }, 500);
+
+    const pool = shuffle((data ?? []) as QuestionRow[]).filter((q) => {
+      const tags = (q.tags_json as string[] | null) ?? [];
+      return !tags.some((t) => t.toLowerCase() === "sample");
+    });
+    selected = pool.slice(0, Math.min(cbtCount, pool.length));
+    if (!selected.length) {
+      return c.json({ error: "No questions available for CBT" }, 404);
+    }
+    topic = "CBT Practice Exam";
+    unit = null;
+    year = null;
   } else {
     let query = db
       .from("questions")
@@ -209,6 +232,8 @@ sessionsApp.post("/", zValidator("json", startSchema), async (c) => {
 
   if (insertErr) return c.json({ error: insertErr.message }, 500);
 
+  const examMode = mode === "cbt";
+
   return c.json({
     session: {
       id: sessionId,
@@ -223,7 +248,7 @@ sessionsApp.post("/", zValidator("json", startSchema), async (c) => {
       total: questionIds.length,
       startedAt: new Date().toISOString(),
     },
-    questions: selected.map(mapQuestion),
+    questions: selected.map((q) => mapQuestion(q, { examMode })),
   });
 });
 
@@ -260,10 +285,14 @@ sessionsApp.get("/:id", async (c) => {
   if (aErr) return c.json({ error: aErr.message }, 500);
 
   const questionMap = new Map(
-    ((questions ?? []) as QuestionRow[]).map((q) => [q.id, mapQuestion(q)]),
+    ((questions ?? []) as QuestionRow[]).map((q) => [q.id, q]),
   );
+  const examMode = session.mode === "cbt" && !session.completed_at;
   const orderedQuestions = questionIds
-    .map((qid) => questionMap.get(qid))
+    .map((qid) => {
+      const row = questionMap.get(qid);
+      return row ? mapQuestion(row, { examMode }) : null;
+    })
     .filter(Boolean);
 
   return c.json({
@@ -318,7 +347,7 @@ sessionsApp.post(
 
     const { data: session, error } = await db
       .from("practice_sessions")
-      .select("id, user_id, question_ids, completed_at")
+      .select("id, user_id, question_ids, completed_at, mode")
       .eq("id", id)
       .eq("user_id", user.id)
       .maybeSingle();
@@ -359,6 +388,18 @@ sessionsApp.post(
     });
 
     if (aErr) return c.json({ error: aErr.message }, 500);
+
+    const cbtExam = session.mode === "cbt" && !session.completed_at;
+    if (cbtExam) {
+      return c.json({
+        answer: {
+          id: answerId,
+          questionId: body.questionId,
+          selectedOptionId: body.selectedOptionId,
+          saved: true,
+        },
+      });
+    }
 
     return c.json({
       answer: {

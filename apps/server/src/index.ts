@@ -10,6 +10,7 @@ import { progressApp } from "./routes/progress";
 import { sessionsApp } from "./routes/sessions";
 import { subjectsApp } from "./routes/subjects";
 import { textbooksApp } from "./routes/textbooks";
+import { melakApp } from "./routes/melak";
 
 type HonoEnv = {
   Bindings: ServerEnv;
@@ -276,5 +277,6 @@ app.route("/sessions", sessionsApp);
 app.route("/progress", progressApp);
 app.route("/subjects", subjectsApp);
 app.route("/textbooks", textbooksApp);
+app.route("/melak", melakApp);
 
 export default app;
