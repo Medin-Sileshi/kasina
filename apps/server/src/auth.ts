@@ -80,7 +80,7 @@ function buildAuth(env: ServerEnv, pool: Pool) {
           type: "string",
           required: true,
           defaultValue: "student",
-          input: true,
+          input: false,
         },
       },
     },

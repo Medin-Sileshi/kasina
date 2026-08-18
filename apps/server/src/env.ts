@@ -23,6 +23,8 @@ export type ServerEnv = {
   APP_URL: string;
   /** Anthropic API key for Melak chat pilot (Vision M1). */
   ANTHROPIC_API_KEY?: string;
+  /** Shared access code required for POST /teacher/signup (pilot schools only). */
+  TEACHER_SIGNUP_SECRET?: string;
 };
 
 export type AppVariables = {

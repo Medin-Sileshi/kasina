@@ -315,7 +315,7 @@ sessionsApp.get("/:id", async (c) => {
       id: a.id,
       questionId: a.question_id,
       selectedOptionId: a.selected_option_id,
-      isCorrect: a.is_correct,
+      ...(examMode ? {} : { isCorrect: a.is_correct }),
       timeTakenSeconds: a.time_taken_seconds,
       answeredAt: a.answered_at,
     })),

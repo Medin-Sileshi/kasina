@@ -4,7 +4,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Flag, X } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
+import { cacheMelakQuestion } from "@/lib/melak-cache";
 import { formatTimer, useQuizStore } from "@/lib/quiz-store";
+import {
+  clearQuizUi,
+  loadQuizUi,
+  remainingTimerSeconds,
+  saveQuizUi,
+} from "@/lib/quiz-session-storage";
 import {
   AnswerOption,
   type AnswerOptionState,
@@ -102,15 +109,49 @@ export default function QuizPage() {
                 },
           ]),
         );
+        for (const q of data.questions) {
+          if (q.explanation) {
+            cacheMelakQuestion({
+              id: q.id,
+              stem: q.stem,
+              stemAm: q.stemAm,
+              unit: q.unit,
+              topic: q.topic,
+              explanation: q.explanation,
+              explanationAm: q.explanationAm,
+            });
+          }
+        }
+        const savedUi = loadQuizUi(data.session.id);
+        const timerDuration = cbt && !data.session.completedAt ? 40 * 60 : null;
+        const timerSeconds =
+          cbt && !data.session.completedAt
+            ? remainingTimerSeconds(
+                savedUi?.timerStartedAt ?? Date.now(),
+                savedUi?.timerDurationSec ?? timerDuration,
+              )
+            : null;
         reset({
           sessionId: data.session.id,
           questions: data.questions as never,
           contextLabel: label,
           mode: cbt ? "cbt" : "practice",
-          timerSeconds: cbt && !data.session.completedAt ? 40 * 60 : null,
+          flagged: savedUi?.flagged ?? {},
+          timerSeconds,
         });
         if (Object.keys(restoredAnswers).length) {
           useQuizStore.setState({ answers: restoredAnswers });
+        }
+        if (savedUi != null) {
+          useQuizStore.getState().goTo(savedUi.index);
+        }
+        if (cbt && !data.session.completedAt && !savedUi?.timerStartedAt) {
+          saveQuizUi(data.session.id, {
+            index: savedUi?.index ?? 0,
+            flagged: savedUi?.flagged ?? {},
+            timerStartedAt: Date.now(),
+            timerDurationSec: timerDuration,
+          });
         }
         if (data.session.completedAt) {
           router.replace(`/quiz/${sessionId}/results`);
@@ -119,6 +160,18 @@ export default function QuizPage() {
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
   }, [sessionId, storeSessionId, questions.length, reset, router]);
+
+  useEffect(() => {
+    if (!sessionId || !questions.length) return;
+    saveQuizUi(sessionId, {
+      index,
+      flagged,
+      timerStartedAt:
+        loadQuizUi(sessionId)?.timerStartedAt ??
+        (isCbt ? Date.now() : null),
+      timerDurationSec: isCbt ? 40 * 60 : null,
+    });
+  }, [sessionId, index, flagged, questions.length, isCbt]);
 
   useEffect(() => {
     if (!isCbt || timerSeconds == null) return;
@@ -216,6 +269,7 @@ export default function QuizPage() {
         await saveCbtAnswer(false);
       }
       await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+      clearQuizUi(sessionId);
       router.push(`/quiz/${sessionId}/results`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not complete session");

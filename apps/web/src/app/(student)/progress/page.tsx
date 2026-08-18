@@ -45,6 +45,15 @@ type ProgressResponse = {
     percent: number;
     completedAt: string | null;
   }>;
+  inProgressSessions: Array<{
+    id: string;
+    subject: string;
+    topic: string | null;
+    unit: string | null;
+    mode: string;
+    total: number | null;
+    startedAt: string;
+  }>;
 };
 
 function scoreColor(pct: number) {
@@ -131,7 +140,7 @@ export default function ProgressPage() {
     );
   }
 
-  if (data.stats.questionsAnswered === 0) {
+  if (data.stats.questionsAnswered === 0 && !data.inProgressSessions?.length) {
     return (
       <EmptyState
         icon={<BarChart2 className="h-12 w-12" />}
@@ -162,6 +171,38 @@ export default function ProgressPage() {
           {data.stats.dayStreak} day streak
         </StatusPill>
       </div>
+
+      {data.inProgressSessions?.length ? (
+        <>
+          <SectionLabel>
+            <span className="mt-8 block">Continue</span>
+          </SectionLabel>
+          <div className="mt-3 space-y-2">
+            {data.inProgressSessions.map((s) => (
+              <Link
+                key={s.id}
+                href={`/quiz/${s.id}`}
+                className="block overflow-hidden rounded-2xl border border-primary-200 bg-primary-50/40 transition hover:border-primary-400"
+              >
+                <div className="flex items-center justify-between px-5 py-4">
+                  <div>
+                    <p className="font-semibold text-gray-950">
+                      {s.mode === "cbt" ? "CBT exam" : "Practice session"}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {s.topic ?? s.unit ?? s.subject}
+                      {s.total ? ` · ${s.total} questions` : ""}
+                    </p>
+                  </div>
+                  <PrimaryButton type="button" className="shrink-0">
+                    Resume
+                  </PrimaryButton>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : null}
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         <MetricCard

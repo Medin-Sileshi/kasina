@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { randomUUID } from "node:crypto";
+import { validateQuestions } from "@kasina/question-bank";
 import {
   DEMO_INVITE_CODE,
   DEMO_TEACHER_EMAIL,
@@ -87,23 +88,9 @@ async function main() {
     import.meta.dirname,
     "../../question-bank/data/grade12-math-seed.json",
   );
-  const questions = JSON.parse(readFileSync(seedPath, "utf8")) as Array<{
-    id: string;
-    grade: number;
-    subject: string;
-    stream?: string;
-    year?: number;
-    unit: string;
-    topic: string;
-    stem: string;
-    stemAm?: string;
-    options: unknown;
-    correctOptionId: string;
-    explanation: string;
-    explanationAm?: string;
-    difficulty?: string;
-    tags?: string[];
-  }>;
+  const questions = validateQuestions(
+    JSON.parse(readFileSync(seedPath, "utf8")),
+  );
 
   const rows = questions.map((q) => ({
     id: q.id,

@@ -11,6 +11,7 @@ import { sessionsApp } from "./routes/sessions";
 import { subjectsApp } from "./routes/subjects";
 import { textbooksApp } from "./routes/textbooks";
 import { melakApp } from "./routes/melak";
+import { teacherSignupApp } from "./routes/teacher-signup";
 
 type HonoEnv = {
   Bindings: ServerEnv;
@@ -218,7 +219,6 @@ app.get("/me", async (c) => {
 
 app.get("/questions", async (c) => {
   const auth = createAuth(c.env);
-  const db = createDb(c.env);
   let session: Awaited<ReturnType<typeof getSessionCached>>;
   try {
     session = await getSessionCached(auth, c.req.raw.headers);
@@ -233,6 +233,12 @@ app.get("/questions", async (c) => {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
+  const role = (session.user as { role?: string }).role ?? "student";
+  if (role !== "admin") {
+    return c.json({ error: "Forbidden" }, 403);
+  }
+
+  const db = createDb(c.env);
   const subject = c.req.query("subject") ?? "mathematics";
   const grade = Number(c.req.query("grade") ?? "12");
 
@@ -278,5 +284,6 @@ app.route("/progress", progressApp);
 app.route("/subjects", subjectsApp);
 app.route("/textbooks", textbooksApp);
 app.route("/melak", melakApp);
+app.route("/teacher/signup", teacherSignupApp);
 
 export default app;

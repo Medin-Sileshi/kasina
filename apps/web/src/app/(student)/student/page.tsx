@@ -32,6 +32,13 @@ type AssignmentMine = {
 type ProgressLite = {
   stats: { questionsAnswered: number; averageScore: number; dayStreak: number };
   weakTopics: Array<{ topic: string; accuracy: number }>;
+  inProgressSessions?: Array<{
+    id: string;
+    mode: string;
+    topic: string | null;
+    unit: string | null;
+    total: number | null;
+  }>;
 };
 
 type StartResponse = {
@@ -76,6 +83,7 @@ export default function StudentHomePage() {
     [assignments],
   );
   const pickup = todoFirst.find((a) => a.status === "todo") ?? todoFirst[0];
+  const inProgress = progress?.inProgressSessions ?? [];
   const weak = progress?.weakTopics?.[0];
   const goalDone = Math.min(progress?.stats.questionsAnswered ?? 0, 20);
   const goalPct = Math.round((goalDone / 20) * 100);
@@ -195,6 +203,32 @@ export default function StudentHomePage() {
           </Card>
         )}
       </section>
+
+      {inProgress.length > 0 ? (
+        <section className="mt-8">
+          <h2 className="text-lg font-bold text-gray-950">Continue exam</h2>
+          <ul className="mt-3 space-y-2">
+            {inProgress.map((s) => (
+              <li key={s.id}>
+                <Link href={`/quiz/${s.id}`}>
+                  <Card className="flex items-center justify-between gap-3 p-4 transition hover:border-primary-400">
+                    <div className="min-w-0">
+                      <p className="font-semibold text-gray-950">
+                        {s.mode === "cbt" ? "CBT exam" : "Practice session"}
+                      </p>
+                      <p className="mt-0.5 text-sm text-gray-500">
+                        {s.topic ?? s.unit ?? "Mathematics"}
+                        {s.total ? ` · ${s.total} questions` : ""}
+                      </p>
+                    </div>
+                    <ChevronRight className="h-5 w-5 shrink-0 text-gray-300" />
+                  </Card>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       {assignments.length > 0 ? (
         <section className="mt-8">

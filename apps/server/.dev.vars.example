@@ -11,5 +11,8 @@ APP_URL=http://localhost:3000
 # Melak optional cloud tutor (offline tutor works without this)
 ANTHROPIC_API_KEY=
 
+# Teacher signup access code (required for POST /teacher/signup in production)
+TEACHER_SIGNUP_SECRET=dev-teacher-signup-change-me
+
 # Production URLs (not for .dev.vars file on laptop):
 # APP_URL=https://kasina.et

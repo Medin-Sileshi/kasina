@@ -21,46 +21,13 @@ import {
   weakTopicsForClass,
 } from "../lib/weak-topics-db";
 import { clientKey, rateLimit } from "../lib/rate-limit";
+import { unwrapAuthUser } from "../lib/auth-signup";
 import { buildClassOverviewEntry } from "../lib/class-overview";
 
 type HonoEnv = {
   Bindings: ServerEnv;
   Variables: AppVariables;
 };
-
-function unwrapAuthUser(result: unknown): {
-  userId: string;
-  headers: Headers | null;
-} {
-  if (result && typeof result === "object") {
-    if (
-      "response" in result &&
-      result.response &&
-      typeof result.response === "object" &&
-      "user" in result.response &&
-      result.response.user &&
-      typeof result.response.user === "object" &&
-      "id" in result.response.user
-    ) {
-      return {
-        userId: String(result.response.user.id),
-        headers:
-          "headers" in result && result.headers instanceof Headers
-            ? result.headers
-            : null,
-      };
-    }
-    if (
-      "user" in result &&
-      result.user &&
-      typeof result.user === "object" &&
-      "id" in result.user
-    ) {
-      return { userId: String(result.user.id), headers: null };
-    }
-  }
-  throw new Error("Auth did not return a user");
-}
 
 const createSchema = z.object({
   name: z.string().min(1).max(120),
@@ -211,8 +178,7 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
           email: body.email,
           password: body.password,
           name: body.displayName,
-          role: "student",
-        } as never,
+        },
         headers: c.req.raw.headers,
         asResponse: false,
         returnHeaders: true,

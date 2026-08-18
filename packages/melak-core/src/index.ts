@@ -28,12 +28,12 @@ const TOPIC_HINTS: Array<{
   {
     keys: ["integral", "integrate", "integration", "ኢንቲግራል", "የማይ"],
     en: "For integrals: reverse the power rule $\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C$ ($n \\neq -1$). For definite integrals, evaluate the antiderivative at the bounds.",
-    am: "ለኢንቲግራሎች፡ $\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C$ ($n \\neq -1$)። የተወሰነ ኢንቲግራል ላይ ገደቦቹን በመ代입 ይሰሉ።",
+    am: "ለኢንቲግራሎች፡ $\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C$ ($n \\neq -1$)። definite integral ከሆነ antiderivativeን በ upper bound − lower bound ይሰሉ።",
   },
   {
     keys: ["limit", "lim", "ገደብ"],
     en: "For limits: try direct substitution first. If you get $\\frac{0}{0}$, factor, rationalize, or use known limits like $\\lim_{x\\to 0}\\frac{\\sin x}{x}=1$.",
-    am: "ለገደቦች፡ መጀመሪያ ቀጥታ ምትክ ይሞክሩ። $\\frac{0}{0}$ ከሆነ፣ ይ分解 ወይም $\\lim_{x\\to 0}\\frac{\\sin x}{x}=1$ ይጠቀሙ።",
+    am: "ለገደቦች፡ መጀመሪያ ቀጥታ ምትክ ይሞክሩ። $\\frac{0}{0}$ ከሆነ factorize ወይም $\\lim_{x\\to 0}\\frac{\\sin x}{x}=1$ ይጠቀሙ።",
   },
   {
     keys: ["sequence", "arithmetic", "series", "summation", "ተከታታይ"],
@@ -89,7 +89,7 @@ function groundedReply(
     : question.explanation;
 
   const steps = am
-    ? "**እንዴት እንረዳ:**\n1. ምን እንደሚጠየቅ ይመልከቱ\n2. ቀመር ወይም ህግ ይเลือก\n3. ደረጃ በደረጃ ይሰሉ\n\n**መሠረታዊ ማብራሪያ:**"
+    ? "**እንዴት እንረዳ:**\n1. ምን እንደሚጠየቅ ይመልከቱ\n2. ቀመር ወይም ህግ ይምረጡ\n3. ደረጃ በደረጃ ይሰሉ\n\n**መሠረታዊ ማብራሪያ:**"
     : "**How to think about it:**\n1. Identify what is being asked\n2. Pick the right rule or formula\n3. Work step by step\n\n**Core explanation:**";
 
   const footer = am

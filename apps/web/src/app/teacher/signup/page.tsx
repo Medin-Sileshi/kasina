@@ -6,11 +6,11 @@ import { FormEvent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AuthCard } from "@/components/auth-chrome";
 import { Field, PrimaryButton, TextInput } from "@/components/ui";
-import { authClient } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/auth-client";
 import { meQueryKey } from "@/lib/session";
 
-function authErrorMessage(err: { message?: string } | null | undefined) {
-  const msg = err?.message?.trim();
+function authErrorMessage(err: unknown) {
+  const msg = err instanceof Error ? err.message : String(err);
   if (!msg || msg === "Failed to fetch" || /fetch failed/i.test(msg)) {
     return "Cannot reach the server or database. Is the API running, and is Supabase online?";
   }
@@ -23,6 +23,7 @@ export default function TeacherSignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accessCode, setAccessCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,22 +32,14 @@ export default function TeacherSignupPage() {
     setLoading(true);
     setError(null);
     try {
-      const { error: err } = await authClient.signUp.email({
-        email,
-        password,
-        name,
-        ...({ role: "teacher" } as Record<string, string>),
+      await apiFetch("/teacher/signup", {
+        method: "POST",
+        body: JSON.stringify({ name, email, password, accessCode }),
       });
-      if (err) {
-        setError(authErrorMessage(err));
-        return;
-      }
       await queryClient.invalidateQueries({ queryKey: meQueryKey });
       router.push("/teacher");
     } catch (err) {
-      setError(
-        err instanceof Error ? authErrorMessage(err) : "Sign up failed",
-      );
+      setError(authErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -55,7 +48,7 @@ export default function TeacherSignupPage() {
   return (
     <AuthCard
       title="Create teacher account"
-      subtitle="Set up your classroom on Kasina."
+      subtitle="Set up your classroom on Kasina. Pilot schools need an access code from Kasina."
       eyebrow="Teachers"
     >
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -82,6 +75,14 @@ export default function TeacherSignupPage() {
             minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </Field>
+        <Field label="Teacher access code">
+          <TextInput
+            required
+            value={accessCode}
+            onChange={(e) => setAccessCode(e.target.value)}
+            placeholder="From your Kasina pilot contact"
           />
         </Field>
         {error ? <p className="text-sm text-error-text">{error}</p> : null}

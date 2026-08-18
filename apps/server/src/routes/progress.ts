@@ -49,12 +49,13 @@ progressApp.get("/", async (c) => {
     .from("practice_sessions")
     .select("id, subject, score, total, started_at, completed_at, mode, topic, unit")
     .eq("user_id", user.id)
-    .not("completed_at", "is", null)
-    .order("completed_at", { ascending: false });
+    .order("started_at", { ascending: false });
 
   if (error) return c.json({ error: error.message }, 500);
 
-  const completed = sessions ?? [];
+  const all = sessions ?? [];
+  const completed = all.filter((s) => s.completed_at != null);
+  const inProgress = all.filter((s) => s.completed_at == null);
   const questionsAnswered = completed.reduce(
     (sum, s) => sum + (s.total ?? 0),
     0,
@@ -135,6 +136,15 @@ progressApp.get("/", async (c) => {
           ? Math.round(((s.score ?? 0) / s.total) * 100)
           : 0,
       completedAt: s.completed_at,
+    })),
+    inProgressSessions: inProgress.slice(0, 5).map((s) => ({
+      id: s.id,
+      subject: s.subject,
+      topic: s.topic,
+      unit: s.unit,
+      mode: s.mode,
+      total: s.total,
+      startedAt: s.started_at,
     })),
   });
 });
