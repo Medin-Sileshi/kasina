@@ -30,12 +30,13 @@ Prefer topics with **≥10** questions so “Assign 10” does not reuse items h
 
 ## Content sources (for authors)
 
-**Canonical MVP textbook (R2):** `textbooks/grade-12/mathematics/student-textbook.pdf` in bucket `kasina-textbooks`  
+**Canonical MVP textbook:** Grade 12 Mathematics, read online as chapter pages (not a PDF download).  
 Catalog: [`content/textbooks/manifest.json`](../../content/textbooks/manifest.json)  
+Convert: `pnpm textbooks:convert`  
 Upload: `pnpm textbooks:upload`  
-Authenticated fetch: `GET /textbooks/grade-12/mathematics`
+App: `/read/mathematics` (students), `/teacher/textbook/mathematics` (teachers)
 
-Also archived on R2 (not in the Math pilot UI): Grade 12 Physics, Chemistry, Biology student textbooks for post-MVP multi-subject work.
+Chemistry and physics are real markdown chapters. Mathematics and biology are scanned books, so the reader loads one compressed page at a time.
 
 Use the Math PDF when reviewing explanations and expanding `grade12-math-seed.json`. Past ESSLCE papers and optional Gr 11 review items remain secondary sources.
 

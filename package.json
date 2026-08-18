@@ -12,7 +12,8 @@
     "db:reset-pilot": "pnpm --filter @kasina/db reset-pilot",
     "questions:validate": "pnpm --filter @kasina/question-bank validate",
     "smoke:prod": "bash ./scripts/smoke-prod.sh",
-    "textbooks:upload": "bash ./scripts/upload-textbooks-r2.sh"
+    "textbooks:upload": "python3 ./scripts/upload_textbooks_r2.py",
+    "textbooks:convert": "python3 ./scripts/pdf_to_markdown.py"
   },
   "devDependencies": {
     "prettier": "^3.7.4",

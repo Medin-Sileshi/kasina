@@ -12,91 +12,121 @@ type Book = (typeof catalog.books)[number];
 
 export const textbooksApp = new Hono<HonoEnv>();
 
-function findBook(subject: string): Book | undefined {
-  return catalog.books.find((b) => b.subject === subject && b.grade === 12);
+const SUBJECTS = new Set(catalog.books.map((b) => b.subject));
+
+function r2Prefix(subject: string) {
+  return `textbooks/grade-12/${subject}`;
 }
 
-/** Catalog for authenticated users. MVP highlights mathematics as active. */
+function contentTypeFor(key: string): string {
+  if (key.endsWith(".json")) return "application/json; charset=utf-8";
+  if (key.endsWith(".md")) return "text/markdown; charset=utf-8";
+  if (key.endsWith(".webp")) return "image/webp";
+  if (key.endsWith(".jpg") || key.endsWith(".jpeg")) return "image/jpeg";
+  if (key.endsWith(".png")) return "image/png";
+  return "application/octet-stream";
+}
+
+async function readKey(env: ServerEnv, key: string) {
+  const bucket = env.TEXTBOOKS;
+  if (!bucket) return null;
+  const object = await bucket.get(key);
+  if (!object?.body) return null;
+  return object;
+}
+
+async function readText(env: ServerEnv, key: string): Promise<string | null> {
+  const object = await readKey(env, key);
+  if (!object) return null;
+  const body = object.body;
+  if (typeof body === "string") return body;
+  if (body instanceof Uint8Array) return new TextDecoder().decode(body);
+  return await new Response(body as ReadableStream).text();
+}
+
 textbooksApp.get("/", async (c) => {
   const user = await requireUser(c);
   if (!isAuthUser(user)) return user;
 
-  const books = catalog.books.map((b) => ({
-    id: b.id,
-    grade: b.grade,
-    subject: b.subject,
-    title: b.title,
-    edition: b.edition,
-    mvpStatus: b.mvpStatus,
-    available: Boolean(c.env.TEXTBOOKS),
-  }));
+  const books = [];
+  for (const b of catalog.books) {
+    const indexText = await readText(c.env, `${r2Prefix(b.subject)}/index.json`);
+    books.push({
+      id: b.id,
+      grade: b.grade,
+      subject: b.subject,
+      title: b.title,
+      edition: b.edition,
+      mvpStatus: b.mvpStatus,
+      readable: Boolean(indexText),
+    });
+  }
 
   return c.json({
-    bucket: catalog.bucket,
     curriculum: catalog.curriculum,
     books,
   });
 });
 
-/**
- * Stream a Grade 12 textbook PDF from R2.
- * MVP: mathematics is active. Other subjects are stored but only teachers/admins
- * may download them (prep for multi-subject; not in student pilot UI).
- */
 textbooksApp.get("/grade-12/:subject", async (c) => {
   const user = await requireUser(c);
   if (!isAuthUser(user)) return user;
 
   const subject = c.req.param("subject").toLowerCase();
-  const book = findBook(subject);
-  if (!book) {
+  if (!SUBJECTS.has(subject as Book["subject"])) {
     return c.json({ error: "Textbook not found" }, 404);
   }
 
-  if (book.mvpStatus !== "active" && user.role === "student") {
+  const text = await readText(c.env, `${r2Prefix(subject)}/index.json`);
+  if (!text) {
     return c.json(
-      {
-        error:
-          "This subject is not part of the Grade 12 Mathematics pilot yet. Ask your teacher if you need access later.",
-      },
-      403,
-    );
-  }
-
-  const bucket = c.env.TEXTBOOKS;
-  if (!bucket) {
-    return c.json(
-      {
-        error:
-          "Textbook storage is not configured on this server (missing TEXTBOOKS R2 binding).",
-      },
-      503,
-    );
-  }
-
-  const object = await bucket.get(book.r2Key);
-  if (!object) {
-    return c.json(
-      {
-        error: "Textbook file is missing from storage. Re-run the R2 upload script.",
-        key: book.r2Key,
-      },
+      { error: "This textbook is not available to read online yet." },
       404,
     );
   }
+  return c.json(JSON.parse(text));
+});
+
+textbooksApp.get("/grade-12/:subject/chapters/:chapter", async (c) => {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+
+  const subject = c.req.param("subject").toLowerCase();
+  const chapter = c.req.param("chapter").replace(/[^a-z0-9-]/g, "");
+  if (!SUBJECTS.has(subject as Book["subject"]) || !chapter) {
+    return c.json({ error: "Not found" }, 404);
+  }
+
+  const markdown = await readText(
+    c.env,
+    `${r2Prefix(subject)}/chapters/${chapter}.md`,
+  );
+  if (!markdown) return c.json({ error: "Chapter not found" }, 404);
+
+  return c.json({ subject, chapter, markdown });
+});
+
+textbooksApp.get("/grade-12/:subject/pages/:file", async (c) => {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+
+  const subject = c.req.param("subject").toLowerCase();
+  const file = c.req.param("file");
+  if (!SUBJECTS.has(subject as Book["subject"])) {
+    return c.json({ error: "Not found" }, 404);
+  }
+  if (!/^p\d{3}\.(webp|jpg|jpeg|png)$/.test(file)) {
+    return c.json({ error: "Invalid page" }, 400);
+  }
+
+  const object = await readKey(c.env, `${r2Prefix(subject)}/pages/${file}`);
+  if (!object) return c.json({ error: "Page not found" }, 404);
 
   const headers = new Headers();
-  headers.set("Content-Type", "application/pdf");
-  headers.set(
-    "Content-Disposition",
-    `inline; filename="kasina-grade-12-${book.subject}.pdf"`,
-  );
-  headers.set("Cache-Control", "private, max-age=3600");
-  if (object.size != null) {
-    headers.set("Content-Length", String(object.size));
-  }
-  object.writeHttpMetadata(headers);
-  if (object.httpEtag) headers.set("ETag", object.httpEtag);
-
-  return new Response(object.body, { headers });
+  headers.set("Content-Type", contentTypeFor(file));
+  headers.set("Content-Disposition", "inline");
+  headers.set("Cache-Control", "private, max-age=86400");
+  headers.set("X-Content-Type-Options", "nosniff");
+  if (object.size != null) headers.set("Content-Length", String(object.size));
+  return new Response(object.body as ReadableStream | Uint8Array, { headers });
 });

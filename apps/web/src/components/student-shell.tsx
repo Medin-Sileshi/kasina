@@ -8,9 +8,18 @@ import { BrandAtmosphere } from "@/components/brand-chrome";
 const links = [
   { href: "/student", label: "Home", exact: true },
   { href: "/subjects/mathematics", label: "Subjects" },
-  { href: "/subjects/mathematics", label: "Practice", id: "practice" },
+  { href: "/read/mathematics", label: "Textbook" },
   { href: "/progress", label: "Progress" },
 ];
+
+function linkActive(pathname: string, href: string, exact?: boolean) {
+  if (exact) return pathname === href;
+  if (href.startsWith("/read")) return pathname.startsWith("/read");
+  if (href.startsWith("/subjects")) {
+    return pathname.startsWith("/subjects") || pathname.startsWith("/quiz");
+  }
+  return pathname === href || pathname.startsWith(href);
+}
 
 export function StudentNav({ userName }: { userName?: string }) {
   const pathname = usePathname();
@@ -30,16 +39,10 @@ export function StudentNav({ userName }: { userName?: string }) {
 
         <nav className="hidden flex-1 items-center justify-center gap-7 md:flex">
           {links.map((link) => {
-            const active = link.exact
-              ? pathname === link.href
-              : link.label === "Practice"
-                ? pathname.startsWith("/subjects") ||
-                  pathname.startsWith("/quiz")
-                : pathname === link.href ||
-                  (link.href !== "/student" && pathname.startsWith(link.href));
+            const active = linkActive(pathname, link.href, link.exact);
             return (
               <Link
-                key={`${link.label}-${link.id ?? link.href}`}
+                key={link.label}
                 href={link.href}
                 className={`relative text-sm font-medium transition ${
                   active ? "text-white" : "text-white/65 hover:text-white"
@@ -80,12 +83,10 @@ export function StudentNav({ userName }: { userName?: string }) {
 
       <nav className="flex gap-1 overflow-x-auto border-t border-white/10 px-3 py-2 md:hidden">
         {links.map((link) => {
-          const active = link.exact
-            ? pathname === link.href
-            : pathname.startsWith(link.href);
+          const active = linkActive(pathname, link.href, link.exact);
           return (
             <Link
-              key={`m-${link.label}-${link.id ?? ""}`}
+              key={`m-${link.label}`}
               href={link.href}
               className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold ${
                 active ? "bg-white/15 text-white" : "text-white/65"

@@ -218,3 +218,58 @@ body {
     animation: none;
   }
 }
+
+.textbook-md h1 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0c0c0e;
+}
+
+.textbook-md h2,
+.textbook-md h3,
+.textbook-md h4 {
+  margin: 1.4rem 0 0.5rem;
+  font-weight: 700;
+  color: #0c0c0e;
+}
+
+.textbook-md h2 { font-size: 1.15rem; }
+.textbook-md h3 { font-size: 1.05rem; }
+
+.textbook-md p {
+  margin: 0.7rem 0;
+}
+
+.textbook-md ul,
+.textbook-md ol {
+  margin: 0.6rem 0 0.6rem 1.2rem;
+}
+
+.textbook-md li {
+  margin: 0.25rem 0;
+}
+
+.textbook-md table {
+  width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.textbook-md th,
+.textbook-md td {
+  border: 1px solid #e5e7eb;
+  padding: 0.4rem 0.55rem;
+  text-align: left;
+}
+
+.textbook-md th {
+  background: #f3f4f6;
+}
+
+.textbook-md strong {
+  font-weight: 650;
+  color: #0c0c0e;
+}

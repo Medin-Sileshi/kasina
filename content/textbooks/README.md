@@ -1,14 +1,31 @@
-# Grade 12 MoE textbooks (R2)
+# Grade 12 textbooks (online reader)
 
-PDFs are **not** committed. They live in Cloudflare R2 bucket `kasina-textbooks`.
+Students do **not** download PDFs. Each book is converted to chapter markdown (or page images when the PDF is a scan) and read in the app.
 
-| Subject | R2 key | MVP |
-|---------|--------|-----|
-| Mathematics | `textbooks/grade-12/mathematics/student-textbook.pdf` | Active (pilot) |
-| Physics | `textbooks/grade-12/physics/student-textbook.pdf` | Archived |
-| Chemistry | `textbooks/grade-12/chemistry/student-textbook.pdf` | Archived |
-| Biology | `textbooks/grade-12/biology/student-textbook.pdf` | Archived |
+| Subject | Format | Typical size |
+|---------|--------|----------------|
+| Chemistry | Markdown chapters | ~400 KB total |
+| Physics | Markdown chapters | ~300 KB total |
+| Mathematics | Chapter markdown + one compressed page at a time | ~50–130 KB per page |
+| Biology | Same as mathematics | ~50–130 KB per page |
 
-- Manifest: [`manifest.json`](./manifest.json) and `apps/server/src/data/textbooks.json`
-- Upload: place PDFs in `grade-12/`, then `pnpm textbooks:upload`
-- App: signed-in users open Math via `GET /textbooks/grade-12/mathematics`
+## Convert
+
+```bash
+# PDFs live in content/textbooks/grade-12/ (gitignored)
+python3 scripts/pdf_to_markdown.py
+```
+
+Output: `content/textbooks/md/grade-12/{subject}/`
+
+## Upload to R2
+
+```bash
+pnpm textbooks:upload
+```
+
+## App
+
+- Students: `/read/mathematics`
+- Teachers: `/teacher/textbook/mathematics`
+- API: `GET /textbooks/grade-12/:subject` (index), `/chapters/:id` (markdown), `/pages/:file` (image)

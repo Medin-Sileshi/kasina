@@ -62,17 +62,16 @@ pnpm deploy
 
 Attach custom domain `api.kasina.et` in the Cloudflare dashboard (Workers → kasina-server → Custom Domains), or set `routes` in `wrangler.jsonc` after the zone is on Cloudflare.
 
-### R2 textbooks (MoE Grade 12 PDFs)
+### R2 textbooks (online chapters, not PDF downloads)
 
-Bucket `kasina-textbooks` is bound as `TEXTBOOKS` in `wrangler.jsonc`. Upload from a machine that has the PDFs:
+Bucket `kasina-textbooks` is bound as `TEXTBOOKS`. Convert MoE PDFs to markdown/page images, then upload:
 
 ```bash
-# Place PDFs under content/textbooks/grade-12/ (gitignored), then:
+python3 scripts/pdf_to_markdown.py
 pnpm textbooks:upload
 ```
 
-Catalog: `content/textbooks/manifest.json` and `apps/server/src/data/textbooks.json`.  
-Authenticated routes: `GET /textbooks`, `GET /textbooks/grade-12/:subject` (mathematics is active for the MVP pilot).
+Authenticated routes: `GET /textbooks`, `GET /textbooks/grade-12/:subject`, `.../chapters/:id`, `.../pages/:file`. Students read in the app; PDFs are not served.
 
 Verify:
 

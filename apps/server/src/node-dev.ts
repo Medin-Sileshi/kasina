@@ -1,5 +1,6 @@
 import { serve } from "@hono/node-server";
 import { readFileSync, existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import app from "./index";
 import type { ServerEnv } from "./env";
@@ -21,6 +22,19 @@ const env = {
   ...process.env,
   ...loadDevVars(resolve(import.meta.dirname, "../.dev.vars")),
 } as unknown as ServerEnv;
+
+const textbooksRoot = resolve(import.meta.dirname, "../../../content/textbooks/md/grade-12");
+env.TEXTBOOKS = {
+  async get(key: string) {
+    try {
+      const rel = key.replace(/^textbooks\/grade-12\//, "");
+      const buf = await readFile(resolve(textbooksRoot, rel));
+      return { body: buf, size: buf.byteLength };
+    } catch {
+      return null;
+    }
+  },
+};
 
 const missing = [
   "SUPABASE_URL",

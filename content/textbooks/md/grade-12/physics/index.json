@@ -1,0 +1,44 @@
+{
+  "subject": "physics",
+  "grade": 12,
+  "title": "Grade 12 Physics Student Textbook",
+  "format": "markdown",
+  "source": "MoE new curriculum student textbook",
+  "chapters": [
+    {
+      "id": "01-application-of-physics-in-other-fields",
+      "number": 1,
+      "title": "Application of Physics in Other Fields",
+      "format": "markdown",
+      "bytes": 46558
+    },
+    {
+      "id": "02-two-dimensional-motion",
+      "number": 2,
+      "title": "Two-Dimensional Motion",
+      "format": "markdown",
+      "bytes": 68617
+    },
+    {
+      "id": "03-fluid-mechanics",
+      "number": 3,
+      "title": "Fluid Mechanics",
+      "format": "markdown",
+      "bytes": 77568
+    },
+    {
+      "id": "04-electromagnetism",
+      "number": 4,
+      "title": "Electromagnetism",
+      "format": "markdown",
+      "bytes": 42299
+    },
+    {
+      "id": "05-basics-of-electronics",
+      "number": 5,
+      "title": "Basics of Electronics",
+      "format": "markdown",
+      "bytes": 61755
+    }
+  ]
+}

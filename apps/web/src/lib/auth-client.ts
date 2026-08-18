@@ -72,11 +72,21 @@ export async function apiFetch<T>(
   return data;
 }
 
-/** Open an authenticated textbook PDF in a new tab (streams from API/R2). */
-export function openTextbook(subject: string) {
-  window.open(
-    `${apiBase}/textbooks/grade-12/${encodeURIComponent(subject)}`,
-    "_blank",
-    "noopener,noreferrer",
-  );
+export async function apiFetchText(
+  path: string,
+): Promise<{ status: number; contentType: string; body: ArrayBuffer }> {
+  let res: Response;
+  try {
+    res = await fetch(`${apiBase}${path}`, { credentials: "include" });
+  } catch (err) {
+    throw new Error(networkErrorMessage(err));
+  }
+  if (!res.ok) {
+    throw new ApiError(`Request failed (${res.status})`, res.status);
+  }
+  return {
+    status: res.status,
+    contentType: res.headers.get("content-type") ?? "",
+    body: await res.arrayBuffer(),
+  };
 }

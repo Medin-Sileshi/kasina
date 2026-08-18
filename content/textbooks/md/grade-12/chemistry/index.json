@@ -1,0 +1,44 @@
+{
+  "subject": "chemistry",
+  "grade": 12,
+  "title": "Grade 12 Chemistry Student Textbook",
+  "format": "markdown",
+  "source": "MoE new curriculum student textbook",
+  "chapters": [
+    {
+      "id": "01-acid-base-equilibria",
+      "number": 1,
+      "title": "Acid-Base Equilibria",
+      "format": "markdown",
+      "bytes": 80543
+    },
+    {
+      "id": "02-electrochemistry",
+      "number": 2,
+      "title": "Electrochemistry",
+      "format": "markdown",
+      "bytes": 123474
+    },
+    {
+      "id": "03-industrial-chemistry",
+      "number": 3,
+      "title": "Industrial Chemistry",
+      "format": "markdown",
+      "bytes": 115129
+    },
+    {
+      "id": "04-polymers",
+      "number": 4,
+      "title": "Polymers",
+      "format": "markdown",
+      "bytes": 29659
+    },
+    {
+      "id": "05-introduction-to-environmental-chemistry",
+      "number": 5,
+      "title": "Introduction to Environmental Chemistry",
+      "format": "markdown",
+      "bytes": 70478
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 node_modules
 .pnp
 .pnp.js
+.pnpm-store/
 
 # Local env files
 .env
@@ -45,5 +46,8 @@ pnpm-debug.log*
 *.local
 .env*.local
 
-# Large MoE textbook PDFs (stored in Cloudflare R2; see content/textbooks/manifest.json)
+# Large MoE textbook PDFs and rasterized page images (R2; see content/textbooks/)
 content/textbooks/**/*.pdf
+content/textbooks/md/**/*.webp
+content/textbooks/md/**/*.jpg
+content/textbooks/md/**/*.png

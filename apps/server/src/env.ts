@@ -2,13 +2,11 @@ export type HyperdriveBinding = {
   connectionString: string;
 };
 
-/** Minimal R2 binding shape (full types via `wrangler types` optional). */
+/** Grade 12 textbooks as markdown chapters and (for scanned books) page images. */
 export type TextbooksBucket = {
   get(key: string): Promise<{
-    body: ReadableStream | null;
+    body: ReadableStream | Uint8Array | string | null;
     size?: number;
-    httpEtag?: string;
-    writeHttpMetadata(headers: Headers): void;
   } | null>;
 };
 

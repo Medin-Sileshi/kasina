@@ -1,7 +1,7 @@
 {
   "bucket": "kasina-textbooks",
   "curriculum": "Ethiopia MoE new curriculum student textbooks",
-  "sourceNote": "PDFs live in Cloudflare R2. Local copies under content/textbooks/grade-12/*.pdf are gitignored and used only for upload.",
+  "sourceNote": "Students read chapter markdown (or compressed page images for scanned books) from R2. Original PDFs are local/gitignored and not served.",
   "books": [
     {
       "id": "grade-12-mathematics",
@@ -9,9 +9,9 @@
       "subject": "mathematics",
       "title": "Grade 12 Mathematics Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/mathematics/student-textbook.pdf",
       "mvpStatus": "active",
-      "notes": "Primary MVP content source for question-bank QA and curriculum alignment."
+      "format": "pages",
+      "notes": "Scanned PDF converted to chapter markdown plus compressed page images."
     },
     {
       "id": "grade-12-physics",
@@ -19,9 +19,8 @@
       "subject": "physics",
       "title": "Grade 12 Physics Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/physics/student-textbook.pdf",
       "mvpStatus": "archived",
-      "notes": "Stored for post-MVP multi-subject expansion. Not used in the Grade 12 Math classroom pilot."
+      "format": "markdown"
     },
     {
       "id": "grade-12-chemistry",
@@ -29,9 +28,8 @@
       "subject": "chemistry",
       "title": "Grade 12 Chemistry Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/chemistry/student-textbook.pdf",
       "mvpStatus": "archived",
-      "notes": "Stored for post-MVP multi-subject expansion."
+      "format": "markdown"
     },
     {
       "id": "grade-12-biology",
@@ -39,9 +37,8 @@
       "subject": "biology",
       "title": "Grade 12 Biology Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/biology/student-textbook.pdf",
       "mvpStatus": "archived",
-      "notes": "Stored for post-MVP multi-subject expansion."
+      "format": "pages"
     }
   ]
 }

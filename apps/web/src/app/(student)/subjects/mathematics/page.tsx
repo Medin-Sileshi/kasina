@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BookOpen, ChevronDown, ChevronLeft } from "lucide-react";
-import { apiFetch, openTextbook } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/auth-client";
 import { useQuizStore, type QuizQuestion } from "@/lib/quiz-store";
 import {
   PrimaryButton,
@@ -158,13 +158,12 @@ export default function MathematicsSubjectPage() {
             <p className="mt-2 text-[15px] text-gray-500">
               {meta.questionCount} questions · {totalTopics} topics
             </p>
-            <button
-              type="button"
-              onClick={() => openTextbook("mathematics")}
-              className="mt-3 text-[13px] font-semibold text-primary-700 underline-offset-2 hover:underline"
+            <Link
+              href="/read/mathematics"
+              className="mt-3 inline-block text-[13px] font-semibold text-primary-700 underline-offset-2 hover:underline"
             >
-              Open Grade 12 Math textbook
-            </button>
+              Read Grade 12 Math textbook
+            </Link>
           </div>
           {meta.overallAccuracy != null ? (
             <StatusPill tone="accent">{meta.overallAccuracy}% accuracy</StatusPill>

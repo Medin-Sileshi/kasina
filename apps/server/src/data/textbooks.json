@@ -8,7 +8,6 @@
       "subject": "mathematics",
       "title": "Grade 12 Mathematics Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/mathematics/student-textbook.pdf",
       "mvpStatus": "active"
     },
     {
@@ -17,7 +16,6 @@
       "subject": "physics",
       "title": "Grade 12 Physics Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/physics/student-textbook.pdf",
       "mvpStatus": "archived"
     },
     {
@@ -26,7 +24,6 @@
       "subject": "chemistry",
       "title": "Grade 12 Chemistry Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/chemistry/student-textbook.pdf",
       "mvpStatus": "archived"
     },
     {
@@ -35,7 +32,6 @@
       "subject": "biology",
       "title": "Grade 12 Biology Student Textbook",
       "edition": "new curriculum",
-      "r2Key": "textbooks/grade-12/biology/student-textbook.pdf",
       "mvpStatus": "archived"
     }
   ]
