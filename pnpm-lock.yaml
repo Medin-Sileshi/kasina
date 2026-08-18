@@ -75,6 +75,9 @@ importers:
       '@kasina/db':
         specifier: workspace:^
         version: link:../../packages/db
+      '@kasina/melak-core':
+        specifier: workspace:^
+        version: link:../../packages/melak-core
       '@kasina/types':
         specifier: workspace:^
         version: link:../../packages/types
@@ -83,7 +86,7 @@ importers:
         version: 2.111.0
       better-auth:
         specifier: ^1.6.25
-        version: 1.6.25(next@16.2.12(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 1.6.25(next@16.2.12(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       hono:
         specifier: ^4.12.33
         version: 4.12.33
@@ -109,6 +112,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@kasina/melak-core':
+        specifier: workspace:^
+        version: link:../../packages/melak-core
       '@kasina/types':
         specifier: workspace:^
         version: link:../../packages/types
@@ -117,7 +123,7 @@ importers:
         version: 5.101.4(react@19.2.4)
       better-auth:
         specifier: ^1.6.25
-        version: 1.6.25(next@16.2.12(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 1.6.25(next@16.2.12(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       katex:
         specifier: ^0.18.1
         version: 0.18.1
@@ -219,6 +225,12 @@ importers:
       typescript-eslint:
         specifier: ^8.50.0
         version: 8.65.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.2)
+
+  packages/melak-core:
+    devDependencies:
+      typescript:
+        specifier: 5.9.2
+        version: 5.9.2
 
   packages/question-bank:
     dependencies:
@@ -7649,9 +7661,7 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-colors@0.86.2': {}
 
@@ -8356,7 +8366,7 @@ snapshots:
 
   baseline-browser-mapping@2.11.10: {}
 
-  better-auth@1.6.25(next@16.2.12(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  better-auth@1.6.25(next@16.2.12(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(pg@8.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@better-auth/core': 1.6.25(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.7)(kysely@0.29.4)(nanostores@1.4.2)
       '@better-auth/drizzle-adapter': 1.6.25(@better-auth/core@1.6.25(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.3.7(zod@4.4.3))(jose@6.2.7)(kysely@0.29.4)(nanostores@1.4.2))(@better-auth/utils@0.4.2)
