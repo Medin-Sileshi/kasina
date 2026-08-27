@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   MarketingBody,
+  MarketingEyebrow,
   MarketingH1,
   MarketingLead,
   MarketingPageShell,
@@ -17,20 +18,18 @@ export default function TeachersPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.headline}</MarketingH1>
       <MarketingLead>{t.intro}</MarketingLead>
-      <ul className="mt-10 space-y-8">
+      <ul className="mt-12 space-y-10">
         {t.points.map((p) => (
-          <li key={p.title} className="border-b border-white/10 pb-8 last:border-0">
+          <li key={p.title} className="border-b border-white/10 pb-10 last:border-0 last:pb-0">
             <h2 className={`text-lg font-bold text-white ${amClass}`}>{p.title}</h2>
             <MarketingBody>{p.body}</MarketingBody>
           </li>
         ))}
       </ul>
-      <div className={`mt-8 flex flex-wrap gap-4 text-[14px] font-semibold ${amClass}`}>
+      <div className={`mt-10 flex flex-wrap gap-x-5 gap-y-3 text-[14px] font-semibold ${amClass}`}>
         <Link href="/melak" className="text-accent-500 hover:text-accent-600">
           {t.ctaMelak}
         </Link>

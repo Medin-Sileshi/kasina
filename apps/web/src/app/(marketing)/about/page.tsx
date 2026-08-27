@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   MarketingBody,
+  MarketingEyebrow,
   MarketingH1,
   MarketingLead,
   MarketingPageShell,
@@ -18,9 +19,7 @@ export default function AboutPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.missionTitle}</MarketingH1>
       <MarketingLead>{t.mission}</MarketingLead>
       <MarketingSectionTitle>{t.originTitle}</MarketingSectionTitle>
@@ -32,7 +31,7 @@ export default function AboutPage() {
       <MarketingBody>{t.org}</MarketingBody>
       <Link
         href="/get-involved"
-        className={`mt-10 inline-block text-[14px] font-semibold text-accent-500 hover:text-accent-600 ${amClass}`}
+        className={`mt-10 inline-flex text-[14px] font-semibold text-accent-500 hover:text-accent-600 ${amClass}`}
       >
         Get Involved →
       </Link>

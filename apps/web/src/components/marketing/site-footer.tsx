@@ -16,22 +16,41 @@ export function SiteFooter() {
   const amClass = lang === "am" ? "font-ethiopic" : "";
 
   return (
-    <footer className="border-t border-white/10 bg-primary-900/40 px-5 py-12 text-white sm:px-8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="text-lg font-bold tracking-tight">
-              Kasina{" "}
-              <span lang="am" className="font-ethiopic font-semibold text-white/75">
-                ({t.brandAm})
-              </span>
-            </p>
-            <p className={`mt-2 max-w-sm text-xs leading-relaxed text-white/45 ${amClass}`}>
-              {t.footerTag}
-            </p>
-            <p className={`mt-3 text-[13px] text-white/55 ${amClass}`}>{t.footerOrg}</p>
-          </div>
-          <div className="space-y-2 text-[13px] text-white/60">
+    <footer className="border-t border-white/10 px-5 py-14 text-white sm:px-8">
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <p className="text-lg font-bold tracking-tight">
+            Kasina{" "}
+            <span lang="am" className="font-ethiopic font-semibold text-white/75">
+              ({t.brandAm})
+            </span>
+          </p>
+          <p className={`mt-3 max-w-sm text-[13px] leading-relaxed text-white/45 ${amClass}`}>
+            {t.footerTag}
+          </p>
+          <p className={`mt-4 text-[12px] text-white/35 ${amClass}`}>{t.footerOrg}</p>
+        </div>
+
+        <div>
+          <p className={`text-[11px] font-semibold uppercase tracking-[0.14em] text-white/35 ${amClass}`}>
+            {t.footerExplore}
+          </p>
+          <ul className={`mt-3 space-y-2 text-[13px] text-white/60 ${amClass}`}>
+            {t.primaryNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className={`text-[11px] font-semibold uppercase tracking-[0.14em] text-white/35 ${amClass}`}>
+            {t.footerContact}
+          </p>
+          <div className="mt-3 space-y-2 text-[13px] text-white/60">
             <a href={`mailto:${CONTACT_EMAIL}`} className="block hover:text-white">
               {CONTACT_EMAIL}
             </a>
@@ -39,23 +58,23 @@ export function SiteFooter() {
               {CONTACT_PHONE}
             </a>
           </div>
+          <p className={`mt-6 text-[12px] text-white/30 ${amClass}`}>{t.partnerStrip}</p>
         </div>
+      </div>
 
-        <p className={`text-center text-[12px] text-white/35 ${amClass}`}>{t.partnerStrip}</p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 text-[12px] text-white/40">
-          <Link href="/privacy-policy" className={`hover:text-white ${amClass}`}>
+      <div className="mx-auto mt-12 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+        <div className={`flex flex-wrap gap-4 text-[12px] text-white/40 ${amClass}`}>
+          <Link href="/privacy-policy" className="hover:text-white">
             {t.footerPrivacy}
           </Link>
-          <Link href="/terms-of-use" className={`hover:text-white ${amClass}`}>
+          <Link href="/terms-of-use" className="hover:text-white">
             {t.footerTerms}
           </Link>
-          <Link href="/faq" className={`hover:text-white ${amClass}`}>
+          <Link href="/faq" className="hover:text-white">
             {t.footerFaq}
           </Link>
         </div>
-
-        <p className="flex items-center justify-center gap-2 text-[12px] text-white/30">
+        <p className="flex items-center gap-2 text-[12px] text-white/30">
           <BookOpen className="h-3.5 w-3.5" aria-hidden />
           Kasina · Melak
         </p>

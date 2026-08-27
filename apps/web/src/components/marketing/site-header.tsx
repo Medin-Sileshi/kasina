@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useMarketingLang } from "@/components/marketing/lang-context";
 import { marketingShell } from "@/lib/marketing-copy";
 
@@ -12,11 +12,30 @@ export function SiteHeader() {
   const t = marketingShell[lang];
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
   const amClass = lang === "am" ? "font-ethiopic" : "";
 
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (!moreRef.current?.contains(e.target as Node)) setMoreOpen(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+    setMoreOpen(false);
+  }, [pathname]);
+
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
   return (
-    <header className="relative z-30 border-b border-white/10 bg-primary-800/95 text-white backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8">
+    <header className="relative z-30 text-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex shrink-0 items-baseline gap-2">
           <span className="text-lg font-bold tracking-tight">Kasina</span>
           <span lang="am" className="font-ethiopic text-sm font-semibold text-white/75">
@@ -24,26 +43,46 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {t.nav.map((item) => {
-            const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition ${amClass} ${
-                  active
-                    ? "bg-white/15 text-white"
-                    : "text-white/70 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+          {t.primaryNav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`rounded-lg px-3 py-2 text-[13px] font-medium transition ${amClass} ${
+                isActive(item.href)
+                  ? "text-white"
+                  : "text-white/65 hover:text-white"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className="relative" ref={moreRef}>
+            <button
+              type="button"
+              onClick={() => setMoreOpen((v) => !v)}
+              className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-[13px] font-medium text-white/65 transition hover:text-white ${amClass}`}
+              aria-expanded={moreOpen}
+            >
+              {t.moreLabel}
+              <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+            </button>
+            {moreOpen ? (
+              <div className="absolute right-0 top-full z-50 mt-2 min-w-[11rem] overflow-hidden rounded-2xl border border-white/15 bg-primary-900/95 py-1.5 shadow-xl backdrop-blur">
+                {t.moreNav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block px-4 py-2.5 text-[13px] font-medium transition hover:bg-white/10 ${amClass} ${
+                      isActive(item.href) ? "text-white" : "text-white/75"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -64,7 +103,7 @@ export function SiteHeader() {
           </button>
           <Link
             href="/get-involved"
-            className={`hidden rounded-xl bg-white px-3.5 py-2 text-[13px] font-semibold text-primary-800 transition hover:bg-white/95 sm:inline-flex ${amClass}`}
+            className={`hidden rounded-2xl bg-white px-4 py-2 text-[13px] font-semibold text-primary-800 transition hover:bg-white/95 sm:inline-flex ${amClass}`}
           >
             {t.cta}
           </Link>
@@ -82,16 +121,15 @@ export function SiteHeader() {
 
       {open ? (
         <nav
-          className="border-t border-white/10 px-5 py-4 lg:hidden"
+          className="border-t border-white/10 bg-primary-900/40 px-5 py-4 backdrop-blur lg:hidden"
           aria-label="Mobile"
         >
-          <ul className="space-y-1">
+          <ul className="space-y-0.5">
             {t.nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 text-[15px] font-medium text-white/85 hover:bg-white/10 ${amClass}`}
+                  className={`block rounded-xl px-3 py-3 text-[15px] font-medium text-white/85 hover:bg-white/10 ${amClass}`}
                 >
                   {item.label}
                 </Link>
@@ -100,8 +138,7 @@ export function SiteHeader() {
             <li>
               <Link
                 href="/get-involved"
-                onClick={() => setOpen(false)}
-                className={`mt-2 block rounded-xl bg-white px-3 py-2.5 text-center text-[15px] font-semibold text-primary-800 ${amClass}`}
+                className={`mt-2 block rounded-2xl bg-white px-3 py-3 text-center text-[15px] font-semibold text-primary-800 ${amClass}`}
               >
                 {t.cta}
               </Link>
