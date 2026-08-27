@@ -28,7 +28,7 @@ export function KasinaMark({
   return (
     <Image
       src={MARK_SRC}
-      alt=""
+      alt="Kasina mark"
       width={width}
       height={height}
       priority={priority}
