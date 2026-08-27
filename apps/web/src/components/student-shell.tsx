@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, User } from "lucide-react";
 import { BrandAtmosphere } from "@/components/brand-chrome";
+import { KasinaLogo } from "@/components/kasina-logo";
 
 const links = [
   { href: "/student", label: "Home", exact: true },
@@ -31,15 +32,7 @@ export function StudentNav({ userName }: { userName?: string }) {
   return (
     <header className="relative z-40 text-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
-        <Link href="/student" className="shrink-0">
-          <span className="text-lg font-bold tracking-tight">Kasina</span>
-          <span
-            lang="am"
-            className="font-ethiopic ml-1.5 text-sm font-semibold text-white/75"
-          >
-            (ካሲና)
-          </span>
-        </Link>
+        <KasinaLogo size="sm" tone="dark" href="/student" />
 
         <nav className="hidden flex-1 items-center justify-center gap-7 md:flex">
           {links.map((link) => {

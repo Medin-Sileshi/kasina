@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { KasinaMark } from "@/components/kasina-logo";
 
 /** Shared green atmosphere used on landing, auth, and app shells. */
 export function BrandAtmosphere({
@@ -25,13 +26,15 @@ export function BrandWordmark({
 }) {
   const title =
     size === "lg"
-      ? "text-[3rem] sm:text-[3.75rem]"
-      : "text-[2.5rem] sm:text-[2.75rem]";
-  const am = size === "lg" ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl";
+      ? "text-[2.5rem] sm:text-[3.25rem]"
+      : "text-[2rem] sm:text-[2.35rem]";
+  const am = size === "lg" ? "text-xl sm:text-2xl" : "text-lg sm:text-xl";
+  const markSize = size === "lg" ? "lg" : "md";
 
   return (
-    <div className={`text-center ${className}`}>
-      <p className={`font-bold leading-none tracking-tight text-white ${title}`}>
+    <div className={`flex flex-col items-center text-center ${className}`}>
+      <KasinaMark size={markSize} priority className="mb-4" />
+      <p className={`font-display font-semibold leading-none tracking-tight text-white ${title}`}>
         Kasina
       </p>
       <p

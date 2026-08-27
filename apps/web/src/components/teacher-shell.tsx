@@ -17,6 +17,7 @@ import {
   LineChart,
 } from "lucide-react";
 import { BrandAtmosphere } from "@/components/brand-chrome";
+import { KasinaLogo } from "@/components/kasina-logo";
 
 type NavItem = {
   id: string;
@@ -149,15 +150,7 @@ function TeacherShellNav({
       <aside className="relative sticky top-0 hidden h-dvh w-[248px] shrink-0 flex-col overflow-hidden bg-primary-800 text-white md:flex">
         <BrandAtmosphere />
         <div className="relative z-10 px-5 pb-4 pt-6">
-          <Link href="/teacher" className="block">
-            <span className="text-xl font-bold tracking-tight">Kasina</span>
-            <span
-              lang="am"
-              className="font-ethiopic ml-1.5 text-base font-semibold text-white/70"
-            >
-              (ካሲና)
-            </span>
-          </Link>
+          <KasinaLogo size="md" tone="dark" href="/teacher" />
           <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-accent-500/90">
             Teacher
           </p>
@@ -218,15 +211,18 @@ function TeacherShellNav({
         <div className="relative overflow-hidden bg-primary-800 text-white md:hidden">
           <BrandAtmosphere />
           <div className="relative z-10 flex h-14 items-center justify-between px-4">
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-500/90">
-                Kasina · Teacher
-              </p>
-              {title ? (
-                <h1 className="truncate text-base font-bold tracking-tight">
-                  {title}
-                </h1>
-              ) : null}
+            <div className="flex min-w-0 items-center gap-2.5">
+              <KasinaLogo size="sm" tone="dark" href="/teacher" withWordmark={false} />
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-500/90">
+                  Teacher
+                </p>
+                {title ? (
+                  <h1 className="truncate text-base font-bold tracking-tight">
+                    {title}
+                  </h1>
+                ) : null}
+              </div>
             </div>
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-sm font-semibold ring-2 ring-white/10">
               {(userName ?? "T").charAt(0).toUpperCase()}

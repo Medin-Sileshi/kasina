@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { RootWingMark } from "@/components/marketing/root-wing-mark";
+import { KasinaLogo } from "@/components/kasina-logo";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
@@ -19,15 +19,7 @@ export function SiteFooter() {
     <footer className="bg-mkt-deep px-5 py-14 text-mkt-paper sm:px-8">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <RootWingMark className="h-8 w-7" tone="gold" />
-            <p className="font-display text-lg font-semibold tracking-tight">
-              Kasina{" "}
-              <span lang="am" className="font-ethiopic font-semibold text-mkt-paper/70">
-                ካሲና
-              </span>
-            </p>
-          </div>
+          <KasinaLogo size="sm" tone="dark" href="/" />
           <p className={`mt-4 max-w-sm text-[13px] leading-relaxed text-mkt-paper/55 ${amClass}`}>
             {t.footerTag}
           </p>

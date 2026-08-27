@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import {
-  RootWingDivider,
-  RootWingMark,
-} from "@/components/marketing/root-wing-mark";
+import { KasinaMark, KasinaMarkDivider } from "@/components/kasina-logo";
 import { homeCopy } from "@/lib/marketing-copy";
 
 export default function HomePage() {
@@ -16,7 +13,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* HERO — deep charcoal (1 of 2 dark sections) */}
       <section className="relative overflow-hidden bg-mkt-deep text-mkt-paper">
         <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:py-24">
           <div className="landing-fade-up text-left">
@@ -53,17 +49,13 @@ export default function HomePage() {
           </div>
 
           <div className="landing-fade-up landing-delay-2 relative flex justify-center lg:justify-end">
-            <RootWingMark
-              className="h-[220px] w-[180px] opacity-90 sm:h-[280px] sm:w-[230px]"
-              tone="paper"
-            />
+            <KasinaMark size="hero" priority className="drop-shadow-lg" />
           </div>
         </div>
       </section>
 
-      <RootWingDivider className="bg-mkt-paper" />
+      <KasinaMarkDivider className="bg-mkt-paper" />
 
-      {/* ACCESS GAPS — paper, students/teachers split */}
       <section className="bg-mkt-paper px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2
@@ -105,9 +97,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <RootWingDivider />
+      <KasinaMarkDivider />
 
-      {/* PILLARS — connected diagram, paper */}
       <section className="bg-mkt-paper px-5 pb-16 sm:px-8 sm:pb-20">
         <div className="mx-auto max-w-6xl">
           <h2
@@ -140,7 +131,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PILOT — deep charcoal (2nd dark section) */}
       <section className="bg-mkt-deep px-5 py-16 text-mkt-paper sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
@@ -183,9 +173,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <RootWingDivider className="bg-mkt-paper" />
+      <KasinaMarkDivider className="bg-mkt-paper" />
 
-      {/* Impact / Partners */}
       <section className="bg-mkt-paper px-5 py-16 sm:px-8 sm:pb-20">
         <div className="mx-auto grid max-w-6xl gap-0 overflow-hidden rounded-xl border border-mkt-rule sm:grid-cols-2">
           <div className="p-7 sm:p-9">
@@ -221,7 +210,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Get involved — light green tint */}
       <section className="border-t border-mkt-rule bg-[#eef4f0] px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-xl text-center">
           <h2

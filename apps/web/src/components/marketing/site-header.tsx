@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { RootWingMark } from "@/components/marketing/root-wing-mark";
+import { KasinaLogo } from "@/components/kasina-logo";
 import { marketingShell } from "@/lib/marketing-copy";
 
 export function SiteHeader() {
@@ -37,15 +37,7 @@ export function SiteHeader() {
   return (
     <header className="relative z-30 border-b border-mkt-rule bg-mkt-paper text-mkt-ink">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5">
-          <RootWingMark className="h-8 w-7" tone="green" />
-          <span className="flex items-baseline gap-1.5">
-            <span className="font-display text-lg font-semibold tracking-tight">Kasina</span>
-            <span lang="am" className="font-ethiopic text-sm font-semibold text-mkt-ink-muted">
-              ካሲና
-            </span>
-          </span>
-        </Link>
+        <KasinaLogo size="sm" tone="light" href="/" priority />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {t.primaryNav.map((item) => (

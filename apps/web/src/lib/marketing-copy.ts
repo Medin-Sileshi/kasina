@@ -124,11 +124,11 @@ export const homeCopy = {
         stage: "03",
       },
     ],
-    pilotLocations: ["Sebeta", "Burayu", "Addis Ababa"],
+    pilotLocations: ["Addis Ababa"],
     pilotLocationsDetail: "Kolfe Keranio · Nifas Silk-Lafto · Lemi Kura",
     pilotTitle: "Classroom pilot",
     pilotBody:
-      "Grade 11–12 government schools in Sebeta, Burayu, and Addis Ababa (Kolfe Keranio, Nifas Silk-Lafto, Lemi Kura).",
+      "Grade 11–12 government schools in Addis Ababa (Kolfe Keranio, Nifas Silk-Lafto, Lemi Kura).",
     pilotCta: "About the pilot",
     impactTitle: "Impact we will measure",
     impactBody:
@@ -189,11 +189,11 @@ export const homeCopy = {
         stage: "03",
       },
     ],
-    pilotLocations: ["ሰበታ", "ቡራዩ", "አዲስ አበባ"],
+    pilotLocations: ["አዲስ አበባ"],
     pilotLocationsDetail: "ኮልፌ ቀራኒዮ · ንፋስ ስልክ-ላፍቶ · ለሚ ኩራ",
     pilotTitle: "የክፍል ሙከራ",
     pilotBody:
-      "በሰበታ፣ ቡራዩ እና አዲስ አበባ (ኮልፌ ቀራኒዮ፣ ንፋስ ስልክ-ላፍቶ፣ ለሚ ኩራ) 11ኛ–12ኛ ክፍል የመንግስት ትምህርት ቤቶች።",
+      "በአዲስ አበባ (ኮልፌ ቀራኒዮ፣ ንፋስ ስልክ-ላፍቶ፣ ለሚ ኩራ) 11ኛ–12ኛ ክፍል የመንግስት ትምህርት ቤቶች።",
     pilotCta: "ስለ ሙከራው",
     impactTitle: "የምንለካው ተጽዕኖ",
     impactBody:
@@ -452,7 +452,7 @@ export const pilotCopy = {
       "Kasina is piloting in government secondary schools to strengthen daily learning and teacher support — with learning improvement as the lead outcome.",
     scopeTitle: "Current scope",
     scope:
-      "Grade 11–12 in Sebeta, Burayu, and Addis Ababa sub-cities (Kolfe Keranio, Nifas Silk-Lafto, Lemi Kura).",
+      "Grade 11–12 in Addis Ababa sub-cities (Kolfe Keranio, Nifas Silk-Lafto, Lemi Kura).",
     timelineTitle: "Timeline",
     timeline: "Approximately 12–18 months for the initial pilot window.",
     outcomesTitle: "Objectives",
@@ -472,7 +472,7 @@ export const pilotCopy = {
       "ካሲና የዕለት ተዕለት ትምህርትንና የመምህር ድጋፍን ለማጠናከር በመንግስት ሁለተኛ ደረጃ ትምህርት ቤቶች ሙከራ እያደረገ ነው — የትምህርት መሻሻል እንደ ዋና ውጤት።",
     scopeTitle: "አሁን ያለው ወሰን",
     scope:
-      "በሰበታ፣ ቡራዩ እና አዲስ አበባ ክፍለ ከተሞች (ኮልፌ ቀራኒዮ፣ ንፋስ ስልክ-ላፍቶ፣ ለሚ ኩራ) 11ኛ–12ኛ ክፍል።",
+      "በአዲስ አበባ ክፍለ ከተሞች (ኮልፌ ቀራኒዮ፣ ንፋስ ስልክ-ላፍቶ፣ ለሚ ኩራ) 11ኛ–12ኛ ክፍል።",
     timelineTitle: "ጊዜ ሰሌዳ",
     timeline: "ለመጀመሪያው የሙከራ መስኮት በግምት 12–18 ወራት።",
     outcomesTitle: "ዓላማዎች",

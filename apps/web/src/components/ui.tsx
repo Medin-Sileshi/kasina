@@ -212,7 +212,17 @@ export function BrandMark({
   light?: boolean;
 }) {
   return (
-    <span className={`font-bold tracking-tight ${light ? "text-white" : "text-gray-950"} ${className}`}>
+    <span
+      className={`inline-flex items-center gap-2 font-bold tracking-tight ${light ? "text-white" : "text-gray-950"} ${className}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/kasina-mark.png"
+        alt=""
+        width={20}
+        height={44}
+        className="h-7 w-auto object-contain"
+      />
       Kasina{" "}
       <span lang="am" className="font-ethiopic font-semibold opacity-90">
         (ካሲና)

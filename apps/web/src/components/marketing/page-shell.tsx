@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { RootWingDivider } from "@/components/marketing/root-wing-mark";
+import { KasinaMarkDivider } from "@/components/kasina-logo";
 
 export function MarketingPageShell({
   children,
@@ -17,7 +17,7 @@ export function MarketingPageShell({
       className="flex-1 bg-mkt-paper text-mkt-ink"
       lang={lang === "am" ? "am" : "en"}
     >
-      <RootWingDivider />
+      <KasinaMarkDivider />
       <div
         className={`landing-fade-up mx-auto px-5 pb-16 pt-4 sm:px-8 sm:pb-20 ${
           wide ? "max-w-6xl" : "max-w-2xl"

@@ -9,7 +9,7 @@ import {
   MarketingPageShell,
 } from "@/components/marketing/page-shell";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { RootWingMark } from "@/components/marketing/root-wing-mark";
+import { KasinaMark } from "@/components/kasina-logo";
 import { melakMarketingCopy } from "@/lib/marketing-copy";
 
 export default function MelakMarketingPage() {
@@ -55,7 +55,7 @@ export default function MelakMarketingPage() {
           </div>
         </div>
         <div className="flex justify-center lg:pt-6">
-          <RootWingMark className="h-[240px] w-[200px]" tone="green" />
+          <KasinaMark size="hero" />
         </div>
       </div>
     </MarketingPageShell>
