@@ -302,7 +302,7 @@ export default function StudentHomePage() {
       <section className="mt-8">
         <h2 className="text-lg font-bold text-gray-950">Demo surfaces</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Link href="/melak">
+          <Link href="/student/melak">
             <Card className="flex items-center gap-3 overflow-hidden p-0 transition hover:border-primary-400">
               <span className="h-full w-1.5 shrink-0 self-stretch bg-accent-500" />
               <div className="flex flex-1 items-center justify-between py-4 pr-4">

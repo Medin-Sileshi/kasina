@@ -197,7 +197,7 @@ function ReviewContent() {
                   <MathText text={activeQ.explanation ?? ""} />
                 </div>
                 <Link
-                  href={`/melak?q=${encodeURIComponent(activeQ.id)}&session=${params.sessionId}`}
+                  href={`/student/melak?q=${encodeURIComponent(activeQ.id)}&session=${params.sessionId}`}
                   className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary-200 bg-primary-50 px-4 py-2.5 text-sm font-semibold text-primary-800 hover:bg-primary-100"
                 >
                   <MessageCircle className="h-4 w-4" />

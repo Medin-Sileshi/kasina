@@ -56,8 +56,16 @@ const nextConfig: NextConfig = {
         destination: `${apiProxyTarget}/textbooks/:path*`,
       },
       {
-        source: "/melak/:path*",
-        destination: `${apiProxyTarget}/melak/:path*`,
+        source: "/melak/chat",
+        destination: `${apiProxyTarget}/melak/chat`,
+      },
+      {
+        source: "/melak/history",
+        destination: `${apiProxyTarget}/melak/history`,
+      },
+      {
+        source: "/melak/context/:path*",
+        destination: `${apiProxyTarget}/melak/context/:path*`,
       },
       {
         source: "/teacher/signup",

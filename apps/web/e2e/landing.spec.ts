@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test("landing page loads with Melak headline", async ({ page }) => {
+test("landing page loads with learning-focused headline", async ({ page }) => {
   await page.goto("/");
   await expect(
     page.getByRole("heading", {
-      name: /Melak helps students understand/i,
+      name: /Better learning and teaching/i,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/Common questions/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Partner With Us/i })).toBeVisible();
 });

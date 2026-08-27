@@ -191,7 +191,7 @@ export default function MathematicsSubjectPage() {
               CBT exam practice
             </SecondaryButton>
           </Link>
-          <Link href="/melak">
+          <Link href="/student/melak">
             <SecondaryButton type="button" className="sm:w-auto">
               Ask Melak
             </SecondaryButton>

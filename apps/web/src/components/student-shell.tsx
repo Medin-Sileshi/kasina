@@ -8,7 +8,7 @@ import { BrandAtmosphere } from "@/components/brand-chrome";
 const links = [
   { href: "/student", label: "Home", exact: true },
   { href: "/subjects/mathematics", label: "Subjects" },
-  { href: "/melak", label: "Melak" },
+  { href: "/student/melak", label: "Melak" },
   { href: "/cbt", label: "CBT" },
   { href: "/read/mathematics", label: "Textbook" },
   { href: "/progress", label: "Progress" },
@@ -17,7 +17,7 @@ const links = [
 function linkActive(pathname: string, href: string, exact?: boolean) {
   if (exact) return pathname === href;
   if (href.startsWith("/read")) return pathname.startsWith("/read");
-  if (href === "/melak") return pathname.startsWith("/melak");
+  if (href === "/student/melak") return pathname.startsWith("/student/melak");
   if (href === "/cbt") return pathname.startsWith("/cbt");
   if (href.startsWith("/subjects")) {
     return pathname.startsWith("/subjects") || pathname.startsWith("/quiz");
