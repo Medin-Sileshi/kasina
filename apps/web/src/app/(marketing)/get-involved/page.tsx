@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  MarketingEyebrow,
   MarketingH1,
   MarketingLead,
   MarketingPageShell,
@@ -16,30 +17,30 @@ export default function GetInvolvedPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.headline}</MarketingH1>
       <MarketingLead>{t.intro}</MarketingLead>
-      <ul className="mt-10 space-y-6">
+      <ul className="mt-10 space-y-4">
         {t.segments.map((s) => {
           const external = s.href.startsWith("mailto:");
-          const className = `mt-4 inline-flex text-[14px] font-semibold text-accent-500 hover:text-accent-600 ${amClass}`;
+          const linkClass = `mkt-link-ochre mt-4 inline-flex text-[14px] ${amClass}`;
           return (
             <li
               key={s.title}
-              className="rounded-2xl border border-white/10 bg-white/5 px-5 py-5"
+              className="rounded-xl border border-mkt-rule bg-mkt-panel px-5 py-5"
             >
-              <h2 className={`text-lg font-bold text-white ${amClass}`}>{s.title}</h2>
-              <p className={`mt-2 text-[14px] leading-relaxed text-white/60 ${amClass}`}>
+              <h2 className={`font-display text-lg font-semibold text-mkt-ink ${amClass}`}>
+                {s.title}
+              </h2>
+              <p className={`mt-2 text-[14px] leading-relaxed text-mkt-ink-muted ${amClass}`}>
                 {s.body}
               </p>
               {external ? (
-                <a href={s.href} className={className}>
+                <a href={s.href} className={linkClass}>
                   {s.cta} →
                 </a>
               ) : (
-                <Link href={s.href} className={className}>
+                <Link href={s.href} className={linkClass}>
                   {s.cta} →
                 </Link>
               )}

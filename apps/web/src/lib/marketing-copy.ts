@@ -93,41 +93,39 @@ export const homeCopy = {
     melakName: "Melak",
     melakChatQ: "How do I find the derivative of x²?",
     melakChatA: "Use the power rule: bring the exponent down, then subtract one. So 2x.",
-    problemTitle: "Built for how learning actually happens",
+    problemTitle: "Access gaps hurt both students and teachers",
     problemBody:
-      "Kasina supports classrooms where understanding matters as much as practice, and where teachers can see who needs help.",
-    problems: [
-      {
-        title: "Understanding takes support",
-        body: "Students need clear explanations in their own words — not only drills that chase a score.",
-      },
-      {
-        title: "Teachers need visibility",
-        body: "Knowing who is stuck, and on what, helps teachers use class time where it matters most.",
-      },
-      {
-        title: "Access is uneven",
-        body: "Quality support often clusters where internet is reliable. Kasina is designed so learning is not limited to strong connectivity.",
-      },
-    ],
+      "When connectivity is unreliable, students lose learning time and teachers lose ways to support them.",
+    studentsLabel: "For students",
+    studentsTitle: "Consistent learning support",
+    studentsBody:
+      "Clear explanations and practice should not depend on strong wifi at home. Melak helps students understand — in Amharic or English.",
+    teachersLabel: "For teachers",
+    teachersTitle: "Visibility into who needs help",
+    teachersBody:
+      "Assignments and progress views surface where learners struggle, so class time goes where it matters.",
+    schoolsNote:
+      "Built for Ethiopian secondary schools — starting with Grade 11–12 government classrooms in the pilot.",
     pillarsTitle: "How Kasina works",
     pillars: [
       {
-        title: "Download once, learn anywhere",
+        title: "Root — offline access",
         body: "After setup, Melak’s core tutoring is meant to keep working without wifi.",
-        icon: "download" as const,
+        stage: "01",
       },
       {
-        title: "Ask Melak anything",
+        title: "Trunk — Melak explains",
         body: "Ask in Amharic or English and get a clear explanation — not just right or wrong.",
-        icon: "sparkles" as const,
+        stage: "02",
       },
       {
-        title: "Teach with clearer insight",
+        title: "Wing — classroom insight",
         body: "Assignments and progress views help teachers see who needs support next.",
-        icon: "school" as const,
+        stage: "03",
       },
     ],
+    pilotLocations: ["Sebeta", "Burayu", "Addis Ababa"],
+    pilotLocationsDetail: "Kolfe Keranio · Nifas Silk-Lafto · Lemi Kura",
     pilotTitle: "Classroom pilot",
     pilotBody:
       "Grade 11–12 government schools in Sebeta, Burayu, and Addis Ababa (Kolfe Keranio, Nifas Silk-Lafto, Lemi Kura).",
@@ -160,41 +158,39 @@ export const homeCopy = {
     melakName: "መላክ",
     melakChatQ: "የ x² ተውሳክ እንዴት ይገኛል?",
     melakChatA: "የኃይል ህግን ይጠቀሙ፡ ገላጩን አውርደው ከዚያ አንድ ይቀንሱ። ስለዚህ 2x።",
-    problemTitle: "ትምህርት በእውነት እንዴት እንደሚሆን የተሰራ",
+    problemTitle: "የመዳረሻ ክፍተቶች ተማሪዎችንና መምህራንን ይጎዳሉ",
     problemBody:
-      "ካሲና ግንዛቤ እንደ ልምምድ አስፈላጊ በሆነበት፣ መምህራንም ማን እገዛ እንደሚያስፈልገው ማየት በሚችሉበት ክፍል ላይ ያተኩራል።",
-    problems: [
-      {
-        title: "መረዳት ድጋፍ ይፈልጋል",
-        body: "ተማሪዎች በራሳቸው ቃላት ግልጽ ማብራሪያ ያስፈልጋቸዋል — ውጤት ብቻ የሚያሳድድ ልምምድ አይደለም።",
-      },
-      {
-        title: "መምህራን ግልጽነት ይፈልጋሉ",
-        body: "ማን በምን እንደሚቸገር ማወቅ የክፍል ጊዜን በሚያስፈልገው ቦታ ለመጠቀም ይረዳል።",
-      },
-      {
-        title: "መዳረሻ እኩል አይደለም",
-        body: "ጥራት ያለው ድጋፍ ብዙ ጊዜ ጠንካራ በይነመረብ ባለበት ነው። ካሲና ትምህርት በግንኙነት ብቻ እንዳይገደብ የተዘጋጀ ነው።",
-      },
-    ],
+      "ግንኙነት አስተማማኝ ሳይሆን ተማሪዎች የትምህርት ጊዜ ያጣሉ፣ መምህራንም የመደገፍ መንገዶችን ያጣሉ።",
+    studentsLabel: "ለተማሪዎች",
+    studentsTitle: "ቋሚ የትምህርት ድጋፍ",
+    studentsBody:
+      "ግልጽ ማብራሪያና ልምምድ በቤት ጠንካራ wifi ላይ ብቻ መደገፍ የለባቸውም። መላክ ተማሪዎች እንዲረዱ ይረዳል — በአማርኛ ወይም በእንግሊዘኛ።",
+    teachersLabel: "ለመምህራን",
+    teachersTitle: "ማን እገዛ እንደሚያስፈልገው ግንዛቤ",
+    teachersBody:
+      "ምደባዎችና የእድገት እይታዎች ተማሪዎች የት እንደሚቸገሩ ያሳያሉ፣ ስለዚህ የክፍል ጊዜ በሚያስፈልገው ቦታ ይሄዳል።",
+    schoolsNote:
+      "ለኢትዮጵያ ሁለተኛ ደረጃ ትምህርት ቤቶች የተሰራ — በሙከራው በ11ኛ–12ኛ ክፍል የመንግስት ክፍሎች ይጀምራል።",
     pillarsTitle: "ካሲና እንዴት ይሰራል",
     pillars: [
       {
-        title: "አንድ ጊዜ ማውረድ፣ በየትም መማር",
+        title: "ሥር — ከመስመር ውጭ መዳረሻ",
         body: "ከተዘጋጀ በኋላ የመላክ ዋና ትምህርት ያለ wifi እንዲቀጥል የተዘጋጀ ነው።",
-        icon: "download" as const,
+        stage: "01",
       },
       {
-        title: "መላክን ማንኛውንም ነገር መጠየቅ",
+        title: "ግንድ — መላክ ያብራራል",
         body: "በአማርኛ ወይም በእንግሊዘኛ ጠይቀው ግልጽ ማብራሪያ ያግኙ — ትክክል/ስህተት ብቻ አይደለም።",
-        icon: "sparkles" as const,
+        stage: "02",
       },
       {
-        title: "በግልጽ ግንዛቤ ማስተማር",
+        title: "ክንፍ — የክፍል ግንዛቤ",
         body: "ምደባዎችና የእድገት እይታዎች መምህራን ማን እገዛ እንደሚያስፈልገው እንዲያዩ ይረዳሉ።",
-        icon: "school" as const,
+        stage: "03",
       },
     ],
+    pilotLocations: ["ሰበታ", "ቡራዩ", "አዲስ አበባ"],
+    pilotLocationsDetail: "ኮልፌ ቀራኒዮ · ንፋስ ስልክ-ላፍቶ · ለሚ ኩራ",
     pilotTitle: "የክፍል ሙከራ",
     pilotBody:
       "በሰበታ፣ ቡራዩ እና አዲስ አበባ (ኮልፌ ቀራኒዮ፣ ንፋስ ስልክ-ላፍቶ፣ ለሚ ኩራ) 11ኛ–12ኛ ክፍል የመንግስት ትምህርት ቤቶች።",

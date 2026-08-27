@@ -1,8 +1,22 @@
 "use client";
 
-import { MarketingLangProvider } from "@/components/marketing/lang-context";
+import { MarketingLangProvider, useMarketingLang } from "@/components/marketing/lang-context";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
+
+function MarketingShell({ children }: { children: React.ReactNode }) {
+  const { lang } = useMarketingLang();
+  return (
+    <div
+      className="marketing-site flex min-h-screen flex-col"
+      lang={lang === "am" ? "am" : "en"}
+    >
+      <SiteHeader />
+      <main className="flex flex-1 flex-col">{children}</main>
+      <SiteFooter />
+    </div>
+  );
+}
 
 export default function MarketingLayout({
   children,
@@ -11,11 +25,7 @@ export default function MarketingLayout({
 }) {
   return (
     <MarketingLangProvider>
-      <div className="flex min-h-screen flex-col bg-primary-800 text-white">
-        <SiteHeader />
-        <main className="flex flex-1 flex-col">{children}</main>
-        <SiteFooter />
-      </div>
+      <MarketingShell>{children}</MarketingShell>
     </MarketingLangProvider>
   );
 }

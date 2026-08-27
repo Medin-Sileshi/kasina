@@ -9,13 +9,12 @@ import {
   MarketingPageShell,
 } from "@/components/marketing/page-shell";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { MelakPhonePreview } from "@/components/marketing/melak-phone";
-import { homeCopy, melakMarketingCopy } from "@/lib/marketing-copy";
+import { RootWingMark } from "@/components/marketing/root-wing-mark";
+import { melakMarketingCopy } from "@/lib/marketing-copy";
 
 export default function MelakMarketingPage() {
   const { lang } = useMarketingLang();
   const t = melakMarketingCopy[lang];
-  const phone = homeCopy[lang];
   const amClass = lang === "am" ? "font-ethiopic" : "";
 
   return (
@@ -27,43 +26,36 @@ export default function MelakMarketingPage() {
           <MarketingLead>{t.intro}</MarketingLead>
           <ul className="mt-10 space-y-8">
             {t.points.map((p) => (
-              <li key={p.title} className="border-b border-white/10 pb-8 last:border-0">
-                <h2 className={`text-lg font-bold text-white ${amClass}`}>{p.title}</h2>
+              <li key={p.title} className="border-b border-mkt-rule pb-8 last:border-0">
+                <h2 className={`font-display text-lg font-semibold text-mkt-ink ${amClass}`}>
+                  {p.title}
+                </h2>
                 <MarketingBody>{p.body}</MarketingBody>
               </li>
             ))}
           </ul>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link
-              href="/join?next=/student/melak"
-              className={`inline-flex h-12 items-center justify-center rounded-2xl bg-white px-5 text-[15px] font-semibold text-primary-800 ${amClass}`}
-            >
+            <Link href="/join?next=/student/melak" className={`mkt-cta ${amClass}`}>
               {t.ctaJoin}
             </Link>
             <Link
               href="/student/melak"
-              className={`inline-flex h-12 items-center justify-center rounded-2xl border border-white/30 px-5 text-[15px] font-semibold text-white hover:bg-white/10 ${amClass}`}
+              className={`inline-flex h-12 items-center justify-center rounded border border-mkt-green px-5 text-[15px] font-semibold text-mkt-green hover:bg-mkt-panel ${amClass}`}
             >
               {t.ctaProduct}
             </Link>
           </div>
           <div className={`mt-6 flex gap-4 text-[14px] font-semibold ${amClass}`}>
-            <Link href="/students" className="text-white/70 hover:text-white">
+            <Link href="/students" className="mkt-link-ochre">
               {t.ctaStudents}
             </Link>
-            <Link href="/teachers" className="text-white/70 hover:text-white">
+            <Link href="/teachers" className="mkt-link-ochre">
               {t.ctaTeachers}
             </Link>
           </div>
         </div>
-        <div className="lg:pt-8">
-          <MelakPhonePreview
-            lang={lang}
-            name={phone.melakName}
-            question={phone.melakChatQ}
-            answer={phone.melakChatA}
-            caption={phone.offlineCaption}
-          />
+        <div className="flex justify-center lg:pt-6">
+          <RootWingMark className="h-[240px] w-[200px]" tone="green" />
         </div>
       </div>
     </MarketingPageShell>

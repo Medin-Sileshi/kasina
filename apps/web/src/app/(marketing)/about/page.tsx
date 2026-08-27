@@ -25,14 +25,11 @@ export default function AboutPage() {
       <MarketingSectionTitle>{t.originTitle}</MarketingSectionTitle>
       <MarketingBody>{t.origin}</MarketingBody>
       <MarketingSectionTitle>{t.teamTitle}</MarketingSectionTitle>
-      <p className={`mt-3 text-[15px] font-semibold text-white ${amClass}`}>{t.founder}</p>
+      <p className={`mt-3 text-[15px] font-semibold text-mkt-ink ${amClass}`}>{t.founder}</p>
       <MarketingBody>{t.founderBody}</MarketingBody>
       <MarketingSectionTitle>{t.orgTitle}</MarketingSectionTitle>
       <MarketingBody>{t.org}</MarketingBody>
-      <Link
-        href="/get-involved"
-        className={`mt-10 inline-flex text-[14px] font-semibold text-accent-500 hover:text-accent-600 ${amClass}`}
-      >
+      <Link href="/get-involved" className={`mkt-link-ochre mt-10 inline-flex text-[14px] ${amClass}`}>
         Get Involved →
       </Link>
     </MarketingPageShell>

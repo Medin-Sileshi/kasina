@@ -2,6 +2,7 @@
 
 import { MessageCircle } from "lucide-react";
 import {
+  MarketingEyebrow,
   MarketingH1,
   MarketingPageShell,
 } from "@/components/marketing/page-shell";
@@ -15,25 +16,23 @@ export default function FaqPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.headline}</MarketingH1>
-      <div className="mt-10 space-y-6">
+      <div className="mt-10 space-y-5">
         {t.items.map((item) => (
-          <details key={item.q} className="group border-b border-white/10 pb-5">
+          <details key={item.q} className="group border-b border-mkt-rule pb-5">
             <summary
-              className={`cursor-pointer list-none text-[15px] font-semibold text-white marker:content-none [&::-webkit-details-marker]:hidden ${amClass}`}
+              className={`cursor-pointer list-none text-[15px] font-semibold text-mkt-ink marker:content-none [&::-webkit-details-marker]:hidden ${amClass}`}
             >
               <span className="flex items-start justify-between gap-3">
                 {item.q}
                 <MessageCircle
-                  className="mt-0.5 h-4 w-4 shrink-0 text-white/35 group-open:text-accent-500"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-mkt-ink/30 group-open:text-mkt-green"
                   aria-hidden
                 />
               </span>
             </summary>
-            <p className={`mt-3 text-[14px] leading-relaxed text-white/60 ${amClass}`}>
+            <p className={`mt-3 text-[14px] leading-relaxed text-mkt-ink-muted ${amClass}`}>
               {item.a}
             </p>
           </details>

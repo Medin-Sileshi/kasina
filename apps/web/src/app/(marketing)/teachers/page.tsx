@@ -23,20 +23,22 @@ export default function TeachersPage() {
       <MarketingLead>{t.intro}</MarketingLead>
       <ul className="mt-12 space-y-10">
         {t.points.map((p) => (
-          <li key={p.title} className="border-b border-white/10 pb-10 last:border-0 last:pb-0">
-            <h2 className={`text-lg font-bold text-white ${amClass}`}>{p.title}</h2>
+          <li key={p.title} className="border-b border-mkt-rule pb-10 last:border-0 last:pb-0">
+            <h2 className={`font-display text-lg font-semibold text-mkt-ink ${amClass}`}>
+              {p.title}
+            </h2>
             <MarketingBody>{p.body}</MarketingBody>
           </li>
         ))}
       </ul>
       <div className={`mt-10 flex flex-wrap gap-x-5 gap-y-3 text-[14px] font-semibold ${amClass}`}>
-        <Link href="/melak" className="text-accent-500 hover:text-accent-600">
+        <Link href="/melak" className="mkt-link-ochre">
           {t.ctaMelak}
         </Link>
-        <Link href="/practice-tools" className="text-white/75 hover:text-white">
+        <Link href="/practice-tools" className="text-mkt-green hover:underline">
           {t.ctaPractice}
         </Link>
-        <Link href="/teacher/signup" className="text-white/75 hover:text-white">
+        <Link href="/teacher/signup" className="text-mkt-green hover:underline">
           {t.ctaJoin}
         </Link>
       </div>

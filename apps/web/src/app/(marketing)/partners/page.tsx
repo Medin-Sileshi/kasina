@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  MarketingEyebrow,
   MarketingH1,
   MarketingLead,
   MarketingPageShell,
@@ -16,15 +17,10 @@ export default function PartnersPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.headline}</MarketingH1>
       <MarketingLead>{t.body}</MarketingLead>
-      <Link
-        href="/get-involved"
-        className={`mt-8 inline-block text-[14px] font-semibold text-accent-500 hover:text-accent-600 ${amClass}`}
-      >
+      <Link href="/get-involved" className={`mkt-link-ochre mt-8 inline-block text-[14px] ${amClass}`}>
         {t.cta} →
       </Link>
     </MarketingPageShell>

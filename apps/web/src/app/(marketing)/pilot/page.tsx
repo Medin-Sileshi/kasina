@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   MarketingBody,
+  MarketingEyebrow,
   MarketingH1,
   MarketingLead,
   MarketingPageShell,
@@ -18,9 +19,7 @@ export default function PilotPage() {
 
   return (
     <MarketingPageShell>
-      <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] text-white/40 ${amClass}`}>
-        {t.title}
-      </p>
+      <MarketingEyebrow>{t.title}</MarketingEyebrow>
       <MarketingH1>{t.headline}</MarketingH1>
       <MarketingLead>{t.intro}</MarketingLead>
       <MarketingSectionTitle>{t.scopeTitle}</MarketingSectionTitle>
@@ -33,10 +32,7 @@ export default function PilotPage() {
       <MarketingBody>{t.funding}</MarketingBody>
       <MarketingSectionTitle>{t.expandTitle}</MarketingSectionTitle>
       <MarketingBody>{t.expand}</MarketingBody>
-      <Link
-        href="/get-involved"
-        className={`mt-10 inline-flex h-12 items-center justify-center rounded-2xl bg-white px-5 text-[15px] font-semibold text-primary-800 ${amClass}`}
-      >
+      <Link href="/get-involved" className={`mkt-cta mt-10 ${amClass}`}>
         {t.cta}
       </Link>
     </MarketingPageShell>

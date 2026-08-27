@@ -71,9 +71,31 @@
   --radius-xl: 16px;
   --radius-2xl: 24px;
   --radius-full: 9999px;
+
+  /* Marketing site — redesign brief tokens */
+  --mkt-paper: #f7f5f0;
+  --mkt-ink: #1c1b18;
+  --mkt-ink-muted: #5c574e;
+  --mkt-deep: #161d19;
+  --mkt-green: #2f5d45;
+  --mkt-green-hover: #264a38;
+  --mkt-ochre: #b4552f;
+  --mkt-gold: #c79a46;
+  --mkt-rule: #e4dfd4;
+  --mkt-panel: #f0ebe3;
 }
 
 @theme inline {
+  --color-mkt-paper: var(--mkt-paper);
+  --color-mkt-ink: var(--mkt-ink);
+  --color-mkt-ink-muted: var(--mkt-ink-muted);
+  --color-mkt-deep: var(--mkt-deep);
+  --color-mkt-green: var(--mkt-green);
+  --color-mkt-green-hover: var(--mkt-green-hover);
+  --color-mkt-ochre: var(--mkt-ochre);
+  --color-mkt-gold: var(--mkt-gold);
+  --color-mkt-rule: var(--mkt-rule);
+  --color-mkt-panel: var(--mkt-panel);
   --color-primary-900: var(--color-primary-900);
   --color-primary-800: var(--color-primary-800);
   --color-primary-700: var(--color-primary-700);
@@ -111,6 +133,8 @@
   --color-subject-math-bg: var(--color-subject-math-bg);
 
   --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-utility: var(--font-utility), ui-monospace, monospace;
   --font-ethiopic: var(--font-ethiopic), "Noto Serif Ethiopic", serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 
@@ -129,6 +153,55 @@ body {
 
 .font-ethiopic {
   font-family: var(--font-ethiopic), "Noto Serif Ethiopic", serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
+.font-utility {
+  font-family: var(--font-utility), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+}
+
+.marketing-site {
+  background: var(--mkt-paper);
+  color: var(--mkt-ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.marketing-site[lang="am"],
+.marketing-site [lang="am"] {
+  font-family: var(--font-ethiopic), "Noto Serif Ethiopic", serif;
+}
+
+.mkt-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  background: var(--mkt-green);
+  color: #f7f5f0;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.15s ease;
+}
+
+.mkt-cta:hover {
+  background: var(--mkt-green-hover);
+}
+
+.mkt-link-ochre {
+  color: var(--mkt-ochre);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.mkt-link-ochre:hover {
+  text-decoration: underline;
 }
 
 .safe-pb {
