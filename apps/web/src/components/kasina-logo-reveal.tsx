@@ -38,7 +38,7 @@ export function KasinaLogoReveal({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`relative w-full max-w-[min(100%,420px)] sm:max-w-[480px] ${className}`}
+      className={`relative w-full max-w-[min(100%,420px)] overflow-hidden rounded-xl sm:max-w-[480px] ${className}`}
       aria-hidden
     >
       <video
@@ -47,7 +47,7 @@ export function KasinaLogoReveal({ className = "" }: { className?: string }) {
         muted
         playsInline
         preload="auto"
-        className="aspect-video h-auto w-full object-contain"
+        className="aspect-video h-auto w-full rounded-xl object-contain"
         onError={() => setUseStatic(true)}
         onEnded={(e) => {
           e.currentTarget.pause();
