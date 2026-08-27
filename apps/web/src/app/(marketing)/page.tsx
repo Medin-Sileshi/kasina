@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { useMarketingLang } from "@/components/marketing/lang-context";
-import { KasinaMark, KasinaMarkDivider } from "@/components/kasina-logo";
+import { KasinaMarkDivider } from "@/components/kasina-logo";
+import { KasinaLogoReveal } from "@/components/kasina-logo-reveal";
 import { homeCopy } from "@/lib/marketing-copy";
 
 export default function HomePage() {
@@ -49,7 +50,7 @@ export default function HomePage() {
           </div>
 
           <div className="landing-fade-up landing-delay-2 relative flex justify-center lg:justify-end">
-            <KasinaMark size="hero" priority className="drop-shadow-lg" />
+            <KasinaLogoReveal />
           </div>
         </div>
       </section>
