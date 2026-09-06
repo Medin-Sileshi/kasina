@@ -12,7 +12,7 @@ export type AuthUser = {
   id: string;
   email: string;
   name: string;
-  role: "student" | "teacher" | "admin";
+  role: "student" | "teacher" | "admin" | "school_admin";
   approvalStatus?: string;
   phone?: string;
   schoolId?: string | null;
@@ -140,6 +140,29 @@ export async function requireAdmin(
   if (!isAuthUser(user)) return user;
   if (user.role !== "admin") {
     return c.json({ error: "Admin access required" }, 403);
+  }
+  return user;
+}
+
+export async function requireSchoolAdmin(
+  c: Context<HonoEnv>,
+): Promise<AuthUser | Response> {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+  if (user.role !== "school_admin") {
+    return c.json({ error: "School admin access required" }, 403);
+  }
+  if (user.approvalStatus === "invited") {
+    return c.json(
+      { error: "Activate your account with phone OTP first", code: "invited" },
+      403,
+    );
+  }
+  if (user.approvalStatus && user.approvalStatus !== "approved") {
+    return c.json({ error: "Account not approved" }, 403);
+  }
+  if (!user.schoolId) {
+    return c.json({ error: "School admin missing school_id" }, 400);
   }
   return user;
 }

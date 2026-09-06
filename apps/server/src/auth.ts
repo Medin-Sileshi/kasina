@@ -47,13 +47,27 @@ export async function withPgRetry<T>(
   throw last;
 }
 
+function allowLocalOrigins(env: { APP_URL?: string; ALLOW_LOCAL_ORIGINS?: string }) {
+  if (env.ALLOW_LOCAL_ORIGINS === "true" || env.ALLOW_LOCAL_ORIGINS === "1") {
+    return true;
+  }
+  const app = (env.APP_URL ?? "").trim().toLowerCase();
+  return (
+    app.startsWith("http://localhost") ||
+    app.startsWith("http://127.0.0.1")
+  );
+}
+
 function appOrigins(env: ServerEnv): string[] {
   const origins = new Set<string>([
     env.APP_URL,
-    "http://localhost:3000",
     "https://kasina.et",
     "https://www.kasina.et",
   ]);
+  if (allowLocalOrigins(env)) {
+    origins.add("http://localhost:3000");
+    origins.add("http://127.0.0.1:3000");
+  }
   return [...origins].filter(Boolean);
 }
 

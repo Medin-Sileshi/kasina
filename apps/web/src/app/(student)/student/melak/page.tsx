@@ -91,7 +91,6 @@ function MelakChat() {
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [turnsRemaining, setTurnsRemaining] = useState<number | null>(null);
   const [onlineMode, setOnlineMode] = useState(true);
   const [isOnline, setIsOnline] = useState(true);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -181,7 +180,6 @@ function MelakChat() {
       try {
         const res = await apiFetch<{
           message: string;
-          turnsRemaining: number;
           mode: "offline" | "online";
           pilotNote?: string;
         }>("/melak/chat", {
@@ -199,7 +197,6 @@ function MelakChat() {
           ...m,
           { role: "assistant", content: res.message, mode: res.mode },
         ]);
-        setTurnsRemaining(res.turnsRemaining);
         if (onlineMode && res.mode === "offline") {
           setError(
             res.pilotNote ||
@@ -261,7 +258,6 @@ function MelakChat() {
         <p className="mt-2 text-sm text-gray-500">
           Enhanced (online) Melak by default. Falls back to on-device when
           offline or the model is unavailable.
-          {turnsRemaining != null ? ` · ${turnsRemaining} enhanced turns left today` : null}
         </p>
         {questionId ? (
           <p className="mt-1 text-xs font-medium text-primary-700">

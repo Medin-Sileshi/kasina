@@ -61,6 +61,7 @@ classesApp.post("/", zValidator("json", createSchema), async (c) => {
       grade: 12,
       subject: "mathematics",
       invite_code: invite,
+      school_id: user.schoolId ?? null,
     });
     if (!error) {
       return c.json({
@@ -423,6 +424,130 @@ classesApp.get("/:id/results", async (c) => {
     );
   }
 });
+
+classesApp.post(
+  "/:id/roster-students",
+  zValidator(
+    "json",
+    z.object({
+      name: z.string().min(1).max(120),
+      phone: z.string().min(7).max(32),
+    }),
+  ),
+  async (c) => {
+    const user = await requireTeacher(c);
+    if (!isAuthUser(user)) return user;
+    if (user.role !== "teacher" && user.role !== "admin") {
+      return c.json({ error: "Teacher access required" }, 403);
+    }
+
+    const classId = c.req.param("id");
+    const body = c.req.valid("json");
+    const db = createDb(c.env);
+
+    const owned = await assertClassOwner(db, classId, user.id);
+    if (owned.error || !owned.klass) {
+      const status = owned.error === "Forbidden" ? 403 : 404;
+      return c.json({ error: owned.error ?? "Not found" }, status);
+    }
+
+    const schoolId =
+      (owned.klass as { school_id?: string | null }).school_id ||
+      user.schoolId ||
+      null;
+
+    // Prefer class school_id; fall back to teacher's school_id
+    let resolvedSchoolId = schoolId;
+    if (!resolvedSchoolId) {
+      const { data: teacher } = await db
+        .from("user")
+        .select("school_id")
+        .eq("id", user.id)
+        .maybeSingle();
+      resolvedSchoolId = teacher?.school_id ?? null;
+    }
+    if (!resolvedSchoolId) {
+      return c.json(
+        {
+          error:
+            "Class is not linked to a school. Cascade rostering requires a school_id.",
+        },
+        400,
+      );
+    }
+
+    const { createInvitedUser, writeRosterAudit } = await import(
+      "../lib/invite-user"
+    );
+
+    try {
+      const result = await createInvitedUser(db, c.env, {
+        name: body.name,
+        phone: body.phone,
+        role: "student",
+        schoolId: resolvedSchoolId,
+      });
+
+      if (!result.created) {
+        const { data: existing } = await db
+          .from("user")
+          .select("id, school_id, role")
+          .eq("id", result.userId)
+          .maybeSingle();
+        if (existing?.school_id && existing.school_id !== resolvedSchoolId) {
+          return c.json(
+            { error: "This phone is already registered to another school." },
+            409,
+          );
+        }
+      }
+
+      const { error: memErr } = await db.from("class_members").upsert(
+        {
+          class_id: classId,
+          student_id: result.userId,
+        },
+        { onConflict: "class_id,student_id" },
+      );
+      if (memErr) {
+        // Some schemas use composite PK without onConflict name — try insert ignore
+        const { error: insErr } = await db.from("class_members").insert({
+          class_id: classId,
+          student_id: result.userId,
+        });
+        if (insErr && !/duplicate|unique/i.test(insErr.message)) {
+          return c.json({ error: insErr.message }, 500);
+        }
+      }
+
+      await writeRosterAudit(db, {
+        actorUserId: user.id,
+        actorRole: user.role === "admin" ? "admin" : "teacher",
+        schoolId: resolvedSchoolId,
+        action: "student_rostered",
+        targetUserId: result.userId,
+        classId,
+        meta: { phone: result.phone, created: result.created },
+      });
+
+      return c.json({
+        student: {
+          id: result.userId,
+          phone: result.phone,
+          created: result.created,
+          approvalStatus: "invited",
+        },
+      });
+    } catch (err) {
+      return c.json(
+        {
+          error: err instanceof Error ? err.message : "Could not add student",
+        },
+        400,
+      );
+    }
+  },
+);
 
 classesApp.get("/:id/weak-topics", async (c) => {
   const user = await requireTeacher(c);

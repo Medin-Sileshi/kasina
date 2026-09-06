@@ -20,6 +20,8 @@ type SignupRequest = {
   email: string | null;
   schoolId: string;
   schoolName: string | null;
+  schoolType: string | null;
+  schoolVerified: boolean | null;
   status: string;
   notes: string | null;
   createdAt: string;
@@ -111,6 +113,12 @@ export function AdminSignupsPage() {
                   </div>
                   <p className="mt-1 text-sm text-gray-500">
                     {r.schoolName ?? r.schoolId}
+                    {r.schoolType ? ` · ${r.schoolType}` : ""}
+                    {r.schoolVerified === true
+                      ? " · verified"
+                      : r.schoolVerified === false
+                        ? " · unverified"
+                        : ""}
                     {r.phone ? ` · ${r.phone}` : ""}
                     {r.email ? ` · ${r.email}` : ""}
                   </p>

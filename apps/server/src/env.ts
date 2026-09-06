@@ -44,6 +44,11 @@ export type ServerEnv = {
    * Prefer this over MELAK_LLM_BASE_URL when set. Do not commit live tunnel URLs.
    */
   MELAK_CLOUD_ENDPOINT?: string;
+  /**
+   * When "true", trust localhost origins even if APP_URL is production.
+   * Local Node/dev should rely on APP_URL=http://localhost:3000 instead.
+   */
+  ALLOW_LOCAL_ORIGINS?: string;
 };
 
 export type AppVariables = {
@@ -51,6 +56,6 @@ export type AppVariables = {
     id: string;
     email: string;
     name: string;
-    role: "student" | "teacher" | "admin";
+    role: "student" | "teacher" | "admin" | "school_admin";
   } | null;
 };

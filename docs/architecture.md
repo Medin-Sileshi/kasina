@@ -78,7 +78,8 @@ pnpm workspace (`apps/*`, `packages/*`) + Turbo.
 
 ### CORS / trusted origins
 
-API trusts `APP_URL`, `http://localhost:3000`, `https://kasina.et`, `https://www.kasina.et`.
+API trusts `APP_URL`, `https://kasina.et`, and `https://www.kasina.et`.  
+`http://localhost:3000` is included **only** when `APP_URL` is local (`http://localhost…` / `127.0.0.1`) or `ALLOW_LOCAL_ORIGINS=true`. Production Workers with `APP_URL=https://kasina.et` do **not** trust localhost.
 
 ---
 
@@ -142,20 +143,41 @@ Apply in order (006 is required for current features):
 | `004_melak.sql` | `melak_messages` |
 | `005_perf_indexes.sql` | Performance indexes |
 | `006_schools_approval_sync.sql` | `schools`, `signup_requests`, `admin_audit_log`, `otp_send_log`; user phone / approval / school; session `client_session_id`, `sync_status` |
+| `007_school_cascade.sql` | `school_join_requests`, `roster_audit_log`; roles `school_admin`; approval `invited` |
+
+### School cascade onboarding
+
+```
+Public /schools/join → school_join_requests
+        ↓
+/medin/schools approve → schools (verified) + invited school_admin + SMS
+        ↓
+/school-admin rosters teachers (invited + SMS)
+        ↓
+Teacher /activate OTP → approved → roster students into class (invited + SMS)
+        ↓
+Student /activate OTP → approved + class_members
+```
+
+Self-serve `/join` and `/teacher/signup` remain: those accounts stay `pending` until Medin individual approval. Cascade accounts use `approval_status=invited` then OTP → `approved` (no per-person Medin review). Roster actions log to `roster_audit_log` (visible on `/medin/audit`, separate from Kasina-admin audit).
 
 ### Core tables (conceptual)
 
 ```
-user ──◄── class_members ──► classes ──► assignments
+`user` ──◄── class_members ──► classes ──► assignments
   │                              │
   ├── practice_sessions ──► answers ──► questions
   ├── melak_messages
   ├── signup_requests ──► schools
+  ├── school_id ──► schools  (teachers, students, school_admin)
   └── (Better Auth: session, account, verification)
 
-admin_audit_log · otp_send_log
+school_join_requests ──(on approve)──► schools + school_admin user
+roster_audit_log · admin_audit_log · otp_send_log
 ```
 
+**Roles:** `student` | `teacher` | `admin` | `school_admin`  
+**Approval:** `pending` | `approved` | `rejected` | `revoked` | `invited`
 **Seed:** `pnpm db:seed` / `pnpm db:reset-pilot` — Grade 12 Math bank + demo class **DEMO2026**.
 
 ### Question bank scope
@@ -206,10 +228,10 @@ Server tries MELAK_CLOUD_ENDPOINT  →  LM Studio native POST /api/v1/chat
 | Setting | Value / notes |
 |---------|----------------|
 | Cloud timeout | **60s** (`CLOUD_TIMEOUT_MS`) |
-| Daily user turns | **20** / UTC day |
+| Daily user turns | **None currently** (pilot). A daily budget may return later. Per-minute rate limit remains (60/min). |
 | Rate limit | 60 requests / minute / user |
 | Persistence | User + assistant rows in `melak_messages` |
-| History | Flat per-user list (`GET /melak/history`) — **no `chat_id` / conversation id** |
+| History | Flat per-user list (`GET /melak/history`) — **no `chat_id` / conversation id**. Client sends last ~10 turns; cloud prompt uses last ~8. **Known limitation:** unrelated topics in one flat thread can bleed into enhanced LLM context until conversation IDs exist. |
 | Optional link | `question_id`, practice `session_id` when opened from a quiz |
 
 **Env:** `MELAK_CLOUD_ENDPOINT`, `MELAK_LLM_BASE_URL`, `MELAK_LLM_API_KEY`, `MELAK_LLM_MODEL`.  
@@ -252,7 +274,10 @@ Designed for weak school connectivity.
 | `/melak` | `routes/melak.ts` | Chat, history, question context |
 | `/teacher/signup` | `routes/teacher-signup.ts` | Teacher registration |
 | `/schools` | `routes/schools.ts` | School list/create |
-| `/admin` | `routes/admin.ts` | Overview, signups, revoke, activity, audit, OTP queue |
+| `/school-join-requests` | `routes/school-join-requests.ts` | Public school join form |
+| `/school-admin` | `routes/school-admin.ts` | School-scoped teacher roster |
+| `/admin` | `routes/admin.ts` | Overview, signups, school joins, revoke, activity, audit, roster audit, OTP queue |
+| `/me/activate-invite` | `index.ts` | Promote `invited` → `approved` after OTP |
 | `/questions` | `index.ts` | Admin-oriented question access |
 
 ---
@@ -265,7 +290,10 @@ Designed for weak school connectivity.
 | Join | `/join` (class invite) |
 | Student | `/student`, `/student/login`, `/student/melak`, `/subjects/mathematics`, `/quiz/[sessionId]` (+ results/review), `/cbt`, `/progress`, `/read/[subject]` |
 | Teacher | `/teacher`, `/teacher/login`, `/teacher/signup`, classes, assign, assignments, students, practice-sets, analytics, textbook |
-| Admin | `/medin/login`, `/medin/*` (signups, otp, audit); `/admin/*` redirects |
+| Admin | `/medin/login`, `/medin/*` (signups, schools, otp, audit); `/admin/*` redirects |
+| School admin | `/school-admin` (roster teachers) |
+| Activate | `/activate` (phone OTP for invited cascade accounts) |
+| School join (public) | `/schools/join` |
 
 ---
 
@@ -357,10 +385,11 @@ Optional: apply migrations in Supabase SQL editor through **006**, then `pnpm db
 ## 16. What this is not (current)
 
 - Not Claude / Anthropic-powered Melak.
-- No Melak **conversation / chat_id** — history is flat per `user_id`.
+- No Melak **conversation / chat_id** — history is flat per `user_id` (context bleed risk for enhanced mode).
 - Question bank is **not** multi-subject yet (Math only).
 - `apps/mobile` / `apps/desktop` are not the pilot offline story; the **web PWA** is.
 - Older MVP docs that say “OTP deferred / offline deferred” are **superseded** by the code above.
+- Apply migrations through **007** for school cascade.
 
 ---
 

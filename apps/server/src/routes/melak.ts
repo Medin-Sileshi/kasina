@@ -37,7 +37,6 @@ const MELAK_ONLINE_SYSTEM = `You are Melak (መላክ), Kasina's tutor for Ethio
 Answer in the student's language (English or Amharic). Stay on Grade 12 Ethiopian Math curriculum.
 Be concise (under 200 words). Use LaTeX: $...$ inline. Guide understanding; do not only give answers.`;
 
-const DAILY_TURN_LIMIT = 20;
 /**
  * Qwen via LM Studio often needs 15–40s (prompt + first token).
  * Aborting early caused empty `output: []` and silent offline fallback.
@@ -354,32 +353,9 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
   const body = c.req.valid("json");
   const db = createDb(c.env);
 
-  const dayStart = new Date();
-  dayStart.setUTCHours(0, 0, 0, 0);
-  const { count: todayCount, error: countErr } = await db
-    .from("melak_messages")
-    .select("id", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .eq("role", "user")
-    .gte("created_at", dayStart.toISOString());
-
-  if (countErr) return c.json({ error: countErr.message }, 500);
-  if ((todayCount ?? 0) >= DAILY_TURN_LIMIT) {
-    return c.json(
-      {
-        error: `Daily Melak limit reached (${DAILY_TURN_LIMIT} messages). Resets at midnight UTC.`,
-      },
-      429,
-    );
-  }
-
   const question = await loadQuestionContext(db, body.questionId);
   const cloudEndpoint = c.env.MELAK_CLOUD_ENDPOINT?.trim();
   const llmBase = c.env.MELAK_LLM_BASE_URL?.trim();
-  const turnsRemaining = Math.max(
-    0,
-    DAILY_TURN_LIMIT - (todayCount ?? 0) - 1,
-  );
 
   const respondOffline = async (pilotNote: string) => {
     const reply = offlineReply(body.message, question);
@@ -387,7 +363,6 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
     return c.json({
       message: reply,
       mode: "offline" as const,
-      turnsRemaining,
       pilotNote,
     });
   };
@@ -427,7 +402,6 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
   return c.json({
     message: enhanced,
     mode: "online" as const,
-    turnsRemaining,
     pilotNote: cloudEndpoint
       ? "Enhanced Melak (demo bridge). Uncheck Enhanced for on-device only."
       : "Enhanced Melak (Kasina VPS). Uncheck Enhanced for on-device only.",

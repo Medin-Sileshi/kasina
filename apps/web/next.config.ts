@@ -80,6 +80,26 @@ const nextConfig: NextConfig = {
         destination: `${apiProxyTarget}/schools/:path*`,
       },
       {
+        source: "/school-join-requests",
+        destination: `${apiProxyTarget}/school-join-requests`,
+      },
+      {
+        source: "/school-join-requests/:path*",
+        destination: `${apiProxyTarget}/school-join-requests/:path*`,
+      },
+      {
+        source: "/school-admin",
+        destination: `${apiProxyTarget}/school-admin`,
+      },
+      {
+        source: "/school-admin/:path*",
+        destination: `${apiProxyTarget}/school-admin/:path*`,
+      },
+      {
+        source: "/me/activate-invite",
+        destination: `${apiProxyTarget}/me/activate-invite`,
+      },
+      {
         source: "/admin",
         destination: `${apiProxyTarget}/admin`,
       },

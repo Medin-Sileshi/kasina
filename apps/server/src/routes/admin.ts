@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { randomUUID } from "node:crypto";
 import { createDb } from "../db";
@@ -127,31 +128,45 @@ adminApp.get("/signup-requests", async (c) => {
   if (error) return c.json({ error: error.message }, 500);
 
   const schoolIds = [...new Set((data ?? []).map((r) => r.school_id))];
-  const schoolNames = new Map<string, string>();
+  const schoolMeta = new Map<
+    string,
+    { name: string; schoolType: string; verified: boolean }
+  >();
   if (schoolIds.length) {
     const { data: schools } = await db
       .from("schools")
-      .select("id, name")
+      .select("id, name, school_type, verified")
       .in("id", schoolIds);
-    for (const s of schools ?? []) schoolNames.set(s.id, s.name);
+    for (const s of schools ?? []) {
+      schoolMeta.set(s.id, {
+        name: s.name,
+        schoolType: s.school_type,
+        verified: Boolean(s.verified),
+      });
+    }
   }
 
   return c.json({
-    requests: (data ?? []).map((r) => ({
-      id: r.id,
-      userId: r.user_id,
-      role: r.role,
-      name: r.name,
-      phone: r.phone,
-      email: r.email,
-      schoolId: r.school_id,
-      schoolName: schoolNames.get(r.school_id) ?? null,
-      status: r.status,
-      notes: r.notes,
-      decidedAt: r.decided_at,
-      decidedBy: r.decided_by,
-      createdAt: r.created_at,
-    })),
+    requests: (data ?? []).map((r) => {
+      const school = schoolMeta.get(r.school_id);
+      return {
+        id: r.id,
+        userId: r.user_id,
+        role: r.role,
+        name: r.name,
+        phone: r.phone,
+        email: r.email,
+        schoolId: r.school_id,
+        schoolName: school?.name ?? null,
+        schoolType: school?.schoolType ?? null,
+        schoolVerified: school?.verified ?? null,
+        status: r.status,
+        notes: r.notes,
+        decidedAt: r.decided_at,
+        decidedBy: r.decided_by,
+        createdAt: r.created_at,
+      };
+    }),
   });
 });
 
@@ -414,4 +429,241 @@ adminApp.post("/otp-queue/:id/manual", async (c) => {
   });
 
   return c.json({ ok: true, item: { id: data.id, phone: data.phone, status: data.status } });
+});
+
+const schoolJoinApproveSchema = z.object({
+  schoolType: z.enum(["government", "private", "other"]).default("government"),
+  verified: z.boolean().default(true),
+  schoolName: z.string().min(2).max(200).optional(),
+  notes: z.string().max(2000).optional(),
+});
+
+adminApp.get("/school-join-requests", async (c) => {
+  const db = createDb(c.env);
+  const status = c.req.query("status") ?? "pending";
+  let query = db
+    .from("school_join_requests")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(100);
+  if (status !== "all") query = query.eq("status", status);
+  const { data, error } = await query;
+  if (error) return c.json({ error: error.message }, 500);
+  return c.json({
+    requests: (data ?? []).map((r) => ({
+      id: r.id,
+      schoolName: r.school_name,
+      subCity: r.sub_city,
+      woreda: r.woreda,
+      region: r.region,
+      declaredSchoolType: r.declared_school_type,
+      contactName: r.contact_name,
+      contactPhone: r.contact_phone,
+      contactEmail: r.contact_email,
+      estimatedTeachers: r.estimated_teachers,
+      estimatedStudents: r.estimated_students,
+      status: r.status,
+      notes: r.notes,
+      schoolId: r.school_id,
+      decidedAt: r.decided_at,
+      decidedBy: r.decided_by,
+      createdAt: r.created_at,
+    })),
+  });
+});
+
+adminApp.post(
+  "/school-join-requests/:id/approve",
+  zValidator("json", schoolJoinApproveSchema),
+  async (c) => {
+    const admin = c.get("user");
+    if (!admin) return c.json({ error: "Unauthorized" }, 401);
+    const db = createDb(c.env);
+    const id = c.req.param("id");
+    const body = c.req.valid("json");
+
+    const { data: req, error } = await db
+      .from("school_join_requests")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) return c.json({ error: error.message }, 500);
+    if (!req) return c.json({ error: "Request not found" }, 404);
+    if (req.status !== "pending") {
+      return c.json({ error: `Request already ${req.status}` }, 400);
+    }
+
+    const { createInvitedUser, randomInviteCode } = await import(
+      "../lib/invite-user"
+    );
+
+    const schoolId = randomUUID();
+    const invite = randomInviteCode("SCH");
+    const schoolName = (body.schoolName?.trim() || req.school_name).trim();
+
+    const { error: sErr } = await db.from("schools").insert({
+      id: schoolId,
+      name: schoolName,
+      sub_city: req.sub_city,
+      woreda: req.woreda,
+      region: req.region || "Addis Ababa",
+      school_type: body.schoolType,
+      verified: body.verified,
+      teacher_invite_code: invite,
+    });
+    if (sErr) return c.json({ error: sErr.message }, 500);
+
+    let schoolAdminId: string | null = null;
+    try {
+      const invited = await createInvitedUser(db, c.env, {
+        name: req.contact_name,
+        phone: req.contact_phone,
+        email: req.contact_email,
+        role: "school_admin",
+        schoolId,
+      });
+      schoolAdminId = invited.userId;
+      if (!invited.created) {
+        await db
+          .from("user")
+          .update({
+            role: "school_admin",
+            school_id: schoolId,
+            approval_status: "invited",
+            name: req.contact_name,
+          })
+          .eq("id", invited.userId);
+      }
+    } catch (err) {
+      return c.json(
+        {
+          error:
+            err instanceof Error
+              ? err.message
+              : "Could not provision school admin",
+        },
+        400,
+      );
+    }
+
+    const now = new Date().toISOString();
+    const { error: uErr } = await db
+      .from("school_join_requests")
+      .update({
+        status: "approved",
+        school_id: schoolId,
+        notes: body.notes ?? req.notes,
+        decided_at: now,
+        decided_by: admin.id,
+      })
+      .eq("id", id);
+    if (uErr) return c.json({ error: uErr.message }, 500);
+
+    await writeAudit(db, {
+      adminId: admin.id,
+      action: "school_join_approve",
+      targetUserId: schoolAdminId,
+      meta: {
+        schoolJoinRequestId: id,
+        schoolId,
+        schoolType: body.schoolType,
+        verified: body.verified,
+      },
+    });
+
+    return c.json({
+      ok: true,
+      schoolId,
+      schoolAdminId,
+      teacherInviteCode: invite,
+    });
+  },
+);
+
+adminApp.post(
+  "/school-join-requests/:id/reject",
+  zValidator("json", notesSchema),
+  async (c) => {
+    const admin = c.get("user");
+    if (!admin) return c.json({ error: "Unauthorized" }, 401);
+    const db = createDb(c.env);
+    const id = c.req.param("id");
+    const body = c.req.valid("json");
+
+    const { data: req, error } = await db
+      .from("school_join_requests")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) return c.json({ error: error.message }, 500);
+    if (!req) return c.json({ error: "Request not found" }, 404);
+    if (req.status !== "pending") {
+      return c.json({ error: `Request already ${req.status}` }, 400);
+    }
+
+    const now = new Date().toISOString();
+    const { error: uErr } = await db
+      .from("school_join_requests")
+      .update({
+        status: "rejected",
+        notes: body.notes ?? req.notes,
+        decided_at: now,
+        decided_by: admin.id,
+      })
+      .eq("id", id);
+    if (uErr) return c.json({ error: uErr.message }, 500);
+
+    await writeAudit(db, {
+      adminId: admin.id,
+      action: "school_join_reject",
+      meta: { schoolJoinRequestId: id },
+    });
+
+    if (req.contact_phone) {
+      void sendSms(c.env, {
+        to: req.contact_phone,
+        message: "Kasina: your school join request was not approved.",
+      });
+    }
+
+    return c.json({ ok: true, status: "rejected" });
+  },
+);
+
+adminApp.get("/roster-audit", async (c) => {
+  const db = createDb(c.env);
+  const { data, error } = await db
+    .from("roster_audit_log")
+    .select(
+      "id, actor_user_id, actor_role, school_id, action, target_user_id, class_id, meta_json, created_at",
+    )
+    .order("created_at", { ascending: false })
+    .limit(100);
+  if (error) return c.json({ error: error.message }, 500);
+
+  const schoolIds = [...new Set((data ?? []).map((e) => e.school_id))];
+  const names = new Map<string, string>();
+  if (schoolIds.length) {
+    const { data: schools } = await db
+      .from("schools")
+      .select("id, name")
+      .in("id", schoolIds);
+    for (const s of schools ?? []) names.set(s.id, s.name);
+  }
+
+  return c.json({
+    entries: (data ?? []).map((e) => ({
+      id: e.id,
+      actorUserId: e.actor_user_id,
+      actorRole: e.actor_role,
+      schoolId: e.school_id,
+      schoolName: names.get(e.school_id) ?? null,
+      action: e.action,
+      targetUserId: e.target_user_id,
+      classId: e.class_id,
+      meta: e.meta_json,
+      createdAt: e.created_at,
+      source: "roster" as const,
+    })),
+  });
 });

@@ -3,7 +3,12 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiFetch, authClient, ApiError } from "@/lib/auth-client";
 
-export type ApprovalStatus = "pending" | "approved" | "rejected" | "revoked";
+export type ApprovalStatus =
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "revoked"
+  | "invited";
 
 export type MeUser = {
   id: string;

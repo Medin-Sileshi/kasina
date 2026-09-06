@@ -14,6 +14,7 @@ function navLinks(basePath: string) {
   return [
     { href: basePath, label: "Overview", exact: true },
     { href: `${basePath}/signups`, label: "Signups" },
+    { href: `${basePath}/schools`, label: "Schools" },
     { href: `${basePath}/otp`, label: "OTP queue" },
     { href: `${basePath}/audit`, label: "Audit" },
   ];

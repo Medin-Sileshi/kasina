@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Copy, Plus } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
 import { useTeacherTitle } from "@/components/teacher-chrome";
@@ -11,8 +11,11 @@ import { useTeacherOverview } from "@/lib/teacher-data";
 import {
   Card,
   ContentSkeleton,
+  Field,
   MetricCard,
+  PrimaryButton,
   StatusPill,
+  TextInput,
 } from "@/components/ui";
 
 type ClassDetail = {
@@ -92,6 +95,10 @@ function ClassDetailInner() {
   const searchParams = useSearchParams();
   const tab = tabFromSearch(searchParams.get("tab"));
   const [copied, setCopied] = useState(false);
+  const [rosterName, setRosterName] = useState("");
+  const [rosterPhone, setRosterPhone] = useState("");
+  const [rosterError, setRosterError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const overviewQuery = useTeacherOverview();
   const overviewClass = overviewQuery.data?.classes.find((c) => c.id === classId);
@@ -107,6 +114,25 @@ function ClassDetailInner() {
       ]);
       return { detail, assignments: assignments.assignments };
     },
+  });
+
+  const rosterStudent = useMutation({
+    mutationFn: () =>
+      apiFetch(`/classes/${classId}/roster-students`, {
+        method: "POST",
+        body: JSON.stringify({ name: rosterName, phone: rosterPhone }),
+      }),
+    onSuccess: async () => {
+      setRosterName("");
+      setRosterPhone("");
+      setRosterError(null);
+      await queryClient.invalidateQueries({ queryKey: ["class", classId] });
+      await overviewQuery.refetch();
+    },
+    onError: (err) =>
+      setRosterError(
+        err instanceof Error ? err.message : "Could not add student",
+      ),
   });
 
   // Prefer shared overview cache so Results doesn't re-hit a heavy endpoint
@@ -269,10 +295,53 @@ function ClassDetailInner() {
         <div role="tabpanel" className="mt-8">
           <section>
             <h2 className="text-lg font-bold text-gray-950">Roster</h2>
+            <Card className="mt-3">
+              <p className="text-sm font-semibold text-gray-800">
+                Add student by phone
+              </p>
+              <p className="mt-1 text-xs text-gray-500">
+                Creates an invited student linked to this class. They activate
+                via OTP. Invite-code join still works in parallel.
+              </p>
+              <form
+                className="mt-3 grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  rosterStudent.mutate();
+                }}
+              >
+                <Field label="Name">
+                  <TextInput
+                    required
+                    value={rosterName}
+                    onChange={(e) => setRosterName(e.target.value)}
+                  />
+                </Field>
+                <Field label="Phone">
+                  <TextInput
+                    required
+                    type="tel"
+                    placeholder="+251…"
+                    value={rosterPhone}
+                    onChange={(e) => setRosterPhone(e.target.value)}
+                  />
+                </Field>
+                <PrimaryButton
+                  type="submit"
+                  className="h-12 w-auto px-5"
+                  disabled={rosterStudent.isPending}
+                >
+                  {rosterStudent.isPending ? "Adding…" : "Add"}
+                </PrimaryButton>
+              </form>
+              {rosterError ? (
+                <p className="mt-2 text-sm text-error-text">{rosterError}</p>
+              ) : null}
+            </Card>
             <Card className="mt-3 overflow-hidden p-0">
               {detail.roster.length === 0 ? (
                 <p className="p-5 text-sm text-gray-600">
-                  No students yet. Share the invite code.
+                  No students yet. Add by phone or share the invite code.
                 </p>
               ) : (
                 <table className="w-full min-w-[520px] text-left text-sm">

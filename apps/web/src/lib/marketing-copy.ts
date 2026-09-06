@@ -496,8 +496,8 @@ export const getInvolvedCopy = {
       {
         title: "For Schools",
         body: "Request a partnership conversation for your secondary school or cluster.",
-        href: `mailto:${CONTACT_EMAIL}?subject=Kasina%20school%20partnership`,
-        cta: "Email us",
+        href: "/schools/join",
+        cta: "Request to join",
       },
       {
         title: "For Teachers",
@@ -527,8 +527,8 @@ export const getInvolvedCopy = {
       {
         title: "ለትምህርት ቤቶች",
         body: "ለሁለተኛ ደረጃ ትምህርት ቤትዎ ወይም ክላስተር የአጋርነት ውይይት ይጠይቁ።",
-        href: `mailto:${CONTACT_EMAIL}?subject=Kasina%20school%20partnership`,
-        cta: "ኢሜይል ይላኩ",
+        href: "/schools/join",
+        cta: "ለመቀላቀል ይጠይቁ",
       },
       {
         title: "ለመምህራን",

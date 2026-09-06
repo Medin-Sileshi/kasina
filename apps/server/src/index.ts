@@ -3,7 +3,7 @@ import { cors } from "hono/cors";
 import { createAuth, isTransientPgError, resetAuthCache } from "./auth";
 import { createDb, pingDb } from "./db";
 import type { AppVariables, ServerEnv } from "./env";
-import { getSessionCached } from "./lib/auth-user";
+import { getSessionCached, isAuthUser, requireUser } from "./lib/auth-user";
 import { assignmentsApp } from "./routes/assignments";
 import { classesApp } from "./routes/classes";
 import { progressApp } from "./routes/progress";
@@ -13,6 +13,8 @@ import { textbooksApp } from "./routes/textbooks";
 import { melakApp } from "./routes/melak";
 import { teacherSignupApp } from "./routes/teacher-signup";
 import { schoolsApp } from "./routes/schools";
+import { schoolJoinRequestsApp } from "./routes/school-join-requests";
+import { schoolAdminApp } from "./routes/school-admin";
 import { adminApp } from "./routes/admin";
 
 type HonoEnv = {
@@ -26,11 +28,20 @@ app.use("*", async (c, next) => {
   const allowed = new Set(
     [
       c.env.APP_URL,
-      "http://localhost:3000",
       "https://kasina.et",
       "https://www.kasina.et",
     ].filter(Boolean),
   );
+  const appUrl = (c.env.APP_URL ?? "").trim().toLowerCase();
+  const allowLocal =
+    c.env.ALLOW_LOCAL_ORIGINS === "true" ||
+    c.env.ALLOW_LOCAL_ORIGINS === "1" ||
+    appUrl.startsWith("http://localhost") ||
+    appUrl.startsWith("http://127.0.0.1");
+  if (allowLocal) {
+    allowed.add("http://localhost:3000");
+    allowed.add("http://127.0.0.1:3000");
+  }
   return cors({
     origin: (origin) => (origin && allowed.has(origin) ? origin : null),
     allowHeaders: ["Content-Type", "Authorization"],
@@ -163,7 +174,11 @@ app.get("/me", async (c) => {
     name: string;
     role?: string;
   };
-  const role = (user.role ?? "student") as "student" | "teacher" | "admin";
+  const role = (user.role ?? "student") as
+    | "student"
+    | "teacher"
+    | "admin"
+    | "school_admin";
 
   const { data: profile } = await db
     .from("user")
@@ -179,7 +194,7 @@ app.get("/me", async (c) => {
     inviteCode: string;
   }> = [];
 
-  if (role === "teacher") {
+  if (role === "teacher" || role === "admin") {
     const { data } = await db
       .from("classes")
       .select("id, name, grade, subject, invite_code")
@@ -225,6 +240,45 @@ app.get("/me", async (c) => {
       schoolId: profile?.school_id ?? null,
     },
     classes,
+  });
+});
+
+/** After phone OTP, promote cascade-invited users to approved. */
+app.post("/me/activate-invite", async (c) => {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+  const db = createDb(c.env);
+
+  const { data: row, error } = await db
+    .from("user")
+    .select("id, approval_status, phone, role")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (error) return c.json({ error: error.message }, 500);
+  if (!row) return c.json({ error: "User not found" }, 404);
+
+  if (row.approval_status !== "invited") {
+    return c.json({
+      ok: true,
+      approvalStatus: row.approval_status ?? "approved",
+      alreadyActive: true,
+    });
+  }
+
+  const { error: uErr } = await db
+    .from("user")
+    .update({
+      approval_status: "approved",
+      phoneVerified: true,
+    })
+    .eq("id", user.id);
+  if (uErr) return c.json({ error: uErr.message }, 500);
+
+  return c.json({
+    ok: true,
+    approvalStatus: "approved",
+    role: row.role,
+    alreadyActive: false,
   });
 });
 
@@ -297,6 +351,8 @@ app.route("/textbooks", textbooksApp);
 app.route("/melak", melakApp);
 app.route("/teacher/signup", teacherSignupApp);
 app.route("/schools", schoolsApp);
+app.route("/school-join-requests", schoolJoinRequestsApp);
+app.route("/school-admin", schoolAdminApp);
 app.route("/admin", adminApp);
 
 export default app;

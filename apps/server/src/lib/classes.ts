@@ -18,7 +18,9 @@ export async function assertClassOwner(
 ) {
   const { data, error } = await db
     .from("classes")
-    .select("id, teacher_id, name, grade, subject, invite_code, created_at")
+    .select(
+      "id, teacher_id, name, grade, subject, invite_code, created_at, school_id",
+    )
     .eq("id", classId)
     .maybeSingle();
   if (error) return { error: error.message, klass: null };
