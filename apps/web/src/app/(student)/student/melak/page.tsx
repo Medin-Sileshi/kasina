@@ -13,7 +13,7 @@ import {
   getCachedMelakQuestion,
   loadLocalMelakHistory,
 } from "@/lib/melak-cache";
-import { MathText } from "@/components/math-text";
+import { MelakMessageContent } from "@/components/melak-message-content";
 import {
   Card,
   ContentSkeleton,
@@ -136,6 +136,7 @@ function MelakChat() {
         message: string;
         turnsRemaining: number;
         mode: "offline" | "online";
+        pilotNote?: string;
       }>("/melak/chat", {
         method: "POST",
         body: JSON.stringify({
@@ -152,12 +153,25 @@ function MelakChat() {
         { role: "assistant", content: res.message, mode: res.mode },
       ]);
       setTurnsRemaining(res.turnsRemaining);
-    } catch {
+      if (onlineMode && res.mode === "offline") {
+        setError(
+          res.pilotNote ||
+            "Enhanced model did not respond in time — showing on-device Melak.",
+        );
+      } else {
+        setError(null);
+      }
+    } catch (err) {
       appendLocalMelakHistory(text, offline.reply, "offline");
       setMessages((m) => [
         ...m,
         { role: "assistant", content: offline.reply, mode: "offline" },
       ]);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not reach Melak — showed on-device reply.",
+      );
     } finally {
       setSending(false);
     }
@@ -243,18 +257,29 @@ function MelakChat() {
                 }`}
               >
                 {m.role === "assistant" && m.mode ? (
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  <p
+                    className={`mb-1.5 text-[10px] font-bold uppercase tracking-wide ${
+                      m.mode === "online"
+                        ? "text-primary-600"
+                        : "text-gray-400"
+                    }`}
+                  >
                     {m.mode === "offline" ? "On-device" : "Enhanced (online)"}
                   </p>
                 ) : null}
-                <div className="prose-sm">
-                  <MathText text={m.content} />
-                </div>
+                {m.role === "assistant" ? (
+                  <MelakMessageContent text={m.content} />
+                ) : (
+                  <p className="whitespace-pre-wrap">{m.content}</p>
+                )}
               </div>
             </div>
           ))}
           {sending ? (
-            <p className="text-sm text-gray-400">Melak is thinking…</p>
+            <p className="text-sm text-gray-400">
+              Melak is thinking
+              {onlineMode ? " (enhanced can take up to a minute)…" : "…"}
+            </p>
           ) : null}
           <div ref={bottomRef} />
         </div>

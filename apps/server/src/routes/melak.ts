@@ -38,8 +38,11 @@ Answer in the student's language (English or Amharic). Stay on Grade 12 Ethiopia
 Be concise (under 200 words). Use LaTeX: $...$ inline. Guide understanding; do not only give answers.`;
 
 const DAILY_TURN_LIMIT = 20;
-/** Demo laptop + tunnel: fail fast, then fall back to on-device Melak. */
-const CLOUD_TIMEOUT_MS = 10_000;
+/**
+ * Qwen via LM Studio often needs 15–40s (prompt + first token).
+ * Aborting early caused empty `output: []` and silent offline fallback.
+ */
+const CLOUD_TIMEOUT_MS = 60_000;
 
 export const melakApp = new Hono<HonoEnv>();
 
@@ -136,27 +139,59 @@ function buildCloudInput(
     .join("\n");
 }
 
+function contentToText(content: unknown): string {
+  if (typeof content === "string") return content.trim();
+  if (Array.isArray(content)) {
+    return content
+      .map((part) => {
+        if (typeof part === "string") return part;
+        if (!part || typeof part !== "object") return "";
+        const p = part as { type?: string; text?: string; content?: string };
+        if (typeof p.text === "string") return p.text;
+        if (typeof p.content === "string") return p.content;
+        return "";
+      })
+      .join("")
+      .trim();
+  }
+  return "";
+}
+
+/** Take everything useful from an LM Studio / OpenAI-shaped payload. */
 function extractLmStudioReply(payload: unknown): string | null {
   if (!payload || typeof payload !== "object") return null;
   const output = (payload as { output?: unknown }).output;
   if (Array.isArray(output)) {
     const parts: string[] = [];
     for (const item of output) {
-      if (
-        item &&
-        typeof item === "object" &&
-        (item as { type?: string }).type === "message" &&
-        typeof (item as { content?: unknown }).content === "string"
-      ) {
-        parts.push((item as { content: string }).content.trim());
+      if (!item || typeof item !== "object") continue;
+      const row = item as { type?: string; content?: unknown; text?: unknown };
+      // Prefer message content; also accept plain text / output_text rows.
+      if (row.type === "message" || row.type === "text" || row.type == null) {
+        const text =
+          contentToText(row.content) ||
+          (typeof row.text === "string" ? row.text.trim() : "");
+        if (text) parts.push(text);
       }
     }
-    if (parts.length) return parts.join("\n").trim();
+    if (parts.length) return parts.join("\n\n").trim();
   }
-  // OpenAI-compatible shape (fallback if endpoint was mis-set)
-  const choices = (payload as { choices?: Array<{ message?: { content?: string } }> })
-    .choices;
-  const openAi = choices?.[0]?.message?.content?.trim();
+  // Top-level content / message (some gateways)
+  const top = payload as {
+    content?: unknown;
+    message?: string | { content?: unknown };
+    choices?: Array<{ message?: { content?: unknown } }>;
+  };
+  const topContent = contentToText(top.content);
+  if (topContent) return topContent;
+  if (typeof top.message === "string" && top.message.trim()) {
+    return top.message.trim();
+  }
+  if (top.message && typeof top.message === "object") {
+    const nested = contentToText(top.message.content);
+    if (nested) return nested;
+  }
+  const openAi = contentToText(top.choices?.[0]?.message?.content);
   return openAi || null;
 }
 
@@ -207,6 +242,8 @@ async function tryLmStudioCloud(
           stream: false,
           reasoning: "off",
           temperature: 0.3,
+          // Prefer longer completions so curriculum answers are not cut off.
+          max_output_tokens: 1024,
         }),
       },
       CLOUD_TIMEOUT_MS,
@@ -381,9 +418,8 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
   }
 
   if (!enhanced) {
-    // Silent fallback — no client-facing error (demo-safe).
     return respondOffline(
-      "Melak on-device — lightweight tutor. No cloud AI needed.",
+      "Enhanced model timed out or returned empty — showing on-device Melak. Try again; Qwen can take 20–40s on first tokens.",
     );
   }
 
