@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { MessageCircle, Send, Sparkles, Wifi, WifiOff } from "lucide-react";
+import { MessageCircle, Mic, NotebookPen, Send, Sparkles, Wifi, WifiOff } from "lucide-react";
 import { generateMelakReply } from "@kasina/melak-core";
 import { apiFetch } from "@/lib/auth-client";
 import {
@@ -18,7 +18,6 @@ import {
   Card,
   ContentSkeleton,
   GhostButton,
-  PrimaryButton,
   SecondaryButton,
 } from "@/components/ui";
 
@@ -27,6 +26,53 @@ type ChatMessage = {
   content: string;
   mode?: "offline" | "online";
 };
+
+const SUGGESTIONS: Array<{
+  label: string;
+  prompt: string;
+  icon: "bulb" | "notebook" | "help" | "am";
+}> = [
+  {
+    label: "Explain the Power Rule",
+    prompt: "Explain the Power Rule",
+    icon: "bulb",
+  },
+  {
+    label: "Show worked example",
+    prompt: "Show a worked example of the power rule",
+    icon: "notebook",
+  },
+  {
+    label: "Why is this formula used?",
+    prompt: "Why is the derivative / power rule formula used?",
+    icon: "help",
+  },
+  {
+    label: "በአማርኛ አስረዳኝ",
+    prompt: "በአማርኛ አስረዳኝ — የኃይል ህግ (power rule) ምንድን ነው?",
+    icon: "am",
+  },
+];
+
+function SuggestionIcon({ kind }: { kind: (typeof SUGGESTIONS)[number]["icon"] }) {
+  if (kind === "bulb") {
+    return <span aria-hidden className="text-sm leading-none">💡</span>;
+  }
+  if (kind === "notebook") {
+    return <NotebookPen className="h-3.5 w-3.5 text-gray-500" aria-hidden />;
+  }
+  if (kind === "help") {
+    return (
+      <span
+        aria-hidden
+        className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white"
+      >
+        ?
+      </span>
+    );
+  }
+  return <span aria-hidden className="text-sm leading-none">🇪🇹</span>;
+}
 
 export default function MelakPage() {
   return (
@@ -106,84 +152,87 @@ function MelakChat() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, sending]);
 
-  const send = useCallback(async () => {
-    const text = input.trim();
-    if (!text || sending) return;
-    setInput("");
-    setError(null);
-    setSending(true);
-    const prior = messages;
+  const send = useCallback(
+    async (override?: string) => {
+      const text = (override ?? input).trim();
+      if (!text || sending) return;
+      setInput("");
+      setError(null);
+      setSending(true);
+      const prior = messages;
 
-    const question = getCachedMelakQuestion(questionId);
-    const offline = generateMelakReply({ message: text, question });
-    const useLocalOnly = !isOnline || !onlineMode;
+      const question = getCachedMelakQuestion(questionId);
+      const offline = generateMelakReply({ message: text, question });
+      const useLocalOnly = !isOnline || !onlineMode;
 
-    if (useLocalOnly) {
-      appendLocalMelakHistory(text, offline.reply, "offline");
-      setMessages((m) => [
-        ...m,
-        { role: "user", content: text },
-        { role: "assistant", content: offline.reply, mode: "offline" },
-      ]);
-      setSending(false);
-      return;
-    }
-
-    setMessages((m) => [...m, { role: "user", content: text }]);
-
-    try {
-      const res = await apiFetch<{
-        message: string;
-        turnsRemaining: number;
-        mode: "offline" | "online";
-        pilotNote?: string;
-      }>("/melak/chat", {
-        method: "POST",
-        body: JSON.stringify({
-          message: text,
-          history: prior.slice(-10),
-          questionId,
-          sessionId,
-          online: onlineMode,
-        }),
-      });
-      appendLocalMelakHistory(text, res.message, res.mode);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: res.message, mode: res.mode },
-      ]);
-      setTurnsRemaining(res.turnsRemaining);
-      if (onlineMode && res.mode === "offline") {
-        setError(
-          res.pilotNote ||
-            "Enhanced model did not respond in time — showing on-device Melak.",
-        );
-      } else {
-        setError(null);
+      if (useLocalOnly) {
+        appendLocalMelakHistory(text, offline.reply, "offline");
+        setMessages((m) => [
+          ...m,
+          { role: "user", content: text },
+          { role: "assistant", content: offline.reply, mode: "offline" },
+        ]);
+        setSending(false);
+        return;
       }
-    } catch (err) {
-      appendLocalMelakHistory(text, offline.reply, "offline");
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: offline.reply, mode: "offline" },
-      ]);
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Could not reach Melak — showed on-device reply.",
-      );
-    } finally {
-      setSending(false);
-    }
-  }, [
-    input,
-    sending,
-    messages,
-    questionId,
-    sessionId,
-    isOnline,
-    onlineMode,
-  ]);
+
+      setMessages((m) => [...m, { role: "user", content: text }]);
+
+      try {
+        const res = await apiFetch<{
+          message: string;
+          turnsRemaining: number;
+          mode: "offline" | "online";
+          pilotNote?: string;
+        }>("/melak/chat", {
+          method: "POST",
+          body: JSON.stringify({
+            message: text,
+            history: prior.slice(-10),
+            questionId,
+            sessionId,
+            online: onlineMode,
+          }),
+        });
+        appendLocalMelakHistory(text, res.message, res.mode);
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: res.message, mode: res.mode },
+        ]);
+        setTurnsRemaining(res.turnsRemaining);
+        if (onlineMode && res.mode === "offline") {
+          setError(
+            res.pilotNote ||
+              "Enhanced model did not respond in time — showing on-device Melak.",
+          );
+        } else {
+          setError(null);
+        }
+      } catch (err) {
+        appendLocalMelakHistory(text, offline.reply, "offline");
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: offline.reply, mode: "offline" },
+        ]);
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Could not reach Melak — showed on-device reply.",
+        );
+      } finally {
+        setSending(false);
+      }
+    },
+    [
+      input,
+      sending,
+      messages,
+      questionId,
+      sessionId,
+      isOnline,
+      onlineMode,
+    ],
+  );
 
   if (loading) return <ContentSkeleton rows={6} />;
 
@@ -293,8 +342,37 @@ function MelakChat() {
         ) : null}
 
         <div className="border-t border-gray-100 p-4 sm:p-5">
-          <div className="flex items-end gap-2">
-            <textarea
+          <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s.label}
+                type="button"
+                disabled={sending}
+                onClick={() => void send(s.prompt)}
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 transition hover:border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+              >
+                <SuggestionIcon kind={s.icon} />
+                <span lang={s.icon === "am" ? "am" : undefined}>{s.label}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white py-1.5 pl-4 pr-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/15">
+            <span
+              className="hidden shrink-0 items-center gap-1.5 text-sm font-medium text-gray-600 sm:inline-flex"
+              aria-hidden
+            >
+              <span className="font-serif text-base leading-none text-gray-700">
+                Σ
+              </span>
+              Math
+            </span>
+            <span
+              className="hidden h-5 w-px shrink-0 bg-gray-200 sm:block"
+              aria-hidden
+            />
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
@@ -303,23 +381,32 @@ function MelakChat() {
                   void send();
                 }
               }}
-              rows={2}
-              placeholder="Ask in English or Amharic…"
-              className="min-h-11 min-w-0 flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+              placeholder="Ask Melak anything in English or Amharic…"
+              className="min-w-0 flex-1 border-0 bg-transparent py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0"
+              aria-label="Message Melak"
             />
-            <PrimaryButton
+            <button
               type="button"
-              className="h-11 !w-11 shrink-0 grow-0 !px-0"
+              disabled
+              title="Voice input coming soon"
+              aria-label="Voice input coming soon"
+              className="inline-flex h-9 w-9 shrink-0 cursor-not-allowed items-center justify-center rounded-full text-gray-400"
+            >
+              <Mic className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
               disabled={sending || !input.trim()}
               onClick={() => void send()}
               aria-label="Send"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-800 text-white transition hover:bg-primary-700 disabled:opacity-45"
             >
-              <Send className="mx-auto h-4 w-4" />
-            </PrimaryButton>
+              <Send className="h-4 w-4" />
+            </button>
           </div>
-          <p className="mt-2 text-xs text-gray-400">
-            Enhanced by default · falls back on-device · Grade 12 Math · Not a
-            substitute for your teacher
+          <p className="mt-2.5 text-center text-xs text-gray-400">
+            Enhanced by default · Grade 12 Math · Not a substitute for your
+            teacher
           </p>
         </div>
       </Card>
