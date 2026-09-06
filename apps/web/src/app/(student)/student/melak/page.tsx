@@ -289,7 +289,7 @@ function MelakChat() {
         ) : null}
 
         <div className="border-t border-gray-100 p-4 sm:p-5">
-          <div className="flex gap-2">
+          <div className="flex items-end gap-2">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -301,11 +301,11 @@ function MelakChat() {
               }}
               rows={2}
               placeholder="Ask in English or Amharic…"
-              className="min-h-[44px] flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+              className="min-h-11 min-w-0 flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             />
             <PrimaryButton
               type="button"
-              className="h-11 w-11 shrink-0 px-0"
+              className="h-11 !w-11 shrink-0 grow-0 !px-0"
               disabled={sending || !input.trim()}
               onClick={() => void send()}
               aria-label="Send"
