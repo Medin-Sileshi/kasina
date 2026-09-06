@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   title: "Admin",
 };
 
-/** Legacy /admin UI paths redirect from each page to /medin/*. */
-export default function AdminLegacyLayout({
+export default function MedinRootLayout({
   children,
 }: {
   children: React.ReactNode;

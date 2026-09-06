@@ -8,30 +8,43 @@ import { KasinaLogo } from "@/components/kasina-logo";
 import { ContentSkeleton } from "@/components/ui";
 import { isUnauthorized, useMe, useSignOut } from "@/lib/session";
 
-const links = [
-  { href: "/admin", label: "Overview", exact: true },
-  { href: "/admin/signups", label: "Signups" },
-  { href: "/admin/otp", label: "OTP queue" },
-  { href: "/admin/audit", label: "Audit" },
-];
+const DEFAULT_BASE = "/medin";
 
-export function AdminShell({ children }: { children: React.ReactNode }) {
+function navLinks(basePath: string) {
+  return [
+    { href: basePath, label: "Overview", exact: true },
+    { href: `${basePath}/signups`, label: "Signups" },
+    { href: `${basePath}/otp`, label: "OTP queue" },
+    { href: `${basePath}/audit`, label: "Audit" },
+  ];
+}
+
+export function AdminShell({
+  children,
+  basePath = DEFAULT_BASE,
+  loginHref = `${DEFAULT_BASE}/login`,
+}: {
+  children: React.ReactNode;
+  basePath?: string;
+  loginHref?: string;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const meQuery = useMe();
   const signOut = useSignOut();
   const me = meQuery.data;
   const unauthorized = isUnauthorized(meQuery.error);
+  const links = navLinks(basePath);
 
   useEffect(() => {
     if (unauthorized) {
-      router.replace("/teacher/login");
+      router.replace(loginHref);
       return;
     }
     if (me && me.user.role !== "admin") {
       router.replace(me.user.role === "teacher" ? "/teacher" : "/student");
     }
-  }, [unauthorized, me, router]);
+  }, [unauthorized, me, router, loginHref]);
 
   if (unauthorized) {
     return (
@@ -62,7 +75,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       <BrandAtmosphere />
       <header className="relative z-40 text-white">
         <div className="mx-auto flex h-16 max-w-5xl items-center gap-6 px-4 sm:px-6">
-          <KasinaLogo size="sm" tone="dark" href="/admin" />
+          <KasinaLogo size="sm" tone="dark" href={basePath} />
           <nav className="hidden flex-1 items-center gap-5 md:flex">
             {links.map((link) => {
               const active = link.exact
@@ -87,7 +100,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </span>
             <button
               type="button"
-              onClick={() => void signOut()}
+              onClick={() => void signOut().then(() => router.replace(loginHref))}
               className="text-white/60 hover:text-white"
             >
               Sign out
