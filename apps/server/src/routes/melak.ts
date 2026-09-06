@@ -20,7 +20,7 @@ const chatSchema = z.object({
   message: z.string().min(1).max(2000),
   questionId: z.string().optional(),
   sessionId: z.string().optional(),
-  /** When true and ANTHROPIC_API_KEY is set, use cloud tutor (heavier). Default: offline. */
+  /** When true and a cloud/VPS endpoint is configured, try enhanced Melak. */
   online: z.boolean().optional().default(false),
   history: z
     .array(
@@ -33,11 +33,13 @@ const chatSchema = z.object({
     .optional(),
 });
 
-const MELAK_ONLINE_SYSTEM = `You are Melak (መላክ), Kasina's AI tutor for Ethiopian Grade 12 Mathematics.
+const MELAK_ONLINE_SYSTEM = `You are Melak (መላክ), Kasina's tutor for Ethiopian Grade 12 Mathematics.
 Answer in the student's language (English or Amharic). Stay on Grade 12 Ethiopian Math curriculum.
 Be concise (under 200 words). Use LaTeX: $...$ inline. Guide understanding; do not only give answers.`;
 
 const DAILY_TURN_LIMIT = 20;
+/** Demo laptop + tunnel: fail fast, then fall back to on-device Melak. */
+const CLOUD_TIMEOUT_MS = 10_000;
 
 export const melakApp = new Hono<HonoEnv>();
 
@@ -98,6 +100,194 @@ async function persistExchange(
   if (error) console.error("[melak] persist error:", error.message);
 }
 
+function llmChatUrl(base: string): string {
+  const trimmed = base.replace(/\/$/, "");
+  if (/\/chat\/completions$/i.test(trimmed)) return trimmed;
+  if (/\/v1$/i.test(trimmed)) return `${trimmed}/chat/completions`;
+  return `${trimmed}/v1/chat/completions`;
+}
+
+function offlineReply(
+  message: string,
+  question: MelakQuestionContext | null,
+) {
+  return generateMelakReply({ message, question }).reply;
+}
+
+function buildCloudInput(
+  message: string,
+  question: MelakQuestionContext | null,
+  history: Array<{ role: "user" | "assistant"; content: string }> | undefined,
+): string {
+  let grounding = "";
+  if (question) {
+    grounding = `\n\nQuestion context:\nUnit: ${question.unit}\nTopic: ${question.topic}\nStem: ${question.stem}\nExplanation hint: ${question.explanation}`;
+  }
+  const hist = (history ?? [])
+    .slice(-8)
+    .map((m) => `${m.role === "user" ? "Student" : "Melak"}: ${m.content}`)
+    .join("\n");
+  return [
+    MELAK_ONLINE_SYSTEM + grounding,
+    hist ? `\nRecent conversation:\n${hist}` : "",
+    `\nStudent: ${message}\nMelak:`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+function extractLmStudioReply(payload: unknown): string | null {
+  if (!payload || typeof payload !== "object") return null;
+  const output = (payload as { output?: unknown }).output;
+  if (Array.isArray(output)) {
+    const parts: string[] = [];
+    for (const item of output) {
+      if (
+        item &&
+        typeof item === "object" &&
+        (item as { type?: string }).type === "message" &&
+        typeof (item as { content?: unknown }).content === "string"
+      ) {
+        parts.push((item as { content: string }).content.trim());
+      }
+    }
+    if (parts.length) return parts.join("\n").trim();
+  }
+  // OpenAI-compatible shape (fallback if endpoint was mis-set)
+  const choices = (payload as { choices?: Array<{ message?: { content?: string } }> })
+    .choices;
+  const openAi = choices?.[0]?.message?.content?.trim();
+  return openAi || null;
+}
+
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  timeoutMs: number,
+): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * LM Studio native REST: POST /api/v1/chat with { model, input, store, … }.
+ * See https://lmstudio.ai/docs/developer/rest/chat
+ */
+async function tryLmStudioCloud(
+  env: ServerEnv,
+  endpoint: string,
+  message: string,
+  question: MelakQuestionContext | null,
+  history: Array<{ role: "user" | "assistant"; content: string }> | undefined,
+): Promise<string | null> {
+  const model =
+    env.MELAK_LLM_MODEL?.trim() || "qwen/qwen3.5-9b";
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (env.MELAK_LLM_API_KEY) {
+    headers.Authorization = `Bearer ${env.MELAK_LLM_API_KEY}`;
+  }
+
+  try {
+    const res = await fetchWithTimeout(
+      endpoint,
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          model,
+          input: buildCloudInput(message, question, history),
+          store: false,
+          stream: false,
+          reasoning: "off",
+          temperature: 0.3,
+        }),
+      },
+      CLOUD_TIMEOUT_MS,
+    );
+    if (!res.ok) {
+      console.error(
+        "[melak] MELAK_CLOUD_ENDPOINT error:",
+        res.status,
+        await res.text(),
+      );
+      return null;
+    }
+    const payload: unknown = await res.json();
+    return extractLmStudioReply(payload);
+  } catch (err) {
+    console.error(
+      "[melak] MELAK_CLOUD_ENDPOINT failed:",
+      err instanceof Error ? err.message : err,
+    );
+    return null;
+  }
+}
+
+async function tryOpenAiCompatible(
+  env: ServerEnv,
+  base: string,
+  message: string,
+  question: MelakQuestionContext | null,
+  history: Array<{ role: "user" | "assistant"; content: string }> | undefined,
+): Promise<string | null> {
+  let grounding = "";
+  if (question) {
+    grounding = `\n\nQuestion context:\nUnit: ${question.unit}\nTopic: ${question.topic}\nStem: ${question.stem}\nExplanation hint: ${question.explanation}`;
+  }
+  const model = env.MELAK_LLM_MODEL?.trim() || "melak";
+  const messages = [
+    { role: "system" as const, content: MELAK_ONLINE_SYSTEM + grounding },
+    ...(history ?? []).map((m) => ({
+      role: m.role as "user" | "assistant",
+      content: m.content,
+    })),
+    { role: "user" as const, content: message },
+  ];
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (env.MELAK_LLM_API_KEY) {
+    headers.Authorization = `Bearer ${env.MELAK_LLM_API_KEY}`;
+  }
+
+  try {
+    const res = await fetchWithTimeout(
+      llmChatUrl(base),
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          model,
+          max_tokens: 512,
+          messages,
+        }),
+      },
+      CLOUD_TIMEOUT_MS,
+    );
+    if (!res.ok) {
+      console.error("[melak] llm error:", res.status, await res.text());
+      return null;
+    }
+    const payload = (await res.json()) as {
+      choices?: Array<{ message?: { content?: string } }>;
+    };
+    return payload.choices?.[0]?.message?.content?.trim() || null;
+  } catch (err) {
+    console.error(
+      "[melak] llm fetch error:",
+      err instanceof Error ? err.message : err,
+    );
+    return null;
+  }
+}
+
 melakApp.get("/context/:questionId", async (c) => {
   const user = await requireUser(c);
   if (!isAuthUser(user)) return user;
@@ -147,81 +337,64 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
   }
 
   const question = await loadQuestionContext(db, body.questionId);
+  const cloudEndpoint = c.env.MELAK_CLOUD_ENDPOINT?.trim();
+  const llmBase = c.env.MELAK_LLM_BASE_URL?.trim();
+  const turnsRemaining = Math.max(
+    0,
+    DAILY_TURN_LIMIT - (todayCount ?? 0) - 1,
+  );
 
-  // Default: lightweight offline tutor (no external API)
-  if (!body.online || !c.env.ANTHROPIC_API_KEY) {
-    const { reply } = generateMelakReply({
-      message: body.message,
-      question,
-    });
+  const respondOffline = async (pilotNote: string) => {
+    const reply = offlineReply(body.message, question);
     await persistExchange(db, user.id, body, reply);
     return c.json({
       message: reply,
       mode: "offline" as const,
-      turnsRemaining: Math.max(0, DAILY_TURN_LIMIT - (todayCount ?? 0) - 1),
-      pilotNote:
-        "Melak offline — lightweight tutor on your device. No cloud AI needed.",
+      turnsRemaining,
+      pilotNote,
     });
-  }
-
-  // Optional online enhancement (Haiku — smaller/faster than Sonnet)
-  let grounding = "";
-  if (question) {
-    grounding = `\n\nQuestion context:\nUnit: ${question.unit}\nTopic: ${question.topic}\nStem: ${question.stem}\nExplanation hint: ${question.explanation}`;
-  }
-
-  const messages = [
-    ...(body.history ?? []).map((m) => ({
-      role: m.role as "user" | "assistant",
-      content: m.content,
-    })),
-    { role: "user" as const, content: body.message },
-  ];
-
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": c.env.ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-3-5-haiku-20241022",
-      max_tokens: 512,
-      system: MELAK_ONLINE_SYSTEM + grounding,
-      messages,
-    }),
-  });
-
-  if (!res.ok) {
-    console.error("[melak] anthropic error:", res.status, await res.text());
-    const { reply } = generateMelakReply({
-      message: body.message,
-      question,
-    });
-    await persistExchange(db, user.id, body, reply);
-    return c.json({
-      message: reply,
-      mode: "offline" as const,
-      turnsRemaining: Math.max(0, DAILY_TURN_LIMIT - (todayCount ?? 0) - 1),
-      pilotNote: "Cloud tutor unavailable — using offline Melak instead.",
-    });
-  }
-
-  const payload = (await res.json()) as {
-    content: Array<{ type: string; text?: string }>;
   };
-  const reply =
-    payload.content.find((b) => b.type === "text")?.text?.trim() ??
-    generateMelakReply({ message: body.message, question }).reply;
 
-  await persistExchange(db, user.id, body, reply);
+  if (!body.online || (!cloudEndpoint && !llmBase)) {
+    return respondOffline(
+      "Melak on-device — lightweight tutor. No cloud AI needed.",
+    );
+  }
 
+  let enhanced: string | null = null;
+  if (cloudEndpoint) {
+    enhanced = await tryLmStudioCloud(
+      c.env,
+      cloudEndpoint,
+      body.message,
+      question,
+      body.history,
+    );
+  } else if (llmBase) {
+    enhanced = await tryOpenAiCompatible(
+      c.env,
+      llmBase,
+      body.message,
+      question,
+      body.history,
+    );
+  }
+
+  if (!enhanced) {
+    // Silent fallback — no client-facing error (demo-safe).
+    return respondOffline(
+      "Melak on-device — lightweight tutor. No cloud AI needed.",
+    );
+  }
+
+  await persistExchange(db, user.id, body, enhanced);
   return c.json({
-    message: reply,
+    message: enhanced,
     mode: "online" as const,
-    turnsRemaining: Math.max(0, DAILY_TURN_LIMIT - (todayCount ?? 0) - 1),
-    pilotNote: "Online tutor (needs connection). Switch off for offline mode.",
+    turnsRemaining,
+    pilotNote: cloudEndpoint
+      ? "Enhanced Melak (demo bridge). Switch off for on-device-only."
+      : "Enhanced Melak (Kasina VPS). Switch off for on-device-only mode.",
   });
 });
 

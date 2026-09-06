@@ -346,18 +346,18 @@ export const audienceCopy = {
 
 export const melakMarketingCopy = {
   en: {
-    title: "Melak — AI-assisted tutor",
+    title: "Melak — on-device tutor",
     headline: "Understanding first. Always.",
     intro:
-      "Melak (መልአክ) helps students grasp concepts in Amharic or English. It is built for learning support — not only drilling — and designed to stay useful when connectivity is limited.",
+      "Melak (መልአክ) helps students grasp concepts in Amharic or English. It is an on-device tutor by default — curriculum-grounded learning support that stays useful without wifi — with optional self-hosted enhancement when online.",
     points: [
       {
         title: "Curriculum-grounded help",
         body: "Pilot coverage starts with Grade 12 Mathematics, with explanations tied to classroom practice.",
       },
       {
-        title: "Offline-aware",
-        body: "A lightweight offline tutor runs without wifi after setup; optional cloud tutoring needs a connection.",
+        title: "On-device first",
+        body: "A lightweight tutor runs on your device without wifi after setup. When online, answers can be enhanced by Kasina’s self-hosted model — not a third-party cloud API.",
       },
       {
         title: "Helps teachers indirectly",
@@ -381,7 +381,7 @@ export const melakMarketingCopy = {
       },
       {
         title: "ከመስመር ውጭ የሚያውቅ",
-        body: "ቀላል ከመስመር ውጭ አስተማሪ ከተዘጋጀ በኋላ ያለ wifi ይሰራል፤ አማራጭ የክላውድ ትምህርት ግንኙነት ይፈልጋል።",
+        body: "ቀላል አስተማሪ በመሣሪያዎ ላይ ያለ wifi ይሰራል። በይነመረብ ሲኖር መልሶች በካሲና በራሷ በሚያስተናግደው ሞዴል ሊጠናከሩ ይችላሉ — የሶስተኛ ወገን ክላውድ አይደለም።",
       },
       {
         title: "መምህራንን በተዘዋዋሪ ይደግፋል",
@@ -586,19 +586,19 @@ export const faqCopy = {
     items: [
       {
         q: "Does it really work without internet?",
-        a: "Melak’s lightweight tutor runs on your device without wifi — grounded to practice questions when you open it from review. Optional cloud tutoring needs a connection. CBT and class sync still need internet today.",
+        a: "Melak’s on-device tutor runs without wifi after setup. When online, answers can be enhanced by Kasina’s self-hosted model (not a third-party API). Practice and CBT are being built to work offline after a hub sync; class sync still needs connectivity when uploading results.",
       },
       {
         q: "What devices does it support?",
-        a: "Right now: modern phones and laptops in a browser (Chrome or Firefox). A dedicated Android app for offline Melak is on the roadmap after this pilot.",
+        a: "Right now: modern phones and laptops in a browser (Chrome or Firefox), installable as a PWA for offline use after sync. A dedicated Android app is on the roadmap after this pilot.",
       },
       {
         q: "Is student data safe?",
-        a: "We only collect what is needed for learning and class management. We do not sell student data. See our Privacy Policy for plain-language details.",
+        a: "We only collect what is needed for learning and class management. We do not sell student data. See our Privacy Policy and data-handling notes for minors.",
       },
       {
         q: "Is this aligned with the national curriculum?",
-        a: "Practice content follows Ethiopian secondary classroom subjects, starting with Grade 12 Mathematics in this pilot. We do not claim official MoE endorsement unless a partnership is signed and listed on Partners.",
+        a: "Practice content follows Ethiopian secondary classroom subjects. Live question coverage today is Grade 12 Mathematics; Grade 11–12 expansion is planned for the pilot. We do not claim official MoE endorsement unless a partnership is signed and listed on Partners.",
       },
       {
         q: "Is Kasina only for exam prep?",
@@ -612,19 +612,19 @@ export const faqCopy = {
     items: [
       {
         q: "በእውነት ያለ በይነመረብ ይሰራል?",
-        a: "የመላክ ቀላል አስተማሪ ያለ wifi በመሣሪያዎ ላይ ይሰራል — ከግምገማ ሲከፍቱ ከልምምድ ጥያቄዎች ጋር ይገናኛል። አማራጭ የክላውድ ትምህርት ግንኙነት ይፈልጋል። CBT እና የክፍል ማመሳሰል ዛሬ በይነመረብ ይፈልጋሉ።",
+        a: "የመላክ አስተማሪ በመሣሪያዎ ላይ ያለ wifi ይሰራል። በይነመረብ ሲኖር መልሶች በካሲና በራሷ በሚያስተናግደው ሞዴል ሊጠናከሩ ይችላሉ። ልምምድ/CBT ከትምህርት ቤት ሲንክ በኋላ ከመስመር ውጭ እንዲሰሩ እየተገነቡ ነው፤ ውጤቶችን ሲላኩ ግንኙነት ያስፈልጋል።",
       },
       {
         q: "የትኞቹ መሣሪያዎች ይደገፋሉ?",
-        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ (Chrome ወይም Firefox)። ለከመስመር ውጭ መላክ የተለየ Android መተግበሪያ ከዚህ ሙከራ በኋላ በሮድማፕ ላይ ነው።",
+        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ (Chrome ወይም Firefox)፣ እንደ PWA ሊጫኑ ይችላሉ። የተለየ Android መተግበሪያ ከዚህ ሙከራ በኋላ በሮድማፕ ላይ ነው።",
       },
       {
         q: "የተማሪ ውሂብ ደህንነቱ የተጠበቀ ነው?",
-        a: "ለትምህርትና የክፍል አስተዳደር የሚያስፈልገውን ብቻ እንሰበስባለን። የተማሪ ውሂብ አንሸጥም። ዝርዝር በግላዊነት ፖሊሲ ላይ።",
+        a: "ለትምህርትና የክፍል አስተዳደር የሚያስፈልገውን ብቻ እንሰበስባለን። የተማሪ ውሂብ አንሸጥም። ዝርዝር በግላዊነት ፖሊሲና የልጅ ጥበቃ ማስታወሻዎች ላይ።",
       },
       {
         q: "ከብሔራዊ ስርዓተ ትምህርት ጋር የተጣጣመ ነው?",
-        a: "የልምምድ ይዘት የኢትዮጵያ ሁለተኛ ደረጃ ትምህርቶችን ይከተላል፣ በዚህ ሙከራ በ12ኛ ክፍል ሂሳብ ይጀምራል። ኦፊሴላዊ የሞኢ ድጋፍ ካልተፈረመና በአጋሮች ላይ ካልተዘረዘረ አንጠይቅም።",
+        a: "የልምምድ ይዘት የኢትዮጵያ ሁለተኛ ደረጃ ትምህርቶችን ይከተላል። አሁን ያለው ጥያቄ ባንክ 12ኛ ክፍል ሂሳብ ነው፤ 11ኛ–12ኛ ማስፋፋት ለሙከራው ታቅዷል። ኦፊሴላዊ የሞኢ ድጋፍ ካልተፈረመና በአጋሮች ላይ ካልተዘረዘረ አንጠይቅም።",
       },
       {
         q: "ካሲና ለፈተና ዝግጅት ብቻ ነው?",

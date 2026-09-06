@@ -38,10 +38,208 @@ const answerSchema = z.object({
   timeTakenSeconds: z.number().int().nonnegative().optional(),
 });
 
+const syncSchema = z.object({
+  clientSessionId: z.string().min(1).max(128),
+  mode: z.enum(["random", "topic", "year", "weak_topics", "cbt"]),
+  subject: z.string().default("mathematics"),
+  grade: z.number().int().default(12),
+  unit: z.string().optional(),
+  topic: z.string().optional(),
+  year: z.number().int().optional(),
+  assignmentId: z.string().min(1).optional(),
+  questionIds: z.array(z.string().min(1)).min(1).max(100),
+  answers: z
+    .array(
+      z.object({
+        questionId: z.string().min(1),
+        selectedOptionId: z.string().min(1),
+        timeTakenSeconds: z.number().int().nonnegative().optional(),
+      }),
+    )
+    .max(100),
+  completedAt: z.string().datetime().or(z.string().min(1)),
+  score: z.number().int().nonnegative().optional(),
+  total: z.number().int().positive().optional(),
+});
+
 const QUESTION_SELECT =
   "id, grade, subject, stream, year, unit, topic, stem, stem_am, options_json, correct_option_id, explanation, explanation_am, difficulty, tags_json";
 
 export const sessionsApp = new Hono<HonoEnv>();
+
+sessionsApp.get("/offline-pack", async (c) => {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+
+  const db = createDb(c.env);
+  const subject = c.req.query("subject") ?? "mathematics";
+  const grade = Number(c.req.query("grade") ?? "12");
+
+  const { data, error } = await db
+    .from("questions")
+    .select(QUESTION_SELECT)
+    .eq("subject", subject)
+    .eq("grade", grade)
+    .order("unit", { ascending: true });
+
+  if (error) return c.json({ error: error.message }, 500);
+
+  const questions = ((data ?? []) as QuestionRow[]).map((q) => mapQuestion(q));
+  return c.json({
+    subject,
+    grade,
+    count: questions.length,
+    questions,
+    syncedAt: new Date().toISOString(),
+  });
+});
+
+sessionsApp.post("/sync", zValidator("json", syncSchema), async (c) => {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+
+  const rl = rateLimit({
+    key: `session-sync:${user.id}`,
+    limit: 60,
+    windowMs: 60_000,
+  });
+  if (!rl.ok) {
+    return c.json(
+      { error: `Too many sync requests. Try again in ${rl.retryAfterSec}s.` },
+      429,
+    );
+  }
+
+  const body = c.req.valid("json");
+  const db = createDb(c.env);
+
+  const { data: existing } = await db
+    .from("practice_sessions")
+    .select("id, sync_status, score, total, completed_at")
+    .eq("user_id", user.id)
+    .eq("client_session_id", body.clientSessionId)
+    .maybeSingle();
+
+  if (existing) {
+    return c.json({
+      session: {
+        id: existing.id,
+        clientSessionId: body.clientSessionId,
+        syncStatus: existing.sync_status,
+        score: existing.score,
+        total: existing.total,
+        completedAt: existing.completed_at,
+        idempotent: true,
+      },
+    });
+  }
+
+  let syncStatus: "synced" | "late" = "synced";
+  if (body.assignmentId) {
+    const { data: assignment } = await db
+      .from("assignments")
+      .select("id, due_at")
+      .eq("id", body.assignmentId)
+      .maybeSingle();
+    if (assignment?.due_at) {
+      const due = new Date(assignment.due_at).getTime();
+      const completed = new Date(body.completedAt).getTime();
+      if (!Number.isNaN(due) && !Number.isNaN(completed) && completed > due) {
+        syncStatus = "late";
+      }
+    }
+  }
+
+  const questionIds = body.questionIds;
+  const { data: questions, error: qErr } = await db
+    .from("questions")
+    .select("id, correct_option_id")
+    .in("id", questionIds);
+  if (qErr) return c.json({ error: qErr.message }, 500);
+
+  const correctById = new Map(
+    (questions ?? []).map((q) => [q.id, q.correct_option_id as string]),
+  );
+
+  let score = 0;
+  const answerRows = body.answers.map((a) => {
+    const isCorrect = correctById.get(a.questionId) === a.selectedOptionId;
+    if (isCorrect) score += 1;
+    return {
+      id: randomUUID(),
+      question_id: a.questionId,
+      selected_option_id: a.selectedOptionId,
+      is_correct: isCorrect,
+      time_taken_seconds: a.timeTakenSeconds ?? null,
+    };
+  });
+
+  const total = body.total ?? questionIds.length;
+  const finalScore = body.score ?? score;
+  const sessionId = randomUUID();
+
+  const { error: insertErr } = await db.from("practice_sessions").insert({
+    id: sessionId,
+    user_id: user.id,
+    assignment_id: body.assignmentId ?? null,
+    subject: body.subject,
+    grade: body.grade,
+    mode: body.mode,
+    unit: body.unit ?? null,
+    topic: body.topic ?? null,
+    year: body.year ?? null,
+    question_ids: questionIds,
+    total,
+    score: finalScore,
+    completed_at: body.completedAt,
+    client_session_id: body.clientSessionId,
+    sync_status: syncStatus,
+  });
+
+  if (insertErr) {
+    if (/unique|duplicate/i.test(insertErr.message)) {
+      const { data: raced } = await db
+        .from("practice_sessions")
+        .select("id, sync_status, score, total, completed_at")
+        .eq("user_id", user.id)
+        .eq("client_session_id", body.clientSessionId)
+        .maybeSingle();
+      if (raced) {
+        return c.json({
+          session: {
+            id: raced.id,
+            clientSessionId: body.clientSessionId,
+            syncStatus: raced.sync_status,
+            score: raced.score,
+            total: raced.total,
+            completedAt: raced.completed_at,
+            idempotent: true,
+          },
+        });
+      }
+    }
+    return c.json({ error: insertErr.message }, 500);
+  }
+
+  if (answerRows.length) {
+    const { error: aErr } = await db.from("answers").insert(
+      answerRows.map((a) => ({ ...a, session_id: sessionId })),
+    );
+    if (aErr) return c.json({ error: aErr.message }, 500);
+  }
+
+  return c.json({
+    session: {
+      id: sessionId,
+      clientSessionId: body.clientSessionId,
+      syncStatus,
+      score: finalScore,
+      total,
+      completedAt: body.completedAt,
+      idempotent: false,
+    },
+  });
+});
 
 sessionsApp.post("/", zValidator("json", startSchema), async (c) => {
   const user = await requireUser(c);

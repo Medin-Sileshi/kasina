@@ -6,16 +6,27 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${SITE_NAME} (${SITE_NAME_AM})`,
     short_name: SITE_NAME,
     description: SITE_DESCRIPTION,
-    start_url: "/",
+    start_url: "/join",
     display: "standalone",
     background_color: "#161D19",
     theme_color: "#161D19",
     lang: "en",
     icons: [
       {
+        src: "/favicon.ico",
+        sizes: "48x48",
+        type: "image/x-icon",
+      },
+      {
+        src: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
         src: "/icon.png",
         sizes: "512x512",
         type: "image/png",
+        purpose: "any",
       },
       {
         src: "/apple-icon.png",

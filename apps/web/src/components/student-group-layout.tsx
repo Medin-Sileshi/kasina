@@ -3,6 +3,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  ApprovalGate,
+  needsApprovalGate,
+} from "@/components/approval-gate";
 import { StudentShell } from "@/components/student-shell";
 import { ContentSkeleton } from "@/components/ui";
 import {
@@ -83,6 +87,10 @@ export default function StudentGroupLayout({
         </p>
       </main>
     );
+  }
+
+  if (me && needsApprovalGate(me.user.approvalStatus)) {
+    return <ApprovalGate status={me.user.approvalStatus} />;
   }
 
   if (quizPlay) {

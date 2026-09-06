@@ -23,7 +23,8 @@ export default function TeacherSignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accessCode, setAccessCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [schoolInviteCode, setSchoolInviteCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +35,13 @@ export default function TeacherSignupPage() {
     try {
       await apiFetch("/teacher/signup", {
         method: "POST",
-        body: JSON.stringify({ name, email, password, accessCode }),
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          schoolInviteCode,
+          ...(phone.trim() ? { phone: phone.trim() } : {}),
+        }),
       });
       await queryClient.invalidateQueries({ queryKey: meQueryKey });
       router.push("/teacher");
@@ -48,7 +55,7 @@ export default function TeacherSignupPage() {
   return (
     <AuthCard
       title="Create teacher account"
-      subtitle="Set up your classroom on Kasina. Pilot schools need an access code from Kasina."
+      subtitle="Use the invite code from your school’s Kasina pilot contact."
       eyebrow="Teachers"
     >
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -68,6 +75,14 @@ export default function TeacherSignupPage() {
             placeholder="teacher@kasina.local"
           />
         </Field>
+        <Field label="Phone (optional)">
+          <TextInput
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="+251…"
+          />
+        </Field>
         <Field label="Password">
           <TextInput
             type="password"
@@ -77,12 +92,16 @@ export default function TeacherSignupPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
-        <Field label="Teacher access code">
+        <Field
+          label="School invite code"
+          hint="Per-school code from your Kasina pilot contact"
+        >
           <TextInput
             required
-            value={accessCode}
-            onChange={(e) => setAccessCode(e.target.value)}
-            placeholder="From your Kasina pilot contact"
+            value={schoolInviteCode}
+            onChange={(e) => setSchoolInviteCode(e.target.value)}
+            placeholder="School invite code"
+            className="font-mono uppercase tracking-wide"
           />
         </Field>
         {error ? <p className="text-sm text-error-text">{error}</p> : null}

@@ -1,6 +1,10 @@
 import { betterAuth } from "better-auth";
+import { phoneNumber } from "better-auth/plugins";
 import { Pool } from "pg";
+import { randomUUID } from "node:crypto";
 import type { ServerEnv } from "./env";
+import { createDb } from "./db";
+import { sendSms } from "./lib/sms";
 
 type Auth = ReturnType<typeof buildAuth>;
 
@@ -82,8 +86,57 @@ function buildAuth(env: ServerEnv, pool: Pool) {
           defaultValue: "student",
           input: false,
         },
+        approvalStatus: {
+          type: "string",
+          required: false,
+          defaultValue: "approved",
+          fieldName: "approval_status",
+          input: false,
+          returned: true,
+        },
+        schoolId: {
+          type: "string",
+          required: false,
+          fieldName: "school_id",
+          input: false,
+          returned: true,
+        },
       },
     },
+    plugins: [
+      phoneNumber({
+        // Map plugin fields onto migration columns (phone / phoneVerified)
+        schema: {
+          user: {
+            fields: {
+              phoneNumber: "phone",
+              phoneNumberVerified: "phoneVerified",
+            },
+          },
+        },
+        sendOTP: async ({ phoneNumber: phone, code }) => {
+          const message = `Kasina code: ${code}`;
+          const result = await sendSms(env, { to: phone, message });
+          const db = createDb(env);
+          const status = result.ok
+            ? "sent"
+            : result.mocked
+              ? "pending"
+              : "failed";
+          const { error } = await db.from("otp_send_log").insert({
+            id: randomUUID(),
+            phone,
+            purpose: "login",
+            status,
+            code_hint: code.slice(-2),
+            error: result.error ?? (result.mocked ? "SMS gateway not configured" : null),
+          });
+          if (error) {
+            console.error("[auth] otp_send_log insert failed:", error.message);
+          }
+        },
+      }),
+    ],
   });
 }
 

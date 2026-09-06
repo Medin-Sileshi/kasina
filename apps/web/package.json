@@ -15,6 +15,7 @@
     "@kasina/types": "workspace:^",
     "@tanstack/react-query": "^5.101.4",
     "better-auth": "^1.6.25",
+    "idb": "^8",
     "katex": "^0.18.1",
     "lucide-react": "^1.28.0",
     "next": "16.2.12",

@@ -5,6 +5,12 @@ import { useParams, useRouter } from "next/navigation";
 import { Flag, X } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
 import { cacheMelakQuestion } from "@/lib/melak-cache";
+import {
+  completeLocalSession,
+  getLocalSession,
+  isLocalSessionId,
+  recordLocalAnswer,
+} from "@/lib/offline-session/sync";
 import { formatTimer, useQuizStore } from "@/lib/quiz-store";
 import {
   clearQuizUi,
@@ -71,12 +77,80 @@ export default function QuizPage() {
   const [showSubmitAll, setShowSubmitAll] = useState(false);
 
   const isCbt = mode === "cbt";
+  const isLocal = isLocalSessionId(sessionId);
 
   useEffect(() => {
     if (storeSessionId === sessionId && questions.length > 0) {
       setLoading(false);
       return;
     }
+
+    if (isLocalSessionId(sessionId)) {
+      void getLocalSession(sessionId)
+        .then((local) => {
+          if (!local) {
+            setError("Local offline session not found");
+            return;
+          }
+          if (local.completedAt) {
+            router.replace(`/quiz/${sessionId}/results`);
+            return;
+          }
+          for (const q of local.questions) {
+            if (q.explanation) {
+              cacheMelakQuestion({
+                id: q.id,
+                stem: q.stem,
+                stemAm: q.stemAm,
+                unit: q.unit,
+                topic: q.topic,
+                explanation: q.explanation,
+                explanationAm: q.explanationAm,
+              });
+            }
+          }
+          const cbt = local.mode === "cbt";
+          const savedUi = loadQuizUi(local.clientSessionId);
+          reset({
+            sessionId: local.clientSessionId,
+            questions: local.questions as never,
+            contextLabel:
+              local.contextLabel ??
+              local.topic ??
+              (local.year ? `${local.year} Exam` : "Offline practice"),
+            mode: cbt ? "cbt" : "practice",
+            flagged: savedUi?.flagged ?? {},
+            timerSeconds: null,
+          });
+          if (local.answers.length) {
+            useQuizStore.setState({
+              answers: Object.fromEntries(
+                local.answers.map((a) => {
+                  const q = local.questions.find((qq) => qq.id === a.questionId);
+                  return [
+                    a.questionId,
+                    {
+                      selectedOptionId: a.selectedOptionId,
+                      isCorrect: a.isCorrect,
+                      correctOptionId: q?.correctOptionId,
+                      explanation: q?.explanation,
+                      explanationAm: q?.explanationAm,
+                      saved: true,
+                    },
+                  ];
+                }),
+              ),
+            });
+          }
+          if (savedUi != null) {
+            useQuizStore.getState().goTo(savedUi.index);
+          }
+        })
+        .catch((e: Error) => setError(e.message))
+        .finally(() => setLoading(false));
+      return;
+    }
+
     apiFetch<{
       session: {
         id: string;
@@ -219,13 +293,20 @@ export default function QuizPage() {
     setSubmitting(true);
     setError(null);
     try {
-      await apiFetch<AnswerResponse>(`/sessions/${sessionId}/answers`, {
-        method: "POST",
-        body: JSON.stringify({
+      if (isLocal) {
+        await recordLocalAnswer(sessionId, {
           questionId: question.id,
           selectedOptionId,
-        }),
-      });
+        });
+      } else {
+        await apiFetch<AnswerResponse>(`/sessions/${sessionId}/answers`, {
+          method: "POST",
+          body: JSON.stringify({
+            questionId: question.id,
+            selectedOptionId,
+          }),
+        });
+      }
       markCbtSaved(question.id, selectedOptionId);
       if (andAdvance && index < total - 1) next();
     } catch (e) {
@@ -244,17 +325,25 @@ export default function QuizPage() {
     setSubmitting(true);
     setError(null);
     try {
-      const data = await apiFetch<AnswerResponse>(
-        `/sessions/${sessionId}/answers`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            questionId: question.id,
-            selectedOptionId,
-          }),
-        },
-      );
-      markSubmitted(data.answer);
+      if (isLocal) {
+        const data = await recordLocalAnswer(sessionId, {
+          questionId: question.id,
+          selectedOptionId,
+        });
+        markSubmitted(data);
+      } else {
+        const data = await apiFetch<AnswerResponse>(
+          `/sessions/${sessionId}/answers`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              questionId: question.id,
+              selectedOptionId,
+            }),
+          },
+        );
+        markSubmitted(data.answer);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not save answer");
     } finally {
@@ -268,7 +357,11 @@ export default function QuizPage() {
       if (question && selectedOptionId && !answers[question.id]) {
         await saveCbtAnswer(false);
       }
-      await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+      if (isLocal) {
+        await completeLocalSession(sessionId);
+      } else {
+        await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+      }
       clearQuizUi(sessionId);
       router.push(`/quiz/${sessionId}/results`);
     } catch (e) {
@@ -292,7 +385,11 @@ export default function QuizPage() {
     }
     if (index >= total - 1) {
       try {
-        await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+        if (isLocal) {
+          await completeLocalSession(sessionId);
+        } else {
+          await apiFetch(`/sessions/${sessionId}/complete`, { method: "POST" });
+        }
         router.push(`/quiz/${sessionId}/results`);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Could not complete session");

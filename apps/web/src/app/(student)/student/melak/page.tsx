@@ -188,13 +188,13 @@ function MelakChat() {
             ) : (
               <WifiOff className="h-3 w-3" />
             )}
-            {isOnline ? "Offline tutor ready" : "Offline — no wifi needed"}
+            {isOnline ? "On-device ready" : "On-device — no wifi needed"}
           </span>
         </div>
         <p className="mt-2 text-sm text-gray-500">
-          Lightweight Grade 12 Math tutor — runs on your device. Cloud AI is
-          optional.
-          {turnsRemaining != null ? ` · ${turnsRemaining} syncs left today` : null}
+          On-device Grade 12 Math tutor by default. Enhanced answers use Kasina’s
+          own online model when available.
+          {turnsRemaining != null ? ` · ${turnsRemaining} enhanced turns left today` : null}
         </p>
         {questionId ? (
           <p className="mt-1 text-xs font-medium text-primary-700">
@@ -211,7 +211,7 @@ function MelakChat() {
               onChange={(e) => setOnlineMode(e.target.checked)}
               className="rounded border-gray-300"
             />
-            Use cloud tutor when online (uses more data; offline is default)
+            Use Enhanced (online) when available (uses more data; On-device is default)
           </label>
         ) : null}
       </header>
@@ -244,7 +244,7 @@ function MelakChat() {
               >
                 {m.role === "assistant" && m.mode ? (
                   <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-gray-400">
-                    {m.mode === "offline" ? "Offline Melak" : "Cloud Melak"}
+                    {m.mode === "offline" ? "On-device" : "Enhanced (online)"}
                   </p>
                 ) : null}
                 <div className="prose-sm">
@@ -289,7 +289,7 @@ function MelakChat() {
             </PrimaryButton>
           </div>
           <p className="mt-2 text-xs text-gray-400">
-            Offline by default · Grade 12 Math · Not a substitute for your teacher
+            On-device by default · Grade 12 Math · Not a substitute for your teacher
           </p>
         </div>
       </Card>

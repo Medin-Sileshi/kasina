@@ -4,9 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, ChevronDown, ChevronLeft } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronLeft, Download } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
 import { useQuizStore, type QuizQuestion } from "@/lib/quiz-store";
+import {
+  pullOfflinePack,
+  startLocalSession,
+} from "@/lib/offline-session/sync";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -63,6 +67,8 @@ export default function MathematicsSubjectPage() {
   const [starting, setStarting] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [openUnit, setOpenUnit] = useState<string | null>(null);
+  const [syncing, setSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState<string | null>(null);
 
   const metaQuery = useQuery({
     queryKey: ["subjects", "mathematics", "meta"],
@@ -81,6 +87,28 @@ export default function MathematicsSubjectPage() {
     setStarting(true);
     setActionError(null);
     try {
+      const offline =
+        typeof navigator !== "undefined" && navigator.onLine === false;
+      if (offline) {
+        const local = await startLocalSession({
+          mode: (body.mode as "random" | "topic" | "year" | "cbt") ?? "random",
+          subject: (body.subject as string) ?? "mathematics",
+          grade: (body.grade as number) ?? 12,
+          unit: body.unit as string | undefined,
+          topic: body.topic as string | undefined,
+          year: body.year as number | undefined,
+          count: (body.count as number) ?? 10,
+          contextLabel: label,
+        });
+        reset({
+          sessionId: local.session.clientSessionId,
+          questions: local.questions,
+          contextLabel: label,
+        });
+        router.push(`/quiz/${local.session.clientSessionId}`);
+        return;
+      }
+
       const data = await apiFetch<StartResponse>("/sessions", {
         method: "POST",
         body: JSON.stringify(body),
@@ -94,6 +122,23 @@ export default function MathematicsSubjectPage() {
     } catch (e) {
       setActionError(e instanceof Error ? e.message : "Could not start session");
       setStarting(false);
+    }
+  }
+
+  async function onSyncOffline() {
+    setSyncing(true);
+    setSyncMessage(null);
+    setActionError(null);
+    try {
+      const pack = await pullOfflinePack({
+        subject: "mathematics",
+        grade: 12,
+      });
+      setSyncMessage(`Synced ${pack.count} questions for offline practice.`);
+    } catch (e) {
+      setActionError(e instanceof Error ? e.message : "Sync failed");
+    } finally {
+      setSyncing(false);
     }
   }
 
@@ -186,6 +231,17 @@ export default function MathematicsSubjectPage() {
           {starting ? "Starting…" : "Practice 10 random questions"}
         </PrimaryButton>
         <div className="mt-3 flex flex-wrap gap-2">
+          <SecondaryButton
+            type="button"
+            className="sm:w-auto"
+            disabled={syncing}
+            onClick={() => void onSyncOffline()}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Download className="h-4 w-4" />
+              {syncing ? "Syncing…" : "Sync for offline"}
+            </span>
+          </SecondaryButton>
           <Link href="/cbt">
             <SecondaryButton type="button" className="sm:w-auto">
               CBT exam practice
@@ -197,6 +253,9 @@ export default function MathematicsSubjectPage() {
             </SecondaryButton>
           </Link>
         </div>
+        {syncMessage ? (
+          <p className="mt-2 text-sm text-success-text">{syncMessage}</p>
+        ) : null}
 
         {meta.years.length > 0 ? (
           <>

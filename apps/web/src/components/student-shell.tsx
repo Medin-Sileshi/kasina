@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bell, User, Wifi, WifiOff } from "lucide-react";
 import { BrandAtmosphere } from "@/components/brand-chrome";
 import { KasinaLogo } from "@/components/kasina-logo";
+import { getLastSyncedAt } from "@/lib/offline-session/sync";
 
 const links = [
   { href: "/student", label: "Home", exact: true },
@@ -24,6 +26,59 @@ function linkActive(pathname: string, href: string, exact?: boolean) {
     return pathname.startsWith("/subjects") || pathname.startsWith("/quiz");
   }
   return pathname === href || pathname.startsWith(href);
+}
+
+function formatSynced(iso: string | null) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function SyncIndicator() {
+  const [online, setOnline] = useState(true);
+  const [lastSynced, setLastSynced] = useState<string | null>(null);
+
+  useEffect(() => {
+    setOnline(typeof navigator !== "undefined" ? navigator.onLine : true);
+    const on = () => setOnline(true);
+    const off = () => setOnline(false);
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+
+    void getLastSyncedAt()
+      .then((v) => setLastSynced(v))
+      .catch(() => setLastSynced(null));
+
+    return () => {
+      window.removeEventListener("online", on);
+      window.removeEventListener("offline", off);
+    };
+  }, []);
+
+  const syncedLabel = formatSynced(lastSynced);
+
+  return (
+    <span
+      className="hidden items-center gap-1.5 text-[11px] font-medium text-white/65 sm:inline-flex"
+      title={syncedLabel ? `Last synced ${syncedLabel}` : "Not synced yet"}
+    >
+      {online ? (
+        <Wifi className="h-3.5 w-3.5" />
+      ) : (
+        <WifiOff className="h-3.5 w-3.5" />
+      )}
+      {online ? "Online" : "Offline"}
+      {syncedLabel ? (
+        <span className="text-white/40">· {syncedLabel}</span>
+      ) : null}
+    </span>
+  );
 }
 
 export function StudentNav({ userName }: { userName?: string }) {
@@ -55,7 +110,8 @@ export function StudentNav({ userName }: { userName?: string }) {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <span className="hidden text-xs font-medium text-white/65 sm:inline">
+          <SyncIndicator />
+          <span className="hidden text-xs font-medium text-white/65 lg:inline">
             EN <span className="text-white/30">|</span> አማ
           </span>
           <button

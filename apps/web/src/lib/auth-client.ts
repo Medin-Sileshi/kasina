@@ -1,4 +1,5 @@
 import { createAuthClient } from "better-auth/react";
+import { phoneNumberClient } from "better-auth/client/plugins";
 
 export const apiBase =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -8,6 +9,7 @@ export const apiBase =
 
 export const authClient = createAuthClient({
   baseURL: apiBase,
+  plugins: [phoneNumberClient()],
 });
 
 export class ApiError extends Error {

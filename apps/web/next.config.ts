@@ -71,6 +71,22 @@ const nextConfig: NextConfig = {
         source: "/teacher/signup",
         destination: `${apiProxyTarget}/teacher/signup`,
       },
+      {
+        source: "/schools",
+        destination: `${apiProxyTarget}/schools`,
+      },
+      {
+        source: "/schools/:path*",
+        destination: `${apiProxyTarget}/schools/:path*`,
+      },
+      {
+        source: "/admin",
+        destination: `${apiProxyTarget}/admin`,
+      },
+      {
+        source: "/admin/:path*",
+        destination: `${apiProxyTarget}/admin/:path*`,
+      },
     ];
   },
 };

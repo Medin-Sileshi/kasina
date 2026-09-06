@@ -1,7 +1,9 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { PwaRegister } from "@/components/pwa-register";
+import { registerOfflineSync } from "@/lib/offline-session/register-sync";
 
 export function Providers({ children }: { children: ReactNode }) {
   const [client] = useState(
@@ -23,5 +25,14 @@ export function Providers({ children }: { children: ReactNode }) {
       }),
   );
 
-  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+  useEffect(() => {
+    registerOfflineSync();
+  }, []);
+
+  return (
+    <QueryClientProvider client={client}>
+      <PwaRegister />
+      {children}
+    </QueryClientProvider>
+  );
 }

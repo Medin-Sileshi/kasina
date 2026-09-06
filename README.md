@@ -44,6 +44,10 @@ pnpm db:seed
 
 ## Docs
 
+- Architecture: `docs/architecture.md`
+- Content status: `docs/content-status.md`
+- Data & child protection: `docs/data-and-child-protection.md`
+- SMS gateway ops: `docs/ops/sms-gateway.md`
 - MVP deploy: `docs/mvp/`
 - Vision / demo: `docs/vision/`
 

@@ -38,6 +38,8 @@ const joinSchema = z.object({
   displayName: z.string().min(1),
   email: z.string().email(),
   password: z.string().min(8),
+  phone: z.string().min(7).max(32).optional(),
+  schoolId: z.string().min(1),
 });
 
 export const classesApp = new Hono<HonoEnv>();
@@ -149,9 +151,17 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
   const body = c.req.valid("json");
   const inviteCode = body.inviteCode.trim().toUpperCase();
 
+  const { data: school, error: schoolErr } = await db
+    .from("schools")
+    .select("id")
+    .eq("id", body.schoolId)
+    .maybeSingle();
+  if (schoolErr) return c.json({ error: schoolErr.message }, 500);
+  if (!school) return c.json({ error: "School not found" }, 404);
+
   const { data: klass, error: classErr } = await db
     .from("classes")
-    .select("id, name, grade, subject, invite_code")
+    .select("id, name, grade, subject, invite_code, school_id")
     .eq("invite_code", inviteCode)
     .maybeSingle();
 
@@ -161,6 +171,7 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
 
   let userId: string | null = null;
   let authHeaders: Headers | null = null;
+  let isNewSignup = false;
 
   const existingSession = await auth.api.getSession({
     headers: c.req.raw.headers,
@@ -169,7 +180,12 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
     userId = existingSession.user.id;
     await db
       .from("user")
-      .update({ name: body.displayName, role: "student" })
+      .update({
+        name: body.displayName,
+        role: "student",
+        school_id: body.schoolId,
+        ...(body.phone ? { phone: body.phone.trim() } : {}),
+      })
       .eq("id", userId);
   } else {
     try {
@@ -186,7 +202,16 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
       const signed = unwrapAuthUser(signUp);
       userId = signed.userId;
       authHeaders = signed.headers;
-      await db.from("user").update({ role: "student" }).eq("id", userId);
+      isNewSignup = true;
+      await db
+        .from("user")
+        .update({
+          role: "student",
+          approval_status: "pending",
+          school_id: body.schoolId,
+          ...(body.phone ? { phone: body.phone.trim() } : {}),
+        })
+        .eq("id", userId);
     } catch {
       try {
         const signedIn = await auth.api.signInEmail({
@@ -200,7 +225,12 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
         authHeaders = signed.headers;
         await db
           .from("user")
-          .update({ name: body.displayName, role: "student" })
+          .update({
+            name: body.displayName,
+            role: "student",
+            school_id: body.schoolId,
+            ...(body.phone ? { phone: body.phone.trim() } : {}),
+          })
           .eq("id", userId);
       } catch (err) {
         const message =
@@ -211,6 +241,20 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
   }
 
   if (!userId) return c.json({ error: "Could not resolve student" }, 400);
+
+  if (isNewSignup) {
+    const { error: reqErr } = await db.from("signup_requests").insert({
+      id: randomUUID(),
+      user_id: userId,
+      role: "student",
+      name: body.displayName,
+      phone: body.phone?.trim() || body.email,
+      email: body.email,
+      school_id: body.schoolId,
+      status: "pending",
+    });
+    if (reqErr) return c.json({ error: reqErr.message }, 500);
+  }
 
   const { error: memberErr } = await db.from("class_members").upsert({
     class_id: klass.id,
@@ -224,6 +268,9 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
       email: body.email,
       name: body.displayName,
       role: "student" as const,
+      approvalStatus: isNewSignup ? ("pending" as const) : undefined,
+      schoolId: body.schoolId,
+      phone: body.phone?.trim() ?? null,
     },
     class: {
       id: klass.id,
@@ -232,6 +279,7 @@ classesApp.post("/join", zValidator("json", joinSchema), async (c) => {
       subject: klass.subject,
       inviteCode: klass.invite_code,
     },
+    pendingApproval: isNewSignup,
   });
 
   if (authHeaders) {

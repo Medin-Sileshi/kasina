@@ -8,10 +8,28 @@ BETTER_AUTH_SECRET=dev-secret-change-me-to-a-long-random-string
 BETTER_AUTH_URL=http://localhost:8787
 APP_URL=http://localhost:3000
 
-# Melak optional cloud tutor (offline tutor works without this)
-ANTHROPIC_API_KEY=
+# Deprecated — unused. Melak online uses MELAK_LLM_* instead.
+# ANTHROPIC_API_KEY=
 
-# Teacher signup access code (required for POST /teacher/signup in production)
+# Self-hosted Melak LLM (OpenAI-compatible chat/completions). Optional.
+# MELAK_LLM_BASE_URL=http://127.0.0.1:8080/v1
+# MELAK_LLM_API_KEY=
+# MELAK_LLM_MODEL=qwen/qwen3.5-9b
+
+# Demo bridge: LM Studio native chat via Cloudflare Tunnel (or LAN).
+# Full chat URL — regenerates when cloudflared restarts; do not commit live values.
+# Start tunnel with: cloudflared tunnel --protocol http2 --url http://192.168.x.x:1234
+# MELAK_CLOUD_ENDPOINT=https://YOUR-SUBDOMAIN.trycloudflare.com/api/v1/chat
+# Local LAN example (laptop only):
+# MELAK_CLOUD_ENDPOINT=http://192.168.8.115:1234/api/v1/chat
+
+# Device SMS gateway (android-sms-gateway style). Optional in local dev (mocked).
+# SMS_GATEWAY_URL=https://api.sms-gate.app/3rdparty/v1/messages
+# SMS_GATEWAY_USER=
+# SMS_GATEWAY_PASSWORD=
+# SMS_GATEWAY_TOKEN=
+
+# Teacher signup: per-school invite codes preferred; this secret is an admin override.
 TEACHER_SIGNUP_SECRET=dev-teacher-signup-change-me
 
 # Production URLs (not for .dev.vars file on laptop):

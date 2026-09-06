@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import {
+  ApprovalGate,
+  needsApprovalGate,
+} from "@/components/approval-gate";
 import { TeacherShell } from "@/components/teacher-shell";
 import {
   TeacherChromeProvider,
@@ -129,6 +133,13 @@ export default function TeacherGroupLayout({
         </p>
       </main>
     );
+  }
+
+  if (
+    meQuery.data &&
+    needsApprovalGate(meQuery.data.user.approvalStatus)
+  ) {
+    return <ApprovalGate status={meQuery.data.user.approvalStatus} />;
   }
 
   return (

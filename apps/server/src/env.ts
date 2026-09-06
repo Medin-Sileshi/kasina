@@ -21,10 +21,29 @@ export type ServerEnv = {
   BETTER_AUTH_SECRET: string;
   BETTER_AUTH_URL: string;
   APP_URL: string;
-  /** Anthropic API key for Melak chat pilot (Vision M1). */
+  /**
+   * @deprecated Unused — Melak online uses MELAK_LLM_* (self-hosted VPS).
+   * Kept optional for transition; do not wire new code to this.
+   */
   ANTHROPIC_API_KEY?: string;
   /** Shared access code required for POST /teacher/signup (pilot schools only). */
   TEACHER_SIGNUP_SECRET?: string;
+  /** android-sms-gateway style base or messages endpoint URL. */
+  SMS_GATEWAY_URL?: string;
+  SMS_GATEWAY_USER?: string;
+  SMS_GATEWAY_PASSWORD?: string;
+  /** Prefer over Basic auth when set (Bearer token). */
+  SMS_GATEWAY_TOKEN?: string;
+  /** OpenAI-compatible chat/completions base (e.g. http://vps:8080/v1). */
+  MELAK_LLM_BASE_URL?: string;
+  MELAK_LLM_API_KEY?: string;
+  MELAK_LLM_MODEL?: string;
+  /**
+   * Full URL to LM Studio native chat (demo bridge / Cloudflare tunnel).
+   * Example: https://….trycloudflare.com/api/v1/chat
+   * Prefer this over MELAK_LLM_BASE_URL when set. Do not commit live tunnel URLs.
+   */
+  MELAK_CLOUD_ENDPOINT?: string;
 };
 
 export type AppVariables = {

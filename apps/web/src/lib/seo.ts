@@ -8,19 +8,19 @@ export const SITE_NAME_AM = "ካሲና";
 
 /** Default description optimized for brand + product queries. */
 export const SITE_DESCRIPTION =
-  "Kasina (ካሲና) is an Ethiopian EdTech platform. Melak helps Grade 11–12 students understand lessons in Amharic or English, with classroom tools for teachers. Piloting in Addis Ababa.";
+  "Kasina (ካሲና) is an Ethiopian EdTech platform. Melak is an on-device tutor for Grade 12 Mathematics (Grade 11–12 expansion planned), with classroom tools for teachers. Piloting in Addis Ababa government schools.";
 
 export const SITE_KEYWORDS = [
   "Kasina",
   "ካሲና",
   "Kasina Ethiopia",
   "Kasina Melak",
-  "Melak AI tutor",
+  "Melak on-device tutor",
   "መላክ",
   "Ethiopian EdTech",
   "Ethiopia secondary school",
   "Grade 12 Mathematics",
-  "offline AI tutor Ethiopia",
+  "offline tutor Ethiopia",
   "Addis Ababa education",
   "kasina.et",
 ];
@@ -35,20 +35,20 @@ type PageSeo = {
 export const marketingPages = {
   home: {
     path: "/",
-    title: "Kasina (ካሲና) | Melak AI tutor for Ethiopian classrooms",
+    title: "Kasina (ካሲና) | On-device Melak tutor for Ethiopian classrooms",
     description: SITE_DESCRIPTION,
   },
   about: {
     path: "/about",
     title: "About Kasina (ካሲና)",
     description:
-      "Learn about Kasina (ካሲና) — Ethiopian secondary EdTech building Melak, an offline-aware AI tutor for students and teachers in Addis Ababa pilot schools.",
+      "Learn about Kasina (ካሲና) — Ethiopian secondary EdTech building Melak, an on-device tutor with self-hosted enhancement when online, for Addis Ababa government-school pilots.",
   },
   students: {
     path: "/students",
     title: "Kasina for Students",
     description:
-      "Study with Kasina and Melak — clear explanations in Amharic or English, practice tools, and offline-friendly support for Ethiopian secondary students.",
+      "Study with Kasina and Melak — on-device explanations in Amharic or English, practice tools, and offline-friendly support for Ethiopian secondary students.",
   },
   teachers: {
     path: "/teachers",
@@ -58,9 +58,9 @@ export const marketingPages = {
   },
   melak: {
     path: "/melak",
-    title: "Melak — Kasina’s AI tutor",
+    title: "Melak — Kasina’s on-device tutor",
     description:
-      "Melak (መላክ) is Kasina’s AI-assisted tutor for Ethiopian classrooms — curriculum-grounded help in Amharic and English, designed to work when connectivity is weak.",
+      "Melak (መላክ) is Kasina’s on-device tutor for Ethiopian classrooms — curriculum-grounded help in Amharic and English, enhanced by a self-hosted model when online.",
   },
   pilot: {
     path: "/pilot",

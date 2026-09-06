@@ -6,6 +6,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Star, Trophy, TrendingUp, Target } from "lucide-react";
 import { apiFetch } from "@/lib/auth-client";
+import {
+  completeLocalSession,
+  getLocalSession,
+  isLocalSessionId,
+} from "@/lib/offline-session/sync";
 import { useQuizStore, type QuizQuestion } from "@/lib/quiz-store";
 import {
   PrimaryButton,
@@ -43,6 +48,31 @@ export default function ResultsPage() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["session", params.sessionId, "results"],
     queryFn: async () => {
+      if (isLocalSessionId(params.sessionId)) {
+        let local = await getLocalSession(params.sessionId);
+        if (!local) throw new Error("Local session not found");
+        if (!local.completedAt) {
+          local = await completeLocalSession(params.sessionId);
+        }
+        return {
+          session: {
+            id: local.clientSessionId,
+            score: local.score ?? 0,
+            total: local.total ?? local.questions.length,
+            completedAt: local.completedAt ?? null,
+            topic: local.topic ?? null,
+            unit: local.unit ?? null,
+            mode: local.mode,
+          },
+          questions: local.questions,
+          answers: local.answers.map((a) => ({
+            questionId: a.questionId,
+            selectedOptionId: a.selectedOptionId,
+            isCorrect: Boolean(a.isCorrect),
+          })),
+        } satisfies SessionPayload;
+      }
+
       let payload = await apiFetch<SessionPayload>(
         `/sessions/${params.sessionId}`,
       );

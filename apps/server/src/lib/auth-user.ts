@@ -1,5 +1,6 @@
 import type { Context } from "hono";
 import { createAuth, type Auth, withPgRetry } from "../auth";
+import { createDb } from "../db";
 import type { AppVariables, ServerEnv } from "../env";
 
 type HonoEnv = {
@@ -12,6 +13,9 @@ export type AuthUser = {
   email: string;
   name: string;
   role: "student" | "teacher" | "admin";
+  approvalStatus?: string;
+  phone?: string;
+  schoolId?: string | null;
 };
 
 type SessionResult = Awaited<ReturnType<Auth["api"]["getSession"]>>;
@@ -83,12 +87,38 @@ export async function requireUser(
     email: string;
     name: string;
     role?: string;
+    approvalStatus?: string;
+    phone?: string;
+    phoneNumber?: string;
+    schoolId?: string | null;
   };
+
+  let approvalStatus = user.approvalStatus;
+  let phone = user.phone ?? user.phoneNumber;
+  let schoolId = user.schoolId ?? null;
+
+  if (approvalStatus === undefined || phone === undefined) {
+    const db = createDb(c.env);
+    const { data: row } = await db
+      .from("user")
+      .select("approval_status, phone, school_id")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (row) {
+      approvalStatus = approvalStatus ?? row.approval_status ?? undefined;
+      phone = phone ?? row.phone ?? undefined;
+      schoolId = schoolId ?? row.school_id ?? null;
+    }
+  }
+
   return {
     id: user.id,
     email: user.email,
     name: user.name,
     role: (user.role ?? "student") as AuthUser["role"],
+    approvalStatus,
+    phone,
+    schoolId,
   };
 }
 
@@ -99,6 +129,17 @@ export async function requireTeacher(
   if (!isAuthUser(user)) return user;
   if (user.role !== "teacher" && user.role !== "admin") {
     return c.json({ error: "Teacher access required" }, 403);
+  }
+  return user;
+}
+
+export async function requireAdmin(
+  c: Context<HonoEnv>,
+): Promise<AuthUser | Response> {
+  const user = await requireUser(c);
+  if (!isAuthUser(user)) return user;
+  if (user.role !== "admin") {
+    return c.json({ error: "Admin access required" }, 403);
   }
   return user;
 }

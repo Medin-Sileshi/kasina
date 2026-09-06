@@ -47,7 +47,7 @@ const notoEthiopic = Noto_Serif_Ethiopic({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Kasina (${SITE_NAME_AM}) | Melak AI tutor for Ethiopian classrooms`,
+    default: `Kasina (${SITE_NAME_AM}) | On-device Melak tutor for Ethiopian classrooms`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -71,20 +71,20 @@ export const metadata: Metadata = {
     alternateLocale: ["am_ET"],
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `Kasina (${SITE_NAME_AM}) | Melak AI tutor for Ethiopian classrooms`,
+    title: `Kasina (${SITE_NAME_AM}) | On-device Melak tutor for Ethiopian classrooms`,
     description: SITE_DESCRIPTION,
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Kasina (ካሲና) — Melak AI tutor for Ethiopian classrooms",
+        alt: "Kasina (ካሲና) — On-device Melak tutor for Ethiopian classrooms",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `Kasina (${SITE_NAME_AM}) | Melak AI tutor for Ethiopian classrooms`,
+    title: `Kasina (${SITE_NAME_AM}) | On-device Melak tutor for Ethiopian classrooms`,
     description: SITE_DESCRIPTION,
     images: ["/opengraph-image.png"],
   },
@@ -100,8 +100,13 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   other: {
     "geo.region": "ET-AA",

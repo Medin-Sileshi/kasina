@@ -12,6 +12,8 @@ import { subjectsApp } from "./routes/subjects";
 import { textbooksApp } from "./routes/textbooks";
 import { melakApp } from "./routes/melak";
 import { teacherSignupApp } from "./routes/teacher-signup";
+import { schoolsApp } from "./routes/schools";
+import { adminApp } from "./routes/admin";
 
 type HonoEnv = {
   Bindings: ServerEnv;
@@ -163,6 +165,12 @@ app.get("/me", async (c) => {
   };
   const role = (user.role ?? "student") as "student" | "teacher" | "admin";
 
+  const { data: profile } = await db
+    .from("user")
+    .select("approval_status, phone, school_id")
+    .eq("id", user.id)
+    .maybeSingle();
+
   let classes: Array<{
     id: string;
     name: string;
@@ -212,6 +220,9 @@ app.get("/me", async (c) => {
       email: user.email,
       name: user.name,
       role,
+      approvalStatus: profile?.approval_status ?? "approved",
+      phone: profile?.phone ?? null,
+      schoolId: profile?.school_id ?? null,
     },
     classes,
   });
@@ -285,5 +296,7 @@ app.route("/subjects", subjectsApp);
 app.route("/textbooks", textbooksApp);
 app.route("/melak", melakApp);
 app.route("/teacher/signup", teacherSignupApp);
+app.route("/schools", schoolsApp);
+app.route("/admin", adminApp);
 
 export default app;
