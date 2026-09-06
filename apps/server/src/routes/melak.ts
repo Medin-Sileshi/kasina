@@ -21,7 +21,7 @@ const chatSchema = z.object({
   questionId: z.string().optional(),
   sessionId: z.string().optional(),
   /** When true and a cloud/VPS endpoint is configured, try enhanced Melak. */
-  online: z.boolean().optional().default(false),
+  online: z.boolean().optional().default(true),
   history: z
     .array(
       z.object({
@@ -394,7 +394,7 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
 
   if (!body.online || (!cloudEndpoint && !llmBase)) {
     return respondOffline(
-      "Melak on-device — lightweight tutor. No cloud AI needed.",
+      "Melak on-device — lightweight tutor fallback.",
     );
   }
 
@@ -429,8 +429,8 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
     mode: "online" as const,
     turnsRemaining,
     pilotNote: cloudEndpoint
-      ? "Enhanced Melak (demo bridge). Switch off for on-device-only."
-      : "Enhanced Melak (Kasina VPS). Switch off for on-device-only mode.",
+      ? "Enhanced Melak (demo bridge). Uncheck Enhanced for on-device only."
+      : "Enhanced Melak (Kasina VPS). Uncheck Enhanced for on-device only.",
   });
 });
 

@@ -46,7 +46,7 @@ function MelakChat() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [turnsRemaining, setTurnsRemaining] = useState<number | null>(null);
-  const [onlineMode, setOnlineMode] = useState(false);
+  const [onlineMode, setOnlineMode] = useState(true);
   const [isOnline, setIsOnline] = useState(true);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -202,12 +202,16 @@ function MelakChat() {
             ) : (
               <WifiOff className="h-3 w-3" />
             )}
-            {isOnline ? "On-device ready" : "On-device — no wifi needed"}
+            {isOnline
+              ? onlineMode
+                ? "Enhanced when available"
+                : "On-device only"
+              : "On-device — no wifi needed"}
           </span>
         </div>
         <p className="mt-2 text-sm text-gray-500">
-          On-device Grade 12 Math tutor by default. Enhanced answers use Kasina’s
-          own online model when available.
+          Enhanced (online) Melak by default. Falls back to on-device when
+          offline or the model is unavailable.
           {turnsRemaining != null ? ` · ${turnsRemaining} enhanced turns left today` : null}
         </p>
         {questionId ? (
@@ -225,7 +229,7 @@ function MelakChat() {
               onChange={(e) => setOnlineMode(e.target.checked)}
               className="rounded border-gray-300"
             />
-            Use Enhanced (online) when available (uses more data; On-device is default)
+            Use Enhanced (online) when available (falls back to on-device)
           </label>
         ) : null}
       </header>
@@ -314,7 +318,8 @@ function MelakChat() {
             </PrimaryButton>
           </div>
           <p className="mt-2 text-xs text-gray-400">
-            On-device by default · Grade 12 Math · Not a substitute for your teacher
+            Enhanced by default · falls back on-device · Grade 12 Math · Not a
+            substitute for your teacher
           </p>
         </div>
       </Card>
