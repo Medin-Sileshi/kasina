@@ -16,7 +16,7 @@ export const TABLES = {
   assignments: "Class assignments",
   practice_sessions: "Student quiz sessions (+ client_session_id, sync_status)",
   answers: "Per-question answers",
-  melak_messages: "Melak chat turns",
+  melak_messages: "Adey AI / Melak chat turns (chat_id for thread isolation)",
   signup_requests: "Pending student/teacher signup approvals",
   admin_audit_log: "Kasina-admin approve/reject/revoke actions",
   roster_audit_log: "School cascade roster actions (school_admin / teacher)",

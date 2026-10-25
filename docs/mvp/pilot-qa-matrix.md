@@ -1,14 +1,12 @@
-# Pilot — Device QA matrix & offline expectations
+# Pilot — Device QA matrix & low-bandwidth expectations
 
-## Offline / airplane mode
+## Network / weak connection
 
-MVP **requires network**. There is no offline SQLite sync.
+Kasina is **online-first**. There is no full offline product promise. IndexedDB may **queue** practice answers and flush on reconnect; the student shell should show pending queue state when applicable.
 
-When offline or the API is unreachable, the web app shows:
+When the API is unreachable, the web app shows offline / cannot-reach-server messaging. Students should reconnect first — do not ask them to “force refresh” as the first step.
 
-> You appear to be offline… / Cannot reach the server…
-
-Students should retry when Wi‑Fi returns. Do not ask them to “force refresh” as the first step — reconnect first.
+**Adey AI:** enhanced mode needs the model endpoint; basic fallback may still reply when the model is down.
 
 ## QA matrix (critical path)
 

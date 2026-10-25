@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { Bell, User, Wifi, WifiOff } from "lucide-react";
 import { BrandAtmosphere } from "@/components/brand-chrome";
 import { KasinaLogo } from "@/components/kasina-logo";
-import { getLastSyncedAt } from "@/lib/offline-session/sync";
+import {
+  getLastSyncedAt,
+  getPendingQueueCount,
+} from "@/lib/offline-session/sync";
 
 const links = [
   { href: "/student", label: "Home", exact: true },
   { href: "/subjects/mathematics", label: "Subjects" },
-  { href: "/student/melak", label: "Melak" },
+  { href: "/student/melak", label: "Adey AI" },
   { href: "/cbt", label: "CBT" },
   { href: "/read/mathematics", label: "Textbook" },
   { href: "/progress", label: "Progress" },
@@ -43,38 +46,68 @@ function formatSynced(iso: string | null) {
 function SyncIndicator() {
   const [online, setOnline] = useState(true);
   const [lastSynced, setLastSynced] = useState<string | null>(null);
+  const [pending, setPending] = useState(0);
 
   useEffect(() => {
     setOnline(typeof navigator !== "undefined" ? navigator.onLine : true);
-    const on = () => setOnline(true);
-    const off = () => setOnline(false);
+    const refreshPending = () => {
+      void getPendingQueueCount()
+        .then((n) => setPending(n))
+        .catch(() => setPending(0));
+    };
+    const on = () => {
+      setOnline(true);
+      refreshPending();
+    };
+    const off = () => {
+      setOnline(false);
+      refreshPending();
+    };
     window.addEventListener("online", on);
     window.addEventListener("offline", off);
 
     void getLastSyncedAt()
       .then((v) => setLastSynced(v))
       .catch(() => setLastSynced(null));
+    refreshPending();
+
+    const interval = window.setInterval(refreshPending, 15_000);
 
     return () => {
       window.removeEventListener("online", on);
       window.removeEventListener("offline", off);
+      window.clearInterval(interval);
     };
   }, []);
 
   const syncedLabel = formatSynced(lastSynced);
+  const queueTitle =
+    pending > 0
+      ? `${pending} saved — will send when you're online`
+      : syncedLabel
+        ? `Last synced ${syncedLabel}`
+        : "Not synced yet";
 
   return (
     <span
       className="hidden items-center gap-1.5 text-[11px] font-medium text-white/65 sm:inline-flex"
-      title={syncedLabel ? `Last synced ${syncedLabel}` : "Not synced yet"}
+      title={queueTitle}
     >
       {online ? (
         <Wifi className="h-3.5 w-3.5" />
       ) : (
         <WifiOff className="h-3.5 w-3.5" />
       )}
-      {online ? "Online" : "Offline"}
-      {syncedLabel ? (
+      {pending > 0 ? (
+        <span className="text-accent-400">
+          Saved · {pending} pending
+        </span>
+      ) : online ? (
+        "Online"
+      ) : (
+        "Offline"
+      )}
+      {pending === 0 && syncedLabel ? (
         <span className="text-white/40">· {syncedLabel}</span>
       ) : null}
     </span>

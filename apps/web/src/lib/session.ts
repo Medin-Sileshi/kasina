@@ -61,3 +61,30 @@ export function useSignOut() {
 export function isUnauthorized(error: unknown): boolean {
   return error instanceof ApiError && error.status === 401;
 }
+
+/** Post-login / wrong-shell home path by role. */
+export function homePathForRole(role: string | undefined | null): string {
+  switch (role) {
+    case "school_admin":
+      return "/school-admin";
+    case "admin":
+      return "/medin";
+    case "teacher":
+      return "/teacher";
+    case "student":
+    default:
+      return "/student";
+  }
+}
+
+/** Fetch /me after auth and route to the correct shell. */
+export async function redirectAfterAuth(
+  router: { push: (href: string) => void },
+): Promise<void> {
+  try {
+    const me = await apiFetch<MeResponse>("/me");
+    router.push(homePathForRole(me.user.role));
+  } catch {
+    router.push("/student");
+  }
+}

@@ -1,5 +1,7 @@
 # M2 — Teacher Classroom Loop
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**.
+
 **Window:** Week 3–4  
 **Depends on:** M1 exit criteria  
 **Purpose:** Make Kasina a classroom product — not only a practice app.  
@@ -48,7 +50,7 @@ Home
 ### Teacher home — `/teacher`
 
 - [ ] List classes for logged-in teacher
-- [ ] Create class (name, grade=12, subject=mathematics)
+- [ ] Create class (name, grade=12, subject=mathematics) — _Grade 11 and further subjects arrive in K3; multi-grade class create stays in the backlog._
 - [ ] Empty state: “Create your first class”
 
 ### Class detail — `/teacher/classes/:classId`
@@ -132,7 +134,7 @@ All must be true:
 
 ## Out of scope for M2
 
-- Heatmaps, PDF export, school admin multi-class hierarchy  
+- Heatmaps, PDF export, school admin multi-class hierarchy _(a school-admin roster and school cascade shipped afterwards)_  
 - SMS invites, email blasts  
-- Melak, CBT, textbooks  
+- Melak (now **Adey AI**), CBT, textbooks _(all added later as amplifiers of this loop)_  
 - Perfect weak-topic UX (good enough aggregate OK; M3 deepens)

@@ -286,3 +286,13 @@ export async function flushSyncQueue() {
   const remaining = await db.count("answer_queue");
   return { flushed, remaining };
 }
+
+/** Pending practice sessions waiting to sync (for student-shell queue UX). */
+export async function getPendingQueueCount(): Promise<number> {
+  try {
+    const db = await getOfflineDb();
+    return await db.count("answer_queue");
+  } catch {
+    return 0;
+  }
+}

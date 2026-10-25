@@ -15,6 +15,7 @@ import {
 } from "@/components/teacher-chrome";
 import { ContentSkeleton } from "@/components/ui";
 import {
+  homePathForRole,
   isUnauthorized,
   useMe,
   useSignOut,
@@ -69,7 +70,7 @@ export default function TeacherGroupLayout({
       meQuery.data.user.role !== "teacher" &&
       meQuery.data.user.role !== "admin"
     ) {
-      router.replace("/student");
+      router.replace(homePathForRole(meQuery.data.user.role));
     }
   }, [authPage, unauthorized, meQuery.data, router]);
 

@@ -82,6 +82,15 @@ export default function MelakPage() {
   );
 }
 
+const CHAT_ID_KEY = "kasina-adey-chat-id";
+
+function newChatId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  return `chat-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 function MelakChat() {
   const searchParams = useSearchParams();
   const questionId = searchParams.get("q") ?? undefined;
@@ -93,7 +102,35 @@ function MelakChat() {
   const [error, setError] = useState<string | null>(null);
   const [onlineMode, setOnlineMode] = useState(true);
   const [isOnline, setIsOnline] = useState(true);
+  const [chatId, setChatId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const existing = sessionStorage.getItem(CHAT_ID_KEY);
+      if (existing) {
+        setChatId(existing);
+      } else {
+        const id = newChatId();
+        sessionStorage.setItem(CHAT_ID_KEY, id);
+        setChatId(id);
+      }
+    } catch {
+      setChatId(newChatId());
+    }
+  }, []);
+
+  function startNewChat() {
+    const id = newChatId();
+    try {
+      sessionStorage.setItem(CHAT_ID_KEY, id);
+    } catch {
+      /* ignore */
+    }
+    setChatId(id);
+    setMessages([]);
+    setError(null);
+  }
 
   useEffect(() => {
     setIsOnline(typeof navigator !== "undefined" ? navigator.onLine : true);
@@ -114,25 +151,27 @@ function MelakChat() {
       mode: m.mode,
     }));
 
+    if (!chatId) return;
+
     if (!isOnline) {
       setMessages(local);
       setLoading(false);
       return;
     }
 
-    apiFetch<{ messages: Array<{ role: "user" | "assistant"; content: string }> }>(
-      "/melak/history",
-    )
+    apiFetch<{
+      messages: Array<{ role: "user" | "assistant"; content: string }>;
+    }>(`/melak/history?chat_id=${encodeURIComponent(chatId)}`)
       .then((data) => {
         const server = data.messages.map((m) => ({
           role: m.role,
           content: m.content,
         }));
-        setMessages(server.length ? server : local);
+        setMessages(server.length ? server : []);
       })
       .catch(() => setMessages(local))
       .finally(() => setLoading(false));
-  }, [isOnline]);
+  }, [isOnline, chatId]);
 
   useEffect(() => {
     if (!questionId || !isOnline) return;
@@ -178,9 +217,19 @@ function MelakChat() {
       setMessages((m) => [...m, { role: "user", content: text }]);
 
       try {
+        const activeChatId = chatId ?? newChatId();
+        if (!chatId) {
+          try {
+            sessionStorage.setItem(CHAT_ID_KEY, activeChatId);
+          } catch {
+            /* ignore */
+          }
+          setChatId(activeChatId);
+        }
         const res = await apiFetch<{
           message: string;
           mode: "offline" | "online";
+          chat_id?: string;
           pilotNote?: string;
         }>("/melak/chat", {
           method: "POST",
@@ -190,8 +239,17 @@ function MelakChat() {
             questionId,
             sessionId,
             online: onlineMode,
+            chat_id: activeChatId,
           }),
         });
+        if (res.chat_id && res.chat_id !== activeChatId) {
+          try {
+            sessionStorage.setItem(CHAT_ID_KEY, res.chat_id);
+          } catch {
+            /* ignore */
+          }
+          setChatId(res.chat_id);
+        }
         appendLocalMelakHistory(text, res.message, res.mode);
         setMessages((m) => [
           ...m,
@@ -200,7 +258,7 @@ function MelakChat() {
         if (onlineMode && res.mode === "offline") {
           setError(
             res.pilotNote ||
-              "Enhanced model did not respond in time — showing on-device Melak.",
+              "Enhanced model did not respond in time — showing basic Adey reply.",
           );
         } else {
           setError(null);
@@ -214,7 +272,7 @@ function MelakChat() {
         setError(
           err instanceof Error
             ? err.message
-            : "Could not reach Melak — showed on-device reply.",
+            : "Could not reach Adey — showed basic reply.",
         );
       } finally {
         setSending(false);
@@ -228,6 +286,7 @@ function MelakChat() {
       sessionId,
       isOnline,
       onlineMode,
+      chatId,
     ],
   );
 
@@ -238,9 +297,9 @@ function MelakChat() {
       <header className="mb-6">
         <div className="flex flex-wrap items-center gap-2">
           <Sparkles className="h-6 w-6 text-accent-500" />
-          <h1 className="text-2xl font-bold text-gray-950">Melak</h1>
+          <h1 className="text-2xl font-bold text-gray-950">Adey AI</h1>
           <span lang="am" className="font-ethiopic text-lg text-gray-500">
-            መላክ
+            አደይ
           </span>
           <span className="inline-flex items-center gap-1 rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-semibold text-primary-800">
             {isOnline ? (
@@ -251,13 +310,21 @@ function MelakChat() {
             {isOnline
               ? onlineMode
                 ? "Enhanced when available"
-                : "On-device only"
-              : "On-device — no wifi needed"}
+                : "Basic fallback"
+              : "Offline — basic fallback"}
           </span>
+          <GhostButton
+            type="button"
+            className="!ml-auto !h-9 !w-auto px-3 text-xs"
+            onClick={startNewChat}
+            disabled={sending}
+          >
+            New chat
+          </GhostButton>
         </div>
         <p className="mt-2 text-sm text-gray-500">
-          Enhanced (online) Melak by default. Falls back to on-device when
-          offline or the model is unavailable.
+          Adey AI (online) by default. Falls back to a basic reply when offline
+          or the model is unavailable.
         </p>
         {questionId ? (
           <p className="mt-1 text-xs font-medium text-primary-700">
@@ -274,7 +341,7 @@ function MelakChat() {
               onChange={(e) => setOnlineMode(e.target.checked)}
               className="rounded border-gray-300"
             />
-            Use Enhanced (online) when available (falls back to on-device)
+            Use Enhanced (online) when available (falls back if model is down)
           </label>
         ) : null}
       </header>
@@ -285,11 +352,12 @@ function MelakChat() {
             <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500">
               <MessageCircle className="mb-3 h-10 w-10 text-gray-300" />
               <p className="font-medium text-gray-700">
-                Ask Melak about Grade 12 Math
+                Ask Adey about Grade 12 Math
               </p>
               <p className="mt-1 max-w-sm text-sm">
-                Works offline. Try: &ldquo;Explain the product rule&rdquo; or
-                open from a wrong answer for a tailored explanation.
+                Built for low bandwidth. Try: &ldquo;Explain the product
+                rule&rdquo; or open from a wrong answer for a tailored
+                explanation.
               </p>
             </div>
           ) : null}
@@ -313,7 +381,7 @@ function MelakChat() {
                         : "text-gray-400"
                     }`}
                   >
-                    {m.mode === "offline" ? "On-device" : "Enhanced (online)"}
+                    {m.mode === "offline" ? "Basic fallback" : "Enhanced (online)"}
                   </p>
                 ) : null}
                 {m.role === "assistant" ? (
@@ -326,7 +394,7 @@ function MelakChat() {
           ))}
           {sending ? (
             <p className="text-sm text-gray-400">
-              Melak is thinking
+              Adey is thinking
               {onlineMode ? " (enhanced can take up to a minute)…" : "…"}
             </p>
           ) : null}
@@ -377,9 +445,9 @@ function MelakChat() {
                   void send();
                 }
               }}
-              placeholder="Ask Melak anything in English or Amharic…"
+              placeholder="Ask Adey anything in English or Amharic…"
               className="min-w-0 flex-1 border-0 bg-transparent py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0"
-              aria-label="Message Melak"
+              aria-label="Message Adey"
             />
             <button
               type="button"

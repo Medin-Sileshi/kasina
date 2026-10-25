@@ -1,5 +1,7 @@
 # M3 — Learning Quality
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**. Content beyond Grade 12 Mathematics is now tracked in **K3**; the per-subject checklist there replaces the open content items below.
+
 **Window:** Week 4–5  
 **Depends on:** M2 exit criteria  
 **Purpose:** Turn practice into **targeted learning** so national exam readiness is a byproduct of mastery — not random drilling.  
@@ -48,7 +50,7 @@ This is the difference between “doing questions” and “getting better at th
 
 - [x] Push validated Grade 12 Math bank toward **150** questions (now ≥170)
 - [x] Coverage across major units (incl. Sequences and Series) — see [curriculum-map](../curriculum-map-grade12-math.md)
-- [ ] Explanations reviewed for correctness (ongoing with MoE textbooks)
+- [ ] Explanations reviewed for correctness (ongoing with MoE textbooks) — _carried into the K3 per-subject review checklist_
 - [x] Amharic rendering: Noto Serif Ethiopic + `lang="am"` on Ethiopic strings
 - [x] Sample `stemAm` / `explanationAm` set (~25 items)
 - [ ] Fix known bug class: Ethiopic character rendering as wrong Latin glyphs (verify on device)
@@ -113,5 +115,5 @@ All must be true:
 
 - AI adaptive weekly calendar  
 - Predicted ESSLCE score  
-- Live Melak / textbook page jump  
+- Live Melak (now **Adey AI**, K2) / textbook page jump  
 - CBT simulator

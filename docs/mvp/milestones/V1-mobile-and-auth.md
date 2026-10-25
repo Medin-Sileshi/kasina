@@ -1,42 +1,29 @@
-# V1 — Mobile student + auth (stub)
+# V1 — Mobile student + auth (superseded)
 
-**Status:** Stub — expand only after an M5 **GO** in [pilot-results/05-decision.md](../pilot-results/05-decision.md).  
-**Depends on:** M5 GO  
-**Purpose:** Amplify the proven classroom loop on Android; do not rebuild the loop.
+> **Path update (2026-10-25):** This stub is **superseded** by [kasina-path-milestones.md](../../kasina-path-milestones.md). It is kept so older links and the M5 decision history still resolve.
 
----
+**Status:** Superseded. Do not expand.
+**Originally depended on:** M5 GO.
 
-## Priority order (locked by M5)
+## What happened to each original V1 priority
 
-1. **Mobile student APK** (Expo / `apps/mobile`) for Android  
-2. **Phone OTP** auth (replace/supplement email join for students)  
-3. **Offline SQLite sync** for practice when school Wi‑Fi drops  
-4. **Multi-subject** expansion beyond Grade 12 Mathematics  
-5. **Cached Melak** (AI tutor) as an amplifier — not a substitute for weak-topic practice  
+| Original V1 priority | Outcome | Where it lives now |
+|----------------------|---------|--------------------|
+| 1. Mobile student APK (Expo, `apps/mobile`) | **Parked.** Low-end Android devices limit on-device work, and the web PWA covers the pilot. Revisit only if pilot data shows web is the limiting factor. | K7 (conditional) |
+| 2. Phone OTP auth | **Shipped** (device SIM SMS gateway, `/medin/otp` queue). Student identity model (OTP vs email) still to be settled. | K0 decision #1, K4 |
+| 3. Offline SQLite sync | **Dropped.** Replaced by online-first resilience: cached shell, school-level caching, queued answers and tutor questions sent on reconnect. | K1 |
+| 4. Multi-subject expansion | **Planned in phases** (Grade 11 Math, then other subjects), each with a review checklist. | K3 |
+| 5. Cached Melak | **Replaced** by **Adey AI**: self-hosted ~9B open model, curriculum-grounded, evaluated in Amharic, model-agnostic. | K2 |
 
-Do not reorder casually. Do not jump to Ministry dashboard, paywall, or CBT as the “save” feature.
+## Still out of scope
 
----
-
-## Out of V1 (still later)
-
-- School admin / multi-school  
-- Desktop Electron as primary student surface  
-- Full Amharic UI chrome (content Amharic can continue in parallel)
-
----
-
-## Exit criteria (draft)
-
-- [ ] Students can install APK and complete an assigned session  
-- [ ] OTP join works on pilot SIMs  
-- [ ] Offline: answer locally → sync when online without data loss  
-- [ ] Teacher web loop unchanged and still primary for assign/results  
-
----
+- Ministry dashboard, paywall, or a paid private-school arm (Kasina is a pure not-for-profit)
+- Desktop Electron as a student surface
+- Full Amharic UI chrome (content Amharic continues in parallel under K3)
 
 ## Links
 
-- MVP thesis: [../README.md](../README.md)  
-- Gate decision: [../pilot-results/05-decision.md](../pilot-results/05-decision.md)  
+- Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md)
+- MVP thesis: [../README.md](../README.md)
+- Gate decision: [../pilot-results/05-decision.md](../pilot-results/05-decision.md)
 - Deferrals: [../post-mvp-backlog.md](../post-mvp-backlog.md)

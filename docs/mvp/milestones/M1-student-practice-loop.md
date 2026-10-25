@@ -1,5 +1,7 @@
 # M1 — Student Practice Loop
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**.
+
 **Window:** Week 1–3  
 **Depends on:** M0 exit criteria  
 **Purpose:** Core learning path — the screens students use every day.  
@@ -65,6 +67,7 @@ Reference UX: Kasina webapp design spec (Answer Option 6 states, tokens, empty s
 - [ ] Explanation panel slides in (EN; Amharic if present)
 - [ ] Result indicator: “Correct!” or “The correct answer is [X]”
 - [ ] Optional: Bookmark + Ask Melak links **hidden or disabled** (Melak out of MVP) — Bookmark only if time
+  - _Later:_ the tutor shipped as **Adey AI** (`/student/melak` today; route rename tracked in K0/K1).
 
 ### Results screen — `/quiz/:sessionId/results`
 
@@ -144,3 +147,5 @@ All must be true:
 - Teacher assign UI, class roster, invite management (M2)  
 - Polished weak-topic algorithm + “Practice weak topics” fully wired (M3)  
 - Offline SQLite, mobile app
+
+_Path note:_ on-device SQLite and the mobile app are **no longer planned**. Resilience on poor connections is handled by queued answers and caching (K1).

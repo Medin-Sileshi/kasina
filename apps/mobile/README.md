@@ -1,12 +1,7 @@
-# Kasina Mobile (stub)
+# Kasina Mobile — parked (not on path)
 
-Expo scaffold for a future **offline Melak** Android app. Not part of the current web pilot.
+Expo scaffold only. **Not on the K0–K7 product path** (see `docs/kasina-path-milestones.md` K1 / K7).
 
-The browser product at [kasina.et](https://kasina.et) covers practice, CBT, and Melak (offline rule-based tutor + optional cloud mode).
+The live product is the browser app at [kasina.et](https://kasina.et): practice, CBT, and **Adey AI** (online, low-bandwidth). Revisit a dedicated mobile app only if post-pilot data shows the web PWA is the limiting factor.
 
-When mobile work starts, expect:
-
-- Shared `@kasina/melak-core` and question packs
-- Local SQLite sync (see `packages/db` roadmap notes)
-
-For now, run the web app: `pnpm --filter web dev`.
+For development, run the web app: `pnpm --filter web dev`.

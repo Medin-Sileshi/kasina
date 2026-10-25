@@ -307,7 +307,7 @@ export default function StudentHomePage() {
               <span className="h-full w-1.5 shrink-0 self-stretch bg-accent-500" />
               <div className="flex flex-1 items-center justify-between py-4 pr-4">
                 <div>
-                  <p className="font-semibold text-gray-950">Melak tutor</p>
+                  <p className="font-semibold text-gray-950">Adey AI tutor</p>
                   <p className="text-sm text-gray-500">Grade 12 Math · pilot</p>
                 </div>
                 <ChevronRight className="h-5 w-5 text-gray-300" />

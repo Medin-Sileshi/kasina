@@ -1,8 +1,8 @@
 # Pilot — Teacher guide (one pager)
 
-**Support during pilot week:** reply in the pilot WhatsApp/Telegram group, or email `support@kasina.et` (update if you use a different inbox).
+**Support during pilot week:** reply in the pilot WhatsApp/Telegram group, or email `medin@kasina.et` / `support@kasina.et`.
 
-Kasina needs a network connection. Airplane mode will not work — students will see a clear offline message.
+Kasina is **online-first** (low-bandwidth friendly). Airplane mode will not work for join/sync. Students may see “Saved — will send when you’re online” if answers queue. The tutor is **Adey AI** (route `/student/melak`). Students can join via **invite code + email** or **phone OTP** if rostered by the school.
 
 ---
 

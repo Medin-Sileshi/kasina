@@ -1,6 +1,10 @@
 # Kasina — Student handout (3 steps)
 
-**You need internet.** Airplane mode will not work.
+Kasina is **online-first** (built for low bandwidth). Airplane mode will not work for joining or syncing. If the connection drops mid-quiz, answers may be saved and sent when you reconnect.
+
+**Two ways to get in (both intentional):**
+- **Class invite** (this sheet): email + password via `/join`
+- **School roster**: phone OTP via **Student login** / **Activate** if your school admin added you
 
 **Invite code from your teacher:** ________________
 
@@ -25,7 +29,7 @@ Enter:
 
 Tap **Continue** / **Join class**.
 
-Already joined before? Use **Student login** on the home page instead.
+Already joined before? Use **Student login** on the home page (phone OTP or email). Try **Adey AI** (`/student/melak`) when you need an explanation.
 
 ---
 

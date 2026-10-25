@@ -249,7 +249,7 @@ export default function MathematicsSubjectPage() {
           </Link>
           <Link href="/student/melak">
             <SecondaryButton type="button" className="sm:w-auto">
-              Ask Melak
+              Ask Adey
             </SecondaryButton>
           </Link>
         </div>

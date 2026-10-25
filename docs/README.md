@@ -2,6 +2,15 @@
 
 Product and delivery documentation for the Kasina monorepo.
 
+## Path forward (current)
+
+| Doc | Description |
+|-----|-------------|
+| [Path & milestones K0–K7](./kasina-path-milestones.md) | Online-first / Adey AI / pilot plan — **where we are going** |
+| [Architecture](./architecture.md) | As implemented today |
+
+**Direction (2026-10-25):** online + low-bandwidth (not offline-first); tutor → **Adey AI**; pure not-for-profit; secondary schools in phases. Classroom loop (C0–C5) stays the core; K0+ builds on it.
+
 ## Design
 
 | Doc | Description |
@@ -9,7 +18,7 @@ Product and delivery documentation for the Kasina monorepo.
 | [Design system](./design/README.md) | Brand, typography, layout, buttons |
 | [Tokens](./design/tokens.md) | Colors, spacing, radii, Answer Option map |
 
-## MVP Classroom Loop
+## Classroom MVP (C0–C5, historical / closing)
 
 Practice alone does not help students pass national exams. The MVP proves a **closed classroom loop**: teachers assign work, students practice with feedback, both sides see weak topics and act on them.
 
@@ -28,4 +37,4 @@ Practice alone does not help students pass national exams. The MVP proves a **cl
 | [M5 — MVP gate](./mvp/milestones/M5-mvp-gate.md) | Real-class success criteria + go/no-go |
 | [Non-goals](./mvp/non-goals.md) | Explicit outs that protect the timeline |
 
-**Target:** ~6 weeks to a one-class pilot.
+Milestones above carry a path-update banner pointing at K0–K7. Next work is **K0** (doc alignment), then K1–K4 before multi-school pilot (K5/K6).

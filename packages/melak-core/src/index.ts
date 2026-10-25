@@ -1,4 +1,4 @@
-/** Lightweight offline Melak tutor — no network, no ML model. */
+/** Lightweight Adey AI fallback tutor — no network, no ML model. */
 
 export type MelakQuestionContext = {
   id: string;
@@ -93,8 +93,8 @@ function groundedReply(
     : "**How to think about it:**\n1. Identify what is being asked\n2. Pick the right rule or formula\n3. Work step by step\n\n**Core explanation:**";
 
   const footer = am
-    ? "\n\n_ይህ ከመረጃ ጎታ የተገኘ ቀላል መረጃ ነው። ከመምህርዎ ወይም ከመጽሐፍ ያረጋግጡ።_"
-    : "\n\n_This is lightweight offline help from Kasina's question bank. Check with your teacher or textbook._";
+    ? "\n\n_ይህ ከመረጃ ጎታ የተገኘ ቀላል የአደይ መረጃ ነው። ከመምህርዎ ወይም ከመጽሐፍ ያረጋግጡ።_"
+    : "\n\n_This is a basic Adey AI reply from Kasina's question bank. Check with your teacher or textbook._";
 
   return `${intro}\n\n${stemBlock}\n\n${steps}\n${expl}${footer}`;
 }
@@ -106,28 +106,28 @@ function genericReply(message: string): string {
   if (hint) {
     const body = am ? hint.am : hint.en;
     const intro = am
-      ? "**Grade 12 Mathematics (offline Melak):**\n\n"
-      : "**Grade 12 Mathematics (offline Melak):**\n\n";
+      ? "**Grade 12 Mathematics (Adey AI — basic):**\n\n"
+      : "**Grade 12 Mathematics (Adey AI — basic):**\n\n";
     const footer = am
-      ? "\n\n_ከተለመደ ጥያቄ ይጀምሩ ወይም ከዝግተኛ ጥያቄ ላይ «Ask Melak» ይጫኑ።_"
-      : "\n\n_Open Melak from a practice question for a more specific explanation._";
+      ? "\n\n_ከተለመደ ጥያቄ ይጀምሩ ወይም ከዝግተኛ ጥያቄ ላይ «Ask Adey» ይጫኑ።_"
+      : "\n\n_Open Adey AI from a practice question for a more specific explanation._";
     return intro + body + footer;
   }
 
   if (am) {
     return (
-      "እኔ **Melak (offline)** ነኝ — Grade 12 Mathematics tutor።\n\n" +
+      "እኔ **Adey AI (basic)** ነኝ — Grade 12 Mathematics tutor።\n\n" +
       "derivative፣ limit፣ sequence፣ integral ወይም probability ይባሉ። " +
-      "ከተለመደ ጥያቄ ላይ «Ask Melak» ከጫኑ የተሻለ መልስ እሰጣለሁ።\n\n" +
-      "_Internet አያስፈልግም — ሁሉ በመሣሪያዎ ላይ ይሰራል።_"
+      "ከተለመደ ጥያቄ ላይ «Ask Adey» ከጫኑ የተሻለ መልስ እሰጣለሁ።\n\n" +
+      "_ይህ መሠረታዊ መልስ ነው — ሙሉ Adey ሞዴል ሲገኝ የተሻለ ማብራሪያ ያገኛሉ።_"
     );
   }
 
   return (
-    "I'm **Melak (offline)** — your lightweight Grade 12 Math tutor.\n\n" +
+    "I'm **Adey AI (basic)** — your lightweight Grade 12 Math tutor.\n\n" +
     "Try asking about derivatives, limits, sequences, integrals, or probability. " +
-    "For the best answer, open **Ask Melak** from a question you got wrong.\n\n" +
-    "_No internet needed — everything runs on your device._"
+    "For the best answer, open **Ask Adey** from a question you got wrong.\n\n" +
+    "_This is a basic fallback — the full Adey model gives richer help when available._"
   );
 }
 

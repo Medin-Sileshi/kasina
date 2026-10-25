@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AuthCard } from "@/components/auth-chrome";
 import { Field, PrimaryButton, TextInput, SecondaryButton } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
-import { meQueryKey } from "@/lib/session";
+import { meQueryKey, redirectAfterAuth } from "@/lib/session";
 
 function authErrorMessage(err: { message?: string } | null | undefined) {
   const msg = err?.message?.trim();
@@ -65,7 +65,7 @@ export default function StudentLoginPage() {
         return;
       }
       await queryClient.invalidateQueries({ queryKey: meQueryKey });
-      router.push("/student");
+      await redirectAfterAuth(router);
     } catch (err) {
       setError(
         err instanceof Error ? authErrorMessage(err) : "Verification failed",
@@ -86,7 +86,7 @@ export default function StudentLoginPage() {
         return;
       }
       await queryClient.invalidateQueries({ queryKey: meQueryKey });
-      router.push("/student");
+      await redirectAfterAuth(router);
     } catch (err) {
       setError(
         err instanceof Error ? authErrorMessage(err) : "Login failed",

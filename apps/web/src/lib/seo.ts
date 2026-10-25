@@ -8,19 +8,19 @@ export const SITE_NAME_AM = "ካሲና";
 
 /** Default description optimized for brand + product queries. */
 export const SITE_DESCRIPTION =
-  "Kasina (ካሲና) is an Ethiopian EdTech platform. Melak is an on-device tutor for Grade 12 Mathematics (Grade 11–12 expansion planned), with classroom tools for teachers. Piloting in Addis Ababa government schools.";
+  "Kasina (ካሲና) is an Ethiopian EdTech platform. Adey AI is a curriculum-grounded tutor for Grade 12 Mathematics (Grade 11–12 expansion planned), with classroom tools for teachers. Online and built for low bandwidth. Piloting in Addis Ababa government schools.";
 
 export const SITE_KEYWORDS = [
   "Kasina",
   "ካሲና",
   "Kasina Ethiopia",
-  "Kasina Melak",
-  "Melak on-device tutor",
-  "መላክ",
+  "Kasina Adey AI",
+  "Adey AI tutor",
+  "አደይ",
   "Ethiopian EdTech",
   "Ethiopia secondary school",
   "Grade 12 Mathematics",
-  "offline tutor Ethiopia",
+  "low bandwidth education Ethiopia",
   "Addis Ababa education",
   "kasina.et",
 ];
@@ -35,32 +35,32 @@ type PageSeo = {
 export const marketingPages = {
   home: {
     path: "/",
-    title: "Kasina (ካሲና) | On-device Melak tutor for Ethiopian classrooms",
+    title: "Kasina (ካሲና) | Adey AI tutor for Ethiopian classrooms",
     description: SITE_DESCRIPTION,
   },
   about: {
     path: "/about",
     title: "About Kasina (ካሲና)",
     description:
-      "Learn about Kasina (ካሲና) — Ethiopian secondary EdTech building Melak, an on-device tutor with self-hosted enhancement when online, for Addis Ababa government-school pilots.",
+      "Learn about Kasina (ካሲና) — Ethiopian secondary EdTech building Adey AI, a curriculum-grounded tutor on Kasina-hosted infrastructure, for Addis Ababa government-school pilots.",
   },
   students: {
     path: "/students",
     title: "Kasina for Students",
     description:
-      "Study with Kasina and Melak — on-device explanations in Amharic or English, practice tools, and offline-friendly support for Ethiopian secondary students.",
+      "Study with Kasina and Adey AI — explanations in Amharic or English, practice tools, and low-bandwidth support for Ethiopian secondary students.",
   },
   teachers: {
     path: "/teachers",
     title: "Kasina for Teachers",
     description:
-      "Kasina helps Ethiopian secondary teachers assign practice, see who needs help, and support Grade 11–12 classrooms with Melak.",
+      "Kasina helps Ethiopian secondary teachers assign practice, see who needs help, and support Grade 11–12 classrooms with Adey AI.",
   },
   melak: {
     path: "/melak",
-    title: "Melak — Kasina’s on-device tutor",
+    title: "Adey AI — Kasina’s curriculum tutor",
     description:
-      "Melak (መላክ) is Kasina’s on-device tutor for Ethiopian classrooms — curriculum-grounded help in Amharic and English, enhanced by a self-hosted model when online.",
+      "Adey AI is Kasina’s curriculum tutor for Ethiopian classrooms — help in Amharic and English on Kasina-hosted infrastructure, built for low-bandwidth connections.",
   },
   pilot: {
     path: "/pilot",
@@ -96,23 +96,23 @@ export const marketingPages = {
     path: "/contact",
     title: "Contact Kasina",
     description:
-      "Contact Kasina (ካሲና) — reach the team about the Melak pilot, school partnerships, or support.",
+      "Contact Kasina (ካሲና) — reach the team about the Adey AI pilot, school partnerships, or support.",
   },
   faq: {
     path: "/faq",
     title: "Kasina FAQ",
     description:
-      "Frequently asked questions about Kasina, Melak, the classroom pilot, and how students and teachers get started.",
+      "Frequently asked questions about Kasina, Adey AI, the classroom pilot, and how students and teachers get started.",
   },
   "privacy-policy": {
     path: "/privacy-policy",
     title: "Kasina Privacy Policy",
-    description: "Privacy policy for Kasina (ካሲና) and the Melak learning platform.",
+    description: "Privacy policy for Kasina (ካሲና) and the Adey AI learning platform.",
   },
   "terms-of-use": {
     path: "/terms-of-use",
     title: "Kasina Terms of Use",
-    description: "Terms of use for Kasina (ካሲና) and the Melak learning platform.",
+    description: "Terms of use for Kasina (ካሲና) and the Adey AI learning platform.",
   },
 } as const satisfies Record<string, PageSeo>;
 
@@ -194,7 +194,7 @@ export function softwareApplicationJsonLd() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "Kasina",
-    alternateName: ["ካሲና", "Melak"],
+    alternateName: ["ካሲና", "Adey AI"],
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
     url: SITE_URL,

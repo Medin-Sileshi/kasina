@@ -2,7 +2,7 @@
 
 **Status:** As implemented in the monorepo (not a roadmap).  
 **Live:** [kasina.et](https://kasina.et) (web) · [api.kasina.et](https://api.kasina.et) (API)  
-**Product:** Ethiopian secondary EdTech — Grade 12 Mathematics practice, teacher classroom loop, Melak tutor, CBT-style sessions, textbook reader. Pilot focus: Addis Ababa government schools.
+**Product:** Ethiopian secondary EdTech — Grade 12 Mathematics practice, teacher classroom loop, **Adey AI** tutor (routes still under `/melak`), CBT-style sessions, textbook reader. Online, low-bandwidth. Pilot focus: Addis Ababa government schools.
 
 ---
 
@@ -16,11 +16,11 @@
 └──────────────┬───────────────┘                          └──────────────┬───────────────┘
                │                                                         │
                │ IndexedDB (questions, sessions, sync queue)             │ Better Auth (pg Pool)
-               │ @kasina/melak-core (on-device fallback)                  │ Supabase Postgres
+               │ @kasina/melak-core (Adey basic fallback)                 │ Supabase Postgres
                │ Service worker (/sw.js)                                 │ Hyperdrive (Workers)
                ▼                                                         │ R2 textbooks
-         Offline practice + Melak                                        │ SMS gateway (OTP)
-                                                                         │ Melak LLM (optional)
+         Queued practice + Adey AI                                       │ SMS gateway (OTP)
+                                                                         │ Adey LLM (MELAK_* env)
                                                                          ▼
                                                               Supabase · R2 · device SMS · LM Studio / VPS
 ```
@@ -32,10 +32,10 @@
 | API (local) | Same Hono app via `@hono/node-server` | `localhost:8787` (`node-dev.ts`) |
 | Database | Postgres | Supabase (+ Hyperdrive on Workers) |
 | Textbooks | Markdown / page assets | R2 bucket `kasina-textbooks` |
-| Melak enhanced | Self-hosted / demo LLM | `MELAK_CLOUD_ENDPOINT` (LM Studio) or `MELAK_LLM_*` (OpenAI-compatible VPS) |
-| Melak fallback | Rule engine | `@kasina/melak-core` (browser + server) |
+| Adey AI enhanced | Self-hosted / demo LLM | `MELAK_CLOUD_ENDPOINT` (LM Studio) or `MELAK_LLM_*` (OpenAI-compatible VPS) |
+| Adey AI fallback | Rule engine | `@kasina/melak-core` (browser + server; package name is a temporary alias) |
 | OTP SMS | Device SIM gateway | `SMS_GATEWAY_*` (mocked if unset) |
-| Mobile / desktop | Expo stub · Electron shell | **Not** the pilot delivery path |
+| Mobile / desktop | Expo stub · Electron shell | **Parked — not on path** (K1) |
 
 ---
 
@@ -51,7 +51,7 @@ pnpm workspace (`apps/*`, `packages/*`) + Turbo.
 | `apps/desktop` | Electron shell (loads web; not pilot offline) |
 | `packages/db` | SQL migrations, seed, reset-pilot |
 | `packages/question-bank` | Grade 12 Math question JSON + validation |
-| `packages/melak-core` | Deterministic on-device Melak replies |
+| `packages/melak-core` | Deterministic Adey AI fallback replies (alias name) |
 | `packages/types` | Shared TypeScript types |
 | `packages/ui` | Deprecated; web uses local components |
 | `content/textbooks/` | Source markdown / pages uploaded to R2 |
@@ -199,17 +199,19 @@ Live practice content = **Grade 12 Mathematics** (`packages/question-bank`). Tex
 
 ---
 
-## 7. Melak tutor
+## 7. Adey AI tutor
+
+Product name: **Adey AI**. Routes and packages still use the `melak` alias (`/melak`, `/student/melak`, `@kasina/melak-core`, `MELAK_*` env) until a later rename.
 
 ### Modes (current product default)
 
 1. **Enhanced (online) — default** when the browser is online and the “Enhanced” checkbox is on (default **checked**).
-2. **On-device — fallback** when offline, Enhanced is unchecked, cloud endpoint missing, timeout, or empty LLM response.
+2. **Basic fallback** when offline, Enhanced is unchecked, cloud endpoint missing, timeout, or empty LLM response.
 
-### On-device path
+### Basic fallback path
 
 - Package: `@kasina/melak-core` (`generateMelakReply`).
-- Runs in the **browser** for local-only turns and on the **server** as silent/timeout fallback.
+- Runs in the **browser** for local-only turns and on the **server** as timeout/fallback.
 - Curriculum-grounded rules; no network ML.
 
 ### Enhanced path (`POST /melak/chat`)
@@ -231,19 +233,19 @@ Server tries MELAK_CLOUD_ENDPOINT  →  LM Studio native POST /api/v1/chat
 | Daily user turns | **None currently** (pilot). A daily budget may return later. Per-minute rate limit remains (60/min). |
 | Rate limit | 60 requests / minute / user |
 | Persistence | User + assistant rows in `melak_messages` |
-| History | Flat per-user list (`GET /melak/history`) — **no `chat_id` / conversation id**. Client sends last ~10 turns; cloud prompt uses last ~8. **Known limitation:** unrelated topics in one flat thread can bleed into enhanced LLM context until conversation IDs exist. |
+| History | Per-thread via `chat_id` (`POST /melak/chat` + `GET /melak/history?chat_id=`). Client keeps active id in `sessionStorage`; **New chat** starts a fresh thread. Client still sends last ~10 turns; cloud prompt uses last ~8. |
 | Optional link | `question_id`, practice `session_id` when opened from a quiz |
 
 **Env:** `MELAK_CLOUD_ENDPOINT`, `MELAK_LLM_BASE_URL`, `MELAK_LLM_API_KEY`, `MELAK_LLM_MODEL`.  
 `ANTHROPIC_API_KEY` is deprecated / unused.
 
-**UI:** `/student/melak` — markdown + KaTeX rendering (`MelakMessageContent`).
+**UI:** `/student/melak` (also `/adey` → `/melak`) — markdown + KaTeX rendering (`MelakMessageContent`).
 
 ---
 
-## 8. Offline-first & PWA
+## 8. Low-bandwidth resilience & PWA
 
-Designed for weak school connectivity.
+**Not offline-first.** The PWA and IndexedDB queue are resilience for poor connections: cache the app shell and practice material, queue answers, flush on reconnect. Full offline operation is not promised.
 
 | Layer | Implementation |
 |-------|----------------|
@@ -254,8 +256,9 @@ Designed for weak school connectivity.
 | Pull | `GET /sessions/offline-pack` |
 | Push | `POST /sessions/sync` on reconnect |
 | Late work | Past assignment `due_at` → `sync_status = 'late'` (accepted, flagged for teachers) |
+| Queue UX | Student shell shows pending queued answers (“Saved — will send when you’re online”) |
 
-**Loop:** online hub install/sync → offline practice/CBT → reconnect flush.
+**Loop:** online practice → queue if connection drops → reconnect flush.
 
 ---
 
@@ -286,7 +289,7 @@ Designed for weak school connectivity.
 
 | Area | Routes |
 |------|--------|
-| Marketing | `/`, `/about`, `/students`, `/teachers`, `/melak`, `/practice-tools`, `/pilot`, `/impact`, `/partners`, `/faq`, `/contact`, `/get-involved`, `/privacy-policy`, `/terms-of-use` |
+| Marketing | `/`, `/about`, `/students`, `/teachers`, `/melak` (+ `/adey` redirect), `/practice-tools`, `/pilot`, `/impact`, `/partners`, `/faq`, `/contact`, `/get-involved`, `/privacy-policy`, `/terms-of-use` |
 | Join | `/join` (class invite) |
 | Student | `/student`, `/student/login`, `/student/melak`, `/subjects/mathematics`, `/quiz/[sessionId]` (+ results/review), `/cbt`, `/progress`, `/read/[subject]` |
 | Teacher | `/teacher`, `/teacher/login`, `/teacher/signup`, classes, assign, assignments, students, practice-sets, analytics, textbook |
@@ -313,7 +316,7 @@ Session results → weak topics
 Teacher dashboard + student progress act on weak topics
 ```
 
-Amplifiers on the same stack: **Melak**, **textbook reader**, **offline sync**.
+Amplifiers on the same stack: **Adey AI**, **textbook reader**, **queued sync**.
 
 ---
 

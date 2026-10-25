@@ -10,7 +10,7 @@ const primaryNavEn: NavItem[] = [
   { href: "/about", label: "About" },
   { href: "/students", label: "Students" },
   { href: "/teachers", label: "Teachers" },
-  { href: "/melak", label: "Melak" },
+  { href: "/melak", label: "Adey AI" },
   { href: "/pilot", label: "Pilot" },
 ];
 
@@ -27,7 +27,7 @@ const primaryNavAm: NavItem[] = [
   { href: "/about", label: "ስለ እኛ" },
   { href: "/students", label: "ተማሪዎች" },
   { href: "/teachers", label: "መምህራን" },
-  { href: "/melak", label: "መላክ" },
+  { href: "/melak", label: "አደይ" },
   { href: "/pilot", label: "ሙከራ" },
 ];
 
@@ -83,14 +83,14 @@ export const homeCopy = {
   en: {
     brandLine: "Kasina",
     eyebrow: "Piloting in Ethiopian secondary classrooms",
-    headline: "Better learning and teaching — even without the internet",
+    headline: "Better learning and teaching — built for low bandwidth",
     subhead:
-      "Offline-first tools and Melak, an AI-assisted tutor, for students who need understanding and teachers who need clearer support.",
+      "Online, low-bandwidth tools and Adey AI, a curriculum-grounded tutor, for students who need understanding and teachers who need clearer support.",
     primaryCta: "Join a class free",
     secondaryCta: "For schools & teachers",
     joinHint: "Have an invite code? Start in minutes.",
-    offlineCaption: "Designed for offline study after one download",
-    melakName: "Melak",
+    offlineCaption: "Designed for weak connections — answers queue and send when you reconnect",
+    melakName: "Adey AI",
     melakChatQ: "How do I find the derivative of x²?",
     melakChatA: "Use the power rule: bring the exponent down, then subtract one. So 2x.",
     problemTitle: "Access gaps hurt both students and teachers",
@@ -99,7 +99,7 @@ export const homeCopy = {
     studentsLabel: "For students",
     studentsTitle: "Consistent learning support",
     studentsBody:
-      "Clear explanations and practice should not depend on strong wifi at home. Melak helps students understand — in Amharic or English.",
+      "Clear explanations and practice should work on weak school and home connections. Adey AI helps students understand — in Amharic or English.",
     teachersLabel: "For teachers",
     teachersTitle: "Visibility into who needs help",
     teachersBody:
@@ -109,12 +109,12 @@ export const homeCopy = {
     pillarsTitle: "How Kasina works",
     pillars: [
       {
-        title: "Root — offline access",
-        body: "After setup, Melak’s core tutoring is meant to keep working without wifi.",
+        title: "Root — resilient access",
+        body: "Practice and questions can queue when the connection drops, then sync when you’re back online.",
         stage: "01",
       },
       {
-        title: "Trunk — Melak explains",
+        title: "Trunk — Adey AI explains",
         body: "Ask in Amharic or English and get a clear explanation — not just right or wrong.",
         stage: "02",
       },
@@ -148,14 +148,14 @@ export const homeCopy = {
   am: {
     brandLine: "ካሲና",
     eyebrow: "በኢትዮጵያ ሁለተኛ ደረጃ ክፍሎች በሙከራ",
-    headline: "የተሻለ ትምህርትና ማስተማር — በይነመረብ ሳይኖርም",
+    headline: "የተሻለ ትምህርትና ማስተማር — ለደካማ ግንኙነት የተሰራ",
     subhead:
-      "ከመስመር ውጭ መሣሪያዎች እና መላክ — ለመረዳት የሚፈልጉ ተማሪዎችና ግልጽ ድጋፍ ለሚፈልጉ መምህራን።",
+      "የመስመር ላይ ዝቅተኛ-ባንድዊድዝ መሣሪያዎች እና አደይ AI — ለመረዳት የሚፈልጉ ተማሪዎችና ግልጽ ድጋፍ ለሚፈልጉ መምህራን።",
     primaryCta: "ክፍል ነጻ ይቀላቀሉ",
     secondaryCta: "ለትምህርት ቤቶችና መምህራን",
     joinHint: "የግብዣ ኮድ አለዎት? በደቂቃዎች ይጀምሩ።",
-    offlineCaption: "አንድ ጊዜ ካወረዱ በኋላ ከመስመር ውጭ ለመማር የተዘጋጀ",
-    melakName: "መላክ",
+    offlineCaption: "ግንኙነት ሲቋረጥ መልሶች ይቆያሉ — ሲመለሱ ይላካሉ",
+    melakName: "አደይ",
     melakChatQ: "የ x² ተውሳክ እንዴት ይገኛል?",
     melakChatA: "የኃይል ህግን ይጠቀሙ፡ ገላጩን አውርደው ከዚያ አንድ ይቀንሱ። ስለዚህ 2x።",
     problemTitle: "የመዳረሻ ክፍተቶች ተማሪዎችንና መምህራንን ይጎዳሉ",
@@ -164,7 +164,7 @@ export const homeCopy = {
     studentsLabel: "ለተማሪዎች",
     studentsTitle: "ቋሚ የትምህርት ድጋፍ",
     studentsBody:
-      "ግልጽ ማብራሪያና ልምምድ በቤት ጠንካራ wifi ላይ ብቻ መደገፍ የለባቸውም። መላክ ተማሪዎች እንዲረዱ ይረዳል — በአማርኛ ወይም በእንግሊዘኛ።",
+      "ግልጽ ማብራሪያና ልምምድ በደካማ ግንኙነትም መስራት አለባቸው። አደይ AI ተማሪዎች እንዲረዱ ይረዳል — በአማርኛ ወይም በእንግሊዘኛ።",
     teachersLabel: "ለመምህራን",
     teachersTitle: "ማን እገዛ እንደሚያስፈልገው ግንዛቤ",
     teachersBody:
@@ -174,12 +174,12 @@ export const homeCopy = {
     pillarsTitle: "ካሲና እንዴት ይሰራል",
     pillars: [
       {
-        title: "ሥር — ከመስመር ውጭ መዳረሻ",
-        body: "ከተዘጋጀ በኋላ የመላክ ዋና ትምህርት ያለ wifi እንዲቀጥል የተዘጋጀ ነው።",
+        title: "ሥር — ጠንካራ መዳረሻ",
+        body: "ግንኙነት ሲቋረጥ ልምምድ ይቆያል — ሲመለስ ይላካል።",
         stage: "01",
       },
       {
-        title: "ግንድ — መላክ ያብራራል",
+        title: "ግንድ — አደይ ያብራራል",
         body: "በአማርኛ ወይም በእንግሊዘኛ ጠይቀው ግልጽ ማብራሪያ ያግኙ — ትክክል/ስህተት ብቻ አይደለም።",
         stage: "02",
       },
@@ -217,7 +217,7 @@ export const aboutCopy = {
     title: "About Kasina",
     missionTitle: "Mission",
     mission:
-      "Improve education for students and teachers in under-resourced Ethiopian schools through offline-first learning tools and classroom support.",
+      "Improve education for students and teachers in under-resourced Ethiopian schools through online, low-bandwidth learning tools and classroom support.",
     originTitle: "Why we exist",
     origin:
       "Too many learners lose study time when internet is unreliable, and teachers lack simple ways to see who needs help. Kasina addresses access gaps and teacher-support gaps — not an “exam prep gap” as the organizing purpose.",
@@ -232,7 +232,7 @@ export const aboutCopy = {
     title: "ስለ ካሲና",
     missionTitle: "ተልዕኮ",
     mission:
-      "በሀብት እጥረት ባላቸው የኢትዮጵያ ትምህርት ቤቶች ለተማሪዎችና መምህራን ትምህርትን በከመስመር ውጭ መሣሪያዎችና በክፍል ድጋፍ ማሻሻል።",
+      "በሀብት እጥረት ባላቸው የኢትዮጵያ ትምህርት ቤቶች ለተማሪዎችና መምህራን ትምህርትን በዝቅተኛ-ባንድዊድዝ መሣሪያዎችና በክፍል ድጋፍ ማሻሻል።",
     originTitle: "ለምን እንኖራለን",
     origin:
       "በይነመረብ አስተማማኝ ሳይሆን ብዙ ተማሪዎች የመማሪያ ጊዜ ያጣሉ፣ መምህራንም ማን እገዛ እንደሚያስፈልገው ለማየት ቀላል መንገድ አያገኙም። ካሲና የመዳረሻና የመምህር ድጋፍ ክፍተቶችን ያስተናግዳል — «የፈተና ዝግጅት ክፍተት» እንደ ዋና ዓላማ አይደለም።",
@@ -251,22 +251,22 @@ export const audienceCopy = {
       title: "For Students",
       headline: "Learning support for every study day",
       intro:
-        "Kasina helps you understand lessons, ask Melak for clear explanations, and practice with purpose — including when internet is weak.",
+        "Kasina helps you understand lessons, ask Adey AI for clear explanations, and practice with purpose — including when the connection is weak.",
       points: [
         {
-          title: "Concept help with Melak",
-          body: "Ask why something works, in Amharic or English. Melak is built to explain, not only to quiz.",
+          title: "Concept help with Adey AI",
+          body: "Ask why something works, in Amharic or English. Adey AI is built to explain, not only to quiz.",
         },
         {
-          title: "Offline-friendly study",
-          body: "After setup, core Melak tutoring is designed to keep helping without wifi.",
+          title: "Low-bandwidth study",
+          body: "When the connection drops, practice answers are saved and sent when you are online again.",
         },
         {
           title: "Practice tools",
           body: "Classroom practice and exam-format practice are available as one tool among several — see Practice & Assessment Tools.",
         },
       ],
-      ctaMelak: "Meet Melak",
+      ctaMelak: "Meet Adey AI",
       ctaPractice: "Practice tools",
       ctaJoin: "Join your class",
     },
@@ -274,7 +274,7 @@ export const audienceCopy = {
       title: "For Teachers",
       headline: "Tools that support how you already teach",
       intro:
-        "Kasina gives teachers curriculum-aligned practice, visibility into where students struggle, and less prep friction — including offline-friendly student support.",
+        "Kasina gives teachers curriculum-aligned practice, visibility into where students struggle, and less prep friction — including low-bandwidth student support.",
       points: [
         {
           title: "Aligned classroom content",
@@ -289,7 +289,7 @@ export const audienceCopy = {
           body: "Teachers in the pilot receive training and feedback channels as part of rollout support.",
         },
       ],
-      ctaMelak: "How Melak helps your class",
+      ctaMelak: "How Adey AI helps your class",
       ctaPractice: "Practice tools",
       ctaJoin: "Create teacher account",
     },
@@ -299,22 +299,22 @@ export const audienceCopy = {
       title: "ለተማሪዎች",
       headline: "ለእያንዳንዱ የመማሪያ ቀን ድጋፍ",
       intro:
-        "ካሲና ትምህርትን ለመረዳት፣ መላክን ለማብራራት መጠየቅ፣ እና በዓላማ ልምምድ — በይነመረብ ደካማ ሲሆንም — ይረዳዎታል።",
+        "ካሲና ትምህርትን ለመረዳት፣ አደይን ለማብራራት መጠየቅ፣ እና በዓላማ ልምምድ — ግንኙነት ደካማ ሲሆንም — ይረዳዎታል።",
       points: [
         {
-          title: "በመላክ የፅንሰ-ሐሳብ እገዛ",
-          body: "ለምን እንደሚሰራ ይጠይቁ — በአማርኛ ወይም በእንግሊዘኛ። መላክ ለማብራራት የተሰራ ነው፣ ለፈተና ብቻ አይደለም።",
+          title: "በአደይ የፅንሰ-ሐሳብ እገዛ",
+          body: "ለምን እንደሚሰራ ይጠይቁ — በአማርኛ ወይም በእንግሊዘኛ። አደይ ለማብራራት የተሰራ ነው፣ ለፈተና ብቻ አይደለም።",
         },
         {
-          title: "ከመስመር ውጭ ተስማሚ ትምህርት",
-          body: "ከተዘጋጀ በኋላ የመላክ ዋና ትምህርት ያለ wifi እንዲቀጥል የተዘጋጀ ነው።",
+          title: "ለደካማ ግንኙነት ትምህርት",
+          body: "ግንኙነት ሲቋረጥ ልምምድ ይቆያል — ሲመለስ ይላካል።",
         },
         {
           title: "የልምምድ መሣሪያዎች",
           body: "የክፍል ልምምድና የፈተና ቅርጸት ልምምድ ከበርካታ መሣሪያዎች አንዱ ናቸው — የልምምድና ግምገማ መሣሪያዎችን ይመልከቱ።",
         },
       ],
-      ctaMelak: "መላክን ይወቁ",
+      ctaMelak: "አደይን ይወቁ",
       ctaPractice: "የልምምድ መሣሪያዎች",
       ctaJoin: "ክፍልዎን ይቀላቀሉ",
     },
@@ -322,7 +322,7 @@ export const audienceCopy = {
       title: "ለመምህራን",
       headline: "እንደሚያስተምሩ የሚደግፉ መሣሪያዎች",
       intro:
-        "ካሲና ለመምህራን ከስርዓተ ትምህርት ጋር የተጣጣመ ልምምድ፣ ተማሪዎች የት እንደሚቸገሩ ግንዛቤ፣ እና ያነሰ የዝግጅት ጫና — ከመስመር ውጭ ተስማሚ የተማሪ ድጋፍ ጋር — ይሰጣል።",
+        "ካሲና ለመምህራን ከስርዓተ ትምህርት ጋር የተጣጣመ ልምምድ፣ ተማሪዎች የት እንደሚቸገሩ ግንዛቤ፣ እና ያነሰ የዝግጅት ጫና — ለደካማ ግንኙነት የተማሪ ድጋፍ ጋር — ይሰጣል።",
       points: [
         {
           title: "የተጣጣመ የክፍል ይዘት",
@@ -337,7 +337,7 @@ export const audienceCopy = {
           body: "በሙከራው ውስጥ ያሉ መምህራን እንደ የማሰማራት ድጋፍ ስልጠናና የግብረመልስ ቻናሎች ያገኛሉ።",
         },
       ],
-      ctaMelak: "መላክ ክፍልዎን እንዴት እንደሚረዳ",
+      ctaMelak: "አደይ ክፍልዎን እንዴት እንደሚረዳ",
       ctaPractice: "የልምምድ መሣሪያዎች",
       ctaJoin: "የመምህር ሂሳብ ይፍጠሩ",
     },
@@ -346,50 +346,50 @@ export const audienceCopy = {
 
 export const melakMarketingCopy = {
   en: {
-    title: "Melak — on-device tutor",
+    title: "Adey AI — curriculum tutor",
     headline: "Understanding first. Always.",
     intro:
-      "Melak (መልአክ) helps students grasp concepts in Amharic or English. It is an on-device tutor by default — curriculum-grounded learning support that stays useful without wifi — with optional self-hosted enhancement when online.",
+      "Adey AI helps students grasp concepts in Amharic or English. It is Kasina’s curriculum-grounded tutor — online by default, with resilient fallbacks when the connection is weak — running on infrastructure Kasina controls.",
     points: [
       {
         title: "Curriculum-grounded help",
         body: "Pilot coverage starts with Grade 12 Mathematics, with explanations tied to classroom practice.",
       },
       {
-        title: "On-device first",
-        body: "A lightweight tutor runs on your device without wifi after setup. When online, answers can be enhanced by Kasina’s self-hosted model — not a third-party cloud API.",
+        title: "Online, low-bandwidth",
+        body: "Adey AI answers through Kasina’s self-hosted model when available. If the model is slow or unreachable, you get a clear fallback reply — not a silent failure.",
       },
       {
         title: "Helps teachers indirectly",
         body: "When students struggle on the same ideas, teachers gain clearer signals about where to reteach.",
       },
     ],
-    ctaProduct: "Open Melak in your class",
-    ctaJoin: "Join a class to try Melak",
+    ctaProduct: "Open Adey AI in your class",
+    ctaJoin: "Join a class to try Adey AI",
     ctaStudents: "For students",
     ctaTeachers: "For teachers",
   },
   am: {
-    title: "መላክ — የሰው ሰራሽ አስተማሪ",
+    title: "አደይ AI — የትምህርት አስተማሪ",
     headline: "መጀመሪያ መረዳት። ሁልጊዜ።",
     intro:
-      "መላክ ተማሪዎች ፅንሰ-ሐሳቦችን በአማርኛ ወይም በእንግሊዘኛ እንዲረዱ ይረዳል። ለትምህርት ድጋፍ የተሰራ ነው — ለልምምድ ብቻ አይደለም — እና ግንኙነት ውስን ሲሆንም ጠቃሚ ሆኖ እንዲቀጥል የተዘጋጀ ነው።",
+      "አደይ AI ተማሪዎች ፅንሰ-ሐሳቦችን በአማርኛ ወይም በእንግሊዘኛ እንዲረዱ ይረዳል። ለትምህርት ድጋፍ የተሰራ ነው — ለልምምድ ብቻ አይደለም — እና በደካማ ግንኙነትም ጠቃሚ ሆኖ እንዲቀጥል የተዘጋጀ ነው።",
     points: [
       {
         title: "ከስርዓተ ትምህርት ጋር የተገናኘ እገዛ",
         body: "የሙከራ ሽፋን በ12ኛ ክፍል ሂሳብ ይጀምራል፣ ማብራሪያዎች ከክፍል ልምምድ ጋር የተገናኙ ናቸው።",
       },
       {
-        title: "ከመስመር ውጭ የሚያውቅ",
-        body: "ቀላል አስተማሪ በመሣሪያዎ ላይ ያለ wifi ይሰራል። በይነመረብ ሲኖር መልሶች በካሲና በራሷ በሚያስተናግደው ሞዴል ሊጠናከሩ ይችላሉ — የሶስተኛ ወገን ክላውድ አይደለም።",
+        title: "የመስመር ላይ፣ ዝቅተኛ ባንድዊድዝ",
+        body: "አደይ AI በካሲና በራሷ በሚያስተናግደው ሞዴል ይመልሳል። ሞዴሉ ቀርፋፋ ወይም ሳይደርስ ሲቀር ግልጽ የመጠባበቂያ መልስ ያገኛሉ።",
       },
       {
         title: "መምህራንን በተዘዋዋሪ ይደግፋል",
         body: "ተማሪዎች በተመሳሳይ ሐሳቦች ሲቸገሩ መምህራን የት እንደሚያስተምሩ ግልጽ ምልክት ያገኛሉ።",
       },
     ],
-    ctaProduct: "መላክን በክፍልዎ ይክፈቱ",
-    ctaJoin: "መላክን ለመሞከር ክፍል ይቀላቀሉ",
+    ctaProduct: "አደይን በክፍልዎ ይክፈቱ",
+    ctaJoin: "አደይን ለመሞከር ክፍል ይቀላቀሉ",
     ctaStudents: "ለተማሪዎች",
     ctaTeachers: "ለመምህራን",
   },
@@ -408,7 +408,7 @@ export const practiceToolsCopy = {
       },
       {
         title: "Exam-format sessions",
-        body: "Optional CBT-style practice when schools want that format — alongside Melak and textbooks.",
+        body: "Optional CBT-style practice when schools want that format — alongside Adey AI and textbooks.",
       },
       {
         title: "Feedback loop",
@@ -417,7 +417,7 @@ export const practiceToolsCopy = {
     ],
     ctaTry: "Try practice in the app",
     ctaJoin: "Join a class",
-    ctaMelak: "Meet Melak",
+    ctaMelak: "Meet Adey AI",
   },
   am: {
     title: "የልምምድና ግምገማ መሣሪያዎች",
@@ -431,7 +431,7 @@ export const practiceToolsCopy = {
       },
       {
         title: "የፈተና ቅርጸት ክፍለ ጊዜዎች",
-        body: "ትምህርት ቤቶች ሲፈልጉ አማራጭ የCBT ቅርጸት ልምምድ — ከመላክና ከመጽሐፍት ጎን ለጎን።",
+        body: "ትምህርት ቤቶች ሲፈልጉ አማራጭ የCBT ቅርጸት ልምምድ — ከአደይና ከመጽሐፍት ጎን ለጎን።",
       },
       {
         title: "የግብረመልስ ዑደት",
@@ -440,7 +440,7 @@ export const practiceToolsCopy = {
     ],
     ctaTry: "በመተግበሪያው ልምምድ ይሞክሩ",
     ctaJoin: "ክፍል ይቀላቀሉ",
-    ctaMelak: "መላክን ይወቁ",
+    ctaMelak: "አደይን ይወቁ",
   },
 } as const;
 
@@ -507,7 +507,7 @@ export const getInvolvedCopy = {
       },
       {
         title: "For Funders & Donors",
-        body: "Support offline-first learning tools for Ethiopian classrooms.",
+        body: "Support online, low-bandwidth learning tools for Ethiopian classrooms.",
         href: `mailto:${CONTACT_EMAIL}?subject=Kasina%20funding`,
         cta: "Contact about funding",
       },
@@ -538,7 +538,7 @@ export const getInvolvedCopy = {
       },
       {
         title: "ለደጋፊዎች",
-        body: "ለኢትዮጵያ ክፍሎች ከመስመር ውጭ ትምህርት መሣሪያዎችን ይደግፉ።",
+        body: "ለኢትዮጵያ ክፍሎች የዝቅተኛ-ባንድዊድዝ ትምህርት መሣሪያዎችን ይደግፉ።",
         href: `mailto:${CONTACT_EMAIL}?subject=Kasina%20funding`,
         cta: "ስለ ድጋፍ ያግኙን",
       },
@@ -585,12 +585,12 @@ export const faqCopy = {
     headline: "Common questions",
     items: [
       {
-        q: "Does it really work without internet?",
-        a: "Melak’s on-device tutor runs without wifi after setup. When online, answers can be enhanced by Kasina’s self-hosted model (not a third-party API). Practice and CBT are being built to work offline after a hub sync; class sync still needs connectivity when uploading results.",
+        q: "What happens when the connection is weak?",
+        a: "Kasina is online-first and built for low bandwidth. Practice answers can queue and sync when you reconnect. Adey AI uses Kasina’s self-hosted model when available, with a clear fallback if the model is slow or down. We do not promise full offline operation.",
       },
       {
         q: "What devices does it support?",
-        a: "Right now: modern phones and laptops in a browser (Chrome or Firefox), installable as a PWA for offline use after sync. A dedicated Android app is on the roadmap after this pilot.",
+        a: "Right now: modern phones and laptops in a browser (Chrome or Firefox), installable as a PWA for a resilient app shell. A dedicated Android app is parked (not on the current path).",
       },
       {
         q: "Is student data safe?",
@@ -611,12 +611,12 @@ export const faqCopy = {
     headline: "የተለመዱ ጥያቄዎች",
     items: [
       {
-        q: "በእውነት ያለ በይነመረብ ይሰራል?",
-        a: "የመላክ አስተማሪ በመሣሪያዎ ላይ ያለ wifi ይሰራል። በይነመረብ ሲኖር መልሶች በካሲና በራሷ በሚያስተናግደው ሞዴል ሊጠናከሩ ይችላሉ። ልምምድ/CBT ከትምህርት ቤት ሲንክ በኋላ ከመስመር ውጭ እንዲሰሩ እየተገነቡ ነው፤ ውጤቶችን ሲላኩ ግንኙነት ያስፈልጋል።",
+        q: "ግንኙነት ደካማ ሲሆን ምን ይሆናል?",
+        a: "ካሲና የመስመር ላይ ነው እና ለደካማ ግንኙነት የተሰራ ነው። የልምምድ መልሶች ሊቆዩና ሲመለሱ ሊላኩ ይችላሉ። አደይ AI የካሲናን ሞዴል ይጠቀማል፣ ሲዘገይ ወይም ሳይደርስ ግልጽ መጠባበቂያ አለ። ሙሉ ከመስመር ውጭ አሠራር አንገልጽም።",
       },
       {
         q: "የትኞቹ መሣሪያዎች ይደገፋሉ?",
-        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ (Chrome ወይም Firefox)፣ እንደ PWA ሊጫኑ ይችላሉ። የተለየ Android መተግበሪያ ከዚህ ሙከራ በኋላ በሮድማፕ ላይ ነው።",
+        a: "አሁን፡ ዘመናዊ ስልኮችና ላፕቶፖች በአሳሽ (Chrome ወይም Firefox)፣ እንደ PWA ሊጫኑ ይችላሉ። የተለየ Android መተግበሪያ ለአሁኑ ታግዷል።",
       },
       {
         q: "የተማሪ ውሂብ ደህንነቱ የተጠበቀ ነው?",
@@ -639,7 +639,7 @@ export const legalCopy = {
     privacy: {
       title: "Privacy Policy",
       body: [
-        "Kasina collects only what is needed for learning and class management (for example account details, class membership, practice progress, and Melak chat needed for tutoring).",
+        "Kasina collects only what is needed for learning and class management (for example account details, class membership, practice progress, and Adey AI chat needed for tutoring).",
         "We do not sell student data. Access to classroom data is limited to the student, their teachers for that class, and operators maintaining the service.",
         "Questions: email " + CONTACT_EMAIL + ". This plain-language policy will grow as the product does.",
       ],
@@ -659,7 +659,7 @@ export const legalCopy = {
     privacy: {
       title: "የግላዊነት ፖሊሲ",
       body: [
-        "ካሲና ለትምህርትና የክፍል አስተዳደር የሚያስፈልገውን ብቻ ይሰበስባል (ለምሳሌ የመለያ ዝርዝር፣ የክፍል አባልነት፣ የልምምድ እድገት፣ እና ለትምህርት የሚያስፈልግ የመላክ ውይይት)።",
+        "ካሲና ለትምህርትና የክፍል አስተዳደር የሚያስፈልገውን ብቻ ይሰበስባል (ለምሳሌ የመለያ ዝርዝር፣ የክፍል አባልነት፣ የልምምድ እድገት፣ እና ለትምህርት የሚያስፈልግ የአደይ ውይይት)።",
         "የተማሪ ውሂብ አንሸጥም። የክፍል ውሂብ መዳረሻ ለተማሪው፣ ለዚያ ክፍል መምህራን፣ እና አገልግሎቱን ለሚያስተዳድሩ ብቻ ነው።",
         "ጥያቄዎች፡ " + CONTACT_EMAIL + "። ይህ ቀላል ፖሊሲ ከምርቱ ጋር ያድጋል።",
       ],

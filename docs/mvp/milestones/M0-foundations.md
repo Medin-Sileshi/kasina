@@ -1,5 +1,7 @@
 # M0 — Foundations
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**.
+
 **Window:** Week 0–1  
 **Purpose:** Unblock everything that M1–M5 depend on.  
 **Status:** Implemented in code — production DNS/Workers deploy remaining ([deploy-kasina-et.md](../deploy-kasina-et.md), [M0-setup.md](./M0-setup.md))
@@ -51,7 +53,7 @@ A teacher can log in, a student can join a class with an invite code, and tagged
 
 - [ ] Wire **Better Auth** on `apps/server` + `apps/web`
 - [ ] Teacher: email + password sign-up / login
-- [ ] Student: join flow via **class invite code** + display name (no SMS OTP)
+- [ ] Student: join flow via **class invite code** + display name (no SMS OTP at M0; phone OTP and the school-approval cascade shipped later — see architecture.md)
 - [ ] Session cookie / token usable from web API client
 - [ ] Health route on Hono confirming DB connectivity
 
@@ -116,3 +118,5 @@ All must be true:
 ## Out of scope for M0
 
 - Quiz UI, assignments UI, weak topics, mobile, offline, Melak, CBT
+
+_Later outcome:_ quiz, assignments and weak topics shipped in M1–M3. Offline became online-first resilience (queued answers, caching; K1). Melak became **Adey AI** (K2). Mobile and a separate offline app are no longer on the path.

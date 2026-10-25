@@ -1,5 +1,7 @@
 # M5 — MVP Gate
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**. This gate still applies to the **first real-class run**. The formal multi-school pilot is gated separately by K5 and measured in K6.
+
 **Window:** End of Week 6 (+ 1 week observation)  
 **Depends on:** M4 exit criteria  
 **Purpose:** Decide, with evidence, whether the classroom loop works in a real class — then go/no-go for V1.  
@@ -59,13 +61,15 @@ Ask 3 students:
 - Teacher wants to continue next week without bribes, and  
 - Critical bugs are known and schedulable  
 
-**Then prioritize V1 (in order):**
+**Then prioritize the new path (in order):**
 
-1. Mobile student APK (Expo) for Android  
-2. Phone OTP auth  
-3. Offline SQLite sync  
-4. Multi-subject expansion  
-5. Cached Melak  
+1. Online-first hardening: queued answers, caching, conversation IDs (K1)
+2. Adey AI on self-hosted infrastructure, evaluated in Amharic (K2)
+3. Content expansion: Grade 11 Mathematics, then other subjects (K3)
+4. Data protection and safeguarding before real students are onboarded (K4)
+5. Pilot readiness and the multi-school pilot (K5, K6)
+
+_Superseded V1 order (kept for history):_ mobile APK (parked), phone OTP (shipped), offline SQLite (dropped), multi-subject (now K3), cached Melak (now Adey AI, K2).
 
 ### NO-GO / iterate if
 
@@ -99,7 +103,7 @@ Create / fill [`docs/mvp/pilot-results/`](../pilot-results/) with:
 
 - [ ] Evidence pack complete  
 - [ ] GO or NO-GO written and shared with stakeholders  
-- [ ] If GO: V1 milestone doc stubbed  
+- [ ] If GO: next milestone doc stubbed (the V1 stub is superseded by `kasina-path-milestones.md`)  
 - [ ] If NO-GO: top 3 loop fixes scheduled before any new surface  
 
 ---

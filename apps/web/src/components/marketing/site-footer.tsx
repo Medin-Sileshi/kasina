@@ -69,7 +69,7 @@ export function SiteFooter() {
             {t.footerFaq}
           </Link>
         </div>
-        <p className="text-[12px] text-mkt-paper/30">Kasina · Melak</p>
+        <p className="text-[12px] text-mkt-paper/30">Kasina · Adey AI</p>
       </div>
     </footer>
   );

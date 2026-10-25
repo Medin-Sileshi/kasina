@@ -10,6 +10,7 @@ import {
 import { StudentShell } from "@/components/student-shell";
 import { ContentSkeleton } from "@/components/ui";
 import {
+  homePathForRole,
   isUnauthorized,
   useMe,
   useSignOut,
@@ -45,11 +46,8 @@ export default function StudentGroupLayout({
       router.replace("/student/login");
       return;
     }
-    if (
-      me &&
-      (me.user.role === "teacher" || me.user.role === "admin")
-    ) {
-      router.replace("/teacher");
+    if (me && me.user.role !== "student") {
+      router.replace(homePathForRole(me.user.role));
     }
   }, [authPage, unauthorized, me, router]);
 

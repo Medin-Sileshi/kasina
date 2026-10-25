@@ -20,8 +20,10 @@ const chatSchema = z.object({
   message: z.string().min(1).max(2000),
   questionId: z.string().optional(),
   sessionId: z.string().optional(),
-  /** When true and a cloud/VPS endpoint is configured, try enhanced Melak. */
+  /** When true and a cloud/VPS endpoint is configured, try enhanced Adey AI. */
   online: z.boolean().optional().default(true),
+  /** Conversation thread id — isolates history so unrelated topics do not bleed. */
+  chat_id: z.string().uuid().optional(),
   history: z
     .array(
       z.object({
@@ -33,7 +35,8 @@ const chatSchema = z.object({
     .optional(),
 });
 
-const MELAK_ONLINE_SYSTEM = `You are Melak (መላክ), Kasina's tutor for Ethiopian Grade 12 Mathematics.
+const MELAK_ONLINE_SYSTEM = `You are Adey AI (አደይ), Kasina's tutor for Ethiopian Grade 12 Mathematics.
+Always make clear you are an AI tutor that supports the teacher and never replaces them.
 Answer in the student's language (English or Amharic). Stay on Grade 12 Ethiopian Math curriculum.
 Be concise (under 200 words). Use LaTeX: $...$ inline. Guide understanding; do not only give answers.`;
 
@@ -78,6 +81,7 @@ async function persistExchange(
     sessionId?: string;
   },
   reply: string,
+  chatId: string,
 ) {
   const userMsgId = randomUUID();
   const assistantMsgId = randomUUID();
@@ -89,6 +93,7 @@ async function persistExchange(
       content: body.message,
       question_id: body.questionId ?? null,
       session_id: body.sessionId ?? null,
+      chat_id: chatId,
     },
     {
       id: assistantMsgId,
@@ -97,6 +102,7 @@ async function persistExchange(
       content: reply,
       question_id: body.questionId ?? null,
       session_id: body.sessionId ?? null,
+      chat_id: chatId,
     },
   ]);
   if (error) console.error("[melak] persist error:", error.message);
@@ -127,12 +133,12 @@ function buildCloudInput(
   }
   const hist = (history ?? [])
     .slice(-8)
-    .map((m) => `${m.role === "user" ? "Student" : "Melak"}: ${m.content}`)
+    .map((m) => `${m.role === "user" ? "Student" : "Adey"}: ${m.content}`)
     .join("\n");
   return [
     MELAK_ONLINE_SYSTEM + grounding,
     hist ? `\nRecent conversation:\n${hist}` : "",
-    `\nStudent: ${message}\nMelak:`,
+    `\nStudent: ${message}\nAdey:`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -352,6 +358,7 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
 
   const body = c.req.valid("json");
   const db = createDb(c.env);
+  const chatId = body.chat_id ?? randomUUID();
 
   const question = await loadQuestionContext(db, body.questionId);
   const cloudEndpoint = c.env.MELAK_CLOUD_ENDPOINT?.trim();
@@ -359,17 +366,18 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
 
   const respondOffline = async (pilotNote: string) => {
     const reply = offlineReply(body.message, question);
-    await persistExchange(db, user.id, body, reply);
+    await persistExchange(db, user.id, body, reply, chatId);
     return c.json({
       message: reply,
       mode: "offline" as const,
+      chat_id: chatId,
       pilotNote,
     });
   };
 
   if (!body.online || (!cloudEndpoint && !llmBase)) {
     return respondOffline(
-      "Melak on-device — lightweight tutor fallback.",
+      "Adey AI basic fallback — lightweight tutor reply.",
     );
   }
 
@@ -394,17 +402,18 @@ melakApp.post("/chat", zValidator("json", chatSchema), async (c) => {
 
   if (!enhanced) {
     return respondOffline(
-      "Enhanced model timed out or returned empty — showing on-device Melak. Try again; Qwen can take 20–40s on first tokens.",
+      "Enhanced model timed out or returned empty — showing basic Adey reply. Try again; the model can take 20–40s on first tokens.",
     );
   }
 
-  await persistExchange(db, user.id, body, enhanced);
+  await persistExchange(db, user.id, body, enhanced, chatId);
   return c.json({
     message: enhanced,
     mode: "online" as const,
+    chat_id: chatId,
     pilotNote: cloudEndpoint
-      ? "Enhanced Melak (demo bridge). Uncheck Enhanced for on-device only."
-      : "Enhanced Melak (Kasina VPS). Uncheck Enhanced for on-device only.",
+      ? "Enhanced Adey AI (demo bridge). Uncheck Enhanced for basic fallback only."
+      : "Enhanced Adey AI (Kasina VPS). Uncheck Enhanced for basic fallback only.",
   });
 });
 
@@ -412,23 +421,32 @@ melakApp.get("/history", async (c) => {
   const user = await requireUser(c);
   if (!isAuthUser(user)) return user;
 
+  const chatId = c.req.query("chat_id");
   const db = createDb(c.env);
-  const { data, error } = await db
+  let query = db
     .from("melak_messages")
-    .select("id, role, content, question_id, session_id, created_at")
+    .select("id, role, content, question_id, session_id, chat_id, created_at")
     .eq("user_id", user.id)
     .order("created_at", { ascending: true })
     .limit(40);
 
+  if (chatId) {
+    query = query.eq("chat_id", chatId);
+  }
+
+  const { data, error } = await query;
+
   if (error) return c.json({ error: error.message }, 500);
 
   return c.json({
+    chat_id: chatId ?? null,
     messages: (data ?? []).map((m) => ({
       id: m.id,
       role: m.role,
       content: m.content,
       questionId: m.question_id,
       sessionId: m.session_id,
+      chatId: m.chat_id,
       createdAt: m.created_at,
     })),
   });

@@ -1,5 +1,7 @@
 # M0 local setup & verify
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**.
+
 ## 1. Design language
 
 Already locked in `docs/design/` and `apps/web/src/app/globals.css`.
@@ -7,7 +9,7 @@ Already locked in `docs/design/` and `apps/web/src/app/globals.css`.
 ## 2. Supabase
 
 1. Create a project at https://supabase.com
-2. Run SQL from `packages/db/migrations/002_mvp_core.sql` in the SQL editor
+2. Run SQL from `packages/db/migrations/002_mvp_core.sql` in the SQL editor, **then apply `003` through `007` in order.** `006` (schools, approvals, sync) and `007` (school cascade) are required for current features; `002` alone only covers the original M0 slice.
 3. Copy URL + service role key + database connection string (use **Session mode** pooler URI for `DATABASE_URL` if available)
 
 ## 3. Env files
@@ -27,7 +29,7 @@ pnpm install
 pnpm questions:validate
 ```
 
-Expect: `Validated 50 question(s).`
+Expect: `Validated N question(s).` — N was 50 at M0 and is ~178 now; it grows with each K3 content phase.
 
 ## 5. Run API + web
 

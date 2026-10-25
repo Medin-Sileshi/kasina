@@ -1,5 +1,7 @@
 # M4 — Pilot Harden
 
+> **Path update (2026-10-25):** This is a historical classroom-MVP milestone. Product direction has since changed: **online-first and low-bandwidth** (not offline-first), tutor renamed **Adey AI** (formerly Melak), pure not-for-profit, pilot scope = secondary schools in phases. Forward plan: [kasina-path-milestones.md](../../kasina-path-milestones.md). Statements below about deferred OTP, offline, Melak or CBT describe the state **at the time of this milestone**.
+
 **Window:** Week 5–6  
 **Depends on:** M3 exit criteria  
 **Purpose:** Make the product safe and usable for a real school class without feature creep.  
@@ -38,7 +40,7 @@ Ship an install-free pilot: share a URL + invite code with one class. Critical b
   - [ ] Create/share invite  
   - [ ] Create assignment  
   - [ ] Where to see results  
-- [ ] Student join instructions (3 steps max)
+- [ ] Student join instructions (3 steps max) — _handout still describes email + password; the identity model (phone OTP vs email) is open decision #1 in the path file._
 - [ ] Support contact for pilot week
 
 ### Device / QA matrix
@@ -47,7 +49,7 @@ Ship an install-free pilot: share a URL + invite code with one class. Critical b
 - [ ] Android Chrome (large phone)
 - [ ] Android Chrome (tablet or large)
 - [ ] Desktop Chrome or Firefox
-- [ ] Airplane-mode expectations documented (MVP needs network — show clear error)
+- [ ] Airplane-mode expectations documented (MVP needs network — show clear error) — _consistent with the online-first path; K1 adds throttled 2G/3G rows and queue-state checks to this matrix._
 
 ### Bug policy
 
@@ -82,6 +84,6 @@ All must be true:
 
 ## Out of scope for M4
 
-- New product features (Melak, CBT, offline, iOS, etc.)  
+- New product features (Melak, CBT, offline, iOS, etc.) _(Melak is now Adey AI; offline is replaced by online-first resilience)_  
 - Visual redesign unrelated to bugs  
 - Multi-school admin

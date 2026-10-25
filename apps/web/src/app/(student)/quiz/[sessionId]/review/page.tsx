@@ -201,7 +201,7 @@ function ReviewContent() {
                   className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary-200 bg-primary-50 px-4 py-2.5 text-sm font-semibold text-primary-800 hover:bg-primary-100"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Ask Melak about this
+                  Ask Adey about this
                 </Link>
               </div>
             </div>
