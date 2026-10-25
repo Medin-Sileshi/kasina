@@ -158,7 +158,7 @@ export function organizationJsonLd() {
     url: SITE_URL,
     logo: absoluteUrl("/brand/kasina-icon-512.png"),
     description: SITE_DESCRIPTION,
-    email: "medin.sileshi.diro@gmail.com",
+    email: "medin@kasina.et",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Addis Ababa",

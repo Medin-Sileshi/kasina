@@ -1,6 +1,6 @@
 export type MarketingLang = "en" | "am";
 
-export const CONTACT_EMAIL = "medin.sileshi.diro@gmail.com";
+export const CONTACT_EMAIL = "medin@kasina.et";
 export const CONTACT_PHONE = "+251 927 777 739";
 export const CONTACT_PHONE_TEL = "+251927777739";
 

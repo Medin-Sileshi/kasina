@@ -41,7 +41,7 @@ Document the shareable URL here before pilot day:
 Web:  https://kasina.et
 API:  https://api.kasina.et
 Invite example: DEMO2026 (or class-specific code)
-Support: support@kasina.et (or pilot WhatsApp/Telegram)
+Support: medin@kasina.et (or pilot WhatsApp/Telegram)
 ```
 
 Deploy runbook: [deploy-kasina-et.md](./deploy-kasina-et.md) · Smoke: `pnpm smoke:prod` with `API_URL` / `WEB_URL` set.

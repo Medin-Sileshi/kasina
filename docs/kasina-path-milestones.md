@@ -56,7 +56,7 @@ K4 runs alongside K1–K3 but **blocks K5**: no real students are onboarded befo
 - [ ] Update external messaging: online-first, not-for-profit, secondary schools, hosting budget separate.
 - [ ] Reconcile stale docs (see §5).
 - [ ] Close the open decisions in §6 or assign an owner and date to each.
-- [ ] Confirm contact email `medin@kasina.com` on the marketing site, privacy page and support docs.
+- [x] Confirm contact email `medin@kasina.et` on the marketing site, privacy page and support docs.
 
 **Exit:** a new reader can open `docs/` and get the same answer to "what is Kasina and what does it do today?" from every file.
 
